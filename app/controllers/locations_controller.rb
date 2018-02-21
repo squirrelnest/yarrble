@@ -27,10 +27,7 @@ class LocationsController < ApplicationController
   def index
     @location = Location.new
     @locations = Location.all
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @locations, status: 200 }
-    end
+    render json: @locations, status: 200
   end
 
   def new

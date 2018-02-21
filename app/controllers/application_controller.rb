@@ -1,9 +1,7 @@
-# class ApplicationController < ActionController::API
-# end
-
 class ApplicationController < ActionController::API
 
-  protect_from_forgery with: :exception
+  include ActionController::Helpers
+
   before_action :current_user
   helper_method :current_user
 

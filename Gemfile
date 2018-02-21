@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Foreman utility for managing multiple servers (Webpack dev server, Rails API server, etc.)
+gem 'foreman', '~> 0.82.0'
 # Load environment variables from .env
 gem 'dotenv', '~> 2.2', '>= 2.2.1'
 # dotenv-Rails
