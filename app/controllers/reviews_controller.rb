@@ -3,8 +3,10 @@ class ReviewsController < ApplicationController
   def index
     if params[:location_id]
       @reviews = Location.find_by(id: params[:location_id]).reviews
+      render json: @reviews, status: 200
     else
       @reviews = Review.all
+      render json: @reviews, status: 200
     end
   end
 
@@ -29,10 +31,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @review, status: 200 }
-    end
+    render json: @review, status: 200
   end
 
   def edit

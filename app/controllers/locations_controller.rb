@@ -49,10 +49,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @location, status: 200 }
-    end
+    render json: @location, status: 200
   end
 
   def edit
@@ -85,6 +82,7 @@ class LocationsController < ApplicationController
     @current_lat = cookies[:lat].to_f
     distance = 10000
     @locations = Location.nearby(@current_lat, @current_lon, distance)
+    render json: @locations, status: 200
   end
 
   private

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  def index
-    @users = User.all
-  end
+  # def index
+  #   @users = User.all
+  # end
 
   def new
     @user = User.new
@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def reviews
     @reviews = @user.reviews
+    render json: @reviews, status: 200
   end
 
   private
