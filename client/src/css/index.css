@@ -11,3 +11,14 @@ body {
 .listy {
   width: 100%;
 }
+
+.fab {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  z-index: 2000;
+}
+
+.map-container {
+  position: relative;
+}

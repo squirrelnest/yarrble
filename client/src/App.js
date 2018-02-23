@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import MapContainer from './components/MapContainer';
-import Listy from './components/Listy'
+import Listy from './components/Listy';
 
 class App extends Component {
   render() {
