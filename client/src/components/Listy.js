@@ -14,10 +14,10 @@ export default class Listy extends Component {
 
   render() {
     return (
-      <div>
+      <div className="listy">
 
         <List>
-          <Subheader>Nested List Items</Subheader>
+          <Subheader>Anchorages</Subheader>
           <ListItem primaryText="Philippines" />
           <ListItem primaryText="Brazil" />
           <ListItem
