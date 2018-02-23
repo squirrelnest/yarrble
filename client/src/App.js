@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import MapContainer from './components/MapContainer';
 import Listy from './components/Listy';
+import Drawery from './components/Drawery';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <NavBar className="navbar" />
           <div className="row"><MapContainer /><Listy /></div>
           <Tabley className="table" />
+          <Drawery />
         </MuiThemeProvider>
       </div>
     );
