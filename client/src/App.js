@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import Mappy from './components/MapContainer';
+import Listy from './components/Listy'
 
 class App extends Component {
   render() {
@@ -11,7 +12,7 @@ class App extends Component {
       <div className="App">
         <MuiThemeProvider>
           <NavBar className="navbar" />
-          <Mappy />
+          <div className="row"><Mappy className="mappy" /><Listy className="listy" /></div>
           <Tabley className="table" />
         </MuiThemeProvider>
       </div>

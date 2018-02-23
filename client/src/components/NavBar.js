@@ -59,7 +59,7 @@ class NavBar extends Component {
           style={{margin: 20}}
         />
         <AppBar
-          title="Title"
+          title="Yarrble"
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           iconElementRight={this.state.logged ? <Logged /> : <Login />}
         />

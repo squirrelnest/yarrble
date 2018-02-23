@@ -7,8 +7,8 @@ export default class Mappy extends Component {
 
   state = {
     viewport: {
-      width: 400,
-      height: 400,
+      width: window.innerWidth*0.5,
+      height: window.innerHeight,
       latitude: 37.7577,
       longitude: -122.4376,
       zoom: 8
