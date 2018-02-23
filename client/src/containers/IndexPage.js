@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
 import MapContainer from './MapContainer.js';
 import Listy from '../components/Listy.js';
 import Drawery from '../components/Drawery.js';

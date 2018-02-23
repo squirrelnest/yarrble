@@ -103,6 +103,7 @@ export default class Tabley extends Component {
     return (
       <div>
         <Table
+          styles={styles}
           height={this.state.height}
           fixedHeader={this.state.fixedHeader}
           fixedFooter={this.state.fixedFooter}

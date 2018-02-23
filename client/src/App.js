@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './css/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
-import MapContainer from './containers/MapContainer';
 import Listy from './components/Listy';
-import Drawery from './components/Drawery';
 import IndexPage from './containers/IndexPage';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -25,13 +24,15 @@ class App extends Component {
       <div className="App">
         <MuiThemeProvider>
         <NavBar />
-          <Router>
+        <Router>
+          <Switch>
             <div>
               <Route exact path="/" component={IndexPage} />
               <Route exact path="/nearby" component={Listy} />
               <Route exact path="/myreviews" component={Tabley} />
             </div>
-          </Router>
+          </Switch>
+        </Router>
         </MuiThemeProvider>
       </div>
     );

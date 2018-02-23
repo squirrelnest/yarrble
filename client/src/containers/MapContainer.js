@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
 import Mappy from '../components/Mappy.js';
 import Fab from '../components/Fab.js';
 
