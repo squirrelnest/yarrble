@@ -63,6 +63,7 @@ class NavBar extends Component {
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           iconElementRight={this.state.logged ? <Logged /> : <Login />}
         />
+
       </div>
     );
   }
