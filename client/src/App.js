@@ -6,6 +6,8 @@ import Tabley from './components/Table';
 import MapContainer from './containers/MapContainer';
 import Listy from './components/Listy';
 import Drawery from './components/Drawery';
+import IndexPage from './containers/IndexPage';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -22,10 +24,14 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <NavBar className="navbar" />
-          <div className="row"><MapContainer handleToggle={this.handleToggle}/><Listy /></div>
-          <Tabley className="table" />
-          <Drawery open={this.state.open}/>
+        <NavBar />
+          <Router>
+            <div>
+              <Route exact path="/" component={IndexPage} />
+              <Route exact path="/nearby" component={Listy} />
+              <Route exact path="/myreviews" component={Tabley} />
+            </div>
+          </Router>
         </MuiThemeProvider>
       </div>
     );
