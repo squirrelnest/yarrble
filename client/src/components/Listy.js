@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {List, ListItem} from 'material-ui/List';
-// import ActionGrade from 'material-ui/svg-icons/action/grade';
-// import ContentInbox from 'material-ui/svg-icons/content/inbox';
-// import s from 'material-ui/svg-icons/content/drafts';
-// import ContentSend from 'material-ui/svg-icons/content/send';
 import Subheader from 'material-ui/Subheader';
+import CountryListItem from './CountryListItem';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchCats } from './actions/catActions';
 
 export default class Listy extends Component {
 
@@ -12,39 +12,37 @@ export default class Listy extends Component {
     open: false,
   };
 
+  componentDidMount() {
+    this.props.fetchCountries()
+  }
+
   render() {
+
+    const countries = this.props.countries.map((country) =>
+      <CountryListItem key={country.id} />
+    );
+
     return (
       <div className="listy">
 
         <List>
           <Subheader>Anchorages</Subheader>
-          <ListItem primaryText="Philippines" />
-          <ListItem primaryText="Brazil" />
-          <ListItem
-            primaryText="Seychelles"
-            initiallyOpen={true}
-            primaryTogglesNestedList={true}
-            nestedItems={[
-              <ListItem
-                key={1}
-                primaryText="Abacus"
-              />,
-              <ListItem
-                key={2}
-                primaryText="Royal Anse"
-                disabled={true}
-              />,
-              <ListItem
-                key={3}
-                primaryText="Omumu"
-                open={this.state.open}
-                onNestedListToggle={this.handleNestedListToggle}
-              />,
-            ]}
-          />
+          {countries}
         </List>
 
       </div>
     );
   }
 }
+
+Listy.defaultProps = { countries: [] }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchCats}, dispatch)
+}
+
+function mapStateToProps(state){
+  return {catPics: state.cats.cats}
+}
+
+export const WrapperListy = connect(mapStateToProps, mapDispatchToProps)(Listy)

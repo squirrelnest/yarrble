@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
 
   def by_country
     @locations = Location.where(country: params[:country])
-    render json: { locations: @locations.map {|location| LocationSerializer.new(location, :scope => current_user) } }
+    render json: { locations: @locations.map {|location| LocationSerializer.new(location) } }
   end
 
   def mapbox_token

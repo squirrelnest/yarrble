@@ -23,16 +23,18 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-        <NavBar />
-        <Router>
-          <Switch>
-            <div>
-              <Route exact path="/" component={IndexPage} />
-              <Route exact path="/nearby" component={Listy} />
-              <Route exact path="/myreviews" component={Tabley} />
-            </div>
-          </Switch>
-        </Router>
+          <div>
+            <NavBar />
+            <Router>
+              <Switch>
+                <div>
+                  <Route exact path="/" component={IndexPage} />
+                  <Route exact path="/nearby" component={Listy} />
+                  <Route exact path="/myreviews" component={Tabley} />
+                </div>
+              </Switch>
+            </Router>
+          </div>
         </MuiThemeProvider>
       </div>
     );

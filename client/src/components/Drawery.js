@@ -19,7 +19,7 @@ const styles = {
     margin: '20px',
   },
   checkboxblock: {
-    'margin-top': '40px',
+    marginTop: '40px',
   },
   checkbox: {
     marginBottom: 16,
@@ -83,7 +83,7 @@ export default class Drawery extends Component {
               floatingLabelText="Longitude"
               multiLine={false}
               fullWidth={false}
-              style={{'padding-left': '20px'}}
+              style={{paddingLeft: '20px'}}
             />
 
             <AutoComplete

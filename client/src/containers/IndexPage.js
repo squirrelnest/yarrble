@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js';
 import Listy from '../components/Listy.js';
 import Drawery from '../components/Drawery.js';
+import { WrapperListy } from './components/Listy';
 
 export default class IndexPage extends Component {
 
@@ -18,7 +19,7 @@ export default class IndexPage extends Component {
     return (
       <div className="row">
         <MapContainer handleToggle={this.handleToggle}/>
-        <Listy />
+        <WrapperListy />
         <Drawery open={this.state.open}/>
       </div>
     );
