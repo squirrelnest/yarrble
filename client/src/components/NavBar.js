@@ -27,8 +27,8 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="Refresh" />
-    <MenuItem primaryText="Help" />
+    <MenuItem primaryText="My Reviews" />
+    <MenuItem primaryText="Near Me" />
     <MenuItem primaryText="Sign out" />
   </IconMenu>
 );
