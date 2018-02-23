@@ -48,7 +48,7 @@ class NavBar extends Component {
   };
 
   handleClick = () => {
-  alert('onClick triggered on the title component');
+    window.location.assign('/');
 }
 
   render() {
