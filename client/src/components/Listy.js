@@ -9,7 +9,6 @@ export default class Listy extends Component {
   };
 
   render() {
-
     return (
       <div className="listy">
 
