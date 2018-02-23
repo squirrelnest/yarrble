@@ -12,9 +12,9 @@ gem 'dotenv', '~> 2.2', '>= 2.2.1'
 # dotenv-Rails
 gem 'dotenv-rails'
 # use omniauth for user authentication
-gem 'omniauth'
-# omniauth-facebook
-gem 'omniauth-facebook'
+# gem 'omniauth'
+# # omniauth-facebook
+# gem 'omniauth-facebook'
 # ActiveModel Serializer
 gem 'active_model_serializers'
 # Pry for debugging

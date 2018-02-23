@@ -4,7 +4,7 @@ import Subheader from 'material-ui/Subheader';
 import CountryListItem from './CountryListItem';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCats } from './actions/catActions';
+import { fetchCountries } from './actions/countryActions';
 
 export default class Listy extends Component {
 
@@ -38,11 +38,11 @@ export default class Listy extends Component {
 Listy.defaultProps = { countries: [] }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchCats}, dispatch)
+  return bindActionCreators({fetchCountries}, dispatch)
 }
 
 function mapStateToProps(state){
-  return {catPics: state.cats.cats}
+  return {countries: state.countries.countries}
 }
 
 export const WrapperListy = connect(mapStateToProps, mapDispatchToProps)(Listy)
