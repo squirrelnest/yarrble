@@ -8,7 +8,7 @@ import Tabley from './components/Table';
 import Listy from './components/Listy';
 import IndexPage from './containers/IndexPage';
 
-class App extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -20,23 +20,22 @@ class App extends Component {
   handleClose = () => this.setState({open: false});
 
   render() {
+
     return (
       <div className="App">
         <MuiThemeProvider>
-        <NavBar />
-        <Router>
-          <Switch>
-            <div>
-              <Route exact path="/" component={IndexPage} />
-              <Route exact path="/nearby" component={Listy} />
-              <Route exact path="/myreviews" component={Tabley} />
-            </div>
-          </Switch>
-        </Router>
+          <NavBar />
+          <Router>
+            <Switch>
+              <div>
+                <Route exact path="/" component={IndexPage} />
+                <Route exact path="/nearby" component={Listy} />
+                <Route exact path="/myreviews" component={Tabley} />
+              </div>
+            </Switch>
+          </Router>
         </MuiThemeProvider>
       </div>
     );
   }
 }
-
-export default App;

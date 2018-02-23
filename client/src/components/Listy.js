@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import {List, ListItem} from 'material-ui/List';
-// import ActionGrade from 'material-ui/svg-icons/action/grade';
-// import ContentInbox from 'material-ui/svg-icons/content/inbox';
-// import s from 'material-ui/svg-icons/content/drafts';
-// import ContentSend from 'material-ui/svg-icons/content/send';
 import Subheader from 'material-ui/Subheader';
 
 export default class Listy extends Component {
@@ -13,6 +9,7 @@ export default class Listy extends Component {
   };
 
   render() {
+
     return (
       <div className="listy">
 
