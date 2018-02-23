@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMapGL from 'react-map-gl';
-import Mappy from './Mappy.js';
-import Fab from './Fab.js';
-import Drawery from './Drawery.js';
+import Mappy from '../components/Mappy.js';
+import Fab from '../components/Fab.js';
+import Drawery from '../components/Drawery.js';
 
 export default class MapContainer extends Component {
 

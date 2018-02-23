@@ -3,7 +3,7 @@ import './css/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
-import MapContainer from './components/MapContainer';
+import MapContainer from './containers/MapContainer';
 import Listy from './components/Listy';
 import Drawery from './components/Drawery';
 
