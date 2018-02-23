@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js';
 import Listy from '../components/Listy.js';
 import Drawery from '../components/Drawery.js';
-import { WrapperListy } from './components/Listy';
+import { WrapperListy } from '../components/Listy.js';
 
 export default class IndexPage extends Component {
 

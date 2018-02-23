@@ -4,7 +4,7 @@ import Subheader from 'material-ui/Subheader';
 import CountryListItem from './CountryListItem';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCountries } from './actions/countryActions';
+import { fetchCountries } from '../actions/countryActions';
 
 export default class Listy extends Component {
 
