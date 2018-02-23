@@ -27,8 +27,8 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="My Reviews" />
-    <MenuItem primaryText="Near Me" />
+    <MenuItem primaryText="My Reviews" href="/myreviews" />
+    <MenuItem primaryText="Near Me" href="/nearby" />
     <MenuItem primaryText="Sign out" />
   </IconMenu>
 );
@@ -48,12 +48,17 @@ class NavBar extends Component {
     this.setState({logged: logged});
   };
 
+  handleClick = () => {
+  alert('onClick triggered on the title component');
+}
+
   render() {
     return (
       <div>
-      
+
         <AppBar
           title="Yarrble"
+          onTitleClick={this.handleClick}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           iconElementRight={this.state.logged ? <Logged /> : <Login />}
         />
