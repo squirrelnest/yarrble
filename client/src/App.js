@@ -8,14 +8,24 @@ import Listy from './components/Listy';
 import Drawery from './components/Drawery';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
+  }
+
+  handleToggle = () => this.setState({open: !this.state.open});
+
+  handleClose = () => this.setState({open: false});
+
   render() {
     return (
       <div className="App">
         <MuiThemeProvider>
           <NavBar className="navbar" />
-          <div className="row"><MapContainer /><Listy /></div>
+          <div className="row"><MapContainer handleToggle={this.handleToggle}/><Listy /></div>
           <Tabley className="table" />
-          <Drawery />
+          <Drawery open={this.state.open}/>
         </MuiThemeProvider>
       </div>
     );

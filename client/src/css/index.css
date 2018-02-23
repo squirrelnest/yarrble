@@ -4,8 +4,27 @@ body {
   font-family: sans-serif;
 }
 
+h2 {
+  margin: 0;
+}
+
+.column {
+  display:inline-block;
+  width: 33%;
+}
+
 .row {
-  display:flex; flex-direction:row;
+  display:flex;
+  flex-direction:row;
+}
+
+.sliders {
+  margin-bottom: 25px;
+  margin-top: -25px;
+}
+
+.sliderContainer {
+  margin: auto;
 }
 
 .listy {
@@ -21,4 +40,18 @@ body {
 
 .map-container {
   position: relative;
+}
+
+.drawer {
+  padding: 40px;
+}
+
+.submitBtn {
+  position: relative;
+  right: 20px;
+  bottom: 0px;
+}
+
+.subheader {
+  margin: -20px;
 }
