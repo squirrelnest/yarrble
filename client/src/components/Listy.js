@@ -8,10 +8,20 @@ export default class Listy extends Component {
     open: false,
   };
 
+  componentDidMount() {
+    console.log(this.props.locations)
+  }
+
   render() {
+
+    const locations = this.props.locations.map( (loc) =>
+      <p>{loc.nickname}</p>
+    );
+
+
     return (
       <div className="listy">
-
+        <p>{locations}</p>
         <List>
           <Subheader>Anchorages</Subheader>
           <ListItem primaryText="Philippines" />

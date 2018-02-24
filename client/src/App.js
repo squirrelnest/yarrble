@@ -12,7 +12,10 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {
+      open: false,
+      locations: [],
+    };
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -28,8 +31,8 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     })
-
-      .then(response => console.log(response))
+      .then(response => response.text())
+      .then(response => this.setState({ locations: JSON.parse(response).locations }))
   }
 
   render() {
@@ -41,7 +44,7 @@ class App extends Component {
             <Router>
               <Switch>
                 <Route exact path="/" component={IndexPage} />
-                <Route exact path="/nearby" component={Listy} />
+                <Route exact path="/nearby" render={() => <Listy locations={this.state.locations} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>
             </Router>
