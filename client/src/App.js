@@ -20,7 +20,16 @@ class App extends Component {
   handleClose = () => this.setState({open: false});
 
   componentDidMount() {
-    console.log("App mounted");
+    fetch('http://localhost:3001/locations/geojson', {
+      method: "GET",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+
+      .then(response => console.log(response))
   }
 
   render() {
