@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 
 export default class Listy extends Component {
@@ -15,17 +15,19 @@ export default class Listy extends Component {
   render() {
 
     const locations = this.props.locations.map( (loc) =>
-      <p>{loc.nickname}</p>
-    );
-
+      <ListItem
+        primaryText={loc.nickname}
+        initiallyOpen={true}
+        primaryTogglesNestedList={true}
+      />
+    )
 
     return (
       <div className="listy">
-        <p>{locations}</p>
+
         <List>
           <Subheader>Anchorages</Subheader>
-          <ListItem primaryText="Philippines" />
-          <ListItem primaryText="Brazil" />
+          {locations}
           <ListItem
             primaryText="Seychelles"
             initiallyOpen={true}

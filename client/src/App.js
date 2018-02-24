@@ -32,7 +32,11 @@ class App extends Component {
       }
     })
       .then(response => response.text())
-      .then(response => this.setState({ locations: JSON.parse(response).locations }))
+      .then(response => {
+        this.setState({ locations: JSON.parse(response).locations });
+        console.log('setting locations');
+        console.log(this.state.locations)
+      })
   }
 
   render() {
