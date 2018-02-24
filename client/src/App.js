@@ -31,11 +31,9 @@ class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <div>
-                  <Route exact path="/" component={IndexPage} />
-                  <Route exact path="/nearby" component={Listy} />
-                  <Route exact path="/myreviews" component={Tabley} />
-                </div>
+                <Route exact path="/" component={IndexPage} />
+                <Route exact path="/nearby" component={Listy} />
+                <Route exact path="/myreviews" component={Tabley} />
               </Switch>
             </Router>
           </div>
