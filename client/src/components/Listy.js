@@ -18,7 +18,7 @@ export default class Listy extends Component {
       <ListItem
         key={loc.id}
         primaryText={loc.nickname}
-        initiallyOpen={true}
+        initiallyOpen={false}
         primaryTogglesNestedList={true}
         nestedItems={loc.reviews.map( (review) =>
           <ListItem
