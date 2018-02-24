@@ -18,7 +18,7 @@ export default class IndexPage extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle}/>
         <Listy locations={this.props.locations} />
         <Drawery open={this.state.open}/>
