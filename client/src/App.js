@@ -23,7 +23,7 @@ class App extends Component {
   handleClose = () => this.setState({open: false});
 
   componentDidMount() {
-    fetch('http://localhost:3001/locations/geojson', {
+    fetch('http://localhost:3001/', {
       method: "GET",
       credentials: 'same-origin',
       headers: {
@@ -33,9 +33,8 @@ class App extends Component {
     })
       .then(response => response.text())
       .then(response => {
-        this.setState({ locations: JSON.parse(response).locations });
-        console.log('setting locations');
-        console.log(this.state.locations)
+        this.setState({ locations: JSON.parse(response) });
+        console.log(this.state.locations);
       })
   }
 
@@ -47,7 +46,7 @@ class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <Route exact path="/" component={IndexPage} />
+                <Route exact path="/" render={() => <IndexPage locations={this.state.locations} />} />
                 <Route exact path="/nearby" render={() => <Listy locations={this.state.locations} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>

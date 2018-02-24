@@ -16,9 +16,16 @@ export default class Listy extends Component {
 
     const locations = this.props.locations.map( (loc) =>
       <ListItem
+        key={loc.id}
         primaryText={loc.nickname}
         initiallyOpen={true}
         primaryTogglesNestedList={true}
+        nestedItems={loc.reviews.map( (review) =>
+          <ListItem
+            key={1}
+            primaryText={review.content}
+           />
+        )}
       />
     )
 
@@ -28,28 +35,6 @@ export default class Listy extends Component {
         <List>
           <Subheader>Anchorages</Subheader>
           {locations}
-          <ListItem
-            primaryText="Seychelles"
-            initiallyOpen={true}
-            primaryTogglesNestedList={true}
-            nestedItems={[
-              <ListItem
-                key={1}
-                primaryText="Abacus"
-              />,
-              <ListItem
-                key={2}
-                primaryText="Royal Anse"
-                disabled={true}
-              />,
-              <ListItem
-                key={3}
-                primaryText="Omumu"
-                open={this.state.open}
-                onNestedListToggle={this.handleNestedListToggle}
-              />,
-            ]}
-          />
         </List>
 
       </div>

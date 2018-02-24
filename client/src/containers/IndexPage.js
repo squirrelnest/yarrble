@@ -7,7 +7,9 @@ export default class IndexPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {
+      open: false
+    };
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -18,7 +20,7 @@ export default class IndexPage extends Component {
     return (
       <div className="row">
         <MapContainer handleToggle={this.handleToggle}/>
-        <Listy />
+        <Listy locations={this.props.locations} />
         <Drawery open={this.state.open}/>
       </div>
     );
