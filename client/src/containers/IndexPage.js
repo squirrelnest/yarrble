@@ -16,12 +16,17 @@ export default class IndexPage extends Component {
 
   handleClose = () => this.setState({open: false});
 
+  onRequestChange = (open) => {
+    console.log('onRequestChange');
+    this.setState({open});
+  };
+
   render() {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle}/>
         <Listy locations={this.props.locations} />
-        <Drawery open={this.state.open}/>
+        <Drawery open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
   }

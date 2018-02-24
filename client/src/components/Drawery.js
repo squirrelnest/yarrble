@@ -57,7 +57,7 @@ export default class Drawery extends Component {
           width={window.innerWidth*0.5}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={(open) => this.setState({open})}
+          onRequestChange={this.props.onRequestChange}
           containerClassName="drawer"
         >
 
