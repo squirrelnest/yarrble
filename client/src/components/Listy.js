@@ -22,7 +22,7 @@ export default class Listy extends Component {
         primaryTogglesNestedList={true}
         nestedItems={loc.reviews.map( (review) =>
           <ListItem
-            key={1}
+            key={review.id}
             primaryText={review.content}
            />
         )}
