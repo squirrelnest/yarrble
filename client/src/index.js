@@ -16,6 +16,7 @@ export function render() {
 };
 
 render();
-console.log(store.getState)
 
+console.log("hello")
+console.log(store.getState())
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
