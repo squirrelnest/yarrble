@@ -25,7 +25,7 @@ export default function locations(state = initialState, action) {
       const location = Object.assign({}, action.location, { id: id })
       return { locations: state.locations.concat(location) }
     case REMOVE_LOCATION:
-      const locations = state.locations.filter(location => location.id !== action.id)
+      const locations = state.locations.filter(location => location.id !== action.location_id)
       return { locations }
     default:
       return state

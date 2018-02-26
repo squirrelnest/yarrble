@@ -6,7 +6,7 @@ import yomama from './reducers/index';
 
 /* createStore(reducers, initial state) */
 
-let store = createStore(yomama, window.STATE_FROM_SERVER);
+let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export function render() {
   ReactDOM.render(
@@ -18,5 +18,7 @@ export function render() {
 render();
 
 console.log("hello")
-console.log(store.getState())
+console.log(store)
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
+
+unsubscribe()
