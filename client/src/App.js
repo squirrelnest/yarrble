@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './css/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import Listy from './components/Listy';
 import IndexPage from './containers/IndexPage';
+import { addLocation } from './actions/locationActions'
 
 class App extends Component {
 
@@ -26,9 +28,9 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(response => {
-        this.setState({ locations: JSON.parse(response) });
+        this.setState({ locations: response });
         /* console.log(this.state.locations); */
       })
   }
@@ -41,7 +43,7 @@ class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <Route exact path="/" render={() => <IndexPage locations={this.state.locations} />} />
+                <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.state.locations} />} />
                 <Route exact path="/nearby" render={() => <Listy locations={this.state.locations} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>
@@ -53,4 +55,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { locations: state.locations };
+};
+
+const mapDispatchToProps = () => {
+    return {
+      addLocation: addLocation
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

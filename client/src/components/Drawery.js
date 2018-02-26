@@ -31,22 +31,41 @@ const countries = ['United States of America', 'Vietnam', 'Philippines', 'Russia
 export default class Drawery extends Component {
 
   state = {
-    firstSlider: 5,
-    secondSlider: 5,
-    thirdSlider: 5,
+    clicktext: '',
+    nickname: '',
+    stability: 5,
+    aesthetics: 5,
+    safety: 5,
   };
 
   handleFirstSlider = (event, value) => {
-    this.setState({firstSlider: value});
+    this.setState({stability: value});
   };
 
   handleSecondSlider = (event, value) => {
-    this.setState({secondSlider: value});
+    this.setState({aesthetics: value});
   };
 
   handleThirdSlider = (event, value) => {
-    this.setState({thirdSlider: value});
+    this.setState({safety: value});
   };
+
+  handleClick(event) {
+    this.setState({
+      clicktext: 'Submit button clicked'
+    });
+  };
+
+  handleChange(event) {
+    this.setState({
+      nickname: event.target.value
+    });
+  };
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.store.dispatch({type: 'ADD_LOCATION', location: this.state})
+  }
 
   render() {
     return (
@@ -62,157 +81,167 @@ export default class Drawery extends Component {
         >
 
             <h2>Add New Anchorage</h2>
-            <TextField
-              hintText="Nickname"
-              floatingLabelText="Nickname"
-              multiLine={false}
-              fullWidth={false}
-            />
 
-            <br />
+            <p>{this.state.clicktext}</p>
+            <p>{this.state.nickname}</p>
+            <form onSubmit={(event) => this.handleSubmit(event)}>
 
-            <TextField
-              hintText="Latitude"
-              floatingLabelText="Latitude"
-              multiLine={false}
-              fullWidth={false}
-            />
+              <TextField
+                hintText="Nickname"
+                floatingLabelText="Nickname"
+                multiLine={false}
+                fullWidth={false}
+                onChange={(event) => this.handleChange(event)}
+              />
 
-            <TextField
-              hintText="Longitude"
-              floatingLabelText="Longitude"
-              multiLine={false}
-              fullWidth={false}
-              style={{paddingLeft: '20px'}}
-            />
+              <br />
 
-            <AutoComplete
-              floatingLabelText="Country"
-              filter={AutoComplete.caseInsensitiveFilter}
-              dataSource={countries}
-            />
+              <TextField
+                hintText="Latitude"
+                floatingLabelText="Latitude"
+                multiLine={false}
+                fullWidth={false}
+              />
 
-            <FlatButton label="Use current location" primary={true} style={styles.button} />
+              <TextField
+                hintText="Longitude"
+                floatingLabelText="Longitude"
+                multiLine={false}
+                fullWidth={false}
+                style={{paddingLeft: '20px'}}
+              />
 
-            <br />
-            <br />
-            <br />
+              <AutoComplete
+                floatingLabelText="Country"
+                filter={AutoComplete.caseInsensitiveFilter}
+                dataSource={countries}
+              />
 
-            <div className="sliders row" style={styles.root}>
+              <FlatButton label="Use current location" primary={true} style={styles.button} />
 
-              <div className="sliderContainer">
-              <div>{'Stability: '}{this.state.firstSlider}</div>
-              <Slider
-                value={this.state.firstSlider}
-                onChange={this.handleFirstSlider}
-                style={{height: 100}}
-                sliderStyle={{left:'40%'}}
-                axis="y"
-                defaultValue={5}
-                min={0}
-                max={10}/>
-              </div>
+              <br />
+              <br />
+              <br />
 
-              <div className="sliderContainer">
-              <div>{'Aesthetics: '}{this.state.secondSlider}</div>
-              <Slider
-                value={this.state.secondSlider}
-                onChange={this.handleSecondSlider}
-                style={{height: 100}}
-                sliderStyle={{left:'40%'}}
-                axis="y"
-                defaultValue={5}
-                min={0}
-                max={10}/>
-              </div>
+              <div className="sliders row" style={styles.root}>
 
-              <div className="sliderContainer">
-              <div>{'Safety: '}{this.state.thirdSlider}</div>
-              <Slider
-                value={this.state.thirdSlider}
-                onChange={this.handleThirdSlider}
-                style={{height: 100}}
-                sliderStyle={{left:'40%'}}
-                axis="y"
-                defaultValue={5}
-                min={0}
-                max={10}/>
-              </div>
+                <div className="sliderContainer">
+                <div>{'Stability: '}{this.state.firstSlider}</div>
+                <Slider
+                  value={this.state.stability}
+                  onChange={this.handleFirstSlider}
+                  style={{height: 100}}
+                  sliderStyle={{left:'40%'}}
+                  axis="y"
+                  defaultValue={5}
+                  min={0}
+                  max={10}/>
+                </div>
 
-            </div>
+                <div className="sliderContainer">
+                <div>{'Aesthetics: '}{this.state.secondSlider}</div>
+                <Slider
+                  value={this.state.aesthetics}
+                  onChange={this.handleSecondSlider}
+                  style={{height: 100}}
+                  sliderStyle={{left:'40%'}}
+                  axis="y"
+                  defaultValue={5}
+                  min={0}
+                  max={10}/>
+                </div>
 
-            <br />
-            <br />
-            <Subheader className="subheader">Amenities</Subheader>
-
-            <div className="row" style={styles.checkboxblock}>
-
-              <div className="column">
-
-                <Checkbox
-                  label="Fuel"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Fresh Water"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Food"
-                  style={styles.checkbox}
-                />
-
-              </div>
-              <div className="column">
-
-                <Checkbox
-                  label="Laundry"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Snorkeling"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Diving"
-                  style={styles.checkbox}
-                />
-
-              </div>
-              <div className="column">
-
-                <Checkbox
-                  label="Surfing"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Windsurfing"
-                  style={styles.checkbox}
-                />
-                <Checkbox
-                  label="Paddleboarding"
-                  style={styles.checkbox}
-                />
+                <div className="sliderContainer">
+                <div>{'Safety: '}{this.state.thirdSlider}</div>
+                <Slider
+                  value={this.state.safety}
+                  onChange={this.handleThirdSlider}
+                  style={{height: 100}}
+                  sliderStyle={{left:'40%'}}
+                  axis="y"
+                  defaultValue={5}
+                  min={0}
+                  max={10}/>
+                </div>
 
               </div>
 
-            </div>
+              <br />
+              <br />
+              <Subheader className="subheader">Amenities</Subheader>
 
-            <TextField
-              hintText="Write a Review"
-              floatingLabelText="Write a Review"
-              multiLine={true}
-              fullWidth={true}
-              rows={2}
-            />
+              <div className="row" style={styles.checkboxblock}>
 
-            <RaisedButton
-              className="submitBtn"
-              label="Submit"
-              secondary={true}
-              fullWidth={false}
-              style={styles.button}
-            />
+                <div className="column">
+
+                  <Checkbox
+                    label="Fuel"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Fresh Water"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Food"
+                    style={styles.checkbox}
+                  />
+
+                </div>
+                <div className="column">
+
+                  <Checkbox
+                    label="Laundry"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Snorkeling"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Diving"
+                    style={styles.checkbox}
+                  />
+
+                </div>
+                <div className="column">
+
+                  <Checkbox
+                    label="Surfing"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Windsurfing"
+                    style={styles.checkbox}
+                  />
+                  <Checkbox
+                    label="Paddleboarding"
+                    style={styles.checkbox}
+                  />
+
+                </div>
+
+              </div>
+
+              <TextField
+                hintText="Write a Review"
+                floatingLabelText="Write a Review"
+                multiLine={true}
+                fullWidth={true}
+                rows={2}
+              />
+
+              <RaisedButton
+                className="submitBtn"
+                label="Submit"
+                type="submit"
+                secondary={true}
+                fullWidth={false}
+                style={styles.button}
+                onClick={(event) => this.handleClick(event)}
+              />
+
+            </form>
 
         </Drawer>
 
