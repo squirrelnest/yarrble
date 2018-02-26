@@ -8,10 +8,10 @@ import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import Listy from './components/Listy';
 import IndexPage from './containers/IndexPage';
-import { addLocation } from './actions/locationActions';
+import { fetchLocations } from './actions/thunks';
 import { bindActionCreators } from 'redux';
 
-class App extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +32,6 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         this.setState({ locations: response });
-        /* console.log(this.state.locations); */
       })
   }
 
@@ -45,7 +44,7 @@ class App extends Component {
             <Router>
               <Switch>
                 <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.state.locations} />} />
-                <Route exact path="/nearby" render={() => <Listy locations={this.state.locations} />} />
+                <Route exact path="/nearby" render={() => <Listy store={this.props.store} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>
             </Router>
@@ -56,14 +55,14 @@ class App extends Component {
   }
 }
 
+
+
 const mapStateToProps = (state) => {
   return { locations: state.locations };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({addLocation}, dispatch)
+    return bindActionCreators({fetchLocations}, dispatch)
 };
 
 const WrapperApp = connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default WrapperApp

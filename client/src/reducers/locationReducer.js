@@ -1,13 +1,18 @@
 import {
   ADD_LOCATION,
   REMOVE_LOCATION,
-  SET_VISIBILITY_FILTER,
-  VisibilityFilters
-} from '../actions/locationActions'
+  RECEIVE_POSTS
+} from '../actions/locationActions';
+
+import {
+  GET_LOCATIONS,
+  LOADING_LOCATIONS
+} from '../actions/thunks';
 
 let id = 100;
 
 const initialState = {
+  loading: false,
   locations: []
 }
 
@@ -15,6 +20,15 @@ const initialState = {
 
 export default function locationReducer(state = initialState, action) {
   switch (action.type) {
+    case LOADING_LOCATIONS:
+      return {
+        loading: true,
+        locations: []
+      }
+    case GET_LOCATIONS:
+      const newobj = { loading: false, locations: action.payload, ...state.locations }
+      console.log(newobj)
+      return { loading: false, locations: action.payload, ...state.locations }
     case ADD_LOCATION:
       id++;
       const location = Object.assign({}, action.location, { id: id })

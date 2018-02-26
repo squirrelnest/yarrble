@@ -25,7 +25,7 @@ export default class IndexPage extends Component {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle}/>
-        <Listy locations={this.props.locations} />
+        <Listy store={this.props.store} locations={this.props.locations} />
         <Drawery store={this.props.store} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );

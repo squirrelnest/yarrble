@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
+import { connect } from 'react-redux';
 
 export default class Listy extends Component {
 
   state = {
     open: false,
+    locations: []
   };
 
   componentDidMount() {
-    /* console.log(this.props.locations) */
+    console.log(this.props.locations)
   }
 
   render() {
@@ -41,3 +43,7 @@ export default class Listy extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { locations: state.locations };
+};
