@@ -8,7 +8,8 @@ import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import Listy from './components/Listy';
 import IndexPage from './containers/IndexPage';
-import { addLocation } from './actions/locationActions'
+import { addLocation } from './actions/locationActions';
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
 
@@ -59,10 +60,10 @@ const mapStateToProps = (state) => {
   return { locations: state.locations };
 };
 
-const mapDispatchToProps = () => {
-    return {
-      addLocation: addLocation
-    }
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({addLocation}, dispatch)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+const WrapperApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default WrapperApp

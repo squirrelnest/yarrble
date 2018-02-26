@@ -7,6 +7,9 @@ import FlatButton from 'material-ui/FlatButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
+import { addLocation } from '../actions/locationActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const styles = {
   root: {
@@ -30,13 +33,15 @@ const countries = ['United States of America', 'Vietnam', 'Philippines', 'Russia
 
 export default class Drawery extends Component {
 
-  state = {
-    clicktext: '',
-    nickname: '',
-    stability: 5,
-    aesthetics: 5,
-    safety: 5,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      nickname: '',
+      stability: 5,
+      aesthetics: 5,
+      safety: 5,
+    };
+  }
 
   handleFirstSlider = (event, value) => {
     this.setState({stability: value});
@@ -64,7 +69,7 @@ export default class Drawery extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.store.dispatch({type: 'ADD_LOCATION', location: this.state})
+    this.props.store.dispatch(addLocation(this.state));
   }
 
   render() {
@@ -83,7 +88,7 @@ export default class Drawery extends Component {
             <h2>Add New Anchorage</h2>
 
             <p>{this.state.clicktext}</p>
-            <p>{this.state.nickname}</p>
+
             <form onSubmit={(event) => this.handleSubmit(event)}>
 
               <TextField
@@ -249,3 +254,15 @@ export default class Drawery extends Component {
     );
   }
 }
+
+/*
+function mapStateToProps(state) {
+  return { locations: state.locations }
+}
+
+function mapDispatchToProps(dispatch) {
+    addLocation: (location) => { dispatch(addLocation(location)) }
+}
+
+export const ConnectedDrawer = connect(mapStateToProps, mapDispatchToProps)(Drawery)
+*/
