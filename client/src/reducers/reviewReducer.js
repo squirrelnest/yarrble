@@ -14,7 +14,7 @@ const initialState = {
 
 /* Object.assign(target, source object, source object) copies values from one or more source objects to the target object then returns the target object */
 
-export default function reviews(state = initialState, action) {
+export default function reviewReducer(state = initialState, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return Object.assign({}, state, {

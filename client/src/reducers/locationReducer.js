@@ -14,7 +14,7 @@ const initialState = {
 
 /* Object.assign(target, source object, source object) copies values from one or more source objects to the target object then returns the target object */
 
-export default function locations(state = initialState, action) {
+export default function locationReducer(state = initialState, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return Object.assign({}, state, {
@@ -25,7 +25,7 @@ export default function locations(state = initialState, action) {
       const location = Object.assign({}, action.location, { id: id })
       return { locations: state.locations.concat(location) }
     case REMOVE_LOCATION:
-      const locations = state.locations.filter(location => location.id !== action.location_id)
+      const locations = state.locations.filter(location => location.location_id !== action.location_id)
       return { locations }
     default:
       return state

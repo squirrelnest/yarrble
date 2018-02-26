@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import locations from './locationReducer';
-import reviews from './reviewReducer';
+import locationReducer from './locationReducer';
+import reviewReducer from './reviewReducer';
 
 const yomama = combineReducers({
-  locations,
-  reviews
+  locationReducer,
+  reviewReducer
 })
 
 export default yomama

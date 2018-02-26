@@ -9,7 +9,7 @@ export default class Listy extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.locations)
+    /* console.log(this.props.locations) */
   }
 
   render() {
