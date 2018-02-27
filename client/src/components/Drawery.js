@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import AutoComplete from 'material-ui/AutoComplete';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 import { addLocation } from '../actions/locationActions';
@@ -29,17 +28,23 @@ const styles = {
   },
 };
 
-const countries = ['United States of America', 'Vietnam', 'Philippines', 'Russia']
-
 export default class Drawery extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       nickname: '',
+      lon: 0,
+      lat: 0,
+      country: 'Vietnam',
       stability: 5,
       aesthetics: 5,
       safety: 5,
+      reviews: {
+        date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+        content: '',
+        user_id: 0,
+      }
     };
   }
 
@@ -62,8 +67,9 @@ export default class Drawery extends Component {
   };
 
   handleChange(event) {
+    console.log(event.target.name)
     this.setState({
-      nickname: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
@@ -92,6 +98,7 @@ export default class Drawery extends Component {
             <form onSubmit={(event) => this.handleSubmit(event)}>
 
               <TextField
+                name="nickname"
                 hintText="Nickname"
                 floatingLabelText="Nickname"
                 multiLine={false}
@@ -102,24 +109,32 @@ export default class Drawery extends Component {
               <br />
 
               <TextField
+                name="latitude"
                 hintText="Latitude"
                 floatingLabelText="Latitude"
                 multiLine={false}
                 fullWidth={false}
+                onChange={(event) => this.handleChange(event)}
               />
 
               <TextField
+                name="longitude"
                 hintText="Longitude"
                 floatingLabelText="Longitude"
                 multiLine={false}
                 fullWidth={false}
                 style={{paddingLeft: '20px'}}
+                onChange={(event) => this.handleChange(event)}
               />
 
-              <AutoComplete
+              <TextField
+                name="country"
+                hintText="Country"
                 floatingLabelText="Country"
-                filter={AutoComplete.caseInsensitiveFilter}
-                dataSource={countries}
+                multiLine={false}
+                fullWidth={false}
+                style={{paddingLeft: '-20px'}}
+                onChange={(event) => this.handleChange(event)}
               />
 
               <FlatButton label="Use current location" primary={true} style={styles.button} />
@@ -130,8 +145,8 @@ export default class Drawery extends Component {
 
               <div className="sliders row" style={styles.root}>
 
-                <div className="sliderContainer">
-                <div>{'Stability: '}{this.state.firstSlider}</div>
+                <div className="sliderContainer" name="stability">
+                <div>{'Stability: '}{this.state.stability}</div>
                 <Slider
                   value={this.state.stability}
                   onChange={this.handleFirstSlider}
@@ -140,12 +155,14 @@ export default class Drawery extends Component {
                   axis="y"
                   defaultValue={5}
                   min={0}
-                  max={10}/>
+                  max={10}
+                  step={0.1}/>
                 </div>
 
-                <div className="sliderContainer">
-                <div>{'Aesthetics: '}{this.state.secondSlider}</div>
+                <div className="sliderContainer" name="aesthetics">
+                <div>{'Aesthetics: '}{this.state.aesthetics}</div>
                 <Slider
+                  name="aesthetics"
                   value={this.state.aesthetics}
                   onChange={this.handleSecondSlider}
                   style={{height: 100}}
@@ -153,12 +170,14 @@ export default class Drawery extends Component {
                   axis="y"
                   defaultValue={5}
                   min={0}
-                  max={10}/>
+                  max={10}
+                  step={0.1}/>
                 </div>
 
-                <div className="sliderContainer">
-                <div>{'Safety: '}{this.state.thirdSlider}</div>
+                <div className="sliderContainer" name="safety">
+                <div>{'Safety: '}{this.state.safety}</div>
                 <Slider
+                  name="safety"
                   value={this.state.safety}
                   onChange={this.handleThirdSlider}
                   style={{height: 100}}
@@ -166,7 +185,8 @@ export default class Drawery extends Component {
                   axis="y"
                   defaultValue={5}
                   min={0}
-                  max={10}/>
+                  max={10}
+                  step={0.1}/>
                 </div>
 
               </div>
@@ -229,11 +249,13 @@ export default class Drawery extends Component {
               </div>
 
               <TextField
+                name="content"
                 hintText="Write a Review"
                 floatingLabelText="Write a Review"
                 multiLine={true}
                 fullWidth={true}
                 rows={2}
+                onChange={(event) => this.handleChange(event)}
               />
 
               <RaisedButton

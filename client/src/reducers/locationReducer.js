@@ -1,7 +1,6 @@
 import {
   ADD_LOCATION,
   REMOVE_LOCATION,
-  RECEIVE_POSTS
 } from '../actions/locationActions';
 
 import {
@@ -12,7 +11,6 @@ import {
 let id = 100;
 
 const initialState = {
-  loading: false,
   locations: []
 }
 
@@ -20,22 +18,23 @@ const initialState = {
 
 export default function locationReducer(state = initialState, action) {
   switch (action.type) {
+
     case LOADING_LOCATIONS:
-      return {
-        loading: true,
-        locations: []
-      }
+      return { locations: [] }
+
     case GET_LOCATIONS:
-      const newobj = { loading: false, locations: action.payload, ...state.locations }
-      console.log(newobj)
-      return { loading: false, locations: action.payload, ...state.locations }
+      console.log({ locations: action.payload })
+      return { locations: action.payload }
+
     case ADD_LOCATION:
       id++;
       const location = Object.assign({}, action.location, { id: id })
       return { locations: state.locations.concat(location) }
+
     case REMOVE_LOCATION:
       const locations = state.locations.filter(location => location.location_id !== action.location_id)
       return { locations }
+
     default:
       return state
   }

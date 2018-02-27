@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 
 export default class Listy extends Component {
 
-  state = {
-    open: false,
-    locations: []
-  };
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
-    console.log(this.props.locations)
   }
 
   render() {

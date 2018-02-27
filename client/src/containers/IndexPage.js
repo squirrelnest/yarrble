@@ -8,7 +8,7 @@ export default class IndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
 
@@ -22,12 +22,17 @@ export default class IndexPage extends Component {
   };
 
   render() {
+
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
-        <MapContainer handleToggle={this.handleToggle}/>
+        <MapContainer handleToggle={this.handleToggle} />
         <Listy store={this.props.store} locations={this.props.locations} />
         <Drawery store={this.props.store} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { locations: state.locations };
+};
