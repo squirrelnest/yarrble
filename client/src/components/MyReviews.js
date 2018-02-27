@@ -21,7 +21,7 @@ const styles = {
   },
 };
 
-export default class Tabley extends Component {
+export default class MyReviews extends Component {
 
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ export default class Tabley extends Component {
       enableSelectAll: true,
       deselectOnClickaway: true,
       showCheckboxes: true,
-      height: window.innerHeight*0.75,
+      height: 'window.innerHeight*0.75',
     };
   }
 

@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
 import MyReviews from './components/MyReviews';
-import Listy from './components/Listy';
 import Nearby from './components/Nearby';
 import IndexPage from './containers/IndexPage';
 import { fetchLocations } from './actions/thunks';

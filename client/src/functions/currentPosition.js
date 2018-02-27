@@ -1,7 +1,3 @@
-// $(document).click(function() {
-//   console.log("You clicked on me!")
-// })
-
 function getPosition() {
 
   // prevent redirecting

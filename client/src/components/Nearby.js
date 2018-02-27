@@ -18,7 +18,7 @@ export default class Nearby extends Component {
     const reviews = this.props.reviews.map( (review) =>
       <ListItem
         key={review.id}
-        primaryText={review.id}
+        primaryText={review.location.nickname}
         initiallyOpen={false}
         primaryTogglesNestedList={true}
 /*        nestedItems={loc.reviews.map( (review) =>

@@ -9,7 +9,7 @@ export function fetchLocations() {
     dispatch({ type: 'LOADING_LOCATIONS' });
     return fetch('http://localhost:3001/', {
       method: "GET",
-      credentials: 'same-origin',
+      credentials: 'omit',  /* other options: include, same-origin */
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

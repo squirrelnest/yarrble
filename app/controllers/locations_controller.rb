@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
       reviews_attributes: [:date_visited, :stability, :aesthetics, :safety, :content, :user_id])
     # location_params["reviews_attributes"][0]["user_id"] = current_user.id
     @location = Location.create(location_params)
-  
+
     if @location.errors.any?
       render json: { errors: @location.errors.full_messages }
     else
