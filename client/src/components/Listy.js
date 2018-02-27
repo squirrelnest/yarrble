@@ -3,18 +3,25 @@ import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import { connect } from 'react-redux';
 
+function alphabetize(current, next) {
+  if (current.nickname > next.nickname) {
+    return 1;
+  } else if (current.nickname < next.nickname) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
 export default class Listy extends Component {
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-  }
-
   render() {
 
-    const locations = this.props.locations.map( (loc) =>
+    const locations = this.props.locations.sort(alphabetize).map( (loc) =>
       <ListItem
         key={loc.id}
         primaryText={loc.nickname}

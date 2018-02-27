@@ -288,3 +288,13 @@ function mapDispatchToProps(dispatch) {
 
 export const ConnectedDrawer = connect(mapStateToProps, mapDispatchToProps)(Drawery)
 */
+
+function mapStateToProps(state) {
+  return { locations: state.locations }
+}
+
+function mapDispatchToProps(dispatch) {
+  addLocation: (location) => { dispatch(addLocation(location)) }
+}
+
+connect(mapStateToProps)(Drawery)
