@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
-import Tabley from './components/Table';
+import MyReviews from './components/MyReviews';
 import Listy from './components/Listy';
 import Nearby from './components/Nearby';
 import IndexPage from './containers/IndexPage';
@@ -24,7 +24,7 @@ export class App extends Component {
               <Switch>
                 <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/nearby" render={() => <Nearby store={this.props.store} reviews={this.props.reviews} />} />
-                <Route exact path="/myreviews" component={Tabley} />
+                <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
               </Switch>
             </Router>
           </div>
