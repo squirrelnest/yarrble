@@ -4,6 +4,7 @@ import Listy from '../components/Listy.js';
 import Drawery from '../components/Drawery.js';
 import { addLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
+import { createLocation } from '../actions/thunks';
 
 export class IndexPage extends Component {
 
@@ -29,14 +30,15 @@ export class IndexPage extends Component {
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
         <Listy locations={this.props.locations} />
-        <Drawery handleSubmit={this.props.addLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
+        <Drawery handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return { addLocation: (formData) => dispatch(addLocation(formData)) }
+  return { addLocation: (formData) => dispatch(addLocation(formData)),
+           createLocation: (formData) => dispatch(createLocation(formData)) }
 }
 
 export default connect(null, mapDispatchToProps)(IndexPage)

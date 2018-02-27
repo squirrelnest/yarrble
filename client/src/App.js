@@ -13,12 +13,6 @@ import { connect } from 'react-redux';
 
 export class App extends Component {
 
-  componentDidMount() {
-/*
-    this.props.fetchLocations()
-*/
-  }
-
   render() {
     return (
       <div className="App">

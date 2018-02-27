@@ -36,12 +36,13 @@ class LocationsController < ApplicationController
   end
 
   def create
-    location_params = params.require(:location).permit(:nickname, :lon, :lat, :country, reviews_attributes: [:date_visited, :stability, :content]).to_hash
-    location_params["reviews_attributes"][0]["user_id"] = current_user.id
+    location_params = params.require(:location).permit(:nickname, :lon, :lat, :country,
+      reviews_attributes: [:date_visited, :stability, :aesthetics, :safety, :content, :user_id])
+    # location_params["reviews_attributes"][0]["user_id"] = current_user.id
     @location = Location.create(location_params)
+  
     if @location.errors.any?
-      flash[:message] = @location.errors.full_messages.join("\n")
-      redirect_to new_location_path
+      render json: { errors: @location.errors.full_messages }
     else
       render json: @location, status: 201
     end

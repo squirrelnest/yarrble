@@ -33,17 +33,15 @@ export default class Drawery extends Component {
     super(props);
     this.state = {
       nickname: '',
-      lon: 0,
-      lat: 0,
+      longitude: 0,
+      latitude: 0,
       country: 'Vietnam',
       stability: 5,
       aesthetics: 5,
       safety: 5,
-      reviews: {
-        date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
-        content: '',
-        user_id: 0,
-      }
+      date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+      content: '',
+      user_id: 0,
     };
   }
 
@@ -66,7 +64,6 @@ export default class Drawery extends Component {
   };
 
   handleChange(event) {
-    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value
     });
