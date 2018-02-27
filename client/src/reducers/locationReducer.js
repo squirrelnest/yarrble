@@ -8,8 +8,6 @@ import {
   LOADING_LOCATIONS
 } from '../actions/thunks';
 
-let id = 100;
-
 const initialState = {
   locations: []
 }
@@ -23,7 +21,6 @@ export default function locationReducer(state = initialState, action) {
       return { locations: [] }
 
     case GET_LOCATIONS:
-      console.log({ locations: action.payload })
       return { locations: action.payload }
 
     case ADD_LOCATION:

@@ -6,6 +6,7 @@ import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
 import Tabley from './components/Table';
 import Listy from './components/Listy';
+import Nearby from './components/Nearby';
 import IndexPage from './containers/IndexPage';
 import { fetchLocations } from './actions/thunks';
 import { bindActionCreators } from 'redux';
@@ -22,7 +23,7 @@ export class App extends Component {
             <Router>
               <Switch>
                 <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.props.locations} />} />
-                <Route exact path="/nearby" render={() => <Listy store={this.props.store} locations={this.props.locations} />} />
+                <Route exact path="/nearby" render={() => <Nearby store={this.props.store} reviews={this.props.reviews} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>
             </Router>
@@ -33,10 +34,11 @@ export class App extends Component {
   }
 }
 
-
-
 const mapStateToProps = (state) => {
-  return { locations: state.locations.locations };
+  return {
+    locations: state.locations.locations,
+    reviews: state.reviews.reviews
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

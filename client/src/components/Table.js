@@ -72,9 +72,6 @@ const tableData = [
   },
 ];
 
-/**
- * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
- */
 export default class Tabley extends Component {
   state = {
     fixedHeader: true,

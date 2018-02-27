@@ -1,14 +1,11 @@
 import {
   ADD_REVIEW,
   REMOVE_REVIEW,
-  SET_VISIBILITY_FILTER,
-  VisibilityFilters
+  GET_REVIEWS,
+  LOADING_REVIEWS
 } from '../actions/reviewActions'
 
-let id = 100;
-
 const initialState = {
-  visibilityFilter: VisibilityFilters.SHOW_ALL,
   reviews: []
 }
 
@@ -16,17 +13,21 @@ const initialState = {
 
 export default function reviewReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      })
+
+    case LOADING_REVIEWS:
+      return { reviews: [] }
+
+    case GET_REVIEWS:
+      return { reviews: action.reviews }
+
     case ADD_REVIEW:
-      id++;
-      const review = Object.assign({}, action.review, { id: id })
+      const review = Object.assign({}, action.review)
       return { reviews: state.reviews.concat(review) }
+
     case REMOVE_REVIEW:
       const reviews = state.reviews.filter(review => review.id !== action.id)
       return { reviews }
+
     default:
       return state
   }

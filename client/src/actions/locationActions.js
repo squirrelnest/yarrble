@@ -24,11 +24,3 @@ export function removeLocation(location_id) {
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
 }
-
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-function receivePosts(locations) {
-  return {
-    type: RECEIVE_POSTS,
-    locations: locations
-  }
-}

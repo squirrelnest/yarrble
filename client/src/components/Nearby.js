@@ -1,38 +1,33 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import { connect } from 'react-redux';
+import { fetchReviews } from '../actions/reviewActions';
 
-function alphabetize(current, next) {
-  if (current.nickname > next.nickname) {
-    return 1;
-  } else if (current.nickname < next.nickname) {
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-export default class Listy extends Component {
+export default class Nearby extends Component {
 
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.store.dispatch(fetchReviews())
+  }
+
   render() {
 
-    const locations = this.props.locations.sort(alphabetize).map( (loc) =>
+    const reviews = this.props.reviews.map( (review) =>
       <ListItem
-        key={loc.id}
-        primaryText={loc.nickname}
+        key={review.id}
+        primaryText={review.id}
         initiallyOpen={false}
         primaryTogglesNestedList={true}
-          nestedItems={loc.reviews.map( (review) =>
+/*        nestedItems={loc.reviews.map( (review) =>
           <ListItem
             key={review.id}
             primaryText={review.content}
            />
         )}
+*/
       />
     )
 
@@ -41,7 +36,7 @@ export default class Listy extends Component {
 
         <List>
           <Subheader>Anchorages</Subheader>
-          {locations}
+          {reviews}
         </List>
 
       </div>
