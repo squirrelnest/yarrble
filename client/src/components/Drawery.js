@@ -6,7 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
-import { addLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -73,11 +72,6 @@ export default class Drawery extends Component {
     });
   };
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.store.dispatch(addLocation(this.state));
-  }
-
   render() {
     return (
       <div>
@@ -95,7 +89,12 @@ export default class Drawery extends Component {
 
             <p>{this.state.clicktext}</p>
 
-            <form onSubmit={(event) => this.handleSubmit(event)}>
+            <form onSubmit={ (event) => {
+                event.preventDefault();
+                this.props.handleSubmit(this.state)
+              }
+            }
+            >
 
               <TextField
                 name="nickname"
@@ -276,25 +275,3 @@ export default class Drawery extends Component {
     );
   }
 }
-
-/*
-function mapStateToProps(state) {
-  return { locations: state.locations }
-}
-
-function mapDispatchToProps(dispatch) {
-    addLocation: (location) => { dispatch(addLocation(location)) }
-}
-
-export const ConnectedDrawer = connect(mapStateToProps, mapDispatchToProps)(Drawery)
-*/
-
-function mapStateToProps(state) {
-  return { locations: state.locations }
-}
-
-function mapDispatchToProps(dispatch) {
-  addLocation: (location) => { dispatch(addLocation(location)) }
-}
-
-connect(mapStateToProps)(Drawery)

@@ -13,34 +13,10 @@ import { connect } from 'react-redux';
 
 export class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      locations: this.props.store.getState().locationReducer.locations,
-    }
-  }
-
   componentDidMount() {
-    console.log(this.state)
-    console.log(this.props)
-    console.log(this.props.store.getState().locationReducer.locations)
-
 /*
     this.props.fetchLocations()
 */
-
-    fetch('http://localhost:3001/', {
-      method: "GET",
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ locations: response });
-      })
   }
 
   render() {
@@ -51,8 +27,8 @@ export class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.state.locations} />} />
-                <Route exact path="/nearby" render={() => <Listy store={this.props.store} locations={this.state.locations} />} />
+                <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.props.locations} />} />
+                <Route exact path="/nearby" render={() => <Listy store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/myreviews" component={Tabley} />
               </Switch>
             </Router>
@@ -66,7 +42,7 @@ export class App extends Component {
 
 
 const mapStateToProps = (state) => {
-  return { locations: state.locations };
+  return { locations: state.locations.locations };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -78,6 +54,6 @@ connect() returns a higher order component that listens for all of the redux sto
 and renders you a component with props that are values from the store.
 */
 
-const WrapperApp = connect(mapStateToProps, {fetchLocations})(App);
+const WrapperApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default WrapperApp

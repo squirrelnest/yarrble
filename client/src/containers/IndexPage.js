@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer.js';
 import Listy from '../components/Listy.js';
 import Drawery from '../components/Drawery.js';
+import { addLocation } from '../actions/locationActions';
+import { connect } from 'react-redux';
 
-export default class IndexPage extends Component {
+export class IndexPage extends Component {
 
   constructor(props) {
     super(props);
@@ -26,13 +28,15 @@ export default class IndexPage extends Component {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
-        <Listy store={this.props.store} locations={this.props.locations} />
-        <Drawery store={this.props.store} open={this.state.open} onRequestChange={this.onRequestChange}/>
+        <Listy locations={this.props.locations} />
+        <Drawery handleSubmit={this.props.addLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { locations: state.locations };
-};
+function mapDispatchToProps(dispatch) {
+  return { addLocation: (formData) => dispatch(addLocation(formData)) }
+}
+
+export default connect(null, mapDispatchToProps)(IndexPage)

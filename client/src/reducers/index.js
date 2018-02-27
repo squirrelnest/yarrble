@@ -3,8 +3,8 @@ import locationReducer from './locationReducer';
 import reviewReducer from './reviewReducer';
 
 const yomama = combineReducers({
-  locationReducer,
-  reviewReducer
+  locations: locationReducer,
+  reviews: reviewReducer
 })
 
 export default yomama
