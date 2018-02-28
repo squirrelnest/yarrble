@@ -24,24 +24,32 @@ export default class LocationList extends Component {
     }
   }
 
-  handleMouseOver = () => {
-    this.setState({ visibility: 'visible' })
+  handleMouseOver = (event) => {
+    console.log(event.target);
+    this.setState({ visibility: 'visible' });
   }
 
-  handleClick = () => {
+  handleMouseOut = () => {
+    this.setState({ visibility: 'hidden' });
+  }
+
+  handleClick = (event) => {
+    event.preventDefault();
     alert("Are you sure you want to delete this?")
   }
 
   render() {
 
     const locations = this.props.locations.sort(alphabetize).map( (loc) =>
+
+      <div id={loc.id} data-boob="boob" onMouseOver={ (event) => {this.handleMouseOver(event)} }>
         <ListItem
-          leftIcon={<Delete hoverColor={'f44336'}
-            onClick={this.handleClick}
-            style={{visibility: this.state.visibility }}
-            onMouseOver={this.handleMouseOver} />}
-          onMouseOver={this.handleMouseOver}
+          leftIcon={
+            <DeleteBtn visibility={this.state.visibility} />
+          }
+          onMouseOut={this.handleMouseOut}
           key={loc.id}
+          name={loc.nickname}
           primaryText={loc.nickname}
           initiallyOpen={false}
           primaryTogglesNestedList={true}
@@ -49,10 +57,11 @@ export default class LocationList extends Component {
               <ListItem
                 insetChildren={true}
                 key={review.id}
-                primaryText={review.content}
+                primaryText= { '"' + review.content + '"' }
                />
             )}
         />
+      </div>
 
     )
 

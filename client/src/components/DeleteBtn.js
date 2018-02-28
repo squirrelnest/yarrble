@@ -6,7 +6,8 @@ const iconStyles = {
   marginRight: 24,
   marginLeft: 0,
   padding: '16px 56px 16px 72px',
-  position: 'relative'
+  position: 'relative',
+  display: 'inline-block'
 };
 
 export default class DeleteBtn extends Component {
@@ -15,11 +16,8 @@ export default class DeleteBtn extends Component {
     super(props);
   }
 
-  handleMouseOver = () => {
-  }
-
-  handleClick = () => {
-    (console.log("clicked"))
+  handleClick = (event) => {
+    event.preventDefault();
     alert("Are you sure you want to delete this?")
   }
 
@@ -27,9 +25,11 @@ export default class DeleteBtn extends Component {
 
     return (
 
-        <Delete
-          style={iconStyles}
-        />
+      <Delete
+        hoverColor={'f44336'}
+        onClick={ (event) => {this.handleClick(event)} }
+        style={{iconStyles, visibility: this.props.visibility}}
+      />
 
     );
   }
