@@ -69,13 +69,15 @@ class LocationsController < ApplicationController
   end
 
   def destroy
-    if current_user.admin
+    @locations = Location.all
+    # if current_user.admin
       Location.find(params[:id]).destroy
-      redirect_to locations_url
-    else
-      flash[:message] = "Only admins can do that."
-      redirect_to locations_url
-    end
+      # redirect_to locations_url
+    # else
+      # flash[:message] = "Only admins can do that."
+      # redirect_to locations_url
+    # end
+    render json: @locations, status: 200
   end
 
   def nearby

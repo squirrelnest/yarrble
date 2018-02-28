@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { ADD_LOCATION } from './locationActions';
+import { ADD_LOCATION, REMOVE_LOCATION } from './locationActions';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const LOADING_LOCATIONS = 'LOADING_LOCATIONS';
@@ -64,4 +64,21 @@ export function createLocation(locationData) {
 
 export function createLocationSuccess(payload) {
   return {type: ADD_LOCATION, payload};
+}
+
+export function deleteLocation(location_id) {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_LOCATIONS' });
+    return fetch(`http://localhost:3001/locations/${location_id}`, {
+      method: "DELETE",
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(deleteLocationSuccess(response));
+    })
+  }
+}
+
+export function deleteLocationSuccess(payload) {
+  return {type: GET_LOCATIONS, payload};
 }

@@ -24,16 +24,6 @@ export default class LocationListItem extends Component {
     this.setState({ visibility: 'hidden' });
   }
 
-/*
-  handleClick = (event, location_id) => {
-    event.preventDefault();
-    event.stopPropagation();
-    alert("Are you sure you want to delete this?");
-    this.props.store.dispatch(removeLocation(location_id));
-  }
-
-*/
-
   render() {
 
     return (

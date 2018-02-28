@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import LocationList from '../components/LocationList';
 import Drawery from '../components/Drawery';
-import { addLocation, removeLocation } from '../actions/locationActions';
+import { removeLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
-import { createLocation } from '../actions/thunks';
+import { createLocation, deleteLocation } from '../actions/thunks';
 
 export class IndexPage extends Component {
 
@@ -29,7 +29,7 @@ export class IndexPage extends Component {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
-        <LocationList locations={this.props.locations} handleClick={this.props.removeLocation} />
+        <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} />
         <Drawery handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
@@ -37,9 +37,10 @@ export class IndexPage extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { addLocation: (formData) => dispatch(addLocation(formData)),
+  return {
            createLocation: (formData) => dispatch(createLocation(formData)),
-           removeLocation: (location_id) => dispatch(removeLocation(location_id))
+           removeLocation: (location_id) => dispatch(removeLocation(location_id)),
+           deleteLocation: (location_id) => dispatch(deleteLocation(location_id))
           }
 }
 
