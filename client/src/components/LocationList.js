@@ -34,13 +34,7 @@ export default class LocationList extends Component {
           primaryText={loc.nickname}
           initiallyOpen={false}
           primaryTogglesNestedList={true}
-            nestedItems={loc.reviews.map( (review) =>
-              <ListItem
-                insetChildren={true}
-                key={review.id}
-                primaryText= { '"' + review.content + '"' }
-               />
-            )}
+          nestedItems={loc.reviews}
         />
 
     )
