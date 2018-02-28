@@ -17,8 +17,8 @@ export function removeReview(review_id) {
   return { type: REMOVE_REVIEW, review_id }
 }
 
-export function fetchReviewsSuccess(reviews) {
-  return {type: GET_REVIEWS, reviews};
+export function fetchReviewsSuccess(reviews ) {
+  return {type: GET_REVIEWS, reviews };
 }
 
 /* ASYNCS */
@@ -28,6 +28,24 @@ export function fetchReviews() {
     dispatch({ type: 'LOADING_REVIEWS' });
     return fetch('http://localhost:3001/reviews', {
       method: "GET",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(fetchReviewsSuccess(response));
+    })
+  }
+}
+
+export function deleteReview(review_id) {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_REVIEWS' });
+    return fetch(`http://localhost:3001/reviews/${review_id}`, {
+      method: "DELETE",
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',

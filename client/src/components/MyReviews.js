@@ -9,8 +9,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
-import ReviewItem from './ReviewItem';
-import DeleteBtn from './DeleteBtn';
+import { ReviewItem } from './ReviewItem';
 
 const styles = {
   propContainer: {

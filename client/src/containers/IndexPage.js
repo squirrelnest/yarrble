@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import LocationList from '../components/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
-import { removeLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
 import { createLocation, deleteLocation } from '../actions/thunks';
 
@@ -39,7 +38,6 @@ export class IndexPage extends Component {
 function mapDispatchToProps(dispatch) {
   return {
            createLocation: (formData) => dispatch(createLocation(formData)),
-           removeLocation: (location_id) => dispatch(removeLocation(location_id)),
            deleteLocation: (location_id) => dispatch(deleteLocation(location_id))
           }
 }

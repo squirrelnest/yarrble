@@ -9,6 +9,8 @@ import {
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import DeleteBtn from './DeleteBtn';
+import { deleteReview } from '../actions/reviewActions';
+import { connect } from 'react-redux';
 
 const styles = {
   propContainer: {
@@ -21,21 +23,11 @@ const styles = {
   },
 };
 
-export default class ReviewItem extends Component {
+export class ReviewItem extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      fixedHeader: true,
-      fixedFooter: false,
-      stripedRows: false,
-      showRowHover: true,
-      selectable: true,
-      multiSelectable: true,
-      enableSelectAll: true,
-      deselectOnClickaway: true,
-      showCheckboxes: false,
-      height: 'window.innerHeight*0.75',
       visibility: 'hidden',
     };
   }
@@ -51,7 +43,6 @@ export default class ReviewItem extends Component {
   };
 
   handleMouseOver = (event, review_id) => {
-    console.log(review_id)
     this.setState({ visibility: 'visible' });
   }
 
@@ -61,9 +52,8 @@ export default class ReviewItem extends Component {
 
   handleClick = (event, review_id) => {
     event.preventDefault();
-    console.log(review_id)
-    alert("Are you sure you want to delete this?");
-/*    this.props.store.dispatch(deleteReview(review_id));  */
+    console.log(review_id);
+    deleteReview(review_id);
   }
 
   render() {
@@ -87,3 +77,12 @@ export default class ReviewItem extends Component {
     );
   }
 }
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+           deleteReview: (review_id) => dispatch(deleteReview(review_id))
+         }
+}
+
+export default connect(null, mapDispatchToProps)(ReviewItem)
