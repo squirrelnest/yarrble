@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SvgIcon from 'material-ui/SvgIcon';
 import Delete from 'material-ui/svg-icons/action/delete';
+import ListItemIcon from 'material-ui/List';
 
 const iconStyles = {
   marginRight: 24,
@@ -24,12 +24,13 @@ export default class DeleteBtn extends Component {
   render() {
 
     return (
-
-      <Delete
-        hoverColor={'f44336'}
-        onClick={ (event) => {this.handleClick(event)} }
-        style={{iconStyles, visibility: this.props.visibility}}
-      />
+      <ListItemIcon>
+        <Delete
+          hoverColor={'f44336'}
+          onClick={ (event) => {this.handleClick(event)} }
+          style={{visibility: this.props.visibility}}
+        />
+      </ ListItemIcon>
 
     );
   }
