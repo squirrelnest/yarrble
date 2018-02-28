@@ -81,9 +81,9 @@ class LocationsController < ApplicationController
   end
 
   def nearby
-    @current_lon = cookies[:lon].to_f
-    @current_lat = cookies[:lat].to_f
-    distance = 10000
+    @current_lon = params[:lon].to_f
+    @current_lat = params[:lat].to_f
+    distance = 10000  # meters
     @locations = Location.nearby(@current_lat, @current_lon, distance)
     render json: @locations, status: 200
   end

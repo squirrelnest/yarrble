@@ -22,6 +22,26 @@ export function fetchLocations() {
   }
 }
 
+export function fetchNearbyLocations() {
+  let lon = localStorage.getItem('lon');
+  let lat = localStorage.getItem('lat');
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_LOCATIONS' });
+    return fetch(`http://localhost:3001/locations/nearby/${lon}/${lat}`, {
+      method: "GET",
+      credentials: 'omit',  /* other options: include, same-origin */
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(fetchLocationsSuccess(response));
+    })
+  }
+}
+
 export function fetchLocationsSuccess(payload) {
   return {type: GET_LOCATIONS, payload};
 }

@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import { fetchReviews } from '../actions/reviewActions';
+import { fetchNearbyLocations } from '../actions/thunks';
 
 export default class Nearby extends Component {
 
   componentDidMount() {
-    this.props.store.dispatch(fetchReviews())
+    this.props.store.dispatch(fetchNearbyLocations());
   }
 
   render() {
 
-    const reviews = this.props.reviews.map( (review) =>
+    const locations = this.props.locations.map( (location) =>
       <ListItem
-        key={review.id}
-        primaryText={review.location.nickname}
+        key={location.id}
+        primaryText={location.nickname}
         initiallyOpen={false}
         primaryTogglesNestedList={true}
-/*        nestedItems={loc.reviews.map( (review) =>
+        nestedItems={location.reviews.map( (review) =>
           <ListItem
             key={review.id}
             primaryText={review.content}
            />
         )}
-*/
+
       />
     )
 
@@ -31,8 +31,8 @@ export default class Nearby extends Component {
       <div className="listy">
 
         <List>
-          <Subheader>Anchorages</Subheader>
-          {reviews}
+          <Subheader>Anchorages within 10km</Subheader>
+          {locations}
         </List>
 
       </div>

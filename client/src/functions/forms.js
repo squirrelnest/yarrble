@@ -91,7 +91,6 @@ $(document).ready(function() {
       // post to Locations#new
       var posting = $.post('/locations', values);
       posting.done(function(data) {
-        console.log("js intercepted!")
         // handle response and append to DOM
         $("#latest").empty();
         var anchorage = data;

@@ -22,7 +22,7 @@ export class App extends Component {
             <Router>
               <Switch>
                 <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.props.locations} />} />
-                <Route exact path="/nearby" render={() => <Nearby store={this.props.store} reviews={this.props.reviews} />} />
+                <Route exact path="/nearby" render={() => <Nearby store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
               </Switch>
             </Router>
