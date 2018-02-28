@@ -3,6 +3,7 @@ import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import LocationListItem from '../components/LocationListItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
+import FlatButton from 'material-ui/FlatButton';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -18,7 +19,7 @@ export default class LocationList extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    if (event.target.name === 'nearby') {
+    if (event.currentTarget.className === 'nearby') {
       this.props.store.dispatch(fetchNearbyLocations());
     } else {
       this.props.store.dispatch(fetchLocations());
@@ -48,8 +49,8 @@ export default class LocationList extends Component {
         <List>
 
           <Subheader>
-            <a href="" onClick={this.handleClick} name="all">All Anchorages</a>
-            <a href="" onClick={this.handleClick} name="nearby">Nearby Anchorages</a>
+            <FlatButton href="" onClick={this.handleClick} className="all" label="All Anchorages"/>
+            <FlatButton href="" onClick={this.handleClick} className="nearby" label="Nearby Anchorages"/>
           </Subheader>
 
           {locations}
