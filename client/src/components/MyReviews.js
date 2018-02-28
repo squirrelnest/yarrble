@@ -9,6 +9,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
+import ReviewItem from './ReviewItem';
+import DeleteBtn from './DeleteBtn';
 
 const styles = {
   propContainer: {
@@ -34,8 +36,8 @@ export default class MyReviews extends Component {
       multiSelectable: true,
       enableSelectAll: true,
       deselectOnClickaway: true,
-      showCheckboxes: true,
-      height: 'window.innerHeight*0.75',
+      showCheckboxes: false,
+      height: 'window.innerHeight*0.75'
     };
   }
 
@@ -53,17 +55,25 @@ export default class MyReviews extends Component {
     this.setState({height: event.target.value});
   };
 
+  handleClick = (event, review_id) => {
+    event.preventDefault();
+    console.log(review_id)
+    alert("Are you sure you want to delete this?");
+/*    this.props.store.dispatch(deleteReview(review_id));  */
+  }
+
   render() {
 
     const tableData = this.props.reviews.map( (review) =>
-      <TableRow key={review.id}>
-        <TableRowColumn>{review.id}</TableRowColumn>
-        <TableRowColumn>{review.location.nickname}</TableRowColumn>
-        <TableRowColumn>{review.content}</TableRowColumn>
-        <TableRowColumn>{review.stability}</TableRowColumn>
-        <TableRowColumn>{review.aesthetics}</TableRowColumn>
-        <TableRowColumn>{review.safety}</TableRowColumn>
-      </TableRow>
+      <ReviewItem
+        key={review.id}
+        review_id={review.id}
+        nickname={review.location.nickname}
+        content={review.content}
+        stability={review.stability}
+        aesthetics={review.aesthetics}
+        safety={review.safety}
+      />
     )
 
     return (
@@ -82,7 +92,7 @@ export default class MyReviews extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="6" tooltip="My Reviews" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="7" tooltip="My Reviews" style={{textAlign: 'center'}}>
                 My Reviews
               </TableHeaderColumn>
             </TableRow>
@@ -93,6 +103,7 @@ export default class MyReviews extends Component {
               <TableHeaderColumn tooltip="stability">stability</TableHeaderColumn>
               <TableHeaderColumn tooltip="aesthetics">aesthetics</TableHeaderColumn>
               <TableHeaderColumn tooltip="safety">safety</TableHeaderColumn>
+              <TableHeaderColumn tooltip="tasks"></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody

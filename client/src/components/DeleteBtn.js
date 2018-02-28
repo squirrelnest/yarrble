@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Delete from 'material-ui/svg-icons/action/delete';
 import ListItemIcon from 'material-ui/List';
-import { removeLocation } from '../actions/locationActions';
 
 const iconStyles = {
   marginRight: 24,
@@ -17,21 +16,13 @@ export default class DeleteBtn extends Component {
     super(props);
   }
 
-  handleClick = (event, location_id) => {
-    event.preventDefault();
-    console.log(event.target.id)
-    alert("Are you sure you want to delete this?");
-    this.props.store.dispatch(removeLocation(location_id));
-  }
-
   render() {
 
     return (
       <ListItemIcon>
         <Delete
-          location_id={this.props.location_id}
           hoverColor={'f44336'}
-          onClick={ (event, location_id) => {this.handleClick(event, location_id)} }
+          onClick={ (event) => {this.props.handleClick(event, this.props.id)} }
           style={{visibility: this.props.visibility}}
         />
       </ ListItemIcon>

@@ -38,7 +38,6 @@ export default class LocationListItem extends Component {
                 hoverColor={'f44336'}
                 onClick={ (event) => {
                   event.preventDefault();
-                  console.log(this.props.location_id);
                   this.props.handleClick(this.props.location_id);
                   }
                 }
