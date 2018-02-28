@@ -20,6 +20,8 @@ const styles = {
   propToggleHeader: {
     margin: '20px auto 10px',
   },
+  overflow: 'hidden',
+  height: 'this.state.height'
 };
 
 export default class MyReviews extends Component {
@@ -53,18 +55,20 @@ export default class MyReviews extends Component {
   handleChange = (event) => {
     this.setState({height: event.target.value});
   };
-
+/*
   handleClick = (event, review_id) => {
     event.preventDefault();
     console.log(review_id)
     alert("Are you sure you want to delete this?");
-/*    this.props.store.dispatch(deleteReview(review_id));  */
+    this.props.store.dispatch(deleteReview(review_id));
   }
+*/
 
   render() {
 
     const tableData = this.props.reviews.map( (review) =>
       <ReviewItem
+        store={this.props.store}
         key={review.id}
         review_id={review.id}
         nickname={review.location.nickname}

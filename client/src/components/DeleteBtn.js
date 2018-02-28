@@ -22,7 +22,7 @@ export default class DeleteBtn extends Component {
       <ListItemIcon>
         <Delete
           hoverColor={'f44336'}
-          onClick={ (event) => {this.props.handleClick(event, this.props.id)} }
+          onClick={this.props.handleClick}
           style={{visibility: this.props.visibility}}
         />
       </ ListItemIcon>

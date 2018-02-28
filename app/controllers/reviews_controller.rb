@@ -52,13 +52,14 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    if @review.user_id == @user.id || current_user.admin
+    # if @review.user_id == @user.id || current_user.admin
       @review.destroy
-      redirect_to locations_url
-    else
-      flash[:message] = "Can't touch what ain't yours."
-      redirect_to locations_url
-    end
+      # redirect_to locations_url
+    # else
+      # flash[:message] = "Can't touch what ain't yours."
+      # redirect_to locations_url
+    @reviews = Review.all
+    render json: @reviews, status: 200
   end
 
   private

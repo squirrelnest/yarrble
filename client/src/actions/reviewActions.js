@@ -46,11 +46,6 @@ export function deleteReview(review_id) {
     dispatch({ type: 'LOADING_REVIEWS' });
     return fetch(`http://localhost:3001/reviews/${review_id}`, {
       method: "DELETE",
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
     })
     .then(response => response.json())
     .then(response => {

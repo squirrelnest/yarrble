@@ -1,27 +1,9 @@
 import React, {Component} from 'react';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import { TableRow, TableRowColumn } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import DeleteBtn from './DeleteBtn';
 import { deleteReview } from '../actions/reviewActions';
 import { connect } from 'react-redux';
-
-const styles = {
-  propContainer: {
-    width: 200,
-    overflow: 'hidden',
-    margin: '20px auto 0',
-  },
-  propToggleHeader: {
-    margin: '20px auto 10px',
-  },
-};
 
 export class ReviewItem extends Component {
 
@@ -38,10 +20,6 @@ export class ReviewItem extends Component {
     });
   };
 
-  handleChange = (event) => {
-    this.setState({height: event.target.value});
-  };
-
   handleMouseOver = (event, review_id) => {
     this.setState({ visibility: 'visible' });
   }
@@ -50,10 +28,10 @@ export class ReviewItem extends Component {
     this.setState({ visibility: 'hidden' })
   }
 
-  handleClick = (event, review_id) => {
+  handleClick = (event, id) => {
     event.preventDefault();
-    console.log(review_id);
-    deleteReview(review_id);
+    console.log(this.props);
+    this.props.store.dispatch(deleteReview(id));
   }
 
   render() {
@@ -77,7 +55,6 @@ export class ReviewItem extends Component {
     );
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
