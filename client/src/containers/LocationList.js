@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import LocationListItem from '../components/LocationListItem'
+import LocationListItem from '../components/LocationListItem';
+import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -14,6 +15,15 @@ function alphabetize(current, next) {
 }
 
 export default class LocationList extends Component {
+
+  handleClick = (event) => {
+    event.preventDefault();
+    if (event.target.name === 'nearby') {
+      this.props.store.dispatch(fetchNearbyLocations());
+    } else {
+      this.props.store.dispatch(fetchLocations());
+    }
+  }
 
   render() {
 
@@ -36,8 +46,14 @@ export default class LocationList extends Component {
       <div className="listy">
 
         <List>
-          <Subheader>Anchorages</Subheader>
+
+          <Subheader>
+            <a href="" onClick={this.handleClick} name="all">All Anchorages</a>
+            <a href="" onClick={this.handleClick} name="nearby">Nearby Anchorages</a>
+          </Subheader>
+
           {locations}
+
         </List>
 
       </div>

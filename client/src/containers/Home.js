@@ -28,7 +28,7 @@ export class Home extends Component {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
-        <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} />
+        <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} store={this.props.store} />
         <NewLocationForm handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange} handleToggle={this.handleToggle}/>
       </div>
     );
