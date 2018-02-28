@@ -24,10 +24,15 @@ export default class LocationListItem extends Component {
     this.setState({ visibility: 'hidden' });
   }
 
-  handleClick = (event) => {
+/*
+  handleClick = (event, location_id) => {
     event.preventDefault();
-    alert("Are you sure you want to delete this?")
+    event.stopPropagation();
+    alert("Are you sure you want to delete this?");
+    this.props.store.dispatch(removeLocation(location_id));
   }
+
+*/
 
   render() {
 
@@ -38,14 +43,20 @@ export default class LocationListItem extends Component {
         <ListItem
             leftIcon={
               <Delete
+                location_id={this.props.location_id}
                 visibility={this.state.visibility}
                 hoverColor={'f44336'}
-                onClick={ (event) => this.handleClick(event) }
+                onClick={ (event) => {
+                  event.preventDefault();
+                  console.log(this.props.location_id);
+                  this.props.handleClick(this.props.location_id);
+                  }
+                }
               />
             }
             onMouseOver={this.handleMouseOver}
             onMouseOut={this.handleMouseOut}
-            key={this.props.key}
+            key={this.props.location_id}
             name={this.props.name}
             primaryText={this.props.primaryText}
             initiallyOpen={this.props.initiallyOpen}

@@ -6,8 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 const styles = {
   root: {

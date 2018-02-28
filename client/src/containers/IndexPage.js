@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import LocationList from '../components/LocationList';
 import Drawery from '../components/Drawery';
-import { addLocation } from '../actions/locationActions';
+import { addLocation, removeLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
 import { createLocation } from '../actions/thunks';
 
@@ -29,7 +29,7 @@ export class IndexPage extends Component {
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
-        <LocationList locations={this.props.locations} />
+        <LocationList locations={this.props.locations} handleClick={this.props.removeLocation} />
         <Drawery handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
@@ -38,7 +38,9 @@ export class IndexPage extends Component {
 
 function mapDispatchToProps(dispatch) {
   return { addLocation: (formData) => dispatch(addLocation(formData)),
-           createLocation: (formData) => dispatch(createLocation(formData)) }
+           createLocation: (formData) => dispatch(createLocation(formData)),
+           removeLocation: (location_id) => dispatch(removeLocation(location_id))
+          }
 }
 
 export default connect(null, mapDispatchToProps)(IndexPage)

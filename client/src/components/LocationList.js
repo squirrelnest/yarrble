@@ -24,10 +24,12 @@ export default class LocationList extends Component {
 
   render() {
 
-    const locations = this.props.locations.sort(alphabetize).map( (loc) =>
+    const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
 
         <LocationListItem
-          key={loc.id}
+          location_id={loc.id}
+          handleClick={this.props.handleClick}
+          key={index}
           name={loc.nickname}
           primaryText={loc.nickname}
           initiallyOpen={false}
