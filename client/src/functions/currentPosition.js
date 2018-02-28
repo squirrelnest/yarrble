@@ -1,3 +1,5 @@
+/*
+
 function getPosition() {
 
   // prevent redirecting
@@ -58,6 +60,8 @@ function getCountry() {
 
   };
 };
+
+*/
 
 function setCurrentLocation() {
 

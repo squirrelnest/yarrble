@@ -31,6 +31,6 @@ module Yarrble
     config.api_only = true
 
     # Reenable cookies
-    config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Cookies
   end
 end

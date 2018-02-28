@@ -27,7 +27,6 @@ export default class LocationList extends Component {
     const locations = this.props.locations.sort(alphabetize).map( (loc) =>
 
         <LocationListItem
-        
           key={loc.id}
           name={loc.nickname}
           primaryText={loc.nickname}
