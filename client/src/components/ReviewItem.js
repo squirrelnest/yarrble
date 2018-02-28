@@ -27,18 +27,15 @@ export class ReviewItem extends Component {
   handleMouseOut = () => {
     this.setState({ visibility: 'hidden' })
   }
-/*
-  handleClick = (event, id) => {
-    event.preventDefault();
-    this.props.store.dispatch(deleteReview(id));
-  }
-*/
+
   render() {
 
     return (
 
       <TableRow
+        hoverable={true}
         key={this.props.key}
+        hover={true}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
