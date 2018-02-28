@@ -4,6 +4,7 @@ import Subheader from 'material-ui/Subheader';
 import LocationListItem from '../components/LocationListItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import FlatButton from 'material-ui/FlatButton';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -17,9 +18,8 @@ function alphabetize(current, next) {
 
 export default class LocationList extends Component {
 
-  handleClick = (event) => {
-    event.preventDefault();
-    if (event.currentTarget.className === 'nearby') {
+  handleActive = (tab) => {
+    if (tab.props['name'] === 'nearby') {
       this.props.store.dispatch(fetchNearbyLocations());
     } else {
       this.props.store.dispatch(fetchLocations());
@@ -40,7 +40,6 @@ export default class LocationList extends Component {
           primaryTogglesNestedList={true}
           nestedItems={loc.reviews}
         />
-
     )
 
     return (
@@ -48,10 +47,10 @@ export default class LocationList extends Component {
 
         <List>
 
-          <Subheader>
-            <FlatButton href="" onClick={this.handleClick} className="all" label="All Anchorages"/>
-            <FlatButton href="" onClick={this.handleClick} className="nearby" label="Nearby Anchorages"/>
-          </Subheader>
+          <Tabs inkBarStyle={{background: "#00BCD4"}}>
+            <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" style={{ color: '#212121', backgroundColor: 'none' }}/>
+            <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby"  style={{ color: '#212121', backgroundColor: 'none' }}/>
+          </Tabs>
 
           {locations}
 
