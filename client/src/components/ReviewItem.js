@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import DeleteBtn from './DeleteBtn';
-import { deleteReview } from '../actions/reviewActions';
+import EditBtn from './EditBtn';
 import { connect } from 'react-redux';
 
 export class ReviewItem extends Component {
@@ -20,27 +20,26 @@ export class ReviewItem extends Component {
     });
   };
 
-  handleMouseOver = (event, review_id) => {
+  handleMouseOver = (event, name) => {
     this.setState({ visibility: 'visible' });
   }
 
   handleMouseOut = () => {
     this.setState({ visibility: 'hidden' })
   }
-
+/*
   handleClick = (event, id) => {
     event.preventDefault();
-    console.log(this.props);
     this.props.store.dispatch(deleteReview(id));
   }
-
+*/
   render() {
 
     return (
 
       <TableRow
         key={this.props.key}
-        onMouseOver={ (event) => this.handleMouseOver(event, this.props.review_id) }
+        onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
         <TableRowColumn>{this.props.review_id}</TableRowColumn>
@@ -49,17 +48,10 @@ export class ReviewItem extends Component {
         <TableRowColumn>{this.props.stability}</TableRowColumn>
         <TableRowColumn>{this.props.aesthetics}</TableRowColumn>
         <TableRowColumn>{this.props.safety}</TableRowColumn>
-        <TableRowColumn><DeleteBtn handleClick={ (event) => this.handleClick(event, this.props.review_id) } visibility={this.state.visibility } /></TableRowColumn>
+        <TableRowColumn><DeleteBtn review_id={this.props.review_id} store={this.props.store} visibility={this.state.visibility} /></TableRowColumn>
+        <TableRowColumn><EditBtn review_id={this.props.review_id} store={this.props.store} visibility={this.state.visibility} /></TableRowColumn>
       </TableRow>
 
     );
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-           deleteReview: (review_id) => dispatch(deleteReview(review_id))
-         }
-}
-
-export default connect(null, mapDispatchToProps)(ReviewItem)

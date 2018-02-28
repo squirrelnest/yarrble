@@ -14,6 +14,7 @@ const styles = {
     width: 200,
     overflow: 'hidden',
     margin: '20px auto 0',
+    tableLayout: 'auto'
   },
   propToggleHeader: {
     margin: '20px auto 10px',
@@ -83,7 +84,7 @@ export default class MyReviews extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="7" tooltip="My Reviews" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="8" tooltip="My Reviews" style={{textAlign: 'center'}}>
                 My Reviews
               </TableHeaderColumn>
             </TableRow>
@@ -94,7 +95,8 @@ export default class MyReviews extends Component {
               <TableHeaderColumn tooltip="stability">stability</TableHeaderColumn>
               <TableHeaderColumn tooltip="aesthetics">aesthetics</TableHeaderColumn>
               <TableHeaderColumn tooltip="safety">safety</TableHeaderColumn>
-              <TableHeaderColumn tooltip="tasks"></TableHeaderColumn>
+              <TableHeaderColumn tooltip="delete"></TableHeaderColumn>
+              <TableHeaderColumn tooltip="edit"></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody

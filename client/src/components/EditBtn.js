@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import Delete from 'material-ui/svg-icons/action/delete';
 import ListItemIcon from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
-import { deleteReview } from '../actions/reviewActions';
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+/* import { updateReview } from '../actions/reviewActions'; */
 
-export default class DeleteBtn extends Component {
+export default class EditBtn extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    this.props.store.dispatch(deleteReview(this.props.review_id));
+    console.log("Editing!")
+/*    this.props.store.dispatch(updateReview(this.props.review_id)); */
   }
 
   render() {
@@ -19,7 +20,7 @@ export default class DeleteBtn extends Component {
         onClick={this.handleClick}
       >
         <IconButton>
-            <Delete hoverColor={'f44336'} />
+          <ModeEdit hoverColor={'f44336'} />
         </IconButton>
       </ ListItemIcon>
 
