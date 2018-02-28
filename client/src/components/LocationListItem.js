@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { List, ListItem, ListItemIcon } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import { connect } from 'react-redux';
+import { ListItem } from 'material-ui/List';
 import DeleteBtn from './DeleteBtn';
 import Delete from 'material-ui/svg-icons/action/delete';
 

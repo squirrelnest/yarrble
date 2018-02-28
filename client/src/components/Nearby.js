@@ -5,10 +5,6 @@ import { fetchReviews } from '../actions/reviewActions';
 
 export default class Nearby extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.store.dispatch(fetchReviews())
   }

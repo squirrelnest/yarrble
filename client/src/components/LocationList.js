@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { List, ListItem, ListItemIcon } from 'material-ui/List';
+import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import DeleteBtn from './DeleteBtn';
-import { connect } from 'react-redux';
-import Delete from 'material-ui/svg-icons/action/delete';
 import LocationListItem from './LocationListItem'
 
 function alphabetize(current, next) {
@@ -17,10 +14,6 @@ function alphabetize(current, next) {
 }
 
 export default class LocationList extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
 
