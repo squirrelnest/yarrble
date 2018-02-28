@@ -25,7 +25,7 @@ const styles = {
   },
 };
 
-export default class Drawery extends Component {
+export default class NewLocationForm extends Component {
 
   constructor(props) {
     super(props);

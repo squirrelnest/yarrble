@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import LocationList from '../components/LocationList';
-import Drawery from '../components/Drawery';
+import NewLocationForm from '../components/NewLocationForm';
 import { removeLocation } from '../actions/locationActions';
 import { connect } from 'react-redux';
 import { createLocation, deleteLocation } from '../actions/thunks';
@@ -30,7 +30,7 @@ export class IndexPage extends Component {
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
         <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} />
-        <Drawery handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
+        <NewLocationForm handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
       </div>
     );
   }
