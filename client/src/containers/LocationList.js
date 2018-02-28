@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import LocationListItem from './LocationListItem'
+import LocationListItem from '../components/LocationListItem'
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {

@@ -4,9 +4,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
-import MyReviews from './components/MyReviews';
-import Nearby from './components/Nearby';
-import IndexPage from './containers/IndexPage';
+import MyReviews from './containers/MyReviews';
+import Nearby from './containers/Nearby';
+import Home from './containers/Home';
 import { fetchLocations } from './actions/thunks';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ export class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <Route exact path="/" render={() => <IndexPage store={this.props.store} locations={this.props.locations} />} />
+                <Route exact path="/" render={() => <Home store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/nearby" render={() => <Nearby store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
               </Switch>

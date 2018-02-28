@@ -7,7 +7,7 @@ import {
   TableHeaderColumn,
   TableRow
 } from 'material-ui/Table';
-import { ReviewItem } from './ReviewItem';
+import { ReviewItem } from '../components/ReviewItem';
 
 const styles = {
   propContainer: {
