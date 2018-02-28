@@ -30,7 +30,7 @@ export class IndexPage extends Component {
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
         <MapContainer handleToggle={this.handleToggle} />
         <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} />
-        <NewLocationForm handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange}/>
+        <NewLocationForm handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange} handleToggle={this.handleToggle}/>
       </div>
     );
   }

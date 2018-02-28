@@ -39,7 +39,7 @@ export default class NewLocationForm extends Component {
       safety: 5,
       date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
       content: '',
-      user_id: 0,
+      user_id: 0
     };
   }
 
@@ -57,7 +57,7 @@ export default class NewLocationForm extends Component {
 
   handleClick(event) {
     this.setState({
-      clicktext: 'Submit button clicked'
+      open: false,
     });
   };
 
@@ -82,11 +82,9 @@ export default class NewLocationForm extends Component {
 
             <h2>Add New Anchorage</h2>
 
-            <p>{this.state.clicktext}</p>
-
             <form onSubmit={ (event) => {
                 event.preventDefault();
-                this.props.handleSubmit(this.state)
+                this.props.handleSubmit(this.state);
               }
             }
             >
@@ -259,7 +257,7 @@ export default class NewLocationForm extends Component {
                 secondary={true}
                 fullWidth={false}
                 style={styles.button}
-                onClick={(event) => this.handleClick(event)}
+                onClick={this.props.handleToggle}
               />
 
             </form>
