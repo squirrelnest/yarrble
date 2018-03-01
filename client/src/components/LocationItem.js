@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { ListItem } from 'material-ui/List';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { deleteLocation } from '../actions/thunks';
@@ -16,6 +17,10 @@ export default class LocationItem extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ anchorEl: ReactDOM.findDOMNode(this) })
+  }
+
   handleAddReview = (event) => {
     event.preventDefault();
     this.setState({ popoverOpen: false });
@@ -28,7 +33,6 @@ export default class LocationItem extends Component {
     event.stopPropagation(); // don't toggle showing reviews
     this.setState({
       popoverOpen: true,
-      anchorEl: event.currentTarget,
     });
   };
 
