@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import LocationListItem from '../components/LocationListItem';
+import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
+import { deleteLocation } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 function alphabetize(current, next) {
@@ -25,11 +26,16 @@ export default class LocationList extends Component {
     }
   }
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.props.store.dispatch(deleteLocation(this.props.location_id));
+  }
+
   render() {
 
     const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
 
-        <LocationListItem
+        <LocationItem
           location_id={loc.id}
           handleClick={this.props.handleClick}
           key={index}

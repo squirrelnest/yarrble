@@ -6,22 +6,17 @@ import { deleteReview } from '../actions/reviewActions';
 
 export default class DeleteBtn extends Component {
 
-  handleClick = (event) => {
-    event.preventDefault();
-    this.props.store.dispatch(deleteReview(this.props.review_id));
-  }
-
   render() {
 
     return (
-      <ListItemIcon
-        style={{ visibility: this.props.visibility }}
-        onClick={this.handleClick}
-      >
-        <IconButton>
-            <Delete hoverColor={'f44336'} />
-        </IconButton>
-      </ ListItemIcon>
+
+        <Delete
+          hoverColor={'f44336'}
+          style={{
+            visibility: this.props.visibility,
+          }}
+          onClick={this.props.handleClick}
+        />
 
     );
   }

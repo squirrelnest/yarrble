@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 import { connect } from 'react-redux';
+import { deleteReview } from '../actions/reviewActions';
 
 export class ReviewItem extends Component {
 
@@ -28,6 +29,11 @@ export class ReviewItem extends Component {
     this.setState({ visibility: 'hidden' })
   }
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.props.store.dispatch(deleteReview(this.props.review_id));
+  }
+
   render() {
 
     return (
@@ -45,7 +51,7 @@ export class ReviewItem extends Component {
         <TableRowColumn>{this.props.stability}</TableRowColumn>
         <TableRowColumn>{this.props.aesthetics}</TableRowColumn>
         <TableRowColumn>{this.props.safety}</TableRowColumn>
-        <TableRowColumn><DeleteBtn review_id={this.props.review_id} store={this.props.store} visibility={this.state.visibility} /></TableRowColumn>
+        <TableRowColumn><DeleteBtn review_id={this.props.review_id} onClick={this.handleDelete} visibility={this.state.visibility} /></TableRowColumn>
         <TableRowColumn><EditBtn review_id={this.props.review_id} store={this.props.store} visibility={this.state.visibility} /></TableRowColumn>
       </TableRow>
 
