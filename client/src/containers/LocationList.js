@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { List } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
-import { deleteLocation } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import AddReviewForm from '../components/AddReviewForm';
 
@@ -22,25 +20,13 @@ export default class LocationList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       addReviewFormOpen: false,
-      popoverOpen: false,
     }
   }
 
   handleRequestClose = () => {
     this.setState({
       popoverOpen: false,
-    });
-  };
-
-  openPopover = (event) => {
-  // This prevents ghost click.
-    event.preventDefault();
-    event.stopPropagation();
-    this.setState({
-      popoverOpen: true,
-      anchorEl: event.currentTarget,
     });
   };
 
@@ -54,7 +40,6 @@ export default class LocationList extends Component {
 
   handleAdd = (event, location_id) => {
     event.preventDefault();
-    console.log(location_id)
     this.setState({
       addReviewFormOpen: true,
       popoverOpen: false,
@@ -89,7 +74,6 @@ export default class LocationList extends Component {
           store={this.props.store}
           handleAdd={this.handleAdd}
           nestedItems={loc.reviews}
-          popoverOpen={this.state.popoverOpen}
           handleRequestClose={this.handleRequestClose}
           openPopover={this.openPopover}
         />
