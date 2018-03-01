@@ -5,6 +5,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { deleteLocation } from '../actions/thunks';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
+import AddReviewForm from '../components/AddReviewForm';
 
 export default class LocationItem extends Component {
 
@@ -13,6 +14,8 @@ export default class LocationItem extends Component {
     this.state = {
       visibility: 'hidden',
       open: false,
+      addReviewFormOpen: false,
+      popoverOpen: this.props.popoverOpen,
     }
   }
 
@@ -35,7 +38,7 @@ export default class LocationItem extends Component {
     event.preventDefault();
     event.stopPropagation();
     this.setState({
-      open: true,
+      popoverOpen: true,
       anchorEl: event.currentTarget,
     });
   };
@@ -45,26 +48,11 @@ export default class LocationItem extends Component {
     this.props.store.dispatch(deleteLocation(this.props.location_id));
   }
 
-  handleAdd = (event) => {
-    event.preventDefault();
-    /* open Add Review Form */
-  }
-
   render() {
 
     return (
 
       <div className="list-item">
-        <Popover
-            open={this.state.open}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-            onRequestClose={this.handleRequestClose}
-          >
-          <MenuItem primaryText="Add Review" href="" onClick={this.handleAdd} store={this.props.store} />
-          <MenuItem primaryText="Delete Location" href="" onClick={this.handleDelete} />
-        </Popover>
 
         <ListItem
             leftIcon={<MoreVertIcon onClick={this.handleClick} hoverColor={'f44336'} visibility={this.state.visibility}/>}
@@ -79,9 +67,21 @@ export default class LocationItem extends Component {
               <ListItem
                 insetChildren={true}
                 key={review.id}
+                review_id={review.id}
                 primaryText= { '"' + review.content + '"' }
                />
             )}
+            children={<Popover
+                open={this.state.popoverOpen}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose}
+              >
+              <MenuItem primaryText="Add Review" href="" onClick={ (event) => this.props.handleAdd(event, this.props.location_id)} />
+              <MenuItem primaryText="Delete Location" href="" onClick={this.handleDelete} />
+            </Popover>
+            }
           />
 
       </div>

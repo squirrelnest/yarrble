@@ -5,6 +5,7 @@ import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import { deleteLocation } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import AddReviewForm from '../components/AddReviewForm';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -18,6 +19,15 @@ function alphabetize(current, next) {
 
 export default class LocationList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      addReviewFormOpen: false,
+      popoverOpen: false,
+    }
+  }
+
   handleActive = (tab) => {
     if (tab.props['name'] === 'nearby') {
       this.props.store.dispatch(fetchNearbyLocations());
@@ -26,10 +36,27 @@ export default class LocationList extends Component {
     }
   }
 
+  handleAdd = (event, location_id) => {
+    event.preventDefault();
+    console.log(location_id)
+    this.setState({
+      addReviewFormOpen: true,
+      popoverOpen: false,
+    });
+  }
+/*
   handleDelete = (event) => {
     event.preventDefault();
     this.props.store.dispatch(deleteLocation(this.props.location_id));
   }
+*/
+  handleOpen = () => {
+    this.setState({addReviewFormOpen: true});
+  };
+
+  handleClose = () => {
+    this.setState({addReviewFormOpen: false});
+  };
 
   render() {
 
@@ -43,13 +70,21 @@ export default class LocationList extends Component {
           primaryText={loc.nickname}
           initiallyOpen={false}
           primaryTogglesNestedList={true}
-          nestedItems={loc.reviews}
           store={this.props.store}
+          handleAdd={this.handleAdd}
+          nestedItems={loc.reviews}
+          popoverOpen={this.state.popoverOpen}
         />
     )
 
     return (
       <div className="listy">
+
+        <AddReviewForm
+          open={this.state.addReviewFormOpen}
+          handleOpen={this.handleOpen}
+          handleClose={this.handleClose}
+        />
 
         <List>
 
