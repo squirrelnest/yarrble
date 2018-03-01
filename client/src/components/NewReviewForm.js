@@ -24,7 +24,7 @@ const styles = {
   checkbox: {
     marginBottom: 16,
   },
-  dialog: {
+  datepicker: {
     zIndex: '4000',
   }
 };
@@ -37,7 +37,8 @@ export default class NewReviewForm extends Component {
       stability: 5,
       aesthetics: 5,
       safety: 5,
-      date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+      date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
+      controlledDate: null,
       content: '',
       user_id: 0
     };
@@ -56,7 +57,6 @@ export default class NewReviewForm extends Component {
   };
 
   handleChange(event) {
-    console.log(this.state)
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -64,9 +64,15 @@ export default class NewReviewForm extends Component {
 
   handleDateChange = (event, date) => {
     this.setState({
-      date_visited: date,
+      controlledDate: date,
     });
+    console.log(this.state.controlledDate)
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('reviewsubmiteted');
+  }
 
   render() {
     const actions = [
@@ -78,22 +84,25 @@ export default class NewReviewForm extends Component {
       <FlatButton
         label="Submit"
         primary={true}
-        disabled={true}
-        onClick={this.props.handleClose}
+        onClick={this.handleSubmit}
       />,
     ];
 
     return (
-      <div>
 
-        <Dialog
-          title="Add Review to this Location"
-          actions={actions}
-          style={{ zIndex: 3000 }}
-          modal={true}
-          autoScrollBodyContent={true}
-          open={this.props.open}
-        >
+
+      <Dialog
+        title="Add Review to this Location"
+        actions={actions}
+        style={{ zIndex: 3000 }}
+        modal={true}
+        autoScrollBodyContent={true}
+        open={this.props.open}
+      >
+
+        <div>
+
+          <form>
 
           <div style={styles.root}>
 
@@ -153,15 +162,19 @@ export default class NewReviewForm extends Component {
           />
 
           <DatePicker
-            dialogContainerStyle={styles.dialog}
+            dialogContainerStyle={styles.datepicker}
             hintText="Date Visited"
-            value={this.state.date_visited}
+            value={this.state.controlledDate}
             onChange={this.handleDateChange}
           />
 
-        </Dialog>
+          </form>
 
-      </div>
+        </div>
+
+      </Dialog>
+
+
     );
   }
 }
