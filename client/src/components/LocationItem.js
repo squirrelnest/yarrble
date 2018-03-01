@@ -15,15 +15,8 @@ export default class LocationItem extends Component {
       visibility: 'hidden',
       open: false,
       addReviewFormOpen: false,
-      popoverOpen: this.props.popoverOpen,
     }
   }
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
 
   handleMouseOver = (event) => {
     this.setState({ visibility: 'visible' });
@@ -32,16 +25,6 @@ export default class LocationItem extends Component {
   handleMouseOut = () => {
     this.setState({ visibility: 'hidden' });
   }
-
-  handleClick = (event) => {
-  // This prevents ghost click.
-    event.preventDefault();
-    event.stopPropagation();
-    this.setState({
-      popoverOpen: true,
-      anchorEl: event.currentTarget,
-    });
-  };
 
   handleDelete = (event) => {
     event.preventDefault();
@@ -55,7 +38,7 @@ export default class LocationItem extends Component {
       <div className="list-item">
 
         <ListItem
-            leftIcon={<MoreVertIcon onClick={this.handleClick} hoverColor={'f44336'} visibility={this.state.visibility}/>}
+            leftIcon={<MoreVertIcon onClick={this.props.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>}
             onMouseOver={this.handleMouseOver}
             onMouseOut={this.handleMouseOut}
             key={this.props.location_id}
@@ -72,7 +55,7 @@ export default class LocationItem extends Component {
                />
             )}
             children={<Popover
-                open={this.state.popoverOpen}
+                open={this.props.popoverOpen}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}

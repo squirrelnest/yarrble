@@ -28,6 +28,22 @@ export default class LocationList extends Component {
     }
   }
 
+  handleRequestClose = () => {
+    this.setState({
+      popoverOpen: false,
+    });
+  };
+
+  openPopover = (event) => {
+  // This prevents ghost click.
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({
+      popoverOpen: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
   handleActive = (tab) => {
     if (tab.props['name'] === 'nearby') {
       this.props.store.dispatch(fetchNearbyLocations());
@@ -74,6 +90,8 @@ export default class LocationList extends Component {
           handleAdd={this.handleAdd}
           nestedItems={loc.reviews}
           popoverOpen={this.state.popoverOpen}
+          handleRequestClose={this.handleRequestClose}
+          openPopover={this.openPopover}
         />
     )
 
