@@ -57,3 +57,13 @@ h2 {
 .subheader {
   margin: -20px;
 }
+
+.tab-active {
+  color: '#00BCD4';
+  background-color: 'none';
+}
+
+.tab-inactive {
+  color: '#212121';
+  background-color: 'none';
+}

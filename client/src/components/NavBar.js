@@ -28,7 +28,7 @@ const Logged = (props) => (
   >
     <MenuItem primaryText="My Reviews" href="/myreviews" />
     <MenuItem primaryText="Near Me" href="/nearby" />
-    <MenuItem primaryText="Sign out" href="/" />
+    <MenuItem primaryText="Sign out" href="/login" />
   </IconMenu>
 );
 

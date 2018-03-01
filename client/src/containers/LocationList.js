@@ -3,7 +3,6 @@ import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import LocationListItem from '../components/LocationListItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
-import FlatButton from 'material-ui/FlatButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 function alphabetize(current, next) {
@@ -47,9 +46,9 @@ export default class LocationList extends Component {
 
         <List>
 
-          <Tabs inkBarStyle={{background: "#00BCD4"}}>
-            <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" style={{ color: '#212121', backgroundColor: 'none' }}/>
-            <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby"  style={{ color: '#212121', backgroundColor: 'none' }}/>
+          <Tabs inkBarStyle={{background: '#00BCD4'}}>
+            <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" className="tab-active one" style={{ color: '#212121', backgroundColor: 'none' }}/>
+            <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby" className="tab-inactive one" style={{ color: '#212121', backgroundColor: 'none' }}/>
           </Tabs>
 
           {locations}
