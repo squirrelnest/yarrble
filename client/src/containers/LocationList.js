@@ -3,7 +3,7 @@ import { List } from 'material-ui/List';
 import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import AddReviewForm from '../components/AddReviewForm';
+import NewReviewForm from '../components/NewReviewForm';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -20,7 +20,7 @@ export default class LocationList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addReviewFormOpen: false,
+      NewReviewFormOpen: false,
     }
   }
 
@@ -41,7 +41,7 @@ export default class LocationList extends Component {
   handleAdd = (event, location_id) => {
     event.preventDefault();
     this.setState({
-      addReviewFormOpen: true,
+      NewReviewFormOpen: true,
       popoverOpen: false,
     });
   }
@@ -52,11 +52,11 @@ export default class LocationList extends Component {
   }
 */
   handleOpen = () => {
-    this.setState({addReviewFormOpen: true});
+    this.setState({NewReviewFormOpen: true});
   };
 
   handleClose = () => {
-    this.setState({addReviewFormOpen: false});
+    this.setState({NewReviewFormOpen: false});
   };
 
   render() {
@@ -82,8 +82,8 @@ export default class LocationList extends Component {
     return (
       <div className="listy">
 
-        <AddReviewForm
-          open={this.state.addReviewFormOpen}
+        <NewReviewForm
+          open={this.state.NewReviewFormOpen}
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
         />

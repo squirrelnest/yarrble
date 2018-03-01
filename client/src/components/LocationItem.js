@@ -13,7 +13,7 @@ export default class LocationItem extends Component {
     this.state = {
       visibility: 'hidden',
       popoverOpen: false,
-      addReviewFormOpen: false,
+      NewReviewFormOpen: false,
     }
   }
 
