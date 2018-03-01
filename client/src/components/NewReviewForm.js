@@ -6,11 +6,12 @@ import Slider from 'material-ui/Slider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   root: {
     display: 'flex',
-    height: 200,
+    height: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
@@ -23,6 +24,9 @@ const styles = {
   checkbox: {
     marginBottom: 16,
   },
+  dialog: {
+    zIndex: '4000',
+  }
 };
 
 export default class NewReviewForm extends Component {
@@ -52,8 +56,15 @@ export default class NewReviewForm extends Component {
   };
 
   handleChange(event) {
+    console.log(this.state)
     this.setState({
       [event.target.name]: event.target.value
+    });
+  };
+
+  handleDateChange = (event, date) => {
+    this.setState({
+      date_visited: date,
     });
   };
 
@@ -80,53 +91,52 @@ export default class NewReviewForm extends Component {
           actions={actions}
           style={{ zIndex: 3000 }}
           modal={true}
+          autoScrollBodyContent={true}
           open={this.props.open}
         >
 
           <div style={styles.root}>
 
             <div className="sliderContainer" name="stability">
-            <div>{'Stability: '}{this.state.stability}</div>
+            <h5>{'Stability: '}{this.state.stability}</h5>
             <Slider
+              name="stability"
               value={this.state.stability}
               onChange={this.handleFirstSlider}
-              style={{height: 100}}
-              sliderStyle={{left:'40%'}}
-              axis="y"
+              sliderStyle={{left:'0%', width: '150px'}}
+              axis="x"
               defaultValue={5}
               min={0}
               max={10}
-              step={0.1}/>
+              step={1}/>
             </div>
 
             <div className="sliderContainer" name="aesthetics">
-            <div>{'Aesthetics: '}{this.state.aesthetics}</div>
+            <h5>{'Aesthetics: '}{this.state.aesthetics}</h5>
             <Slider
               name="aesthetics"
               value={this.state.aesthetics}
               onChange={this.handleSecondSlider}
-              style={{height: 100}}
-              sliderStyle={{left:'40%'}}
-              axis="y"
+              sliderStyle={{left:'0%', width: '150px'}}
+              axis="x"
               defaultValue={5}
               min={0}
               max={10}
-              step={0.1}/>
+              step={1}/>
             </div>
 
             <div className="sliderContainer" name="safety">
-            <div>{'Safety: '}{this.state.safety}</div>
+            <h5>{'Safety: '}{this.state.safety}</h5>
             <Slider
               name="safety"
               value={this.state.safety}
               onChange={this.handleThirdSlider}
-              style={{height: 100}}
-              sliderStyle={{left:'40%'}}
-              axis="y"
+              sliderStyle={{left:'0%', width: '150px'}}
+              axis="x"
               defaultValue={5}
               min={0}
               max={10}
-              step={0.1}/>
+              step={1}/>
             </div>
 
           </div>
@@ -138,7 +148,15 @@ export default class NewReviewForm extends Component {
             multiLine={true}
             fullWidth={true}
             rows={2}
+            style={{ marginTop: '-50px' }}
             onChange={(event) => this.handleChange(event)}
+          />
+
+          <DatePicker
+            dialogContainerStyle={styles.dialog}
+            hintText="Date Visited"
+            value={this.state.date_visited}
+            onChange={this.handleDateChange}
           />
 
         </Dialog>

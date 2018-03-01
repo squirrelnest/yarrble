@@ -45,12 +45,7 @@ export default class LocationList extends Component {
       popoverOpen: false,
     });
   }
-/*
-  handleDelete = (event) => {
-    event.preventDefault();
-    this.props.store.dispatch(deleteLocation(this.props.location_id));
-  }
-*/
+
   handleOpen = () => {
     this.setState({NewReviewFormOpen: true});
   };
