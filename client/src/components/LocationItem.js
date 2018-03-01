@@ -69,7 +69,7 @@ export default class LocationItem extends Component {
         </Popover>
 
         <ListItem
-            rightIcon={<MoreVertIcon onClick={this.handleClick} hoverColor={'f44336'} />}
+            leftIcon={<MoreVertIcon onClick={this.handleClick} hoverColor={'f44336'} visibility={this.state.visibility}/>}
             onMouseOver={this.handleMouseOver}
             onMouseOut={this.handleMouseOut}
             key={this.props.location_id}
