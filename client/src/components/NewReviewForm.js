@@ -66,12 +66,21 @@ export default class NewReviewForm extends Component {
     this.setState({
       controlledDate: date,
     });
-    console.log(this.state.controlledDate)
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('reviewsubmiteted');
+    console.log(this.state);
+    this.setState({
+      stability: 5,
+      aesthetics: 5,
+      safety: 5,
+      date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
+      controlledDate: null,
+      content: '',
+      user_id: 0
+    });
+    this.props.handleClose();
   }
 
   render() {
@@ -84,6 +93,7 @@ export default class NewReviewForm extends Component {
       <FlatButton
         label="Submit"
         primary={true}
+        type="submit"
         onClick={this.handleSubmit}
       />,
     ];
@@ -102,71 +112,77 @@ export default class NewReviewForm extends Component {
 
         <div>
 
-          <form>
+          <form onSubmit={ (event) => {
+            event.preventDefault();
+            this.handleSubmit(this.state);
+            }
+          }
+          >
 
-          <div style={styles.root}>
+            <div style={styles.root}>
 
-            <div className="sliderContainer" name="stability">
-            <h5>{'Stability: '}{this.state.stability}</h5>
-            <Slider
-              name="stability"
-              value={this.state.stability}
-              onChange={this.handleFirstSlider}
-              sliderStyle={{left:'0%', width: '150px'}}
-              axis="x"
-              defaultValue={5}
-              min={0}
-              max={10}
-              step={1}/>
+              <div className="sliderContainer" name="stability">
+              <h5>{'Stability: '}{this.state.stability}</h5>
+              <Slider
+                name="stability"
+                value={this.state.stability}
+                onChange={this.handleFirstSlider}
+                sliderStyle={{left:'0%', width: '150px'}}
+                axis="x"
+                defaultValue={5}
+                min={0}
+                max={10}
+                step={1}/>
+              </div>
+
+              <div className="sliderContainer" name="aesthetics">
+              <h5>{'Aesthetics: '}{this.state.aesthetics}</h5>
+              <Slider
+                name="aesthetics"
+                value={this.state.aesthetics}
+                onChange={this.handleSecondSlider}
+                sliderStyle={{left:'0%', width: '150px'}}
+                axis="x"
+                defaultValue={5}
+                min={0}
+                max={10}
+                step={1}/>
+              </div>
+
+              <div className="sliderContainer" name="safety">
+              <h5>{'Safety: '}{this.state.safety}</h5>
+              <Slider
+                name="safety"
+                value={this.state.safety}
+                onChange={this.handleThirdSlider}
+                sliderStyle={{left:'0%', width: '150px'}}
+                axis="x"
+                defaultValue={5}
+                min={0}
+                max={10}
+                step={1}/>
+              </div>
+
             </div>
 
-            <div className="sliderContainer" name="aesthetics">
-            <h5>{'Aesthetics: '}{this.state.aesthetics}</h5>
-            <Slider
-              name="aesthetics"
-              value={this.state.aesthetics}
-              onChange={this.handleSecondSlider}
-              sliderStyle={{left:'0%', width: '150px'}}
-              axis="x"
-              defaultValue={5}
-              min={0}
-              max={10}
-              step={1}/>
-            </div>
+            <TextField
+              name="content"
+              value={this.state.content}
+              hintText="Write a Review"
+              floatingLabelText="Write a Review"
+              multiLine={true}
+              fullWidth={true}
+              rows={2}
+              style={{ marginTop: '-50px' }}
+              onChange={(event) => this.handleChange(event)}
+            />
 
-            <div className="sliderContainer" name="safety">
-            <h5>{'Safety: '}{this.state.safety}</h5>
-            <Slider
-              name="safety"
-              value={this.state.safety}
-              onChange={this.handleThirdSlider}
-              sliderStyle={{left:'0%', width: '150px'}}
-              axis="x"
-              defaultValue={5}
-              min={0}
-              max={10}
-              step={1}/>
-            </div>
-
-          </div>
-
-          <TextField
-            name="content"
-            hintText="Write a Review"
-            floatingLabelText="Write a Review"
-            multiLine={true}
-            fullWidth={true}
-            rows={2}
-            style={{ marginTop: '-50px' }}
-            onChange={(event) => this.handleChange(event)}
-          />
-
-          <DatePicker
-            dialogContainerStyle={styles.datepicker}
-            hintText="Date Visited"
-            value={this.state.controlledDate}
-            onChange={this.handleDateChange}
-          />
+            <DatePicker
+              dialogContainerStyle={styles.datepicker}
+              hintText="Date Visited"
+              value={this.state.controlledDate}
+              onChange={this.handleDateChange}
+            />
 
           </form>
 
