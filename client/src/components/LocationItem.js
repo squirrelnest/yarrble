@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { ListItem, ListItemButton } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
-import AddBtn from './AddBtn';
-import DeleteBtn from './DeleteBtn';
-import Delete from 'material-ui/svg-icons/action/delete';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import { deleteLocation } from '../actions/thunks';
-import TaskTray from './TaskTray';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
-import IconButton from 'material-ui/IconButton';
 
 export default class LocationItem extends Component {
 
@@ -51,12 +45,16 @@ export default class LocationItem extends Component {
     this.props.store.dispatch(deleteLocation(this.props.location_id));
   }
 
+  handleAdd = (event) => {
+    event.preventDefault();
+    /* open Add Review Form */
+  }
+
   render() {
 
     return (
 
       <div className="list-item">
-
         <Popover
             open={this.state.open}
             anchorEl={this.state.anchorEl}
@@ -64,8 +62,8 @@ export default class LocationItem extends Component {
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
             onRequestClose={this.handleRequestClose}
           >
-          <MenuItem primaryText="Add Review" href="" />
-          <MenuItem primaryText="Delete Location" href="" />
+          <MenuItem primaryText="Add Review" href="" onClick={this.handleAdd} store={this.props.store} />
+          <MenuItem primaryText="Delete Location" href="" onClick={this.handleDelete} />
         </Popover>
 
         <ListItem

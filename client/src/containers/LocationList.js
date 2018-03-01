@@ -44,6 +44,7 @@ export default class LocationList extends Component {
           initiallyOpen={false}
           primaryTogglesNestedList={true}
           nestedItems={loc.reviews}
+          store={this.props.store}
         />
     )
 
