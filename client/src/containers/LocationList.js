@@ -40,8 +40,6 @@ export default class LocationList extends Component {
   }
 
   handleAdd = (location_id) => {
-  console.log(location_id)
-  /*  event.preventDefault(); */
     this.setState({
       NewReviewFormOpen: true,
       popoverOpen: false,
@@ -59,7 +57,8 @@ export default class LocationList extends Component {
 
   handleSubmit = (reviewData) => {
     console.log(this.state.review_location);
-    dispatch(addReview(reviewData, this.state.review_location))
+    console.log({...reviewData, location_id: this.state.review_location});
+/*    dispatch(addReview({...reviewData, location_id: this.state.review_location})) */
     this.handleClose();
   }
 
@@ -91,7 +90,6 @@ export default class LocationList extends Component {
           open={this.state.NewReviewFormOpen}
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
-          review_location={this.state.review_location}
           handleSubmit={this.handleSubmit}
         />
 

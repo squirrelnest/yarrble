@@ -68,10 +68,7 @@ export default class NewReviewForm extends Component {
 
   submitAndReset = (event) => {
     event.preventDefault();
-    this.props.handleSubmit({
-      ...this.state,
-      review_location: this.props.review_location
-    });
+    this.props.handleSubmit(this.state);
     this.setState(initialState)
   }
 
