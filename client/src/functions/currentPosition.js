@@ -1,6 +1,5 @@
 /*
-
-function getPosition() {
+export function getPosition(event) {
 
   // prevent redirecting
   event.preventDefault();
@@ -31,7 +30,7 @@ function getPosition() {
   };
 };
 
-function getCountry() {
+export function getCountry() {
 
   // get current position
   navigator.geolocation.getCurrentPosition(showPosition);
@@ -63,7 +62,7 @@ function getCountry() {
 
 */
 
-function setCurrentLocation() {
+export function setCurrentLocation() {
 
   navigator.geolocation.getCurrentPosition(showPosition);
   function showPosition(position) {

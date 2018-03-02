@@ -33,7 +33,7 @@ export default class NewLocationForm extends Component {
       nickname: '',
       longitude: 0,
       latitude: 0,
-      country: 'Vietnam',
+      country: '',
       stability: 5,
       aesthetics: 5,
       safety: 5,
@@ -66,6 +66,14 @@ export default class NewLocationForm extends Component {
       [event.target.name]: event.target.value
     });
   };
+
+  getPosition(event) {
+    event.preventDefault();
+    this.setState({
+      longitude: localStorage.getItem('lon'),
+      latitude: localStorage.getItem('lat'),
+    })
+  }
 
   render() {
     return (
@@ -104,6 +112,7 @@ export default class NewLocationForm extends Component {
                 name="latitude"
                 hintText="Latitude"
                 floatingLabelText="Latitude"
+                value={this.state.latitude}
                 multiLine={false}
                 fullWidth={false}
                 onChange={(event) => this.handleChange(event)}
@@ -113,6 +122,7 @@ export default class NewLocationForm extends Component {
                 name="longitude"
                 hintText="Longitude"
                 floatingLabelText="Longitude"
+                value={this.state.longitude}
                 multiLine={false}
                 fullWidth={false}
                 style={{paddingLeft: '20px'}}
@@ -123,13 +133,19 @@ export default class NewLocationForm extends Component {
                 name="country"
                 hintText="Country"
                 floatingLabelText="Country"
+                value={this.state.country}
                 multiLine={false}
                 fullWidth={false}
                 style={{paddingLeft: '-20px'}}
                 onChange={(event) => this.handleChange(event)}
               />
 
-              <FlatButton label="Use current location" primary={true} style={styles.button} />
+              <FlatButton
+                label="Use current location"
+                primary={true}
+                style={styles.button}
+                onClick={(event) => this.getPosition(event)}
+              />
 
               <br />
               <br />
