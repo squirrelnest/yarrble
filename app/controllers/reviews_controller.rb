@@ -42,14 +42,16 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
-    if @review.user_id == @user.id || current_user.admin
+    # if @review.user_id == @user.id || current_user.admin
       @review.update(review_params)
       @review.save
-      redirect_to review_path(@review)
-    else
-      flash[:message] = "Can't touch what ain't yours."
-      redirect_to review_path(@review)
-    end
+      # redirect_to review_path(@review)
+    # else
+      # flash[:message] = "Can't touch what ain't yours."
+      # redirect_to review_path(@review)
+    # end
+    @reviews = Review.all
+    render json: @reviews, status: 200
   end
 
   def destroy
