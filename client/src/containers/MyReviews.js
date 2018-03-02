@@ -99,13 +99,13 @@ export default class MyReviews extends Component {
               </TableHeaderColumn>
             </TableRow>
             <TableRow>
-              <TableHeaderColumn tooltip="id">id</TableHeaderColumn>
-              <TableHeaderColumn tooltip="location">location</TableHeaderColumn>
-              <TableHeaderColumn tooltip="content">content</TableHeaderColumn>
-              <TableHeaderColumn tooltip="stability">stability</TableHeaderColumn>
-              <TableHeaderColumn tooltip="aesthetics">aesthetics</TableHeaderColumn>
-              <TableHeaderColumn tooltip="safety">safety</TableHeaderColumn>
-              <TableHeaderColumn tooltip="tasks">tasks</TableHeaderColumn>
+              <TableHeaderColumn tooltip="id">review_id</TableHeaderColumn>
+              <TableHeaderColumn tooltip="nickname of anchorage">location</TableHeaderColumn>
+              <TableHeaderColumn tooltip="user feedback">content</TableHeaderColumn>
+              <TableHeaderColumn tooltip="water surface stability - a function of exposure to wind and swell">comfort</TableHeaderColumn>
+              <TableHeaderColumn tooltip="subjective beauty">aesthetics</TableHeaderColumn>
+              <TableHeaderColumn tooltip="safety from crime">safety</TableHeaderColumn>
+              <TableHeaderColumn tooltip="delete or edit a review"></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody

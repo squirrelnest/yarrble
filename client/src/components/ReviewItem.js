@@ -50,6 +50,11 @@ export class ReviewItem extends Component {
     this.setState({ editing: false });
   }
 
+  handleCancel = (event) => {
+    event.preventDefault();
+    this.setState({ editing: false });
+  }
+
   render() {
 
     let row = null;
@@ -65,6 +70,7 @@ export class ReviewItem extends Component {
         safety={this.props.safety}
         visibility={this.state.visibility}
         handleSubmit={this.handleSubmit}
+        handleCancel={this.handleCancel}
       />
     } else {
       row = <ShowReview

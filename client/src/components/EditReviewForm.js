@@ -5,6 +5,7 @@ import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles={
   width: '100%',
@@ -41,10 +42,10 @@ export class EditReviewForm extends Component {
         >
           <TableRowColumn>{this.props.review_id}</TableRowColumn>
           <TableRowColumn><p style={{ width: '80px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{this.props.nickname}</p></TableRowColumn>
-          <TableRowColumn><TextField name="content" style={{ width: '680px' }} onChange={(event) => this.handleChange(event)} value={this.state.content} floatingLabelText='content' multiLine={true} textareaStyle={{ marginBottom: '0px' }} /></TableRowColumn>
-          <TableRowColumn><TextField name="stability" style={{ width: '80px' }} onChange={(event) => this.handleChange(event)} value={this.state.stability} floatingLabelText='stability' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
-          <TableRowColumn><TextField name="aesthetics" style={{ width: '80px' }} onChange={(event) => this.handleChange(event)} value={this.state.aesthetics} floatingLabelText='aesthetics' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
-          <TableRowColumn><TextField name="safety" style={{ width: '80px' }} onChange={(event) => this.handleChange(event)} value={this.state.safety} floatingLabelText='safety' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
+          <TableRowColumn><TextField name="content" onChange={(event) => this.handleChange(event)} value={this.state.content} floatingLabelText='content' multiLine={true} textareaStyle={{ marginBottom: '0px' }} /></TableRowColumn>
+          <TableRowColumn><TextField name="stability" onChange={(event) => this.handleChange(event)} value={this.state.stability} floatingLabelText='stability' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
+          <TableRowColumn><TextField name="aesthetics" onChange={(event) => this.handleChange(event)} value={this.state.aesthetics} floatingLabelText='aesthetics' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
+          <TableRowColumn><TextField name="safety" onChange={(event) => this.handleChange(event)} value={this.state.safety} floatingLabelText='safety' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
           <TableRowColumn>
             <RaisedButton
               className="submitBtn"
@@ -54,6 +55,15 @@ export class EditReviewForm extends Component {
               fullWidth={false}
               style={styles.button}
               onClick={(event) => this.props.handleSubmit(event, this.state)}
+            />
+            <FlatButton
+              className="cancelBtn"
+              label="Cancel"
+              type="cancel"
+              secondary={true}
+              fullWidth={false}
+              style={styles.button}
+              onClick={(event) => this.props.handleCancel(event)}
             />
           </TableRowColumn>
         </TableRow>
