@@ -31,8 +31,8 @@ export default class NewLocationForm extends Component {
     super(props);
     this.state = {
       nickname: '',
-      longitude: 0,
-      latitude: 0,
+      longitude: '',
+      latitude: '',
       country: '',
       stability: 5,
       aesthetics: 5,
@@ -72,6 +72,22 @@ export default class NewLocationForm extends Component {
     this.setState({
       longitude: localStorage.getItem('lon'),
       latitude: localStorage.getItem('lat'),
+    })
+    fetch(`http://localhost:3001/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
+      method: "GET",
+      credentials: 'omit',  /* other options: include, same-origin */
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.features[0] == null) {
+        this.setState({ country: '' })
+      } else {
+        this.setState({ country: response.features[0].place_name })
+      }
     })
   }
 
