@@ -4,6 +4,7 @@ import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import NewReviewForm from '../components/NewReviewForm';
+import { createReview } from '../actions/reviewActions';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -58,7 +59,7 @@ export default class LocationList extends Component {
   handleSubmit = (reviewData) => {
     console.log(this.state.review_location);
     console.log({...reviewData, location_id: this.state.review_location});
-/*    dispatch(addReview({...reviewData, location_id: this.state.review_location})) */
+    this.props.store.dispatch(createReview({...reviewData, location_id: this.state.review_location}))
     this.handleClose();
   }
 

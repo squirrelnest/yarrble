@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { fetchLocationsSuccess } from './thunks';
 
 /* ACTION TYPES */
 
@@ -18,7 +19,7 @@ export function removeReview(review_id) {
 }
 
 export function fetchReviewsSuccess(reviews ) {
-  return {type: GET_REVIEWS, reviews };
+  return { type: GET_REVIEWS, reviews };
 }
 
 /* ASYNCS */
@@ -50,6 +51,38 @@ export function deleteReview(review_id) {
     .then(response => response.json())
     .then(response => {
       dispatch(fetchReviewsSuccess(response));
+    })
+  }
+}
+
+export function createReview(reviewData) {
+
+  const bodyData = {
+    review: {
+      location_id: reviewData.location_id,
+      content: reviewData.content,
+      stability: reviewData.stability,
+      aesthetics: reviewData.aesthetics,
+      safety: reviewData.safety,
+      date_visited: reviewData.date_visited,
+      user_id: 1
+    }
+  }
+
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_REVIEWS' });
+    return fetch(`http://localhost:3001/locations/${reviewData.location_id}/reviews`, {
+      method: "POST",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyData),
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(fetchLocationsSuccess(response));
     })
   }
 }
