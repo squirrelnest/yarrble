@@ -11,6 +11,8 @@ export class Home extends Component {
     super(props);
     this.state = {
       open: false,
+      width: window.innerWidth,
+      height: window.innerHeight,
     };
   }
 
@@ -23,12 +25,25 @@ export class Home extends Component {
     this.setState({open});
   };
 
+
+  handleResize(event) {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize.bind(this));
+  }
+
+
   render() {
 
     return (
       <div className="row" style={{ height: (window.innerHeight * 0.9) }}>
-        <MapContainer handleToggle={this.handleToggle} />
-        <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} store={this.props.store} />
+        <MapContainer handleToggle={this.handleToggle} width={this.state.width} height={this.state.height} />
+        <LocationList locations={this.props.locations} handleClick={this.props.deleteLocation} store={this.props.store} width={this.state.width} height={this.state.height} />
         <NewLocationForm handleSubmit={this.props.createLocation} open={this.state.open} onRequestChange={this.onRequestChange} handleToggle={this.handleToggle}/>
       </div>
     );

@@ -94,12 +94,12 @@ export default class LocationList extends Component {
           handleSubmit={this.handleSubmit}
         />
 
-        <List>
+        <Tabs inkBarStyle={{background: '#00BCD4'}}>
+          <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" className="tab-active one" style={{ color: '#212121', backgroundColor: 'none' }}/>
+          <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby" className="tab-inactive one" style={{ color: '#212121', backgroundColor: 'none' }}/>
+        </Tabs>
 
-          <Tabs inkBarStyle={{background: '#00BCD4'}}>
-            <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" className="tab-active one" style={{ color: '#212121', backgroundColor: 'none' }}/>
-            <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby" className="tab-inactive one" style={{ color: '#212121', backgroundColor: 'none' }}/>
-          </Tabs>
+        <List style={{ height: '90%', overflow: 'auto'}}>
 
           {locations}
 

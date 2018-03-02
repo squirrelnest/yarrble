@@ -14,24 +14,15 @@ import { connect } from 'react-redux';
 
 export class App extends Component {
 
-  handleResize() {
-    this.setState({
-      viewport: {
-        
-      }
-    })
-  }
-
   render() {
     return (
-      <div className="App" onresize={this.handleResize}>
+      <div className="App">
         <MuiThemeProvider>
           <div>
             <NavBar />
             <Router>
               <Switch>
                 <Route exact path="/" render={() => <Home store={this.props.store} locations={this.props.locations} />} />
-                <Route exact path="/nearby" render={() => <Nearby store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
                 <Route exact path="/login" component={ LoginContainer } />
               </Switch>
