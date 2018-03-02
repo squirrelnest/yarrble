@@ -7,7 +7,7 @@ export default class MapContainer extends Component {
   render() {
     return (
       <div className="map-container">
-        <Mappy style={{ width: this.props.width, height: this.props.height }} width={this.props.width} height={this.props.height} />
+        <Mappy width={this.props.width} height={this.props.height} locations={this.props.locations}/>
         <Fab handleToggle={this.props.handleToggle} />
       </div>
     );
