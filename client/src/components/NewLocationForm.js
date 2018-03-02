@@ -170,7 +170,7 @@ export default class NewLocationForm extends Component {
               <div className="sliders row" style={styles.root}>
 
                 <div className="sliderContainer" name="stability">
-                <div>{'Stability: '}{this.state.stability}</div>
+                <div>{'Comfort: '}{this.state.stability}</div>
                 <Slider
                   value={this.state.stability}
                   onChange={this.handleFirstSlider}
@@ -180,7 +180,7 @@ export default class NewLocationForm extends Component {
                   defaultValue={5}
                   min={0}
                   max={10}
-                  step={0.1}/>
+                  step={1}/>
                 </div>
 
                 <div className="sliderContainer" name="aesthetics">
@@ -195,7 +195,7 @@ export default class NewLocationForm extends Component {
                   defaultValue={5}
                   min={0}
                   max={10}
-                  step={0.1}/>
+                  step={1}/>
                 </div>
 
                 <div className="sliderContainer" name="safety">
@@ -210,7 +210,7 @@ export default class NewLocationForm extends Component {
                   defaultValue={5}
                   min={0}
                   max={10}
-                  step={0.1}/>
+                  step={1}/>
                 </div>
 
               </div>
