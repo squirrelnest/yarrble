@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker, FlyToInterpolator} from 'react-map-gl';
 import BeachAccess from 'material-ui/svg-icons/places/beach-access';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
@@ -17,10 +17,25 @@ export default class Mappy extends Component {
     }
   };
 
+  handleClick(event) {
+    this.setState({
+      viewport: {
+        ...this.state.viewport,
+        longitude: event.lngLat[0],
+        latitude: event.lngLat[1],
+      }
+    })
+  }
+
   render() {
 
     const markers = this.props.locations.map((location) => (
-      <Marker latitude={location.lat} longitude={location.lon}>
+      <Marker
+        latitude={location.lat}
+        longitude={location.lon}
+        location_id={location.id}
+        key={location.id}
+      >
         <BeachAccess hoverColor={'f44336'} />
       </Marker>
       )
@@ -33,6 +48,9 @@ export default class Mappy extends Component {
           {...this.state.viewport}
           onViewportChange={(viewport) => this.setState({viewport})}
           mapboxApiAccessToken={MAPBOX_TOKEN}
+          transitionDuration={0}
+          transitionInterpolator={new FlyToInterpolator()}
+          onClick={(event) => this.handleClick(event)}
         >
 
         {markers}
