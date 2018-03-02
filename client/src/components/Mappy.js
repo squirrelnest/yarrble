@@ -11,7 +11,7 @@ export default class Mappy extends Component {
       height: window.innerHeight*0.91,
       latitude: 37.7577,
       longitude: -122.4376,
-      zoom: 8
+      zoom: 0
     }
   };
 

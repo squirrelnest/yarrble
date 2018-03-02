@@ -14,9 +14,17 @@ import { connect } from 'react-redux';
 
 export class App extends Component {
 
+  handleResize() {
+    this.setState({
+      viewport: {
+        
+      }
+    })
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App" onresize={this.handleResize}>
         <MuiThemeProvider>
           <div>
             <NavBar />
