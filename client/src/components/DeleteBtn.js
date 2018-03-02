@@ -10,13 +10,14 @@ export default class DeleteBtn extends Component {
 
     return (
 
+      <IconButton
+        style={{ visibility: this.props.visibility }}
+        onClick={this.props.handleClick}
+      >
         <Delete
           hoverColor={'f44336'}
-          style={{
-            visibility: this.props.visibility,
-          }}
-          onClick={this.props.handleClick}
         />
+      </IconButton>
 
     );
   }

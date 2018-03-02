@@ -8,14 +8,14 @@ export default class EditBtn extends Component {
   render() {
 
     return (
-      <ListItemIcon
-        style={{ visibility: this.props.visibility }}
-        onClick={this.props.handleClick}
-      >
-        <IconButton>
+
+        <IconButton
+          style={{ visibility: this.props.visibility }}
+          onClick={this.props.handleClick}
+        >
           <ModeEdit hoverColor={'f44336'} />
         </IconButton>
-      </ ListItemIcon>
+
 
     );
   }

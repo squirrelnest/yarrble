@@ -26,8 +26,22 @@ export class ShowReview extends Component {
           <TableRowColumn>{this.props.stability}</TableRowColumn>
           <TableRowColumn>{this.props.aesthetics}</TableRowColumn>
           <TableRowColumn>{this.props.safety}</TableRowColumn>
-          <TableRowColumn><DeleteBtn review_id={this.props.review_id} onClick={this.props.handleDelete} visibility={this.props.visibility} /></TableRowColumn>
-          <TableRowColumn><EditBtn review_id={this.props.review_id} onClick={this.props.handleEdit} visibility={this.props.visibility} /></TableRowColumn>
+
+          <TableRowColumn>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <DeleteBtn
+                review_id={this.props.review_id}
+                handleClick={this.props.handleDelete}
+                visibility={this.props.visibility}
+              />
+              <EditBtn
+                review_id={this.props.review_id}
+                handleClick={this.props.handleEdit}
+                visibility={this.props.visibility}
+              />
+            </div>
+          </TableRowColumn>
+
         </TableRow>
 
 

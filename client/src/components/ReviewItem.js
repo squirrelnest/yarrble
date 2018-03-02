@@ -39,8 +39,14 @@ export class ReviewItem extends Component {
 
   handleEdit = (event) => {
     event.preventDefault();
-    console.log(this.state.editing)
-    this.setState({ editing: true });
+    this.setState({
+      editing: true
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ editing: false });
   }
 
   render() {
@@ -57,8 +63,7 @@ export class ReviewItem extends Component {
         aesthetics={this.props.aesthetics}
         safety={this.props.safety}
         visibility={this.state.visibility}
-        handleEdit={this.handleEdit}
-        handleDelete={this.handleDelete}
+        handleSubmit={this.handleSubmit}
       />
     } else {
       row = <ShowReview
@@ -75,6 +80,8 @@ export class ReviewItem extends Component {
         handleDelete={this.handleDelete}
       />
     }
+
+/* don't need () after return since we don't need to evaluate return(row) with row as an argument. Just return row. */
 
     return row;
 

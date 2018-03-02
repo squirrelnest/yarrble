@@ -84,7 +84,7 @@ export default class MyReviews extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="8" tooltip="My Reviews" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="7" tooltip="My Reviews" style={{textAlign: 'center'}}>
                 My Reviews
               </TableHeaderColumn>
             </TableRow>
@@ -95,8 +95,7 @@ export default class MyReviews extends Component {
               <TableHeaderColumn tooltip="stability">stability</TableHeaderColumn>
               <TableHeaderColumn tooltip="aesthetics">aesthetics</TableHeaderColumn>
               <TableHeaderColumn tooltip="safety">safety</TableHeaderColumn>
-              <TableHeaderColumn tooltip="delete"></TableHeaderColumn>
-              <TableHeaderColumn tooltip="edit"></TableHeaderColumn>
+              <TableHeaderColumn tooltip="tasks">tasks</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
