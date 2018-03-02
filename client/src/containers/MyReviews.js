@@ -21,6 +21,16 @@ const styles = {
   },
 };
 
+function latest_updated(current, next) {
+  if (current.updated_at > next.updated_at) {
+    return -1;
+  } else if (current.updated_at < next.updated_at) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 export default class MyReviews extends Component {
 
   constructor(props) {
@@ -55,7 +65,7 @@ export default class MyReviews extends Component {
 
   render() {
 
-    const tableData = this.props.reviews.map( (review) =>
+    const tableData = this.props.reviews.sort(latest_updated).map( (review) =>
       <ReviewItem
         store={this.props.store}
         key={review.id}

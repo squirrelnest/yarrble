@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 import { connect } from 'react-redux';
-import { deleteReview } from '../actions/reviewActions';
+import { deleteReview, updateReview } from '../actions/reviewActions';
 import { EditReviewForm } from '../components/EditReviewForm';
 import { ShowReview } from '../components/ShowReview';
 
@@ -44,8 +44,9 @@ export class ReviewItem extends Component {
     });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = (event, reviewData) => {
     event.preventDefault();
+    this.props.store.dispatch(updateReview({ ...reviewData, review_id: this.props.review_id }));
     this.setState({ editing: false });
   }
 

@@ -86,3 +86,34 @@ export function createReview(reviewData) {
     })
   }
 }
+
+export function updateReview(reviewData) {
+
+  const bodyData = {
+    review: {
+      id: reviewData.review_id,
+      content: reviewData.content,
+      stability: reviewData.stability,
+      aesthetics: reviewData.aesthetics,
+      safety: reviewData.safety,
+      user_id: 1
+    }
+  }
+
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_REVIEWS' });
+    return fetch(`http://localhost:3001/reviews/${reviewData.review_id}`, {
+      method: "PATCH",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyData),
+    })
+    .then(response => response.json())
+    .then(response => {
+      dispatch(fetchReviewsSuccess(response));
+    })
+  }
+}
