@@ -11,6 +11,7 @@ export default class LocationItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      location_id: this.props.location_id,
       visibility: 'hidden',
       popoverOpen: false,
       NewReviewFormOpen: false,
@@ -21,10 +22,12 @@ export default class LocationItem extends Component {
     this.setState({ anchorEl: ReactDOM.findDOMNode(this) })
   }
 
-  handleAddReview = (event) => {
+  handleAddReview = (event, location_id) => {
     event.preventDefault();
-    this.setState({ popoverOpen: false });
-    this.props.handleAdd(event, this.props.location_id);
+    this.setState({
+      popoverOpen: false,
+    });
+    this.props.handleAdd(location_id);
   }
 
   openPopover = (event) => {
@@ -85,7 +88,7 @@ export default class LocationItem extends Component {
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
               onRequestClose={this.handleClose}
           >
-            <MenuItem key="addReview" primaryText="Add Review" href="" onClick={this.handleAddReview} />
+            <MenuItem key="addReview" primaryText="Add Review" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)} />
             <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} />
           </Popover>
 

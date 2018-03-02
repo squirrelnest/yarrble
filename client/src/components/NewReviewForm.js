@@ -3,9 +3,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Slider from 'material-ui/Slider';
-import RaisedButton from 'material-ui/RaisedButton';
-import Checkbox from 'material-ui/Checkbox';
-import Subheader from 'material-ui/Subheader';
 import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
@@ -29,20 +26,21 @@ const styles = {
   }
 };
 
+const initialState = {
+  stability: 5,
+  aesthetics: 5,
+  safety: 5,
+  date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
+  content: '',
+  user_id: 0
+};
+
 export default class NewReviewForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      stability: 5,
-      aesthetics: 5,
-      safety: 5,
-      date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
-      controlledDate: null,
-      content: '',
-      user_id: 0
-    };
-}
+    this.state = initialState;
+  }
 
   handleFirstSlider = (event, value) => {
     this.setState({stability: value});
@@ -64,23 +62,17 @@ export default class NewReviewForm extends Component {
 
   handleDateChange = (event, date) => {
     this.setState({
-      controlledDate: date,
+      date_visited: date,
     });
   };
 
-  handleSubmit = (event) => {
+  submitAndReset = (event) => {
     event.preventDefault();
-    console.log(this.state);
-    this.setState({
-      stability: 5,
-      aesthetics: 5,
-      safety: 5,
-      date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
-      controlledDate: null,
-      content: '',
-      user_id: 0
+    this.props.handleSubmit({
+      ...this.state,
+      review_location: this.props.review_location
     });
-    this.props.handleClose();
+    this.setState(initialState)
   }
 
   render() {
@@ -94,12 +86,12 @@ export default class NewReviewForm extends Component {
         label="Submit"
         primary={true}
         type="submit"
-        onClick={this.handleSubmit}
+        name="submit"
+        onClick={this.submitAndReset}
       />,
     ];
 
     return (
-
 
       <Dialog
         title="Add Review to this Location"
@@ -114,7 +106,7 @@ export default class NewReviewForm extends Component {
 
           <form onSubmit={ (event) => {
             event.preventDefault();
-            this.handleSubmit(this.state);
+            this.handleSubmit();
             }
           }
           >
@@ -180,7 +172,7 @@ export default class NewReviewForm extends Component {
             <DatePicker
               dialogContainerStyle={styles.datepicker}
               hintText="Date Visited"
-              value={this.state.controlledDate}
+              value={this.state.date_visited}
               onChange={this.handleDateChange}
             />
 

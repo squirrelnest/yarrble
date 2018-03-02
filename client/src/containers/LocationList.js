@@ -21,6 +21,7 @@ export default class LocationList extends Component {
     super(props);
     this.state = {
       NewReviewFormOpen: false,
+      review_location: null,
     }
   }
 
@@ -38,11 +39,13 @@ export default class LocationList extends Component {
     }
   }
 
-  handleAdd = (event, location_id) => {
-    event.preventDefault();
+  handleAdd = (location_id) => {
+  console.log(location_id)
+  /*  event.preventDefault(); */
     this.setState({
       NewReviewFormOpen: true,
       popoverOpen: false,
+      review_location: location_id,
     });
   }
 
@@ -54,24 +57,31 @@ export default class LocationList extends Component {
     this.setState({NewReviewFormOpen: false});
   };
 
+  handleSubmit = (reviewData) => {
+    console.log(this.state.review_location);
+    dispatch(addReview(reviewData, this.state.review_location))
+    this.handleClose();
+  }
+
   render() {
 
     const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
 
-        <LocationItem
-          location_id={loc.id}
-          handleClick={this.props.handleClick}
-          key={index}
-          name={loc.nickname}
-          primaryText={loc.nickname}
-          initiallyOpen={false}
-          primaryTogglesNestedList={true}
-          store={this.props.store}
-          handleAdd={this.handleAdd}
-          nestedItems={loc.reviews}
-          handleRequestClose={this.handleRequestClose}
-          openPopover={this.openPopover}
-        />
+      <LocationItem
+        location_id={loc.id}
+        handleClick={this.props.handleClick}
+        key={index}
+        name={loc.nickname}
+        primaryText={loc.nickname}
+        initiallyOpen={false}
+        primaryTogglesNestedList={true}
+        store={this.props.store}
+        handleAdd={this.handleAdd}
+        nestedItems={loc.reviews}
+        handleRequestClose={this.handleRequestClose}
+        openPopover={this.openPopover}
+      />
+
     )
 
     return (
@@ -81,6 +91,8 @@ export default class LocationList extends Component {
           open={this.state.NewReviewFormOpen}
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
+          review_location={this.state.review_location}
+          handleSubmit={this.handleSubmit}
         />
 
         <List>
