@@ -69,7 +69,7 @@ export default class LocationItem extends Component {
             onClick={(event) => this.props.moveMap(this.props.lon, this.props.lat)}
             key={this.props.location_id}
             name={this.props.name}
-            primaryText={this.props.primaryText}
+            primaryText={`${this.props.primaryText}, ${this.props.country}`}
             initiallyOpen={this.props.initiallyOpen}
             primaryTogglesNestedList={true}
             nestedItems={this.props.nestedItems.map( (review) =>

@@ -72,6 +72,7 @@ export default class LocationList extends Component {
         handleClick={this.props.handleClick}
         key={index}
         name={loc.nickname}
+        country={loc.country}
         moveMap={this.props.moveMap}
         lon={loc.lon}
         lat={loc.lat}
