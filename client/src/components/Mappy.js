@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
-import ReactMapGL, {Marker, FlyToInterpolator} from 'react-map-gl';
-import BeachAccess from 'material-ui/svg-icons/places/beach-access';
+import ReactMapGL, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
+import Place from 'material-ui/svg-icons/maps/place';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MapPopup from '../components/MapPopup';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg';
 
 export default class Mappy extends Component {
 
-  state = {
-    viewport: {
-      width: window.innerWidth*0.5,
-      height:  window.innerHeight*0.92,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 0
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewport: {
+        width: window.innerWidth*0.5,
+        height:  window.innerHeight*0.92,
+        latitude: 41.87194,
+        longitude: 12.56737,
+        zoom: 8
+      }
+    };
+  }
 
-  handleClick(event) {
+  handleMapClick(event) {
     this.setState({
       viewport: {
         ...this.state.viewport,
@@ -36,21 +40,26 @@ export default class Mappy extends Component {
         location_id={location.id}
         key={location.id}
       >
-        <BeachAccess hoverColor={'f44336'} />
+        <Place
+          hoverColor={'#E91E63'}
+          color='#00BCD4'
+        />
       </Marker>
       )
     )
 
     return (
-      <div style={{ width: (this.props.width* 0.5) }}>
+      <div>
 
         <ReactMapGL
           {...this.state.viewport}
-          onViewportChange={(viewport) => this.setState({viewport})}
+          latitude={this.props.lat ? this.props.lat : 45 }
+          longitude={this.props.lon ? this.props.lon : 37 }
+          onViewportChange={(viewport) => this.setState({ viewport })}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           transitionDuration={0}
           transitionInterpolator={new FlyToInterpolator()}
-          onClick={(event) => this.handleClick(event)}
+          onClick={(event) => this.handleMapClick(event)}
         >
 
         {markers}

@@ -66,6 +66,7 @@ export default class LocationItem extends Component {
             leftIcon={<MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>}
             onMouseOver={this.handleMouseOver}
             onMouseOut={this.handleMouseOut}
+            onClick={(event) => this.props.moveMap(this.props.lon, this.props.lat)}
             key={this.props.location_id}
             name={this.props.name}
             primaryText={this.props.primaryText}

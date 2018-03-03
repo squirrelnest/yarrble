@@ -25,22 +25,24 @@ const styles = {
   },
 };
 
+const initialState = {
+  nickname: '',
+  longitude: '',
+  latitude: '',
+  country: '',
+  stability: 5,
+  aesthetics: 5,
+  safety: 5,
+  date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+  content: '',
+  user_id: 0
+}
+
 export default class NewLocationForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      nickname: '',
-      longitude: '',
-      latitude: '',
-      country: '',
-      stability: 5,
-      aesthetics: 5,
-      safety: 5,
-      date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
-      content: '',
-      user_id: 0
-    };
+    this.state = initialState
   }
 
   handleFirstSlider = (event, value) => {
@@ -91,6 +93,11 @@ export default class NewLocationForm extends Component {
     })
   }
 
+  handleClose() {
+    this.setState(initialState);
+    this.props.onRequestChange();
+  }
+
   render() {
     return (
       <div>
@@ -100,7 +107,7 @@ export default class NewLocationForm extends Component {
           width={window.innerWidth*0.5}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={this.props.onRequestChange}
+          onRequestChange={(event) => this.handleClose()}
           containerClassName="drawer"
         >
 

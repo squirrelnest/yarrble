@@ -72,6 +72,9 @@ export default class LocationList extends Component {
         handleClick={this.props.handleClick}
         key={index}
         name={loc.nickname}
+        moveMap={this.props.moveMap}
+        lon={loc.lon}
+        lat={loc.lat}
         primaryText={loc.nickname}
         initiallyOpen={false}
         primaryTogglesNestedList={true}
