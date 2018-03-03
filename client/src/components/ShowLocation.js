@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-
 const styles = {
   root: {
     display: 'flex',
@@ -71,8 +70,14 @@ const locationPics =
  </GridList>
 </div>
 
-const reviews = ({ location }) => location.reviews.map((review, key) =>
-  Object.keys(review).map(( item ) => <p>{review.content}</p> ))
+/* You don't need a return() if you don't use curly braces inside an arrow function */
+
+const reviews = ({ location }) => location.reviews.map((review) =>
+  <div>
+    <p>{review.content}</p>
+    <span>comfort: {review.stability} | aesthetics: {review.aesthetics} | safety: {review.safety}</span>
+  </div>
+);
 
 const ShowLocation = ({ location }) =>
   <div className="show-location">
@@ -81,8 +86,7 @@ const ShowLocation = ({ location }) =>
     <h2 style={{ color: '#00BCD4' }}>Latitude: {location.lat}</h2>
     <h2 style={{ color: '#00BCD4' }}>Longitude: {location.lon}</h2>
     <Subheader>Reviews</Subheader>
-    <p>{JSON.stringify(location.reviews)}</p>
-    {reviews}
+    {reviews({location})}
   </div>
 
 const mapStateToProps = (state, ownProps) => {
@@ -91,8 +95,10 @@ const mapStateToProps = (state, ownProps) => {
   if (location) {
     return { location }
   } else {
-    return { location: {} }
+    return { location: { reviews: [] } }
   }
 }
+
+/* connect() creates a higher-order component out of the ShowLocation component, whose function is then called by the <Link> */
 
 export default connect(mapStateToProps)(ShowLocation);
