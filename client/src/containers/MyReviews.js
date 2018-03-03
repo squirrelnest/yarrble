@@ -79,7 +79,7 @@ export default class MyReviews extends Component {
     )
 
     return (
-      <div>
+
         <Table
           styles={styles}
           height={this.state.height}
@@ -120,7 +120,6 @@ export default class MyReviews extends Component {
           </TableBody>
         </Table>
 
-      </div>
     );
   }
 }

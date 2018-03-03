@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Nearby from './containers/Nearby';
 import Home from './containers/Home';
+import ShowLocation from './components/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
 import { fetchLocations } from './actions/thunks';
 import { bindActionCreators } from 'redux';
@@ -24,6 +25,7 @@ export class App extends Component {
               <Switch>
                 <Route exact path="/" render={() => <Home store={this.props.store} locations={this.props.locations} />} />
                 <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
+                <Route path={`/locations/:locationId`} component={ ShowLocation } />
                 <Route exact path="/login" component={ LoginContainer } />
               </Switch>
             </Router>

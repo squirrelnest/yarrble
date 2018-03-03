@@ -11,7 +11,6 @@ export class ShowReview extends Component {
 
     return (
 
-
         <TableRow
           hoverable={true}
           key={this.props.key}
@@ -43,7 +42,6 @@ export class ShowReview extends Component {
           </TableRowColumn>
 
         </TableRow>
-
 
     );
   }

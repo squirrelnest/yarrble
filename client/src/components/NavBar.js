@@ -50,7 +50,6 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div>
 
         <AppBar
           title="Yarrble"
@@ -59,7 +58,6 @@ class NavBar extends Component {
           iconElementRight={this.state.logged ? <Logged /> : <Login />}
         />
 
-      </div>
     );
   }
 }

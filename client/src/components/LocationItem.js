@@ -5,6 +5,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { deleteLocation } from '../actions/thunks';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
+import { Link } from 'react-router-dom';
 
 export default class LocationItem extends Component {
 
@@ -66,10 +67,10 @@ export default class LocationItem extends Component {
             leftIcon={<MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>}
             onMouseOver={this.handleMouseOver}
             onMouseOut={this.handleMouseOut}
-            onClick={(event) => this.props.moveMap(this.props.lon, this.props.lat)}
+            onClick={(event) => this.props.moveMap(event, this.props.lon, this.props.lat)}
             key={this.props.location_id}
             name={this.props.name}
-            primaryText={`${this.props.primaryText}, ${this.props.country}`}
+            primaryText={ <span><Link to={`/locations/${this.props.location_id}`} style={{ color: "#00BCD4" }}>{this.props.primaryText}</Link>, {this.props.country}</span> }
             initiallyOpen={this.props.initiallyOpen}
             primaryTogglesNestedList={true}
             nestedItems={this.props.nestedItems.map( (review) =>
@@ -79,7 +80,8 @@ export default class LocationItem extends Component {
                 review_id={review.id}
                 primaryText= { '"' + review.content + '"' }
                />
-            )}
+             )
+            }
           />
           <Popover
               key="menu"

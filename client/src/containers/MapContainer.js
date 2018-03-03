@@ -14,6 +14,7 @@ export default class MapContainer extends Component {
           locations={this.props.locations}
           lon={this.props.lon}
           lat={this.props.lat}
+          handleMapClick={this.props.handleMapClick}
         />
 
       <Fab handleToggle={this.props.handleToggle} />

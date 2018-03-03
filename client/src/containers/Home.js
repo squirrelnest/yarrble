@@ -4,6 +4,7 @@ import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
 import { createLocation, deleteLocation } from '../actions/thunks';
+import ReactMapGL from 'react-map-gl';
 
 export class Home extends Component {
 
@@ -13,8 +14,8 @@ export class Home extends Component {
       open: false,
       width: window.innerWidth,
       height: window.innerHeight,
-      lon: 45,
-      lat: 37,
+      lon: 12.56737,
+      lat: 41.87194, /* Italy */
     };
   }
 
@@ -26,14 +27,23 @@ export class Home extends Component {
     this.setState({open: false});
   };
 
-  moveMap = (lon, lat) => {
-    console.log(lon, lat)
+  moveMap = (event, lon, lat) => {
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({
       lon: lon,
       lat: lat,
     });
   }
 
+  handleMapClick = (event, lngLat) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({
+      lon: lngLat[0],
+      lat: lngLat[1],
+    })
+  }
 
   handleResize(event) {
     this.setState({
@@ -55,6 +65,7 @@ export class Home extends Component {
         <MapContainer
           locations={this.props.locations}
           handleToggle={this.handleToggle}
+          handleMapClick={this.handleMapClick}
           width={this.state.width}
           height={this.state.height}
           lon={this.state.lon}

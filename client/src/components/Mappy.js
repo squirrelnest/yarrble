@@ -14,21 +14,11 @@ export default class Mappy extends Component {
       viewport: {
         width: window.innerWidth*0.5,
         height:  window.innerHeight*0.92,
-        latitude: 41.87194,
+        latitude: 41.87194, /* Italy */
         longitude: 12.56737,
-        zoom: 8
+        zoom: 4
       }
     };
-  }
-
-  handleMapClick(event) {
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        longitude: event.lngLat[0],
-        latitude: event.lngLat[1],
-      }
-    })
   }
 
   render() {
@@ -53,13 +43,13 @@ export default class Mappy extends Component {
 
         <ReactMapGL
           {...this.state.viewport}
-          latitude={this.props.lat ? this.props.lat : 45 }
-          longitude={this.props.lon ? this.props.lon : 37 }
+          latitude={this.props.lat ? this.props.lat : 45}
+          longitude={this.props.lon ? this.props.lon : 37}
           onViewportChange={(viewport) => this.setState({ viewport })}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           transitionDuration={0}
           transitionInterpolator={new FlyToInterpolator()}
-          onClick={(event) => this.handleMapClick(event)}
+          onClick={(event) => this.props.handleMapClick(event, event.lngLat)}
         >
 
         {markers}

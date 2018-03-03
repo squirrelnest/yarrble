@@ -9,12 +9,13 @@ export default class MapPopup extends Component {
 
       <div>
         <Popup
-          latitude={this.props.latitude}
-          longitude={this.props.longitude}
+          latitude={this.props.lat}
+          longitude={this.props.lon}
           closeButton={true}
           anchor="bottom"
         >
-          <div>Mark New Anchorage Here?</div>
+          <p>Longitude: {this.props.lon}</p>
+          <p>Latitude: {this.props.lat}</p>
         </Popup>
       </div>
 
