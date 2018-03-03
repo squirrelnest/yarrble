@@ -3,6 +3,7 @@ import ReactMapGL, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
 import Place from 'material-ui/svg-icons/maps/place';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MapPopup from '../components/MapPopup';
+import { Link } from 'react-router-dom';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg';
 
@@ -24,17 +25,19 @@ export default class Mappy extends Component {
   render() {
 
     const markers = this.props.locations.map((location) => (
-      <Marker
-        latitude={location.lat}
-        longitude={location.lon}
-        location_id={location.id}
-        key={location.id}
-      >
-        <Place
-          hoverColor={'#E91E63'}
-          color='#00BCD4'
-        />
-      </Marker>
+      <Link to={`/locations/${location.id}`}>
+        <Marker
+          latitude={location.lat}
+          longitude={location.lon}
+          location_id={location.id}
+          key={location.id}
+        >
+          <Place
+            hoverColor={'#E91E63'}
+            color='#00BCD4'
+          />
+        </Marker>
+      </Link>
       )
     )
 
