@@ -8,6 +8,9 @@ import antigua from '../img/antigua.jpg';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
+import {blue300, indigo900} from 'material-ui/styles/colors';
 
 const styles = {
   root: {
@@ -23,6 +26,9 @@ const styles = {
   },
   titleStyle: {
     color: 'rgb(0, 188, 212)',
+  },
+  chip: {
+    margin: 4,
   },
 };
 
@@ -74,8 +80,40 @@ const locationPics =
 
 const reviews = ({ location }) => location.reviews.map((review) =>
   <div>
-    <p>{review.content}</p>
-    <span>comfort: {review.stability} | aesthetics: {review.aesthetics} | safety: {review.safety}</span>
+    <Card>
+      <CardText>
+        <p>"{review.content}"</p>
+        <div className="row">
+          <Chip
+            backgroundColor={blue300}
+            style={styles.chip}
+          >
+            <Avatar size={32} color={blue300} backgroundColor={indigo900}>
+              {review.stability}
+            </Avatar>
+            Comfort
+          </Chip>
+          <Chip
+            backgroundColor={blue300}
+            style={styles.chip}
+          >
+            <Avatar size={32} color={blue300} backgroundColor={indigo900}>
+              {review.aesthetics}
+            </Avatar>
+            Aesthetics
+          </Chip>
+          <Chip
+            backgroundColor={blue300}
+            style={styles.chip}
+          >
+            <Avatar size={32} color={blue300} backgroundColor={indigo900}>
+              {review.safety}
+            </Avatar>
+            Safety
+          </Chip>
+        </div>
+      </CardText>
+    </Card>
   </div>
 );
 
@@ -85,6 +123,8 @@ const ShowLocation = ({ location }) =>
     <h1>{location.nickname}, {location.country}</h1>
     <h2 style={{ color: '#00BCD4' }}>Latitude: {location.lat}</h2>
     <h2 style={{ color: '#00BCD4' }}>Longitude: {location.lon}</h2>
+    <h2 style={{ color: '#00BCD4' }}>Depth: 5m</h2>
+    <h2 style={{ color: '#00BCD4' }}>Bottom: Sand</h2>
     <Subheader>Reviews</Subheader>
     {reviews({location})}
   </div>
