@@ -9,6 +9,7 @@ import Nearby from './containers/Nearby';
 import Home from './containers/Home';
 import ShowLocation from './components/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
+import NewReviewForm from './components/NewReviewForm';
 import { fetchLocations } from './actions/thunks';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

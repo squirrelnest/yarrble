@@ -101,12 +101,7 @@ export default class NewReviewForm extends Component {
 
         <div>
 
-          <form onSubmit={ (event) => {
-            event.preventDefault();
-            this.handleSubmit();
-            }
-          }
-          >
+          <form onSubmit={(event) => this.submitAndReset(event)}>
 
             <div style={styles.root}>
 

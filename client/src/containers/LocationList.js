@@ -5,6 +5,7 @@ import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import NewReviewForm from '../components/NewReviewForm';
 import { createReview } from '../actions/reviewActions';
+import { withRouter } from "react-router-dom";
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -16,7 +17,7 @@ function alphabetize(current, next) {
   }
 }
 
-export default class LocationList extends Component {
+export class LocationList extends Component {
 
   constructor(props) {
     super(props);
@@ -57,10 +58,12 @@ export default class LocationList extends Component {
   };
 
   handleSubmit = (reviewData) => {
-    console.log(this.state.review_location);
-    console.log({...reviewData, location_id: this.state.review_location});
     this.props.store.dispatch(createReview({...reviewData, location_id: this.state.review_location}))
     this.handleClose();
+    let url = `/locations/${this.state.review_location}`;
+/*    <Redirect to={url}/>; */
+    console.log(url)
+    this.props.history.push(url)
   }
 
   render() {
@@ -113,3 +116,5 @@ export default class LocationList extends Component {
     );
   }
 }
+
+export default withRouter(LocationList);

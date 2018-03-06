@@ -142,7 +142,7 @@ const ShowLocation = ({ location }) =>
         <div>Reviews</div>
         <div>
           <NavLink
-            to="/myreviews"
+            to="/reviews/new"
             style={{ color: '212121' }}
           >
             <span><NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>Add Review...</span>
