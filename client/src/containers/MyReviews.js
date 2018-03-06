@@ -8,6 +8,7 @@ import {
   TableRow
 } from 'material-ui/Table';
 import { ReviewItem } from '../components/ReviewItem';
+import { connect } from 'react-redux';
 
 const styles = {
   propContainer: {
@@ -31,7 +32,7 @@ function latest_updated(current, next) {
   }
 }
 
-export default class MyReviews extends Component {
+export class MyReviews extends Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +51,7 @@ export default class MyReviews extends Component {
   }
 
   componentDidMount() {
-    this.props.store.dispatch(fetchReviews())
+    this.props.fetchReviews()
   }
 
   handleToggle = (event, toggled) => {
@@ -123,3 +124,9 @@ export default class MyReviews extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return { fetchReviews: () => dispatch(fetchReviews()) }
+};
+
+export default connect(null, mapDispatchToProps)(MyReviews);
