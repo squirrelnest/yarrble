@@ -6,8 +6,9 @@ import { deleteLocation } from '../actions/thunks';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class LocationItem extends Component {
+class LocationItem extends Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +51,7 @@ export default class LocationItem extends Component {
 
   handleDelete = (event) => {
     event.preventDefault();
-    this.props.store.dispatch(deleteLocation(this.props.location_id));
+    this.props.deleteLocation(this.props.location_id);
   }
 
   handleClose = (event) => {
@@ -99,3 +100,9 @@ export default class LocationItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return { deleteLocation: (location_id) => dispatch(deleteLocation(location_id)) }
+};
+
+export default connect(null, mapDispatchToProps)(LocationItem);
