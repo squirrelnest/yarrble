@@ -9,6 +9,8 @@ import Chip from 'material-ui/Chip';
 import {blue300, indigo900} from 'material-ui/styles/colors';
 import { NavLink } from 'react-router-dom';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
+import NewReviewForm from './NewReviewForm';
+import { createReview } from '../actions/reviewActions';
 
 const styles = {
   root: {
@@ -73,7 +75,7 @@ const tilesData = [
 
 /* You don't need a return() function if you don't use curly braces inside an arrow function */
 
-const reviews = ({ location }) => location.reviews.map((review) =>
+const reviews = (location) => location.reviews.map((review) =>
   <div>
     <Card>
       <CardHeader
@@ -119,42 +121,80 @@ const reviews = ({ location }) => location.reviews.map((review) =>
   </div>
 );
 
-const ShowLocation = ({ location }) =>
-  <div className="show-location row" style={{ margin: 0, }}>
-    <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image}/></div>
-    <div style={styles.locationDataContainer}>
-      <h1>{location.nickname}, {location.country}</h1>
-        <table style={styles.table}>
-          <th><Subheader>Latitude</Subheader></th>
-          <th><Subheader>Longitude</Subheader></th>
-            <tr>
-              <td style={styles.tableCell}><h2>{location.lat}</h2></td>
-              <td style={styles.tableCell}><h2>{location.lon}</h2></td>
-            </tr>
-          <th><Subheader>Depth</Subheader></th>
-          <th><Subheader>Bottom</Subheader></th>
-            <tr>
-              <td style={styles.tableCell}><h2>5.1m</h2></td>
-              <td style={styles.tableCell}><h2>Sand</h2></td>
-            </tr>
-        </table>
-      <Subheader style={styles.subheader}>
-        <div>Reviews</div>
-        <div>
-          <NavLink
-            to="/reviews/new"
-            style={{ color: '212121' }}
-          >
-            <span><NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>Add Review...</span>
-          </NavLink>
+class ShowLocation extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      open: false,
+    }
+  }
+
+  openReviewForm = () => {
+    this.setState({
+      open: true,
+    })
+  }
+
+  handleSubmit = (reviewData) => {
+    this.props.createReview({...reviewData, location_id: this.props.location.id})
+    this.handleClose();
+    let url = `/locations/${this.props.location.id}`;
+    this.props.history.push(url)
+  }
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    })
+    let url = `/locations/${this.props.location.id}`;
+    this.props.history.push(url);
+  }
+
+  render() {
+
+    const SingleLocation = (location) =>
+      <div className="show-location row" style={{ margin: 0, }}>
+        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image}/></div>
+        <div style={styles.locationDataContainer}>
+          <h1>{location.nickname}, {location.country}</h1>
+            <table style={styles.table}>
+              <th><Subheader>Latitude</Subheader></th>
+              <th><Subheader>Longitude</Subheader></th>
+                <tr>
+                  <td style={styles.tableCell}><h2>{location.lat}</h2></td>
+                  <td style={styles.tableCell}><h2>{location.lon}</h2></td>
+                </tr>
+              <th><Subheader>Depth</Subheader></th>
+              <th><Subheader>Bottom</Subheader></th>
+                <tr>
+                  <td style={styles.tableCell}><h2>5.1m</h2></td>
+                  <td style={styles.tableCell}><h2>Sand</h2></td>
+                </tr>
+            </table>
+          <Subheader style={styles.subheader}>
+            <div>Reviews</div>
+            <div>
+              <span onClick={this.openReviewForm}><NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>Add Review...</span>
+            </div>
+          </Subheader>
+
+          {reviews(this.props.location)}
+
         </div>
-      </Subheader>
 
-      {reviews({location})}
+        <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit}/>
 
-    </div>
-  </div>
+      </div>
 
+    return (
+
+      <div>
+        {SingleLocation(this.props.location)}
+      </div>
+    )
+  }
+}
 /* map Redux store state to props */
 
 const mapStateToProps = (state, ownProps) => {
@@ -167,6 +207,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+
+  return { createReview: (formData) => dispatch(createReview(formData)) }
+
+}
+
 /* connect() creates a higher-order component out of the ShowLocation component, a function that is then called by <Link> in parent */
 
-export default connect(mapStateToProps)(ShowLocation);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowLocation);

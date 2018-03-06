@@ -45,17 +45,6 @@ export class Home extends Component {
     })
   }
 
-  handleResize(event) {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
-  }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize.bind(this));
-  }
-
   render() {
 
     return (
