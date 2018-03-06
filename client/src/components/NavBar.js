@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -45,7 +46,7 @@ class NavBar extends Component {
   };
 
   handleClick = () => {
-    window.location.assign('/');
+    this.props.history.push('/');
 }
 
   render() {
@@ -62,4 +63,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import { createReview } from '../actions/reviewActions';
 import NewReviewForm from '../components/NewReviewForm';
-import { ReviewCards } from '../components/ReviewCards';
+import ReviewCards from '../components/ReviewCards';
 
 const styles = {
   titleStyle: {
@@ -123,7 +123,9 @@ class ShowLocation extends Component {
             </div>
           </Subheader>
 
-          {ReviewCards(this.props.location)}
+          <ReviewCards
+            location={this.props.location}
+          />
 
         </div>
 
