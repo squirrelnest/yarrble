@@ -22,9 +22,9 @@ export class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <Route exact path="/" render={() => <Home locations={this.props.locations} />} />
-                <Route path={`/locations/:locationId`} component={ShowLocation} />
-                <Route exact path="/reviews/myreviews" render={() => <MyReviews reviews={this.props.reviews} store={this.props.store} />} />
+                <Route exact path="/" component={ Home } />
+                <Route path={`/locations/:locationId`} component={ ShowLocation } />
+                <Route exact path="/reviews/myreviews" render={() => <MyReviews store={this.props.store} />} />
                 <Route exact path="/login" component={ LoginContainer } />
               </Switch>
             </Router>
@@ -41,8 +41,6 @@ const mapStateToProps = (state) => {
     reviews: state.reviews.reviews
   };
 };
-
-
 
 /*
 connect() returns a higher order component that listens for redux store changes

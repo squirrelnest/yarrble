@@ -80,6 +80,13 @@ export class Home extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    locations: state.locations.locations,
+    reviews: state.reviews.reviews,
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
            createLocation: (formData) => dispatch(createLocation(formData)),
@@ -87,4 +94,4 @@ function mapDispatchToProps(dispatch) {
           }
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

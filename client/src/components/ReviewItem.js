@@ -79,7 +79,7 @@ export class ReviewItem extends Component {
         safety={this.props.safety}
         visibility={this.state.visibility}
         handleEdit={this.handleEdit}
-        handleDelete={this.handleDelete}
+        handleDelete={(event) => this.handleDelete(event)}
       />
     }
 

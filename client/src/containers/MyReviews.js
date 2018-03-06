@@ -125,8 +125,15 @@ export class MyReviews extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    locations: state.locations.locations,
+    reviews: state.reviews.reviews,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return { fetchReviews: () => dispatch(fetchReviews()) }
 };
 
-export default connect(null, mapDispatchToProps)(MyReviews);
+export default connect(mapStateToProps, mapDispatchToProps)(MyReviews);
