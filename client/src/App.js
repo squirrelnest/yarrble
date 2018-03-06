@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Nearby from './containers/Nearby';
 import Home from './containers/Home';
-import ShowLocation from './components/ShowLocation';
+import ShowLocation from './containers/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
 import NewReviewForm from './components/NewReviewForm';
 import { fetchLocations } from './actions/thunks';

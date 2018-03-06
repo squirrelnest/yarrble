@@ -9,26 +9,13 @@ import Chip from 'material-ui/Chip';
 import {blue300, indigo900} from 'material-ui/styles/colors';
 import { NavLink } from 'react-router-dom';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
-import NewReviewForm from './NewReviewForm';
 import { createReview } from '../actions/reviewActions';
+import NewReviewForm from '../components/NewReviewForm';
+import { ReviewCards } from '../components/ReviewCards';
 
 const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    height: '200px'
-  },
-  gridList: {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    overflowX: 'auto',
-  },
   titleStyle: {
     color: 'rgb(0, 188, 212)',
-  },
-  chip: {
-    margin: '0px 4px 18px',
   },
   imageContainer: {
     width:'50%',
@@ -71,56 +58,6 @@ const tilesData = [
   },
 ]
 
-/* FUNCTIONAL STATELESS COMPONENTS */
-
-/* You don't need a return() function if you don't use curly braces inside an arrow function */
-
-const reviews = (location) => location.reviews.map((review) =>
-  <div>
-    <Card>
-      <CardHeader
-       title="Username"
-       subtitle="Subtitle"
-       avatar={tilesData[0].img}
-       actAsExpander={true}
-       style={{ margin: '-20px 0px' }}
-      />
-      <CardText >
-        <p>"{review.content}"</p>
-        <div className="row">
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.stability}
-            </Avatar>
-            Comfort
-          </Chip>
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.aesthetics}
-            </Avatar>
-            Aesthetics
-          </Chip>
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.safety}
-            </Avatar>
-            Safety
-          </Chip>
-        </div>
-      </CardText>
-    </Card>
-  </div>
-);
-
 class ShowLocation extends Component {
 
   constructor(props){
@@ -135,6 +72,10 @@ class ShowLocation extends Component {
       open: true,
     })
   }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   handleSubmit = (reviewData) => {
     this.props.createReview({...reviewData, location_id: this.props.location.id})
@@ -175,15 +116,18 @@ class ShowLocation extends Component {
           <Subheader style={styles.subheader}>
             <div>Reviews</div>
             <div>
-              <span onClick={this.openReviewForm}><NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>Add Review...</span>
+              <span onClick={this.openReviewForm} handleClose={this.handleClose}>
+                <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
+                Add Review...
+              </span>
             </div>
           </Subheader>
 
-          {reviews(this.props.location)}
+          {ReviewCards(this.props.location)}
 
         </div>
 
-        <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit}/>
+        <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
 
       </div>
 
