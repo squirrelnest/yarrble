@@ -5,7 +5,8 @@ import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import NewReviewForm from '../components/NewReviewForm';
 import { createReview } from '../actions/reviewActions';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 function alphabetize(current, next) {
   if (current.nickname > next.nickname) {
@@ -35,9 +36,9 @@ export class LocationList extends Component {
 
   handleActive = (tab) => {
     if (tab.props['name'] === 'nearby') {
-      this.props.store.dispatch(fetchNearbyLocations());
+      this.props.fetchNearbyLocations();
     } else {
-      this.props.store.dispatch(fetchLocations());
+      this.props.fetchLocations();
     }
   }
 
@@ -58,7 +59,7 @@ export class LocationList extends Component {
   };
 
   handleSubmit = (reviewData) => {
-    this.props.store.dispatch(createReview({...reviewData, location_id: this.state.review_location}))
+    this.props.createReview({...reviewData, location_id: this.state.review_location})
     this.handleClose();
     let url = `/locations/${this.state.review_location}`;
     this.props.history.push(url)
@@ -115,4 +116,14 @@ export class LocationList extends Component {
   }
 }
 
-export default withRouter(LocationList);
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    createReview: (formData) => dispatch(createReview(formData)),
+    fetchNearbyLocations: () => dispatch(fetchNearbyLocations()),
+    fetchLocations: () => dispatch(fetchLocations()),
+  }
+
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(LocationList));

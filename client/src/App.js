@@ -26,7 +26,7 @@ export class App extends Component {
               <Switch>
                 <Route exact path="/" render={() => <Home store={this.props.store} locations={this.props.locations} />} />
                 <Route path={`/locations/:locationId`} component={ShowLocation} />
-                <Route exact path="/reviews/myreviews" render={() => <MyReviews store={this.props.store} reviews={this.props.reviews} />} />
+                <Route exact path="/reviews/myreviews" render={() => <MyReviews reviews={this.props.reviews} store={this.props.store} />} />
                 <Route exact path="/login" component={ LoginContainer } />
               </Switch>
             </Router>
