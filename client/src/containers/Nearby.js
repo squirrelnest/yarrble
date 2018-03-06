@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import { fetchNearbyLocations } from '../actions/thunks';
+import { connect } from 'react-redux';
 
-export default class Nearby extends Component {
+export class Nearby extends Component {
 
   componentDidMount() {
-    this.props.store.dispatch(fetchNearbyLocations());
+    this.props.fetchNearbyLocations()
   }
 
   render() {
@@ -39,3 +40,9 @@ export default class Nearby extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return { fetchNearbyLocations: () => dispatch(fetchNearbyLocations()) }
+};
+
+export default connect(null, mapDispatchToProps)(Nearby);
