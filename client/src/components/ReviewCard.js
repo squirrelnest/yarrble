@@ -99,6 +99,7 @@ export default class ReviewCard extends Component {
                       Safety
                     </Chip>
 
+
 /* Like Button Chip */
 
                     <Chip

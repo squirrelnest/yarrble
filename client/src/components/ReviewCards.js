@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import paradise from '../img/paradise.jpg';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import ReviewCard from '../components/ReviewCard';
 
 const styles = {
   titleStyle: {
@@ -40,48 +41,38 @@ function latest_updated(current, next) {
   }
 }
 
-export const ReviewCards = (location) => location.reviews.sort(latest_updated).map((review) =>
-  <div>
-    <Card>
-      <CardHeader
-       title="Username"
-       subtitle="Subtitle"
-       avatar={tilesData[0].img}
-       actAsExpander={true}
-       style={{ margin: '-20px 0px' }}
-      />
-      <CardText >
-        <p>"{review.content}"</p>
-        <div className="row">
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.stability}
-            </Avatar>
-            Comfort
-          </Chip>
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.aesthetics}
-            </Avatar>
-            Aesthetics
-          </Chip>
-          <Chip
-            backgroundColor={'#B2EBF2'}
-            style={styles.chip}
-          >
-            <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-              {review.safety}
-            </Avatar>
-            Safety
-          </Chip>
+export default class ReviewCards extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      like: 0,
+    }
+  }
+
+  handleClick() {
+    this.setState({
+      like: this.state.like + 1
+    })
+  }
+
+  render() {
+
+    const ReviewCards = this.props.location.reviews.sort(latest_updated).map((review) =>
+        <div>
+          <ReviewCard
+            review={review}
+            like={this.state.like}
+          />
         </div>
-      </CardText>
-    </Card>
-  </div>
-);
+
+      )
+
+      return (
+        <div>
+          {ReviewCards}
+        </div>
+      );
+
+  }
+}
