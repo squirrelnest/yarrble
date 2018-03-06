@@ -26,18 +26,15 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="My Reviews" href="/myreviews" />
-    <MenuItem primaryText="Near Me" href="/nearby" />
-    <MenuItem primaryText="Sign out" href="/" />
+    <MenuItem primaryText="My Reviews" href="/reviews/myreviews" />
+    <MenuItem primaryText="Sign out" href="/login" />
   </IconMenu>
 );
 
 Logged.muiName = 'IconMenu';
 
-/**
- * This example is taking advantage of the composability of the `AppBar`
- * to render different components depending on the application state.
- */
+/* Taking advantage of the composability of the `AppBar` to render different components depending on application state. */
+
 class NavBar extends Component {
   state = {
     logged: true,
@@ -53,7 +50,6 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div>
 
         <AppBar
           title="Yarrble"
@@ -62,7 +58,6 @@ class NavBar extends Component {
           iconElementRight={this.state.logged ? <Logged /> : <Login />}
         />
 
-      </div>
     );
   }
 }

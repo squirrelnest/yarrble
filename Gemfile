@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Create seed file from previous databases
+gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 # Foreman utility for managing multiple servers (Webpack dev server, Rails API server, etc.)
 gem 'foreman', '~> 0.82.0'
 # Load environment variables from .env

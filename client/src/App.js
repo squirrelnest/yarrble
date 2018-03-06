@@ -4,20 +4,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
-import Tabley from './components/Table';
-import Listy from './components/Listy';
-import IndexPage from './containers/IndexPage';
+import MyReviews from './containers/MyReviews';
+import Nearby from './containers/Nearby';
+import Home from './containers/Home';
+import ShowLocation from './containers/ShowLocation';
+import LoginContainer from './containers/LoginContainer';
+import NewReviewForm from './components/NewReviewForm';
+import { connect } from 'react-redux';
 
-class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {open: false};
-  }
-
-  handleToggle = () => this.setState({open: !this.state.open});
-
-  handleClose = () => this.setState({open: false});
+export class App extends Component {
 
   render() {
     return (
@@ -27,11 +22,10 @@ class App extends Component {
             <NavBar />
             <Router>
               <Switch>
-                <div>
-                  <Route exact path="/" component={IndexPage} />
-                  <Route exact path="/nearby" component={Listy} />
-                  <Route exact path="/myreviews" component={Tabley} />
-                </div>
+                <Route exact path="/" component={ Home } />
+                <Route path={`/locations/:locationId`} component={ ShowLocation } />
+                <Route exact path="/reviews/myreviews" render={() => <MyReviews store={this.props.store} />} />
+                <Route exact path="/login" component={ LoginContainer } />
               </Switch>
             </Router>
           </div>
@@ -41,4 +35,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    locations: state.locations.locations,
+    reviews: state.reviews.reviews
+  };
+};
+
+/*
+connect() returns a higher order component that listens for redux store changes
+and renders a component with props that are values from the store.
+*/
+
+const WrapperApp = connect(mapStateToProps)(App);
+
+export default WrapperApp

@@ -17,16 +17,18 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @location = Location.find_by(id: review_params["location_id"]) || Location.find_by(id: params[:location_id]) || Location.create(location_params)
+    @location = Location.find_by(id: params[:location_id]) || Location.find_by(id: review_params["location_id"]) || Location.create(location_params)
     @review.location = @location
-    @review.user_id = current_user.id
-    if @review.valid?
+    # @review.user_id = current_user.id
+    # if @review.valid?
       @review.save
-      redirect_to locations_path
-    else
-      flash[:message] = @location.errors.messages.values.flatten.join(" ") if @location.errors.any?
-      redirect_to locations_path
-    end
+      # redirect_to locations_path
+    # else
+      # flash[:message] = @location.errors.messages.values.flatten.join(" ") if @location.errors.any?
+      # redirect_to locations_path
+    # end
+    @locations = Location.all
+    render json: @locations, status: 200
   end
 
   def show
@@ -40,31 +42,34 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
-    if @review.user_id == @user.id || current_user.admin
+    # if @review.user_id == @user.id || current_user.admin
       @review.update(review_params)
       @review.save
-      redirect_to review_path(@review)
-    else
-      flash[:message] = "Can't touch what ain't yours."
-      redirect_to review_path(@review)
-    end
+      # redirect_to review_path(@review)
+    # else
+      # flash[:message] = "Can't touch what ain't yours."
+      # redirect_to review_path(@review)
+    # end
+    @reviews = Review.all
+    render json: @reviews, status: 200
   end
 
   def destroy
     @review = Review.find(params[:id])
-    if @review.user_id == @user.id || current_user.admin
+    # if @review.user_id == @user.id || current_user.admin
       @review.destroy
-      redirect_to locations_url
-    else
-      flash[:message] = "Can't touch what ain't yours."
-      redirect_to locations_url
-    end
+      # redirect_to locations_url
+    # else
+      # flash[:message] = "Can't touch what ain't yours."
+      # redirect_to locations_url
+    @reviews = Review.all
+    render json: @reviews, status: 200
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:content, :stability, :date_visited, :location_id)
+    params.require(:review).permit(:content, :stability, :aesthetics, :safety, :date_visited, :location_id, :user_id)
   end
 
   def location_params
