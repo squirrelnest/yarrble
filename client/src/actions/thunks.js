@@ -4,6 +4,9 @@ import { ADD_LOCATION, REMOVE_LOCATION } from './locationActions';
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const LOADING_LOCATIONS = 'LOADING_LOCATIONS';
 
+/* A promise or thenable is an object that may yield a value in the future (either a resolved value or an error message) */
+/* Asynchronous code is single-threaded but multi-tasking - one code can run before another code completes */
+
 export function fetchLocations() {
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
