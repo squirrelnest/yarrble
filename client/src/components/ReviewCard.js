@@ -98,11 +98,21 @@ export default class ReviewCard extends Component {
                       </Avatar>
                       Safety
                     </Chip>
-                    <button
+
+
+/* Like Button Chip */
+
+                    <Chip
+                      backgroundColor={'#B2EBF2'}
+                      style={styles.chip}
                       onClick={this.handleClick.bind(this)}
-                    >Like
-                    </button>
-                    <p>Like Counter: {this.state.like}</p>
+                    >
+                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                        {this.state.like}
+                      </Avatar>
+                      Likes
+                    </Chip>
+
                   </div>
                 </CardText>
               </Card>
