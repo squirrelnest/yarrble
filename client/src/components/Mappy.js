@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactMapGL, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
 import Place from 'material-ui/svg-icons/maps/place';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MapPopup from '../components/MapPopup';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +24,9 @@ export default class Mappy extends Component {
   render() {
 
     const markers = this.props.locations.map((location) => (
-      <Link to={`/locations/${location.id}`}>
+      <Link
+        to={`/locations/${location.id}`}
+        key={location.id}>
         <Marker
           latitude={location.lat}
           longitude={location.lon}

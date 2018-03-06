@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
-import Subheader from 'material-ui/Subheader';
+import React from 'react';
 import paradise from '../img/paradise.jpg';
-import { connect } from 'react-redux';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
-import {blue300, indigo900} from 'material-ui/styles/colors';
-import { NavLink } from 'react-router-dom';
-import NoteAdd from 'material-ui/svg-icons/action/note-add';
-import NewReviewForm from './NewReviewForm';
-import { createReview } from '../actions/reviewActions';
 
 const styles = {
   titleStyle: {

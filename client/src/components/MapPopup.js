@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactMapGL, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
+import { Popup } from 'react-map-gl';
 
 export default class MapPopup extends Component {
 

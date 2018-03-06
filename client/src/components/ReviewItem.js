@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import DeleteBtn from './DeleteBtn';
-import EditBtn from './EditBtn';
 import { deleteReview, updateReview } from '../actions/reviewActions';
 import { EditReviewForm } from '../components/EditReviewForm';
 import { ShowReview } from '../components/ShowReview';
