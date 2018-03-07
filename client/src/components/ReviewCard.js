@@ -86,11 +86,11 @@ export default class ReviewCard extends Component {
                     </Chip>
 
                     <Chip
-                      backgroundColor={'#B2EBF2'}
+                      backgroundColor={'#F8BBD0'}
                       style={styles.chip}
                       onClick={this.handleClick.bind(this)}
                     >
-                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                      <Avatar size={32} color={'#F8BBD0'} backgroundColor={'#EC407A'}>
                         {this.state.like}
                       </Avatar>
                       Likes
