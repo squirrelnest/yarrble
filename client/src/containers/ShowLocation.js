@@ -90,7 +90,7 @@ class ShowLocation extends Component {
 
     const SingleLocation = (location) =>
       <div className="show-location row" style={{ margin: 0, }}>
-        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image}/></div>
+        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image} alt="tropical island"/></div>
         <div style={styles.locationDataContainer}>
           <h1>{location.nickname}, {location.country}</h1>
             <table style={styles.table}>
@@ -150,7 +150,7 @@ class ShowLocation extends Component {
 /* map Redux store state to props */
 
 const mapStateToProps = (state, ownProps) => {
-  const location = state.locations.locations.find(location => location.id == ownProps.match.params.locationId)
+  const location = state.locations.locations.find(location => location.id === ownProps.match.params.locationId)
 
   if (location) {
     return { location }
