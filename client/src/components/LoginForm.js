@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
-// import Dialog from 'material-ui/Dialog';
 
 const styles = {
   width: '33%',
@@ -46,14 +44,6 @@ export default class LoginForm extends Component {
   render() {
 
     return (
-/*
-      <Dialog
-        title="Log In"
-        modal={false}
-        open={this.state.open}
-        onRequestClose={this.handleClose}
-      >
-*/
 
       <form
         style={styles}
@@ -103,8 +93,6 @@ export default class LoginForm extends Component {
         />
 
       </form>
-
-/*      </Dialog>  */
 
     );
   }

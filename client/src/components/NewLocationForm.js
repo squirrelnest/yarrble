@@ -73,6 +73,12 @@ export default class NewLocationForm extends Component {
     console.log(this.state.fuel)
   }
 
+  handleDateChange = (event, date) => {
+    this.setState({
+      date_visited: date,
+    });
+  };
+
   getPosition(event) {
     event.preventDefault();
     this.setState({
@@ -97,9 +103,10 @@ export default class NewLocationForm extends Component {
     })
   }
 
-  handleClose() {
-    this.setState(initialState);
-    this.props.onRequestChange();
+  componentWillReceiveProps(nextProps) {
+    if (this.props.open === false) {
+      this.setState(initialState);
+    }
   }
 
   handleSubmit(event) {
@@ -118,7 +125,7 @@ export default class NewLocationForm extends Component {
           width={window.innerWidth*0.5}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={(event) => this.handleClose()}
+          onRequestChange={(event) => this.props.onRequestChange()}
           containerClassName="drawer"
         >
 
@@ -136,6 +143,7 @@ export default class NewLocationForm extends Component {
                 value={this.state.nickname}
                 hintText="Nickname"
                 floatingLabelText="Nickname"
+                value={this.state.nickname}
                 multiLine={false}
                 fullWidth={false}
                 onChange={(event) => this.handleChange(event)}
@@ -297,6 +305,7 @@ export default class NewLocationForm extends Component {
                 value={this.state.content}
                 hintText="Write a Review"
                 floatingLabelText="Write a Review"
+                value={this.state.content}
                 multiLine={true}
                 fullWidth={true}
                 rows={2}

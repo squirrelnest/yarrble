@@ -26,10 +26,6 @@ const tilesData = [
   },
 ]
 
-/* FUNCTIONAL STATELESS COMPONENT */
-
-/* You don't need a return() function if you don't use curly braces inside an arrow function */
-
 export default class ReviewCard extends Component {
 
   constructor(props) {
@@ -90,11 +86,11 @@ export default class ReviewCard extends Component {
                     </Chip>
 
                     <Chip
-                      backgroundColor={'#F48FB1'}
+                      backgroundColor={'#B2EBF2'}
                       style={styles.chip}
                       onClick={this.handleClick.bind(this)}
                     >
-                      <Avatar size={32} color={'#F48FB1'} backgroundColor={'#E91E63'}>
+                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
                         {this.state.like}
                       </Avatar>
                       Likes
