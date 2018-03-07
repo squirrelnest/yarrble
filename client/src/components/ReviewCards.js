@@ -1,30 +1,5 @@
 import React, { Component } from 'react';
-import paradise from '../img/paradise.jpg';
 import ReviewCard from '../components/ReviewCard';
-
-const styles = {
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
-  },
-  chip: {
-    margin: '0px 4px 18px',
-  },
-  subheader: {
-    marginBottom: '20px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-};
-
-const tilesData = [
-  {
-    img: paradise,
-    title: 'Ao Yon Beach',
-  },
-]
-
-/* You don't need a return() function if you don't use curly braces inside an arrow function */
 
 function latest_updated(current, next) {
   if (current.updated_at > next.updated_at) {
