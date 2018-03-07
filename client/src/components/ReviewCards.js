@@ -54,9 +54,8 @@ export default class ReviewCards extends Component {
   render() {
 
     const ReviewCards = this.props.location.reviews.sort(latest_updated).map((review) =>
-        <div>
+        <div key={review.id}>
           <ReviewCard
-            key={review.id}
             review={review}
             like={this.state.like}
           />

@@ -26,20 +26,6 @@ const tilesData = [
   },
 ]
 
-/* FUNCTIONAL STATELESS COMPONENT */
-
-/* You don't need a return() function if you don't use curly braces inside an arrow function */
-
-function latest_updated(current, next) {
-  if (current.updated_at > next.updated_at) {
-    return -1;
-  } else if (current.updated_at < next.updated_at) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
 export default class ReviewCard extends Component {
 
   constructor(props) {
