@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import paradise from '../img/paradise.jpg';
 import { connect } from 'react-redux';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-import {blue300, indigo900} from 'material-ui/styles/colors';
-import { NavLink } from 'react-router-dom';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import { createReview } from '../actions/reviewActions';
 import NewReviewForm from '../components/NewReviewForm';
@@ -96,27 +90,39 @@ class ShowLocation extends Component {
 
     const SingleLocation = (location) =>
       <div className="show-location row" style={{ margin: 0, }}>
-        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image}/></div>
+        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image} alt="tropical island"/></div>
         <div style={styles.locationDataContainer}>
           <h1>{location.nickname}, {location.country}</h1>
             <table style={styles.table}>
-              <th><Subheader>Latitude</Subheader></th>
-              <th><Subheader>Longitude</Subheader></th>
+              <thead>
+                <tr>
+                  <th><Subheader>Latitude</Subheader></th>
+                  <th><Subheader>Longitude</Subheader></th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td style={styles.tableCell}><h2>{location.lat}</h2></td>
                   <td style={styles.tableCell}><h2>{location.lon}</h2></td>
                 </tr>
-              <th><Subheader>Depth</Subheader></th>
-              <th><Subheader>Bottom</Subheader></th>
+              </tbody>
+              <thead>
+                <tr>
+                  <th><Subheader>Depth</Subheader></th>
+                  <th><Subheader>Bottom</Subheader></th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td style={styles.tableCell}><h2>5.1m</h2></td>
                   <td style={styles.tableCell}><h2>Sand</h2></td>
                 </tr>
+              </tbody>
             </table>
           <Subheader style={styles.subheader}>
             <div>Reviews</div>
             <div>
-              <span onClick={this.openReviewForm} handleClose={this.handleClose}>
+              <span onClick={this.openReviewForm}>
                 <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
                 Add Review...
               </span>
