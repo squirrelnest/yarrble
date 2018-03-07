@@ -99,9 +99,6 @@ export default class ReviewCard extends Component {
                       Safety
                     </Chip>
 
-
-/* Like Button Chip */
-
                     <Chip
                       backgroundColor={'#B2EBF2'}
                       style={styles.chip}

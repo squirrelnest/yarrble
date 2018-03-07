@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import paradise from '../img/paradise.jpg';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
 import ReviewCard from '../components/ReviewCard';
 
 const styles = {
@@ -26,8 +23,6 @@ const tilesData = [
     title: 'Ao Yon Beach',
   },
 ]
-
-/* FUNCTIONAL STATELESS COMPONENT */
 
 /* You don't need a return() function if you don't use curly braces inside an arrow function */
 
@@ -61,6 +56,7 @@ export default class ReviewCards extends Component {
     const ReviewCards = this.props.location.reviews.sort(latest_updated).map((review) =>
         <div>
           <ReviewCard
+            key={review.id}
             review={review}
             like={this.state.like}
           />
