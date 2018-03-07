@@ -85,8 +85,8 @@ export function createLocation(locationData) {
   }
 }
 
-export function createLocationSuccess(payload) {
-  return {type: ADD_LOCATION, payload};
+export function createLocationSuccess(location) {
+  return {type: ADD_LOCATION, location};
 }
 
 export function deleteLocation(location_id) {

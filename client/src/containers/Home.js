@@ -22,7 +22,7 @@ export class Home extends Component {
 
   handleClose = () => this.setState({open: false});
 
-  onRequestChange = () => {
+  handleRequestChange = () => {
     this.setState({open: false});
   };
 
@@ -94,7 +94,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-           createLocation: (formData) => dispatch(createLocation(formData)),
+           createLocation: (locationData) => dispatch(createLocation(locationData)),
            deleteLocation: (location_id) => dispatch(deleteLocation(location_id))
           }
 }

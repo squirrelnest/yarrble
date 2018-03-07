@@ -28,7 +28,7 @@ export default function locationReducer(state = initialState, action) {
       return { locations: action.payload }
 
     case ADD_LOCATION:
-      return { locations: state.locations.concat(action.payload) }
+      return { locations: state.locations.concat(action.location) }
 
     case REMOVE_LOCATION:
       const locations = state.locations.filter( (location) => location.id !== action.location_id)

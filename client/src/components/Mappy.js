@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactMapGL, {Marker, Popup, FlyToInterpolator} from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
 import Place from 'material-ui/svg-icons/maps/place';
 import MapPopup from '../components/MapPopup';
 import { Link } from 'react-router-dom';
