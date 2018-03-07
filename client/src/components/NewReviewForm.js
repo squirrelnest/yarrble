@@ -30,7 +30,7 @@ const initialState = {
   stability: 5,
   aesthetics: 5,
   safety: 5,
-  date_visited: null, /* Date(Date.UTC(96, 1, 2, 3, 4, 5)) */
+  date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
   content: '',
   user_id: 0
 };

@@ -93,9 +93,16 @@ export default class NewLocationForm extends Component {
     })
   }
 
-  handleClose() {
+/*  handleClose() {
     this.setState(initialState);
     this.props.onRequestChange();
+  }
+*/
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.open === false) {
+      this.setState(initialState);
+    }
   }
 
   render() {
@@ -107,7 +114,7 @@ export default class NewLocationForm extends Component {
           width={window.innerWidth*0.5}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={(event) => this.handleClose()}
+          onRequestChange={(event) => this.props.onRequestChange()}
           containerClassName="drawer"
         >
 

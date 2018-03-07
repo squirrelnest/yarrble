@@ -45,6 +45,13 @@ export class Home extends Component {
     })
   }
 
+  handleSubmit = (locationData) => {
+    this.props.createLocation(locationData)
+    this.setState({
+      open: false
+    })
+  }
+
   render() {
 
     return (
@@ -69,10 +76,9 @@ export class Home extends Component {
           height={this.state.height}
           />
         <NewLocationForm
-          handleSubmit={this.props.createLocation}
+          handleSubmit={this.handleSubmit}
           open={this.state.open}
           onRequestChange={this.onRequestChange}
-          handleToggle={this.handleToggle}
         />
 
       </div>
