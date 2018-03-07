@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   root: {
@@ -66,6 +67,12 @@ export default class NewLocationForm extends Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
+    });
+  };
+
+  handleDateChange = (event, date) => {
+    this.setState({
+      date_visited: date,
     });
   };
 
@@ -296,6 +303,12 @@ export default class NewLocationForm extends Component {
                 fullWidth={true}
                 rows={2}
                 onChange={(event) => this.handleChange(event)}
+              />
+
+              <DatePicker
+                dialogContainerStyle={styles.datepicker}
+                hintText="Date Visited"
+                onChange={this.handleDateChange}
               />
 
               <RaisedButton
