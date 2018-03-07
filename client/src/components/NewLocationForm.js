@@ -124,6 +124,7 @@ export default class NewLocationForm extends Component {
                 name="nickname"
                 hintText="Nickname"
                 floatingLabelText="Nickname"
+                value={this.state.nickname}
                 multiLine={false}
                 fullWidth={false}
                 onChange={(event) => this.handleChange(event)}
@@ -283,6 +284,7 @@ export default class NewLocationForm extends Component {
                 name="content"
                 hintText="Write a Review"
                 floatingLabelText="Write a Review"
+                value={this.state.content}
                 multiLine={true}
                 fullWidth={true}
                 rows={2}
