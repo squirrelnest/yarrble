@@ -100,12 +100,6 @@ export default class NewLocationForm extends Component {
     })
   }
 
-/*  handleClose() {
-    this.setState(initialState);
-    this.props.onRequestChange();
-  }
-*/
-
   componentWillReceiveProps(nextProps) {
     if (this.props.open === false) {
       this.setState(initialState);

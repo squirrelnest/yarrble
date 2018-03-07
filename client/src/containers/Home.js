@@ -4,7 +4,6 @@ import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
 import { createLocation, deleteLocation } from '../actions/thunks';
-import ReactMapGL from 'react-map-gl';
 
 export class Home extends Component {
 
