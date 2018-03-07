@@ -150,7 +150,7 @@ class ShowLocation extends Component {
 /* map Redux store state to props */
 
 const mapStateToProps = (state, ownProps) => {
-  const location = state.locations.locations.find(location => location.id === ownProps.match.params.locationId)
+  const location = state.locations.locations.find(location => location.id == ownProps.match.params.locationId)
 
   if (location) {
     return { location }
