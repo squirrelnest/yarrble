@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   root: {
@@ -35,7 +36,8 @@ const initialState = {
   safety: 5,
   date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
   content: '',
-  user_id: 0
+  user_id: 0,
+  fuel: false,
 }
 
 export default class NewLocationForm extends Component {
@@ -57,17 +59,19 @@ export default class NewLocationForm extends Component {
     this.setState({safety: value});
   };
 
-  handleClick(event) {
-    this.setState({
-      open: false,
-    });
-  };
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
+
+  handleCheck(event) {
+    let key = event.target.name
+    this.setState({
+      [key]: !this.state.key
+    });
+    console.log(this.state.fuel)
+  }
 
   getPosition(event) {
     event.preventDefault();
@@ -98,6 +102,13 @@ export default class NewLocationForm extends Component {
     this.props.onRequestChange();
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.handleSubmit(this.state);
+    this.props.handleToggle();
+    this.handleClose();
+  }
+
   render() {
     return (
       <div>
@@ -122,6 +133,7 @@ export default class NewLocationForm extends Component {
 
               <TextField
                 name="nickname"
+                value={this.state.nickname}
                 hintText="Nickname"
                 floatingLabelText="Nickname"
                 multiLine={false}
@@ -179,7 +191,7 @@ export default class NewLocationForm extends Component {
                 <div className="sliderContainer" name="stability">
                 <div>{'Comfort: '}{this.state.stability}</div>
                 <Slider
-                  value={this.state.stability}
+                  name="stability"
                   onChange={this.handleFirstSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -194,7 +206,6 @@ export default class NewLocationForm extends Component {
                 <div>{'Aesthetics: '}{this.state.aesthetics}</div>
                 <Slider
                   name="aesthetics"
-                  value={this.state.aesthetics}
                   onChange={this.handleSecondSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -209,7 +220,6 @@ export default class NewLocationForm extends Component {
                 <div>{'Safety: '}{this.state.safety}</div>
                 <Slider
                   name="safety"
-                  value={this.state.safety}
                   onChange={this.handleThirdSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -232,6 +242,9 @@ export default class NewLocationForm extends Component {
 
                   <Checkbox
                     label="Fuel"
+                    name="fuel"
+                    checked={this.state.fuel}
+                    onCheck={this.handleCheck.bind(this)}
                     style={styles.checkbox}
                   />
                   <Checkbox
@@ -281,12 +294,19 @@ export default class NewLocationForm extends Component {
 
               <TextField
                 name="content"
+                value={this.state.content}
                 hintText="Write a Review"
                 floatingLabelText="Write a Review"
                 multiLine={true}
                 fullWidth={true}
                 rows={2}
                 onChange={(event) => this.handleChange(event)}
+              />
+
+              <DatePicker
+                dialogContainerStyle={styles.datepicker}
+                hintText="Date Visited"
+                onChange={this.handleDateChange}
               />
 
               <RaisedButton
@@ -296,7 +316,7 @@ export default class NewLocationForm extends Component {
                 secondary={true}
                 fullWidth={false}
                 style={styles.button}
-                onClick={this.props.handleToggle}
+                onClick={(event) => this.props.handleSubmit(event)}
               />
 
             </form>

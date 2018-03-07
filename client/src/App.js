@@ -5,11 +5,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
-import Nearby from './containers/Nearby';
 import Home from './containers/Home';
 import ShowLocation from './containers/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
-import NewReviewForm from './components/NewReviewForm';
 import { connect } from 'react-redux';
 
 export class App extends Component {
@@ -28,7 +26,7 @@ export class App extends Component {
                   <Route exact path="/reviews/myreviews" render={() => <MyReviews store={this.props.store} />} />
                   <Route exact path="/login" component={ LoginContainer } />
                 </Switch>
-              </div>  
+              </div>
             </Router>
           </div>
         </MuiThemeProvider>

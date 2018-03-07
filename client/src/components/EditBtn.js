@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ListItemIcon from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 

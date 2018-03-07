@@ -1,31 +1,5 @@
 import React, { Component } from 'react';
-import paradise from '../img/paradise.jpg';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
 import ReviewCard from '../components/ReviewCard';
-
-const styles = {
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
-  },
-  chip: {
-    margin: '0px 4px 18px',
-  },
-  subheader: {
-    marginBottom: '20px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-};
-
-const tilesData = [
-  {
-    img: paradise,
-    title: 'Ao Yon Beach',
-  },
-]
 
 /* FUNCTIONAL STATELESS COMPONENT */
 

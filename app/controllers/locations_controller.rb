@@ -44,7 +44,7 @@ class LocationsController < ApplicationController
     if @location.errors.any?
       render json: { errors: @location.errors.full_messages }
     else
-      render json: @location, status: 201
+      render json: @location, status: 200
     end
   end
 

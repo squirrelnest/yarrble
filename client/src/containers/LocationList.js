@@ -58,6 +58,13 @@ export class LocationList extends Component {
     this.setState({NewReviewFormOpen: false});
   };
 
+  handleSubmitReview = (reviewData) => {
+    this.props.createReview({...reviewData, location_id: this.state.review_location})
+    this.handleClose();
+    let url = `/locations/${this.state.review_location}`;
+    this.props.history.push(url)
+  }
+
   handleSubmit = (reviewData) => {
     this.props.createReview({...reviewData, location_id: this.state.review_location})
     this.handleClose();
@@ -71,20 +78,20 @@ export class LocationList extends Component {
 
       <LocationItem
         location_id={loc.id}
-        handleClick={this.props.handleClick}
         key={index}
         name={loc.nickname}
         country={loc.country}
-        moveMap={this.props.moveMap}
         lon={loc.lon}
         lat={loc.lat}
         primaryText={loc.nickname}
+        nestedItems={loc.reviews}
         initiallyOpen={false}
         primaryTogglesNestedList={true}
         store={this.props.store}
         handleAdd={this.handleAdd}
-        nestedItems={loc.reviews}
+        handleClick={this.props.handleClick}
         handleRequestClose={this.handleRequestClose}
+        moveMap={this.props.moveMap}
         openPopover={this.openPopover}
       />
 

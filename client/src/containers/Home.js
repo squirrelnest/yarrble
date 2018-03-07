@@ -4,7 +4,6 @@ import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
 import { createLocation, deleteLocation } from '../actions/thunks';
-import ReactMapGL from 'react-map-gl';
 
 export class Home extends Component {
 
@@ -23,7 +22,7 @@ export class Home extends Component {
 
   handleClose = () => this.setState({open: false});
 
-  onRequestChange = () => {
+  handleRequestChange = () => {
     this.setState({open: false});
   };
 
@@ -43,6 +42,10 @@ export class Home extends Component {
       lon: lngLat[0],
       lat: lngLat[1],
     })
+  }
+
+  handleSubmit = (locationData) => {
+    this.props.createLocation(locationData);
   }
 
   render() {
@@ -69,9 +72,9 @@ export class Home extends Component {
           height={this.state.height}
           />
         <NewLocationForm
-          handleSubmit={this.props.createLocation}
           open={this.state.open}
-          onRequestChange={this.onRequestChange}
+          handleSubmit={this.handleSubmit}
+          onRequestChange={this.handleRequestChange}
           handleToggle={this.handleToggle}
         />
 
@@ -89,7 +92,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-           createLocation: (formData) => dispatch(createLocation(formData)),
+           createLocation: (locationData) => dispatch(createLocation(locationData)),
            deleteLocation: (location_id) => dispatch(deleteLocation(location_id))
           }
 }
