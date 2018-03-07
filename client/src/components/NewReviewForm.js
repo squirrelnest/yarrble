@@ -164,7 +164,6 @@ export default class NewReviewForm extends Component {
             <DatePicker
               dialogContainerStyle={styles.datepicker}
               hintText="Date Visited"
-              value={this.state.date_visited}
               onChange={this.handleDateChange}
             />
 
