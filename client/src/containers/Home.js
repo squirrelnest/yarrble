@@ -77,7 +77,7 @@ export class Home extends Component {
         <NewLocationForm
           handleSubmit={this.handleSubmit}
           open={this.state.open}
-          onRequestChange={this.onRequestChange}
+          handleRequestChange={this.handleRequestChange}
         />
 
       </div>

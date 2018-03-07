@@ -36,8 +36,7 @@ const initialState = {
   safety: 5,
   date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
   content: '',
-  user_id: 0,
-  fuel: false,
+  user_id: 0
 }
 
 export default class NewLocationForm extends Component {
@@ -59,19 +58,17 @@ export default class NewLocationForm extends Component {
     this.setState({safety: value});
   };
 
+  handleClick(event) {
+    this.setState({
+      open: false,
+    });
+  };
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
-
-  handleCheck(event) {
-    let key = event.target.name
-    this.setState({
-      [key]: !this.state.key
-    });
-    console.log(this.state.fuel)
-  }
 
   handleDateChange = (event, date) => {
     this.setState({
@@ -109,13 +106,6 @@ export default class NewLocationForm extends Component {
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.handleSubmit(this.state);
-    this.props.handleToggle();
-    this.handleClose();
-  }
-
   render() {
     return (
       <div>
@@ -125,7 +115,7 @@ export default class NewLocationForm extends Component {
           width={window.innerWidth*0.5}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={(event) => this.props.onRequestChange()}
+          onRequestChange={(event) => this.props.handleRequestChange()}
           containerClassName="drawer"
         >
 
@@ -140,7 +130,6 @@ export default class NewLocationForm extends Component {
 
               <TextField
                 name="nickname"
-                value={this.state.nickname}
                 hintText="Nickname"
                 floatingLabelText="Nickname"
                 value={this.state.nickname}
@@ -199,7 +188,7 @@ export default class NewLocationForm extends Component {
                 <div className="sliderContainer" name="stability">
                 <div>{'Comfort: '}{this.state.stability}</div>
                 <Slider
-                  name="stability"
+                  value={this.state.stability}
                   onChange={this.handleFirstSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -214,6 +203,7 @@ export default class NewLocationForm extends Component {
                 <div>{'Aesthetics: '}{this.state.aesthetics}</div>
                 <Slider
                   name="aesthetics"
+                  value={this.state.aesthetics}
                   onChange={this.handleSecondSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -228,6 +218,7 @@ export default class NewLocationForm extends Component {
                 <div>{'Safety: '}{this.state.safety}</div>
                 <Slider
                   name="safety"
+                  value={this.state.safety}
                   onChange={this.handleThirdSlider}
                   style={{height: 100}}
                   sliderStyle={{left:'40%'}}
@@ -250,9 +241,6 @@ export default class NewLocationForm extends Component {
 
                   <Checkbox
                     label="Fuel"
-                    name="fuel"
-                    checked={this.state.fuel}
-                    onCheck={this.handleCheck.bind(this)}
                     style={styles.checkbox}
                   />
                   <Checkbox
@@ -302,7 +290,6 @@ export default class NewLocationForm extends Component {
 
               <TextField
                 name="content"
-                value={this.state.content}
                 hintText="Write a Review"
                 floatingLabelText="Write a Review"
                 value={this.state.content}
@@ -325,7 +312,7 @@ export default class NewLocationForm extends Component {
                 secondary={true}
                 fullWidth={false}
                 style={styles.button}
-                onClick={(event) => this.props.handleSubmit(event)}
+                onClick={this.props.handleToggle}
               />
 
             </form>
