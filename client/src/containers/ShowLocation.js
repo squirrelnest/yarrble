@@ -122,7 +122,7 @@ class ShowLocation extends Component {
           <Subheader style={styles.subheader}>
             <div>Reviews</div>
             <div>
-              <span onClick={this.openReviewForm} handleClose={this.handleClose}>
+              <span onClick={this.openReviewForm}>
                 <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
                 Add Review...
               </span>
