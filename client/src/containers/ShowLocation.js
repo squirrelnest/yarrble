@@ -94,18 +94,30 @@ class ShowLocation extends Component {
         <div style={styles.locationDataContainer}>
           <h1>{location.nickname}, {location.country}</h1>
             <table style={styles.table}>
-              <th><Subheader>Latitude</Subheader></th>
-              <th><Subheader>Longitude</Subheader></th>
+              <thead>
+                <tr>
+                  <th><Subheader>Latitude</Subheader></th>
+                  <th><Subheader>Longitude</Subheader></th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td style={styles.tableCell}><h2>{location.lat}</h2></td>
                   <td style={styles.tableCell}><h2>{location.lon}</h2></td>
                 </tr>
-              <th><Subheader>Depth</Subheader></th>
-              <th><Subheader>Bottom</Subheader></th>
+              </tbody>
+              <thead>
+                <tr>
+                  <th><Subheader>Depth</Subheader></th>
+                  <th><Subheader>Bottom</Subheader></th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td style={styles.tableCell}><h2>5.1m</h2></td>
                   <td style={styles.tableCell}><h2>Sand</h2></td>
                 </tr>
+              </tbody>
             </table>
           <Subheader style={styles.subheader}>
             <div>Reviews</div>
