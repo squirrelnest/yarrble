@@ -36,7 +36,15 @@ const initialState = {
   safety: 5,
   date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
   content: '',
-  user_id: 0
+  user_id: 0,
+  fuel: false,
+  water: false,
+  food: false,
+  laundry: false,
+  diving: false,
+  snorkeling: false,
+  paddleboarding: false,
+  surfing: false,
 }
 
 export default class NewLocationForm extends Component {
@@ -44,6 +52,17 @@ export default class NewLocationForm extends Component {
   constructor(props) {
     super(props);
     this.state = initialState
+  }
+
+  handleCheck(event) {
+    let key = event.target.name
+    this.setState((oldState) => {
+      let old = oldState[key]
+      return {
+        [key]: !old,
+      };
+    });
+    console.log(`water: ${this.state.water} food: ${this.state.food}`)
   }
 
   handleFirstSlider = (event, value) => {
@@ -242,14 +261,23 @@ export default class NewLocationForm extends Component {
                   <Checkbox
                     label="Fuel"
                     style={styles.checkbox}
+                    name="fuel"
+                    checked={this.state.fuel}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Fresh Water"
                     style={styles.checkbox}
+                    name="water"
+                    checked={this.state.water}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Food"
                     style={styles.checkbox}
+                    name="food"
+                    checked={this.state.food}
+                    onCheck={this.handleCheck.bind(this)}
                   />
 
                 </div>
@@ -258,14 +286,23 @@ export default class NewLocationForm extends Component {
                   <Checkbox
                     label="Laundry"
                     style={styles.checkbox}
+                    name="laundry"
+                    checked={this.state.laundry}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Snorkeling"
                     style={styles.checkbox}
+                    name="snorkeling"
+                    checked={this.state.snorkeling}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Diving"
                     style={styles.checkbox}
+                    name="diving"
+                    checked={this.state.diving}
+                    onCheck={this.handleCheck.bind(this)}
                   />
 
                 </div>
@@ -274,14 +311,23 @@ export default class NewLocationForm extends Component {
                   <Checkbox
                     label="Surfing"
                     style={styles.checkbox}
+                    name="surfing"
+                    checked={this.state.surfing}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Windsurfing"
                     style={styles.checkbox}
+                    name="windsurfing"
+                    checked={this.state.windsurfing}
+                    onCheck={this.handleCheck.bind(this)}
                   />
                   <Checkbox
                     label="Paddleboarding"
                     style={styles.checkbox}
+                    name="paddleboarding"
+                    checked={this.state.paddleboarding}
+                    onCheck={this.handleCheck.bind(this)}
                   />
 
                 </div>
