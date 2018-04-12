@@ -22,6 +22,8 @@ test:
 
 production:
   <<: *default
-  database: yarrble_production
-  host: <%= ENV.fetch("POSTGRES_HOST") %>
+  database: yarrble
+  host: <%= ENV['POSTGRES_HOST'] %>
+  user: root
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
   port: 5432
