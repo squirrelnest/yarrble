@@ -30,7 +30,7 @@ export function fetchNearbyLocations() {
   let lat = localStorage.getItem('lat');
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch(`http://localhost:3001/locations/nearby/${lon}/${lat}`, {
+    return fetch(`http://yarrble.com:3001/locations/nearby/${lon}/${lat}`, {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {
@@ -69,7 +69,7 @@ export function createLocation(locationData) {
   }
 
   return (dispatch) => {
-    return fetch('http://localhost:3001/locations', {
+    return fetch('http://yarrble.com:3001/locations', {
       method: "POST",
       credentials: 'same-origin',
       headers: {
@@ -92,7 +92,7 @@ export function createLocationSuccess(location) {
 export function deleteLocation(location_id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch(`http://localhost:3001/locations/${location_id}`, {
+    return fetch(`http://yarrble.com:3001/locations/${location_id}`, {
       method: "DELETE",
     })
     .then(response => response.json())
