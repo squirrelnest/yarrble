@@ -10,7 +10,7 @@ export const LOADING_LOCATIONS = 'LOADING_LOCATIONS';
 export function fetchLocations() {
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch('http://localhost:3001/', {
+    return fetch('http://yarrble.com:3001/', {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {
