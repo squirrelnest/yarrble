@@ -7,8 +7,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ['localhost:3000', 'yarrble.com']
-
+    # origins Rails.application.config.x.cors_allowed_origins
+    origins ['localhost:3000', 'yarrble.com:3000', 'yarrble.com']
+    # origins process.env.REACT_APP_FRONTEND_HOST_DEVELOPMENT || 'localhost:3000'
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head]

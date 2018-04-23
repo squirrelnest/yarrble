@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { ADD_LOCATION, REMOVE_LOCATION } from './locationActions';
+import { API_ROOT } from '../api-config';
 
 export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const LOADING_LOCATIONS = 'LOADING_LOCATIONS';
@@ -10,7 +11,7 @@ export const LOADING_LOCATIONS = 'LOADING_LOCATIONS';
 export function fetchLocations() {
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch('//yarrble.com:3001/', {
+    return fetch(`//${API_ROOT}/locations`, {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {
@@ -30,7 +31,7 @@ export function fetchNearbyLocations() {
   let lat = localStorage.getItem('lat');
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch(`//yarrble.com:3001/locations/nearby/${lon}/${lat}`, {
+    return fetch(`//${API_ROOT}/locations/nearby/${lon}/${lat}`, {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {
@@ -69,7 +70,7 @@ export function createLocation(locationData) {
   }
 
   return (dispatch) => {
-    return fetch('//yarrble.com:3001/locations', {
+    return fetch(`//${API_ROOT}/locations`, {
       method: "POST",
       credentials: 'same-origin',
       headers: {
@@ -92,7 +93,7 @@ export function createLocationSuccess(location) {
 export function deleteLocation(location_id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch(`//yarrble.com:3001/locations/${location_id}`, {
+    return fetch(`//${API_ROOT}/locations/${location_id}`, {
       method: "DELETE",
     })
     .then(response => response.json())

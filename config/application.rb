@@ -32,5 +32,9 @@ module Yarrble
 
     # Reenable cookies
     # config.middleware.use ActionDispatch::Cookies
+
+    # Allowed origins as environmental variables
+    # config.x.cors_allowed_origins = ENV['REACT_APP_FRONTEND_HOST_DEVELOPMENT']
+
   end
 end
