@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { login } from '../actions/authActions';
+import { connect } from 'react-redux';
 
 const styles = {
   width: '33%',
@@ -20,7 +22,7 @@ const styles = {
   },
 };
 
-export default class LoginForm extends Component {
+export class LoginForm extends Component {
 
   constructor(props) {
     super(props);
@@ -41,6 +43,11 @@ export default class LoginForm extends Component {
     });
   };
 
+  handleSubmit() {
+    console.log(this.state);
+    this.props.login(this.state);
+  }
+
   render() {
 
     return (
@@ -49,7 +56,7 @@ export default class LoginForm extends Component {
         style={styles}
         onSubmit={ (event) => {
             event.preventDefault();
-            this.props.handleSubmit(this.state);
+            this.handleSubmit(this.state);
           }
         }
       >
@@ -89,7 +96,7 @@ export default class LoginForm extends Component {
           type="submit"
           secondary={true}
           style={styles.button}
-          onClick={this.props.handleToggle}
+          onClick={this.handleClick}
         />
 
       </form>
@@ -97,3 +104,13 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    login: (loginData) => dispatch(login(loginData)),
+  }
+
+}
+
+export default (connect(null, mapDispatchToProps)(LoginForm));

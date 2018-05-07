@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'material-ui/List';
 import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/thunks';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import NewReviewForm from '../components/NewReviewForm';
 import { createReview } from '../actions/reviewActions';
 import { withRouter } from 'react-router-dom';
