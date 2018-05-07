@@ -2,6 +2,8 @@ class ApplicationController < ActionController::API
 
   include ActionController::Helpers
 
+  include Knock::Authenticable
+
   # before_action :current_user
   # helper_method :current_user
   #
