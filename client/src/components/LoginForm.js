@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { login } from '../actions/authActions';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const styles = {
   width: '33%',
@@ -35,21 +36,36 @@ export class LoginForm extends Component {
 
   handleClick(event) {
     console.log('trying to log in')
-  };
+  }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
-  };
+  }
 
   handleSubmit() {
     console.log(this.state);
     this.props.login(this.state);
   }
 
-  render() {
+  errorMessage() {
+    if (this.props.errorMessage) {
+      return (
+        <div style={{ color: '#ff0000', paddingTop: '20px' }}>
+          <p>{this.props.errorMessage}</p>
+        </div>
+      );
+    }
+  }
 
+  renderRedirect = () => {
+    if (this.props.authenticated) {
+      return <Redirect to='/' />
+    }
+  }
+
+  render() {
     return (
 
       <form
@@ -99,9 +115,20 @@ export class LoginForm extends Component {
           onClick={this.handleClick}
         />
 
+        {this.renderRedirect()}
+        {this.errorMessage()}
+
       </form>
 
-    );
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+
+  return {
+    errorMessage: state.auth.error,
+    authenticated: state.auth.authenticated
   }
 }
 
@@ -113,4 +140,4 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 
-export default (connect(null, mapDispatchToProps)(LoginForm));
+export default (connect(mapStateToProps, mapDispatchToProps)(LoginForm));

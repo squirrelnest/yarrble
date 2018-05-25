@@ -38,7 +38,8 @@ export class App extends Component {
 const mapStateToProps = (state) => {
   return {
     locations: state.locations.locations,
-    reviews: state.reviews.reviews
+    reviews: state.reviews.reviews,
+    auth: state.auth
   };
 };
 

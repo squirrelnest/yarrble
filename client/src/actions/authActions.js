@@ -4,23 +4,15 @@ import { API_ROOT } from '../api-config';
 
 /* ACTION TYPES */
 
+export const AUTHENTICATED = 'AUTHENTICATED'
+export const UNAUTHENTICATED = 'UNAUTHENTICATED'
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR'
 export const ADD_USER = 'ADD_USER'
-export const REMOVE_USER = 'REMOVE_USER'
-export const GET_USERS = 'GET_USER'
-export const LOADING_USERS = 'LOADING_USER'
 
 /* ACTION CREATORS */
 
 export function addUser(user) {
   return { type: ADD_USER, user }
-}
-
-export function removeUser(user_id) {
-  return { type: REMOVE_USER, user_id }
-}
-
-export function fetchUsersSuccess(users ) {
-  return { type: GET_USERS, users };
 }
 
 /* ASYNCS */
@@ -47,23 +39,13 @@ export function login(loginData) {
     })
     .then(response => response.json())
     .then(response => localStorage.setItem("jwt", response.jwt))
-  }
-}
-
-export function fetchUsers() {
-  return (dispatch) => {
-    dispatch({ type: 'LOADING_USERS' });
-    return fetch('http://localhost:3001/users', {
-      method: "GET",
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(response => {
-      dispatch(fetchUsersSuccess(response));
+    .then( () => dispatch({ type: AUTHENTICATED }))
+    .catch(function(error) {
+      console.log('Oops! Invalid credentials: \n', error);
+      dispatch({
+        type: AUTHENTICATION_ERROR,
+        payload: "Invalid email or password"
+      });
     })
   }
 }
@@ -95,7 +77,7 @@ export function createUser(userData) {
     })
     .then(response => response.json())
     .then(response => {
-      dispatch(fetchLocationsSuccess(response));
+      dispatch(fetchUsersSuccess(response));
     })
   }
 }
@@ -142,4 +124,8 @@ export function deleteUser(user_id) {
       dispatch(fetchUsersSuccess(response));
     })
   }
+}
+
+export function fetchUsersSuccess() {
+  console.log('fetch successful')
 }
