@@ -50,23 +50,19 @@ export function login(loginData) {
   }
 }
 
-export function createUser(userData) {
+export function register(registrationData) {
 
   const bodyData = {
     user: {
-      location_id: userData.location_id,
-      content: userData.content,
-      stability: userData.stability,
-      aesthetics: userData.aesthetics,
-      safety: userData.safety,
-      date_visited: userData.date_visited,
-      user_id: 1
+      email: registrationData.email,
+      password: registrationData.password,
+      username: registrationData.username
     }
   }
 
   return (dispatch) => {
-    dispatch({ type: 'LOADING_USERS' });
-    return fetch(`http://localhost:3001/locations/${userData.location_id}/users`, {
+    console.log(bodyData)
+    return fetch(`//${API_ROOT}/register`, {
       method: "POST",
       credentials: 'same-origin',
       headers: {
@@ -77,8 +73,9 @@ export function createUser(userData) {
     })
     .then(response => response.json())
     .then(response => {
-      dispatch(fetchUsersSuccess(response));
+      dispatch(addUser(response));
     })
+    .then(console.log('You created a new account'))
   }
 }
 
@@ -126,6 +123,6 @@ export function deleteUser(user_id) {
   }
 }
 
-export function fetchUsersSuccess() {
-  console.log('fetch successful')
+export function fetchUsersSuccess(response) {
+  console.log('fetch successful');
 }

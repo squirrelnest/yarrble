@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { login } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 const styles = {
   width: '33%',
@@ -28,14 +28,14 @@ export class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'test',
-      password: 'test',
-      email: 'test@test.com',
+      username: '',
+      password: '',
+      email: '',
     };
   }
 
   handleClick(event) {
-    console.log('trying to log in')
+    console.log('trying to create new account')
   }
 
   handleChange(event) {
@@ -67,59 +67,62 @@ export class LoginForm extends Component {
 
   render() {
     return (
-
-      <form
-        style={styles}
-        onSubmit={ (event) => {
-            event.preventDefault();
-            this.handleSubmit(this.state);
+      <div style={styles}>
+        <form
+          onSubmit={ (event) => {
+              event.preventDefault();
+              this.handleSubmit(this.state);
+            }
           }
-        }
-      >
+        >
 
-        <TextField
-          name="username"
-          hintText="Username"
-          floatingLabelText="Username"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="username"
+            hintText="username"
+            floatingLabelText="Username"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
+          <br />
 
-        <TextField
-          name="email"
-          hintText="Email"
-          floatingLabelText="Email"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="email"
+            hintText="email"
+            floatingLabelText="Email"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
+          <br />
 
-        <TextField
-          name="password"
-          type="password"
-          hintText="Password"
-          floatingLabelText="Password"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="password"
+            type="password"
+            hintText="Password"
+            floatingLabelText="Password"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
-        <br />
+          <br />
+          <br />
 
-        <RaisedButton
-          className="submitBtn"
-          label="Submit"
-          type="submit"
-          secondary={true}
-          style={styles.button}
-          onClick={this.handleClick}
-        />
+          <RaisedButton
+            className="submitBtn"
+            label="Submit"
+            type="submit"
+            secondary={true}
+            style={styles.button}
+            onClick={this.handleClick}
+          />
 
-        {this.renderRedirect()}
-        {this.errorMessage()}
+          {this.renderRedirect()}
+          {this.errorMessage()}
 
-      </form>
+        </form>
 
+        <Link to='/signup' className='link'>
+          <p>Don't have an account? Sign up!</p>
+        </Link>
+      </div>
     )
   }
 }

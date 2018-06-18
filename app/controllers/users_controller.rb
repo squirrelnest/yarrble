@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user
+  before_action :authenticate_user, only: [:reviews]
 
   # def index
   #   @users = User.all
@@ -13,11 +13,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to '/locations'
+      render json: @user, status: 200
     else
-      flash[:message] = @user.errors.full_messages.join("/n") if @user.errors.any?
-      redirect_to '/users/new'
+      redirect_to '/signup'
     end
   end
 
@@ -29,7 +27,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password)
+    params.require(:user).permit(:email, :username, :password)
   end
 
 end

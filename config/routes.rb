@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :users
   get '/my-reviews' => 'users#reviews'
+  get '/signup' => 'users#new'
+  post '/register' => 'users#create'
 
   # Knock JWT authentication
 
@@ -35,7 +37,6 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  get '/signup' => 'users#new'
   get '/auth/facebook/callback' => 'sessions#fb_auth'
 
 end

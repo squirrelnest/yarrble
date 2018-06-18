@@ -87,3 +87,7 @@ a:hover {
 .show-location {
   margin: 40px;
 }
+
+.link:hover {
+  color: rgb(0, 188, 212);
+}
