@@ -6,8 +6,9 @@ import {
 } from '../actions/authActions'
 
 const initialState = {
-  user: [],
-  registered: false
+  user: {},
+  authenticated: false,
+  newregistration: false
 }
 
 /* Object.assign(target, source object, source object) copies values from one or more source objects to the target object then returns the target object */
@@ -25,7 +26,7 @@ export default function authReducer(state = initialState, action) {
       return { ...state, error: action.payload }
 
     case ADD_USER:
-      return { ...state, user: action.payload, registered: true }
+      return { ...state, user: action.payload, newregistration: true }
 
     default:
       return state

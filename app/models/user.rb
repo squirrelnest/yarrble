@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :username, presence: {message: "cannot be blank"}, allow_blank: false
   validates :username, uniqueness: {message: "must be unique"}
 
+  validates :email, uniqueness: {message: "must be unique"}
+
   has_secure_password
 
 end

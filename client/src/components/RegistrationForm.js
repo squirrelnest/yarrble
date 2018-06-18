@@ -59,7 +59,7 @@ export class RegistrationForm extends Component {
   }
 
   renderRedirect = () => {
-    if (this.props.registered) {
+    if (this.props.newregistration) {
       return <Redirect to='/login' />
     }
   }
@@ -127,7 +127,7 @@ const mapStateToProps = (state) => {
 
   return {
     errorMessage: state.auth.error,
-    registered: state.auth.registered
+    newregistration: state.auth.newregistration
   }
 }
 

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/register' => 'users#create'
 
+  get '/logout' => 'sessions#destroy'
+
   # Knock JWT authentication
 
   post 'user_token' => 'user_token#create'

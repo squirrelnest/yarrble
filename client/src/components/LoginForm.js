@@ -28,7 +28,6 @@ export class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       password: '',
       email: '',
     };
@@ -45,7 +44,6 @@ export class LoginForm extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
     this.props.login(this.state);
   }
 
@@ -68,6 +66,14 @@ export class LoginForm extends Component {
   render() {
     return (
       <div style={styles}>
+
+        { this.props.newregistration == true ?
+        <div>
+          <p>Thanks for signing up, {this.props.username}</p>
+          <p>Now log in to your brand-spanking new account!</p>
+        </div>
+        : null }
+
         <form
           onSubmit={ (event) => {
               event.preventDefault();
@@ -75,15 +81,6 @@ export class LoginForm extends Component {
             }
           }
         >
-
-          <TextField
-            name="username"
-            hintText="username"
-            floatingLabelText="Username"
-            onChange={(event) => this.handleChange(event)}
-          />
-
-          <br />
 
           <TextField
             name="email"
@@ -131,7 +128,9 @@ const mapStateToProps = (state) => {
 
   return {
     errorMessage: state.auth.error,
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    newregistration: state.auth.newregistration,
+    username: state.auth.user.username
   }
 }
 

@@ -7,13 +7,20 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { withRouter } from 'react-router-dom';
+import { logout } from '../actions/authActions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   static muiName = 'FlatButton';
 
+  handleClick = () => {
+    this.props.logout();
+  }
+
   render() {
     return (
-      <FlatButton {...this.props} label="Login" />
+      <Link to="/login"><FlatButton {...this.props} label="Login"/></Link>
     );
   }
 }
@@ -28,7 +35,7 @@ const Logged = (props) => (
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
     <MenuItem primaryText="My Reviews" href="/reviews/myreviews" />
-    <MenuItem primaryText="Sign out" href="/login" />
+    <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
   </IconMenu>
 );
 
@@ -38,11 +45,10 @@ Logged.muiName = 'IconMenu';
 
 class NavBar extends Component {
   state = {
-    logged: true,
+    authenticated: false,
   };
 
   handleChange = (event, logged) => {
-    this.setState({logged: logged});
   };
 
   handleClick = () => {
@@ -56,11 +62,27 @@ class NavBar extends Component {
           title="Yarrble"
           onTitleClick={this.handleClick}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-          iconElementRight={this.state.logged ? <Logged /> : <Login />}
+          iconElementRight={this.props.authenticated ? <Logged /> : <Login />}
         />
 
     );
   }
 }
 
-export default withRouter(NavBar);
+const mapStateToProps = (state) => {
+
+  return {
+    errorMessage: state.auth.error,
+    authenticated: state.auth.authenticated
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    logout: () => dispatch(logout())
+  }
+
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

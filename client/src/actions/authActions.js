@@ -11,8 +11,8 @@ export const ADD_USER = 'ADD_USER'
 
 /* ACTION CREATORS */
 
-export function addUser(user) {
-  return { type: ADD_USER, user }
+export function addUser(payload) {
+  return { type: ADD_USER, payload }
 }
 
 /* ASYNCS */
@@ -21,7 +21,6 @@ export function login(loginData) {
 
   const bodyData = {
     auth: {
-      username: loginData.username,
       email: loginData.email,
       password: loginData.password,
     }
@@ -61,7 +60,6 @@ export function register(registrationData) {
   }
 
   return (dispatch) => {
-    console.log(bodyData)
     return fetch(`//${API_ROOT}/register`, {
       method: "POST",
       credentials: 'same-origin',
@@ -72,11 +70,13 @@ export function register(registrationData) {
       body: JSON.stringify(bodyData),
     })
     .then(response => response.json())
-    .then(response => {
-      dispatch(addUser(response));
-    })
+    .then(response => dispatch(addUser(response)))
     .then(console.log('You created a new account'))
   }
+}
+
+export function logout(dispatch) {
+  dispatch({ type: 'UNAUTHENTICATED' })
 }
 
 export function updateUser(userData) {
