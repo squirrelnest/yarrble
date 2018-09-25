@@ -20,12 +20,12 @@ const styles = {
     width:'50%',
     margin:'0px 20px',
     display:'column',
-    height: window.innerHeight*0.92,
+    height: global.innerHeight*0.92,
     overflow: 'auto',
   },
   image: {
-    height:window.innerHeight*0.92,
-    width:window.innerWidth*0.5
+    height:global.innerHeight*0.92,
+    width:global.innerWidth*0.5
   },
   subheader: {
     marginBottom: '20px',
