@@ -3,6 +3,9 @@ import './css/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
+import { ConnectedRouter } from 'react-router-redux';
+import history from './history';
+
 import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Home from './containers/Home';
@@ -10,6 +13,7 @@ import ShowLocation from './containers/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
 import RegistrationContainer from './containers/RegistrationContainer';
 import { connect } from 'react-redux';
+import Routes from './routes';
 
 export class App extends Component {
 
@@ -17,21 +21,12 @@ export class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <div>
-            <Router>
-              <div>
-                <NavBar />
-                <Switch>
-                  <Route exact path="/" component={ Home } />
-                  <Route path={`/locations/:locationId`} component={ ShowLocation } />
-                  <Route exact path="/reviews/myreviews" render={() => <MyReviews store={this.props.store} />} />
-                  <Route exact path="/login" component={ LoginContainer } />
-                  <Route exact path="/signup" component={ RegistrationContainer } />
-
-                </Switch>
-              </div>
-            </Router>
-          </div>
+          <ConnectedRouter history={history}>
+            <div>
+              <NavBar />
+              <Routes />
+            </div>
+          </ConnectedRouter>
         </MuiThemeProvider>
       </div>
     );

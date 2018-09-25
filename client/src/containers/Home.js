@@ -11,8 +11,8 @@ export class Home extends Component {
     super(props);
     this.state = {
       open: false,
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: global.innerWidth,
+      height: global.innerHeight,
       lon: 12.56737,
       lat: 41.87194, /* Italy */
     };
@@ -55,7 +55,7 @@ export class Home extends Component {
 
     return (
 
-      <div className="row" style={{ height: (window.innerHeight * 0.92) }}>
+      <div className="row" style={{ height: (global.innerHeight * 0.92) }}>
 
         <MapContainer
           locations={this.props.locations}

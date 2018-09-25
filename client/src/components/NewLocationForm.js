@@ -131,7 +131,7 @@ export default class NewLocationForm extends Component {
 
         <Drawer
           docked={false}
-          width={window.innerWidth*0.5}
+          width={500}
           open={this.props.open}
           openSecondary={true}
           onRequestChange={(event) => this.props.handleRequestChange()}

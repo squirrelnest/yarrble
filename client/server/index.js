@@ -2,7 +2,9 @@ import express from 'express'
 import serverRenderer from './middleware/renderer'
 import configureStore from '../src/configureStore'
 
-const PORT = 3000;
+// const configureStore = require('../src/configureStore')
+
+const PORT = 4000;
 const path = require('path');
 
 // initialize the application and create the routes

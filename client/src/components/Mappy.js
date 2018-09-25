@@ -9,16 +9,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGM
 export default class Mappy extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       viewport: {
-        width: window.innerWidth*0.5,
-        height:  window.innerHeight*0.92,
+        width: 500,
+        height: 800,
         latitude: 41.87194, /* Italy */
         longitude: 12.56737,
         zoom: 4
       }
-    };
+    }
   }
 
   render() {

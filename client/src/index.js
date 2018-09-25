@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import './css/index.css';
 import React from 'react';
-import { render, ReactDOM } from 'react-dom';
+import { render, hydrate } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -20,16 +20,16 @@ store.dispatch(fetchLocations())
 /* Provider exposes store so you can pass it through as a prop on context.
    This allows components to subscribe to store updates and dispatch actions */
 
-render (
+// render (
+//   <Provider store={store}>
+//     <WrapperApp store={store} />
+//   </Provider>,
+//   document.getElementById('root')
+// )
+
+hydrate(
     <Provider store={store}>
       <WrapperApp store={store} />
     </Provider>,
     document.getElementById('root')
 )
-
-// ReactDOM.hydrate(
-//     <Provider store={store}>
-//       <WrapperApp store={store} />
-//     </Provider>,
-//     document.getElementById('root')
-// )
