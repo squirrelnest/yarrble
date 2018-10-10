@@ -5,9 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.5.1'
+
 # Enable JWT authentication
 gem 'knock'
-
+# GraphQL
+gem 'graphql', '~> 1.7'
 # Create seed file from previous databases
 gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 # Foreman utility for managing multiple servers (Webpack dev server, Rails API server, etc.)
@@ -30,6 +33,8 @@ gem 'rails', '~> 5.1.5'
 gem 'pg'
 # Use PostGIS adapter for Active Record
 gem 'activerecord-postgis-adapter'
+# Proj4 - transforms geospatial coordinates between coordinate reference systems
+gem "rgeo-proj4"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

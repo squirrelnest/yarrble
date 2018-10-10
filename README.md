@@ -23,13 +23,13 @@ GraphQL
 
 # Deployment instructions
 
-1) Install PostgreSQL and postGIS
-2) Install Ruby 2.3.6
-3) Install Bundler gem
-4) Install gems
-5) Install Node.js
-6) Install npm modules
-7) Clone this repo
+1) Install [PostgreSQL](https://www.postgresql.org/download/) and [postGIS](https://postgis.net/install/)
+2) Install [Ruby 2.5.1](https://www.ruby-lang.org/en/documentation/installation/)
+3) Install Bundler gem: `gem install bundler`
+4) Install gems: `bundle install`
+5) Install [Node.js](https://nodejs.org/en/download/)
+6) Install npm modules: `npm install`
+7) Git clone this repo
 8) Run `rake start` (starts both frontend and backend servers)
 
 # Contributions

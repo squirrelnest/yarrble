@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  ################## GRAPHQL ROUTES - reads only ##################
+
+  post "/graphql", to: "graphql#execute"
+
+  ################## ~RESTFUL ROUTES - reads and writes ##################
+
   root 'locations#index'
 
   # resources :locations & :reviews
