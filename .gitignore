@@ -21,6 +21,10 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore build artifacts
+node_modules
+/node_modules
+
 .byebug_history
 
 # Ignore encrypted secrets key file.

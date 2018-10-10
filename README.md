@@ -1,6 +1,6 @@
 # README
 
-Yarrble is a web (and soon mobile) app that enables sailors to find anchorages and share reviews. It's like Yelp for anchorages.
+Yarrble is a web (and soon mobile) app that enables recreational sailors to find and share information (coordinates, photos, reviews, sea state data) about anchorages (ports, marinas, as well as undeveloped harbors or bays) around the world. It's like Yelp for anchorages, except the user reviews are akin to the ACE reports.
 
 # Demo
 
@@ -8,8 +8,8 @@ https://www.youtube.com/watch?v=U5X_Ggbzc9I
 
 # Configuration
 
-Frontend: React and Redux ([recently refactored away from jQuery](https://medium.com/@mikkanthrope/migrating-to-react-5536447f5b67))
-Backend: Ruby 2.3.6, Rails 5, Postgres, PostGIS
+Frontend: React and Redux ([refactored out of jQuery](https://medium.com/@mikkanthrope/migrating-to-react-5536447f5b67))
+Backend: Ruby 2.3.6, Rails 5, Postgres, PostGIS, GraphQL
 Infrastructure: AWS (EC2, RDS), Packer AMI
 
 # System dependencies
@@ -17,6 +17,9 @@ Infrastructure: AWS (EC2, RDS), Packer AMI
 Mapbox API
 rack-cors
 activerecord
+React
+Redux
+GraphQL
 
 # Deployment instructions
 
