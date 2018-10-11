@@ -11,25 +11,25 @@ import { fetchLocations } from './actions/thunks';
 import './functions/currentPosition';
 import configureStore from './configureStore';
 
-// let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
+let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
-const store = configureStore();
+// const store = configureStore();
 
 store.dispatch(fetchLocations())
 
 /* Provider exposes store so you can pass it through as a prop on context.
    This allows components to subscribe to store updates and dispatch actions */
 
-// render (
-//   <Provider store={store}>
-//     <WrapperApp store={store} />
-//   </Provider>,
-//   document.getElementById('root')
-// )
-
-hydrate(
-    <Provider store={store}>
-      <WrapperApp store={store} />
-    </Provider>,
-    document.getElementById('root')
+render (
+  <Provider store={store}>
+    <WrapperApp store={store} />
+  </Provider>,
+  document.getElementById('root')
 )
+
+// hydrate(
+//     <Provider store={store}>
+//       <WrapperApp store={store} />
+//     </Provider>,
+//     document.getElementById('root')
+// )

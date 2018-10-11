@@ -21,12 +21,18 @@ export class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <ConnectedRouter history={history}>
+          <Router history={history}>
             <div>
               <NavBar />
-              <Routes />
+              <Switch>
+                <Route exact path="/" component={ Home } />
+                <Route path={`/locations/:locationId`} component={ ShowLocation } />
+                <Route exact path="/reviews/myreviews" component={ MyReviews } />} />
+                <Route exact path="/login" component={ LoginContainer } />
+                <Route exact path="/signup" component={ RegistrationContainer } />
+              </Switch>
             </div>
-          </ConnectedRouter>
+          </Router>
         </MuiThemeProvider>
       </div>
     );

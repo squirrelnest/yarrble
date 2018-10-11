@@ -18,7 +18,7 @@ export default function reviewReducer(state = initialState, action) {
       return { reviews: [] }
 
     case GET_REVIEWS:
-      return { reviews: action.reviews }
+      return { reviews: action.payload.data.reviews }
 
     case ADD_REVIEW:
       const review = Object.assign({}, action.review)

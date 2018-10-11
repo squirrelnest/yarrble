@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ################## GRAPHQL ROUTES - reads only ##################
 
-  post "/graphql", to: "graphql#execute"
+  post '/graphql', to: 'graphql#execute'
 
   ################## ~RESTFUL ROUTES - reads and writes ##################
 

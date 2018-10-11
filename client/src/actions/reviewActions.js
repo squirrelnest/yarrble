@@ -5,7 +5,7 @@ import { fetchLocationsSuccess } from './thunks';
 
 export const ADD_REVIEW = 'ADD_REVIEW'
 export const REMOVE_REVIEW = 'REMOVE_REVIEW'
-export const GET_REVIEWS = 'GET_REVIEW'
+export const GET_REVIEWS = 'GET_REVIEWS'
 export const LOADING_REVIEWS = 'LOADING_REVIEW'
 
 /* ACTION CREATORS */
@@ -18,22 +18,44 @@ export function removeReview(review_id) {
   return { type: REMOVE_REVIEW, review_id }
 }
 
-export function fetchReviewsSuccess(reviews ) {
-  return { type: GET_REVIEWS, reviews };
+export function fetchReviewsSuccess(reviews) {
+  return { type: GET_REVIEWS, payload: reviews };
 }
 
 /* ASYNCS */
 
+// export function fetchReviews() {
+//   return (dispatch) => {
+//     dispatch({ type: 'LOADING_REVIEWS' });
+//     return fetch('http://localhost:3001/reviews', {
+//       method: "GET",
+//       credentials: 'same-origin',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//       }
+//     })
+//     .then(response => response.json())
+//     .then(response => {
+//       dispatch(fetchReviewsSuccess(response));
+//     })
+//   }
+// }
+
 export function fetchReviews() {
+
+  const bodyData = { "query" : "{ reviews { id content updatedAt safety aesthetics amenities location { nickname } } }" }
+
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch('http://localhost:3001/reviews', {
-      method: "GET",
+    return fetch('http://localhost:3001/graphql', {
+      method: "POST",
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify(bodyData),
     })
     .then(response => response.json())
     .then(response => {

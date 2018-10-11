@@ -20,7 +20,8 @@ class UsersController < ApplicationController
   end
 
   def reviews
-    @reviews = @user.reviews
+    @reviews = Review.all
+    # @reviews = @user.reviews
     render json: @reviews, status: 200
   end
 

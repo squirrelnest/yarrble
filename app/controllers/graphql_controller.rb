@@ -1,4 +1,5 @@
 class GraphqlController < ApplicationController
+
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
@@ -40,4 +41,5 @@ class GraphqlController < ApplicationController
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
   end
+
 end

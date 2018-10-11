@@ -23,9 +23,9 @@ const styles = {
 };
 
 function latest_updated(current, next) {
-  if (current.updated_at > next.updated_at) {
+  if (current.updatedAt > next.updatedAt) {
     return -1;
-  } else if (current.updated_at < next.updated_at) {
+  } else if (current.updatedAt < next.updatedAt) {
     return 1;
   } else {
     return 0;
