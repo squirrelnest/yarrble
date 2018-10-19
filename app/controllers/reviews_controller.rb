@@ -1,13 +1,16 @@
 class ReviewsController < ApplicationController
 
   def index
-    if params[:location_id]
-      @reviews = Location.find_by(id: params[:location_id]).reviews
-      render json: @reviews, status: 200
-    else
-      @reviews = Review.all
-      render json: @reviews, status: 200
-    end
+
+    # @reviews = Review.all
+    # @location_ids = @reviews.pluck(:location_id)
+    # @locations = Review.where(:location_id.in?(@location_ids))
+
+    @reviews = Review.includes(:location).all
+
+    # @reviews = Review.eager_load(:locations).all
+
+    render json: @reviews, status: 200
   end
 
   def new

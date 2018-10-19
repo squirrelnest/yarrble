@@ -26,7 +26,8 @@ class LocationsController < ApplicationController
 
   def index
     @location = Location.new
-    @locations = Location.all
+    # @locations = Location.all
+    @locations = Location.eager_load(:reviews).all
     render json: @locations, status: 200
   end
 
@@ -68,7 +69,7 @@ class LocationsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # deletes current object record and associated children from DB
     @locations = Location.all
     # if current_user.admin
       Location.find(params[:id]).destroy
@@ -84,7 +85,7 @@ class LocationsController < ApplicationController
     @current_lon = params[:lon].to_f
     @current_lat = params[:lat].to_f
     distance = 10000  # meters
-    @locations = Location.nearby(@current_lat, @current_lon, distance)
+    @locations = Location.nearby(@current_lat, @current_lon, distance).eager_load(:reviews).all
     render json: @locations, status: 200
   end
 

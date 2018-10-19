@@ -20,8 +20,11 @@ class UsersController < ApplicationController
   end
 
   def reviews
-    @reviews = Review.all
-    # @reviews = @user.reviews
+    # @reviews = Review.all
+    @reviews = @user.reviews
+    # @reviews      = Review.all
+    # @location_ids = reviews.pluck(:location_id)
+    # @locations    = Review.where(:_id.in => location_ids)
     render json: @reviews, status: 200
   end
 

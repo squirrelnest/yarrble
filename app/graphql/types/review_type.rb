@@ -20,6 +20,7 @@ module Types
     field :updatedAt, GraphQL::Types::ISO8601DateTime, null: false
     field :locationId, ID, null: false
     field :userId, ID, null: false
+    field :stability, Integer, null:false
     field :safety, Integer, null: true
     field :aesthetics, Integer, null: true
     field :amenities, Integer, null: true

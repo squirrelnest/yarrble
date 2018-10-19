@@ -44,7 +44,7 @@ export function fetchReviewsSuccess(reviews) {
 
 export function fetchReviews() {
 
-  const bodyData = { "query" : "{ reviews { id content updatedAt safety aesthetics amenities location { nickname } } }" }
+  const bodyData = { "query" : "{ reviews { id content updatedAt stability safety aesthetics amenities location { nickname } } }" }
 
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
