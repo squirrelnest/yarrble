@@ -18,7 +18,6 @@ export default function reviewReducer(state = initialState, action) {
       return { chats: action.payload }
 
     case ADD_CHAT:
-      const chat = action.payload
       return { chats: action.payload }
 
     case CHANGE_MESSAGE:

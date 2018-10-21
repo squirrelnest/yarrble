@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import { fetchReviews } from '../actions/reviewActions';
 import {
   Table,
@@ -79,12 +79,6 @@ export class MyReviews extends Component {
         aesthetics={review.aesthetics}
         safety={review.safety}
       />
-    )
-
-    const chats = this.state.chats.map( (chat) => {
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>{chat}</div>
-      )}
     )
 
     return (

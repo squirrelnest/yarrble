@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {
   getChats,
   addChat,
@@ -9,19 +9,6 @@ import {
 } from '../actions/chatActions'
 import ChatItem from '../components/ChatItem'
 import { connect } from 'react-redux'
-
-function writeMessage(nextState) {
-  return {
-    message: nextState.message
-  }
-}
-
-function addMessage(nextState) {
-  return {
-    message: nextState.message,
-    chats: [this.state.chats,...nextState.message]
-  }
-}
 
 function by_id(current, next) {
   if (current.id > next.id) {
@@ -56,7 +43,7 @@ export class Chatterbox extends Component {
   }
 
   handleKeypress = (event) => {
-    if (event.key == 'Enter') {
+    if (event.key === 'Enter') {
       this.submit(event)
     }
   }
