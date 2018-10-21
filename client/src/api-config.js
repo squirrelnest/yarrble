@@ -15,3 +15,5 @@ if (hostname === 'yarrble.com') {
 // }
 
 export const API_ROOT = `${backendHost}`
+
+// export const API_ROOT = `/`

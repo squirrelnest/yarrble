@@ -1,15 +1,7 @@
 class ReviewsController < ApplicationController
 
   def index
-
-    # @reviews = Review.all
-    # @location_ids = @reviews.pluck(:location_id)
-    # @locations = Review.where(:location_id.in?(@location_ids))
-
     @reviews = Review.includes(:location).all
-
-    # @reviews = Review.eager_load(:locations).all
-
     render json: @reviews, status: 200
   end
 

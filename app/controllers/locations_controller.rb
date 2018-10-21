@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
   end
 
   def index
-    @location = Location.new
+    # @location = Location.new
     # @locations = Location.all
     @locations = Location.eager_load(:reviews).all
     render json: @locations, status: 200

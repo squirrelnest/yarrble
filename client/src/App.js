@@ -6,6 +6,7 @@ import { Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import history from './history';
 
+import Chatterbox from './containers/Chatterbox';
 import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Home from './containers/Home';
@@ -26,6 +27,9 @@ export class App extends Component {
               <NavBar />
               <Switch>
                 <Route exact path="/" component={ Home } />
+
+                <Route exact path="/chat" component={ Chatterbox } />
+
                 <Route path={`/locations/:locationId`} component={ ShowLocation } />
                 <Route exact path="/reviews/myreviews" component={ MyReviews } />} />
                 <Route exact path="/login" component={ LoginContainer } />

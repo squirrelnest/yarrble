@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { fetchReviews } from '../actions/reviewActions';
 import {
   Table,
@@ -46,7 +46,9 @@ export class MyReviews extends Component {
       enableSelectAll: true,
       deselectOnClickaway: true,
       showCheckboxes: false,
-      height: 'window.innerHeight*0.75'
+      height: 'window.innerHeight*0.75',
+      chats: [],
+      message: 'yo'
     };
   }
 
@@ -79,6 +81,12 @@ export class MyReviews extends Component {
       />
     )
 
+    const chats = this.state.chats.map( (chat) => {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>{chat}</div>
+      )}
+    )
+
     return (
 
         <Table
@@ -109,6 +117,7 @@ export class MyReviews extends Component {
               <TableHeaderColumn tooltip="delete or edit a review"></TableHeaderColumn>
             </TableRow>
           </TableHeader>
+
           <TableBody
             displayRowCheckbox={this.state.showCheckboxes}
             deselectOnClickaway={this.state.deselectOnClickaway}
@@ -120,8 +129,7 @@ export class MyReviews extends Component {
 
           </TableBody>
         </Table>
-
-    );
+    )
   }
 }
 

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   post '/graphql', to: 'graphql#execute'
 
+  get '/chat', to: 'chats#index'
+  post '/chat', to: 'chats#create'
+  delete '/chat/clear' => 'chats#destroy'
+
   ################## ~RESTFUL ROUTES - reads and writes ##################
 
   root 'locations#index'
