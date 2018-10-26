@@ -20,6 +20,8 @@ function by_id(current, next) {
   }
 }
 
+var socket = new WebSocket('ws://localhost:3000/chat')
+
 export class Chatterbox extends Component {
 
   constructor(props) {
@@ -32,6 +34,27 @@ export class Chatterbox extends Component {
 
   componentDidMount() {
     this.props.getChats()
+
+    var socket = new WebSocket('ws://localhost:3000/cable')
+
+    socket.onopen = (event) => {
+      this.props.postChat('Connected to' + event.currentTarget.url)
+    }
+
+    socket.onerror = (error) => {
+      alert("WebSocket Error:" + error)
+    }
+
+    socket.onmessage = (event) => {
+      this.props.getChats()
+    }
+  }
+  
+  componentWillUnmount() {
+    socket.close()
+    socket.onclose = (event) => {
+      alert("Disconnected from WebSocket")
+    }
   }
 
   handleChange = (event) => {
@@ -52,6 +75,7 @@ export class Chatterbox extends Component {
     event.stopPropagation()
     event.preventDefault()
     this.props.postChat(this.state.message)
+    socket.send(this.state.message)
     this.reset()
   }
 

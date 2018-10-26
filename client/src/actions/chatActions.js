@@ -1,5 +1,4 @@
-import fetch from 'isomorphic-fetch';
-import { API_ROOT } from '../api-config';
+import fetch from 'isomorphic-fetch'
 
 /* ACTION TYPES */
 
