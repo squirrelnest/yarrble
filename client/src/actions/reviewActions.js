@@ -25,14 +25,16 @@ export function fetchReviewsSuccess(reviews ) {
 /* ASYNCS */
 
 export function fetchReviews() {
+  let token = "Bearer " + localStorage.getItem("jwt")
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch('http://localhost:3001/reviews', {
+    return fetch('http://localhost:3001/myreviews', {
       method: "GET",
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token
       }
     })
     .then(response => response.json())

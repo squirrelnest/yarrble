@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # resources :users
 
   resources :users
-  get '/my-reviews' => 'users#reviews'
+  get '/myreviews' => 'users#reviews'
   get '/signup' => 'users#new'
   post '/register' => 'users#create'
 

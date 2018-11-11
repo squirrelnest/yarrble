@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   #   @users = User.all
   # end
 
+  def show
+   render json: current_user.as_json(only: %i(id email))
+  end
+
   def new
     @user = User.new
   end
@@ -20,7 +24,9 @@ class UsersController < ApplicationController
   end
 
   def reviews
+    @user = User.find_by(id: current_user.id)
     @reviews = @user.reviews
+    # @reviews = Review.all
     render json: @reviews, status: 200
   end
 
