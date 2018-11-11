@@ -18,14 +18,12 @@ export function addUser(payload) {
 /* ASYNCS */
 
 export function login(loginData) {
-
   const bodyData = {
     auth: {
       email: loginData.email,
       password: loginData.password,
     }
   }
-
   return (dispatch) => {
     return fetch(`//${API_ROOT}/user_token`, {
       method: 'POST',
@@ -49,8 +47,13 @@ export function login(loginData) {
   }
 }
 
-export function register(registrationData) {
+export function refreshAuth() {
+  if (window.localStorage.jwt) {
+    return (dispatch) => { dispatch({ type: AUTHENTICATED }) }
+  } 
+}
 
+export function register(registrationData) {
   const bodyData = {
     user: {
       email: registrationData.email,
@@ -58,7 +61,6 @@ export function register(registrationData) {
       username: registrationData.username
     }
   }
-
   return (dispatch) => {
     return fetch(`//${API_ROOT}/register`, {
       method: "POST",
@@ -76,11 +78,11 @@ export function register(registrationData) {
 }
 
 export function logout(dispatch) {
+  window.localStorage.clear()
   dispatch({ type: 'UNAUTHENTICATED' })
 }
 
 export function updateUser(userData) {
-
   const bodyData = {
     user: {
       id: userData.user_id,
@@ -91,7 +93,6 @@ export function updateUser(userData) {
       user_id: 1
     }
   }
-
   return (dispatch) => {
     dispatch({ type: 'LOADING_USERS' });
     return fetch(`http://localhost:3001/users/${userData.user_id}`, {

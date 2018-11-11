@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../actions/authActions';
+import { logout, refreshAuth } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -15,45 +15,62 @@ class Login extends Component {
   static muiName = 'FlatButton';
 
   handleClick = () => {
-    this.props.logout();
+    this.props.logout()
   }
 
   render() {
     return (
       <Link to="/login"><FlatButton {...this.props} label="Login"/></Link>
-    );
+    )
   }
 }
 
-const Logged = (props) => (
-  <IconMenu
-    {...props}
-    iconButtonElement={
-      <IconButton><MoreVertIcon /></IconButton>
+class Logged extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
     }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-  >
-    <MenuItem primaryText="My Reviews" href="/reviews/myreviews" />
-    <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
-  </IconMenu>
-);
+  }
+
+  handleClick = () => {
+    window.localStorage.clear()
+    this.props.logout()
+  }
+
+  render() {
+    return (
+      <IconMenu
+        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem primaryText="My Reviews" href="/myreviews" />
+        <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
+      </IconMenu>
+    )
+  }
+}
 
 Logged.muiName = 'IconMenu';
 
 /* Taking advantage of the composability of the `AppBar` to render different components depending on application state. */
 
 class NavBar extends Component {
-  state = {
-    authenticated: false,
-  };
 
-  handleChange = (event, logged) => {
-  };
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (window.localStorage.jwt) {
+      this.props.refreshAuth()
+    }
+  }
 
   handleClick = () => {
-    this.props.history.push('/');
-}
+    this.props.history.push('/')
+  }
 
   render() {
     return (
@@ -65,7 +82,7 @@ class NavBar extends Component {
           iconElementRight={this.props.authenticated ? <Logged /> : <Login />}
         />
 
-    );
+    )
   }
 }
 
@@ -80,7 +97,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    refreshAuth: () => dispatch(refreshAuth())
   }
 
 }

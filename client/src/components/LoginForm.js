@@ -33,10 +33,6 @@ export class LoginForm extends Component {
     };
   }
 
-  handleClick(event) {
-    console.log('trying to create new account')
-  }
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -108,7 +104,6 @@ export class LoginForm extends Component {
             type="submit"
             secondary={true}
             style={styles.button}
-            onClick={this.handleClick}
           />
 
           {this.renderRedirect()}
