@@ -9,8 +9,8 @@ export default class MapContainer extends Component {
       <div className="map-container">
 
         <Mappy
-          width={this.props.width}
-          height={this.props.height}
+          width={window.innerWidth < 700 ? this.props.width : this.props.width*0.5}
+          height={window.innerWidth < 700 ? this.props.height*0.5 : this.props.height*0.92}
           locations={this.props.locations}
           lon={this.props.lon}
           lat={this.props.lat}

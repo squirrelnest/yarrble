@@ -14,7 +14,7 @@ export default class Mappy extends Component {
       viewport: {
         latitude: 41.87194, /* Italy */
         longitude: 12.56737,
-        zoom: 4
+        zoom: 1
       }
     };
   }
@@ -45,8 +45,8 @@ export default class Mappy extends Component {
 
         <ReactMapGL
           {...this.state.viewport}
-          width={this.props.width*0.5}
-          height={this.props.height*0.92}
+          width={this.props.width}
+          height={this.props.height}
           latitude={this.props.lat ? this.props.lat : 45}
           longitude={this.props.lon ? this.props.lon : 37}
           onViewportChange={(viewport) => this.setState({ viewport })}
