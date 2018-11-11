@@ -18,6 +18,14 @@ export class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.resizeMap)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeMap)
+  }
+
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
@@ -25,6 +33,13 @@ export class Home extends Component {
   handleRequestChange = () => {
     this.setState({open: false});
   };
+
+  resizeMap = () => {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    })
+  }
 
   moveMap = (event, lon, lat) => {
     event.preventDefault();
