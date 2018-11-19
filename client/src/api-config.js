@@ -7,8 +7,8 @@ if(hostname === 'yarrble.com') {
 } else if(hostname === 'localhost') {
   backendHost = 'localhost:3001';
 }
-// else {
-//   backendHost = process.env.REACT_APP_API_HOST_DEVELOPMENT;
-// }
+else {
+  backendHost = process.env.REACT_APP_API_HOST_DEVELOPMENT;
+}
 
 export const API_ROOT = `${backendHost}`;

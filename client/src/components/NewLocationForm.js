@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 import DatePicker from 'material-ui/DatePicker';
+import { API_ROOT } from '../api-config';
 
 const styles = {
   root: {
@@ -101,7 +102,7 @@ export default class NewLocationForm extends Component {
       longitude: localStorage.getItem('lon'),
       latitude: localStorage.getItem('lat'),
     })
-    fetch(`http://localhost:3001/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
+    fetch(`http://${API_ROOT}/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {
