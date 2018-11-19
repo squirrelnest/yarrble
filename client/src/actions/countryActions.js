@@ -4,7 +4,7 @@ import { API_ROOT } from '../api-config';
 export function fetchCountries() {
   return (dispatch) => {
     dispatch({ type: 'LOADING_COUNTRIES' });
-    return fetch(`http://${API_ROOT}/geojson`)
+    return fetch(`//${API_ROOT}/geojson`)
       .then(response => response.json())
       .then(responseJSON => {
         dispatch({

@@ -102,7 +102,7 @@ export default class NewLocationForm extends Component {
       longitude: localStorage.getItem('lon'),
       latitude: localStorage.getItem('lat'),
     })
-    fetch(`http://${API_ROOT}/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
+    fetch(`//${API_ROOT}/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
       method: "GET",
       credentials: 'omit',  /* other options: include, same-origin */
       headers: {

@@ -95,7 +95,7 @@ export function updateUser(userData) {
   }
   return (dispatch) => {
     dispatch({ type: 'LOADING_USERS' });
-    return fetch(`http://${API_ROOT}/users/${userData.user_id}`, {
+    return fetch(`//${API_ROOT}/users/${userData.user_id}`, {
       method: "PATCH",
       credentials: 'same-origin',
       headers: {
@@ -114,7 +114,7 @@ export function updateUser(userData) {
 export function deleteUser(user_id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING_USERS' });
-    return fetch(`http://${API_ROOT}:3001/users/${user_id}`, {
+    return fetch(`//${API_ROOT}:3001/users/${user_id}`, {
       method: "DELETE",
     })
     .then(response => response.json())

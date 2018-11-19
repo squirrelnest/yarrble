@@ -29,7 +29,7 @@ export function fetchReviews() {
   let token = "Bearer " + localStorage.getItem("jwt")
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch(`http://${API_ROOT}/myreviews`, {
+    return fetch(`//${API_ROOT}/myreviews`, {
       method: "GET",
       credentials: 'same-origin',
       headers: {
@@ -48,7 +48,7 @@ export function fetchReviews() {
 export function deleteReview(review_id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch(`http://${API_ROOT}/reviews/${review_id}`, {
+    return fetch(`//${API_ROOT}/reviews/${review_id}`, {
       method: "DELETE",
     })
     .then(response => response.json())
@@ -74,7 +74,7 @@ export function createReview(reviewData) {
 
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch(`http://${API_ROOT}/locations/${reviewData.location_id}/reviews`, {
+    return fetch(`//${API_ROOT}/locations/${reviewData.location_id}/reviews`, {
       method: "POST",
       credentials: 'same-origin',
       headers: {
@@ -105,7 +105,7 @@ export function updateReview(reviewData) {
 
   return (dispatch) => {
     dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch(`http://${API_ROOT}/reviews/${reviewData.review_id}`, {
+    return fetch(`//${API_ROOT}/reviews/${reviewData.review_id}`, {
       method: "PATCH",
       credentials: 'same-origin',
       headers: {
