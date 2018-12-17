@@ -3,7 +3,7 @@ import MapContainer from './MapContainer';
 import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
-import { createLocation, deleteLocation } from '../actions/thunks';
+import { createLocation, deleteLocation } from '../actions/locationActions';
 
 export class Home extends Component {
 

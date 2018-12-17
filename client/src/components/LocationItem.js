@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ListItem } from 'material-ui/List';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import { deleteLocation } from '../actions/thunks';
+import { deleteLocation } from '../actions/locationActions';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import { Link } from 'react-router-dom';

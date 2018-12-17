@@ -25,3 +25,7 @@
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
+
+# Ignore node modules
+node_modules
+/node_modules

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import yomama from './reducers/index';
 import WrapperApp from './App';
-import { fetchLocations } from './actions/thunks';
+import { fetchLocations } from './actions/locationActions';
 import './functions/currentPosition';
 
 let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));

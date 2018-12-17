@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import { fetchNearbyLocations } from '../actions/thunks';
+import { fetchNearbyLocations } from '../actions/locationActions';
 import { connect } from 'react-redux';
 
 export class Nearby extends Component {

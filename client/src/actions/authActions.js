@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { fetchLocationsSuccess } from './thunks';
+import { fetchLocationsSuccess } from './locationActions';
 import { API_ROOT } from '../api-config';
 
 /* ACTION TYPES */

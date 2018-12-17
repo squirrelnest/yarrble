@@ -1,12 +1,9 @@
 import {
-  ADD_LOCATION,
-  REMOVE_LOCATION,
-} from '../actions/locationActions';
-
-import {
   GET_LOCATIONS,
-  LOADING_LOCATIONS
-} from '../actions/thunks';
+  LOADING_LOCATIONS,
+  ADD_LOCATION,
+  REMOVE_LOCATION
+} from '../actions/locationActions';
 
 const initialState = {
   locations: []
