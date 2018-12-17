@@ -63,7 +63,6 @@ export default class NewLocationForm extends Component {
         [key]: !old,
       };
     });
-    console.log(`water: ${this.state.water} food: ${this.state.food}`)
   }
 
   handleFirstSlider = (event, value) => {
@@ -196,6 +195,7 @@ export default class NewLocationForm extends Component {
                 label="Use current location"
                 primary={true}
                 style={styles.button}
+                disabled={!this.props.isOnline}
                 onClick={(event) => this.getPosition(event)}
               />
 

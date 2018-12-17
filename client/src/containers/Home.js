@@ -15,15 +15,19 @@ export class Home extends Component {
       height: window.innerHeight,
       lon: 12.56737,
       lat: 41.87194, /* Italy */
+      isOnline: false
     };
   }
 
   componentDidMount() {
+    if (window.navigator.onLine) {this.isOnline()}
     window.addEventListener('resize', this.resizeMap)
+    window.addEventListener('online', () => {this.isOnline()} )
+    window.addEventListener('offline', () => {this.isOffline()} )
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeMap)
+    window.removeEventListener('resize', this.resizeMap);
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -33,6 +37,20 @@ export class Home extends Component {
   handleRequestChange = () => {
     this.setState({open: false});
   };
+
+  isOnline = () => {
+    this.setState({
+      isOnline: true
+    })
+    console.log('online')
+  }
+
+  isOffline = () => {
+    this.setState({
+      isOnline: false
+    })
+    console.log('offline')
+  }
 
   resizeMap = () => {
     this.setState({
@@ -93,6 +111,7 @@ export class Home extends Component {
           handleSubmit={this.handleSubmit}
           open={this.state.open}
           handleRequestChange={this.handleRequestChange}
+          isOnline={this.state.isOnline}
         />
 
       </div>
