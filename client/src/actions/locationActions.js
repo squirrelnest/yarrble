@@ -24,7 +24,7 @@ export function storeOfflineData(data) {
   let drafts = JSON.parse(localStorage.getItem('drafts'))
   // check for existing drafts
   if (!drafts) {
-  // store draft
+  // store first draft
     let newDraft = { draft_1: data }
     localStorage.setItem('drafts', JSON.stringify([newDraft]))
   } else {
