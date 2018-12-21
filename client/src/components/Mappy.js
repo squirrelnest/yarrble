@@ -21,15 +21,15 @@ export default class Mappy extends Component {
 
   render() {
 
-    const markers = this.props.locations.map((location) => (
+    const markers = this.props.locations.map((loc) => (
       <Link
-        to={`/locations/${location.id}`}
-        key={location.id}>
+        to={ `/locations/${loc.id}` }
+        key={ loc.id }>
         <Marker
-          latitude={location.lat}
-          longitude={location.lon}
-          location_id={location.id}
-          key={location.id}
+          latitude={loc.lat}
+          longitude={loc.lon}
+          location_id={loc.id}
+          key={loc.id}
         >
           <Place
             hoverColor={'#E91E63'}

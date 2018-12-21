@@ -27,12 +27,6 @@ class Login extends Component {
 
 class Logged extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
-
   handleClick = () => {
     window.localStorage.clear()
     this.props.logout()
@@ -57,10 +51,6 @@ Logged.muiName = 'IconMenu';
 /* Taking advantage of the composability of the `AppBar` to render different components depending on application state. */
 
 class NavBar extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     if (window.localStorage.jwt) {

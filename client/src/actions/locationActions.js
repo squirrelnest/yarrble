@@ -36,15 +36,31 @@ export function storeOfflineData(data) {
   }
 }
 
-export function postOfflineData() {
+export function postOfflineData(dispatch) {
 
-  const drafts = JSON.parse(localStorage.getItem('drafts'))
+  return (dispatch) => {
+    if (localStorage.getItem('drafts')) {
+      const drafts = JSON.parse(localStorage.getItem('drafts'))
+      drafts.forEach( (draft, index) => {
 
-  drafts.forEach( (draft, index) => createLocation( draft[`draft_${index}`] ) )
+        return fetch(`//${API_ROOT}/locations`, {
+          method: "POST",
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(draft[`draft_${index + 1}`].location)
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+          dispatch(createLocationSuccess(responseJSON));
+        })
+      })
+      // localStorage.removeItem('drafts');
+    }
+  }
 
-  // return () => {
-  //   createLocation(draft)
-  // }
 }
 
 /* API CALLS */
@@ -95,7 +111,7 @@ export function fetchLocationsSuccess(payload) {
 }
 
 export function createLocation(locationData) {
-
+  console.log(locationData)
   const bodyData = {
     location: {
       nickname: locationData.nickname,
@@ -125,9 +141,7 @@ export function createLocation(locationData) {
         body: JSON.stringify(bodyData)
       })
       .then(response => response.json())
-      .then(response => {
-        dispatch(createLocationSuccess(response));
-      })
+      .then(response => dispatch(createLocationSuccess(response)))
     }
   } else {
     return () => {

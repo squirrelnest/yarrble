@@ -3,7 +3,7 @@ import MapContainer from './MapContainer';
 import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
-import { createLocation, deleteLocation } from '../actions/locationActions';
+import { createLocation, deleteLocation, postOfflineData } from '../actions/locationActions';
 
 export class Home extends Component {
 
@@ -20,14 +20,16 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    if (window.navigator.onLine) {this.isOnline()}
+    if (window.navigator.onLine) { this.isOnline() }
     window.addEventListener('resize', this.resizeMap)
     window.addEventListener('online', () => {this.isOnline()} )
     window.addEventListener('offline', () => {this.isOffline()} )
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeMap);
+    window.removeEventListener('resize', this.resizeMap)
+    window.removeEventListener('online', () => {this.isOnline()} )
+    window.removeEventListener('offline', () => {this.isOffline()} )
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -42,6 +44,7 @@ export class Home extends Component {
     this.setState({
       isOnline: true
     })
+    this.props.postOfflineData()
     console.log('online')
   }
 
@@ -121,16 +124,17 @@ export class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    locations: state.locations.locations,
-    reviews: state.reviews.reviews,
+    locations: state.locations.locations || [],
+    reviews: state.reviews.reviews || [],
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
            createLocation: (locationData) => dispatch(createLocation(locationData)),
-           deleteLocation: (location_id) => dispatch(deleteLocation(location_id))
-          }
+           deleteLocation: (location_id) => dispatch(deleteLocation(location_id)),
+           postOfflineData: () => dispatch(postOfflineData())
+         }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

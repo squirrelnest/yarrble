@@ -63,7 +63,7 @@ export class LoginForm extends Component {
     return (
       <div style={styles}>
 
-        { this.props.newregistration == true ?
+        { this.props.newregistration === true ?
         <div>
           <p>Thanks for signing up, {this.props.username}</p>
           <p>Now log in to your brand-spanking new account!</p>

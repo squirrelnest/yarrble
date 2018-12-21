@@ -17,7 +17,7 @@ export default class MapContainer extends Component {
           handleMapClick={this.props.handleMapClick}
         />
 
-      <Fab handleToggle={this.props.handleToggle} />
+        <Fab handleToggle={this.props.handleToggle} />
 
       </div>
     );
