@@ -18,6 +18,35 @@ export function removeLocation(location_id) {
   return { type: REMOVE_LOCATION, location_id }
 }
 
+/* OFFLINE MODE */
+
+export function storeOfflineData(data) {
+  let drafts = JSON.parse(localStorage.getItem('drafts'))
+  // check for existing drafts
+  if (!drafts) {
+  // store draft
+    let newDraft = { draft_1: data }
+    localStorage.setItem('drafts', JSON.stringify([newDraft]))
+  } else {
+  // increment draftID then append draft to drafts object
+    let draftID = `draft_${Object.entries(drafts).length + 1}`
+    let newDraft = { [draftID]: data }
+    drafts.push(newDraft)
+    localStorage.setItem('drafts', JSON.stringify(drafts))
+  }
+}
+
+export function postOfflineData() {
+
+  const drafts = JSON.parse(localStorage.getItem('drafts'))
+
+  drafts.forEach( (draft, index) => createLocation( draft[`draft_${index}`] ) )
+
+  // return () => {
+  //   createLocation(draft)
+  // }
+}
+
 /* API CALLS */
 
 /* A promise or thenable is an object that may yield a value in the future (either a resolved value or an error message) */
@@ -101,11 +130,10 @@ export function createLocation(locationData) {
       })
     }
   } else {
-    return (dispatch) => {
-      console.log('localstorage')
+    return () => {
+      storeOfflineData(bodyData)
     }
   }
-
 }
 
 export function createLocationSuccess(location) {
