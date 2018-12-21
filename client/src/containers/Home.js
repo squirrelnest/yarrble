@@ -45,6 +45,7 @@ export class Home extends Component {
       isOnline: true
     })
     this.props.postOfflineData()
+    localStorage.removeItem('drafts');
     console.log('online')
   }
 

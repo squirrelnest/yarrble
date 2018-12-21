@@ -57,7 +57,6 @@ export function postOfflineData(dispatch) {
           dispatch(createLocationSuccess(responseJSON));
         })
       })
-      // localStorage.removeItem('drafts');
     }
   }
 
