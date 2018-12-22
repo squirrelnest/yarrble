@@ -46,6 +46,7 @@ export class Home extends Component {
     })
     this.props.postOfflineData()
     localStorage.removeItem('drafts');
+    localStorage.removeItem('cachedLocations');
     console.log('online')
   }
 
@@ -53,7 +54,9 @@ export class Home extends Component {
     this.setState({
       isOnline: false
     })
+    alert('You are currently offline. Your drafts will be saved and uploaded when back online.');
     console.log('offline')
+    localStorage.setItem('cachedLocations', JSON.stringify(this.props.locations))
   }
 
   resizeMap = () => {
@@ -125,8 +128,7 @@ export class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    locations: state.locations.locations || [],
-    reviews: state.reviews.reviews || [],
+    locations: state.locations.locations || []
   }
 }
 
