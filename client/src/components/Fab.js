@@ -4,6 +4,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const style = {
   marginRight: 20,
+  zIndex: 1000
 };
 
 export default class Fab extends Component {

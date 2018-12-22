@@ -109,6 +109,12 @@ export class Home extends Component {
     });
   };
 
+  handleClose = () => {
+    this.setState({
+      open: false
+    })
+  }
+
   render() {
     return (
       <div className="row" style={{ height: window.innerHeight * 0.92 }}>
@@ -133,6 +139,7 @@ export class Home extends Component {
           handleSubmit={this.handleSubmit}
           open={this.state.open}
           handleRequestChange={this.handleRequestChange}
+          handleClose={this.handleClose}
           isOnline={this.state.isOnline}
         />
       </div>

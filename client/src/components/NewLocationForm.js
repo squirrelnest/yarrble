@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 import DatePicker from 'material-ui/DatePicker';
+import IconButton from 'material-ui/IconButton';
+import Button from '@material-ui/core/Button';
 import { API_ROOT } from '../api-config';
 
 const styles = {
@@ -14,17 +16,21 @@ const styles = {
     display: 'flex',
     height: 120,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
   },
   button: {
-    margin: '20px',
+    margin: '20px 0'
+  },
+  closeButton: {
+    color: 'grey',
+    fontSize: '14px'
   },
   checkboxblock: {
-    marginTop: '40px',
+    marginTop: '40px'
   },
   checkbox: {
     marginBottom: 16,
-  },
+  }
 };
 
 const initialState = {
@@ -127,11 +133,11 @@ export default class NewLocationForm extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ zIndex: 2000 }}>
 
         <Drawer
           docked={false}
-          width={window.innerWidth*0.5}
+          width={window.innerWidth > 700 ? window.innerWidth*0.5 : window.innerWidth}
           open={this.props.open}
           openSecondary={true}
           onRequestChange={(event) => this.props.handleRequestChange()}
@@ -166,6 +172,7 @@ export default class NewLocationForm extends Component {
                 value={this.state.latitude}
                 multiLine={false}
                 fullWidth={false}
+                style={{marginRight: '20px'}}
                 onChange={(event) => this.handleChange(event)}
               />
 
@@ -176,7 +183,6 @@ export default class NewLocationForm extends Component {
                 value={this.state.longitude}
                 multiLine={false}
                 fullWidth={false}
-                style={{paddingLeft: '20px'}}
                 onChange={(event) => this.handleChange(event)}
               />
 
@@ -187,17 +193,19 @@ export default class NewLocationForm extends Component {
                 value={this.state.country}
                 multiLine={false}
                 fullWidth={false}
-                style={{paddingLeft: '-20px'}}
+                style={{marginRight: '20px'}}
                 onChange={(event) => this.handleChange(event)}
               />
 
-              <FlatButton
-                label="Use current location"
-                primary={true}
+              <Button
+                variant="outlined"
+                color="secondary"
                 style={styles.button}
                 disabled={!this.props.isOnline}
                 onClick={(event) => this.getPosition(event)}
-              />
+              >
+              Autofill with current location
+              </Button>
 
               <br />
               <br />
@@ -361,6 +369,14 @@ export default class NewLocationForm extends Component {
                 style={styles.button}
                 onClick={this.props.handleToggle}
               />
+
+
+              <FlatButton
+                style={styles.closeButton}
+                onClick={this.props.handleClose}
+              >
+                CANCEL
+              </FlatButton>
 
             </form>
 

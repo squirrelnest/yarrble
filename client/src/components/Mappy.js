@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import ReactMapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
 import Place from 'material-ui/svg-icons/maps/place';
-import MapPopup from '../components/MapPopup';
 import { Link } from 'react-router-dom';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg';
