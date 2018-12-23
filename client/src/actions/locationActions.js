@@ -37,7 +37,6 @@ export function storeOfflineData(data) {
 }
 
 export function postOfflineData(dispatch) {
-
   return (dispatch) => {
     if (localStorage.getItem('drafts')) {
       const drafts = JSON.parse(localStorage.getItem('drafts'))
@@ -59,7 +58,6 @@ export function postOfflineData(dispatch) {
       })
     }
   }
-
 }
 
 /* API CALLS */
@@ -68,21 +66,28 @@ export function postOfflineData(dispatch) {
 /* Asynchronous code is single-threaded but multi-tasking - one code can run before another code completes */
 
 export function fetchLocations() {
-  return (dispatch) => {
-    dispatch({ type: 'LOADING_LOCATIONS' });
-    return fetch(`//${API_ROOT}/locations`, {
-      method: "GET",
-      credentials: 'omit',  /* other options: include, same-origin */
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(response => {
-      dispatch(fetchLocationsSuccess(response));
-    })
-  }
+  // if (!window.onLine) {
+  //   return (dispatch) => {
+  //     let locationsCache = JSON.parse(localStorage.getItem('cachedLocations'))
+  //     dispatch(fetchLocationsSuccess(locationsCache));
+  //   }
+  // } else {
+    return (dispatch) => {
+      dispatch({ type: 'LOADING_LOCATIONS' });
+      return fetch(`//${API_ROOT}/locations`, {
+        method: "GET",
+        credentials: 'omit',  /* other options: include, same-origin */
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(response => {
+        dispatch(fetchLocationsSuccess(response));
+      })
+    }
+  // }
 }
 
 export function fetchNearbyLocations() {

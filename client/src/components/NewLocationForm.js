@@ -7,7 +7,6 @@ import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 import DatePicker from 'material-ui/DatePicker';
-import IconButton from 'material-ui/IconButton';
 import Button from '@material-ui/core/Button';
 import { API_ROOT } from '../api-config';
 

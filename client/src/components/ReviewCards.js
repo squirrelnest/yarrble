@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReviewCard from '../components/ReviewCard';
 
 function latest_updated(current, next) {
@@ -26,23 +26,26 @@ export default class ReviewCards extends Component {
     })
   }
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   render() {
 
-    const ReviewCards = this.props.location.reviews.sort(latest_updated).map((review) =>
-        <div key={review.id}>
-          <ReviewCard
-            review={review}
-            like={this.state.like}
-          />
-        </div>
+    const ReviewCards = this.props.reviews.sort(latest_updated).map((review) =>
+      <div key={review.id}>
+        <ReviewCard
+          review={review}
+          like={this.state.like}
+        />
+      </div>
+    )
 
-      )
-
-      return (
-        <div>
-          {ReviewCards}
-        </div>
-      );
+    return (
+      <Fragment>
+        {ReviewCards}
+      </Fragment>
+    );
 
   }
 }

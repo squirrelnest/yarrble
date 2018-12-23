@@ -88,81 +88,72 @@ class ShowLocation extends Component {
 
   render() {
 
-    const SingleLocation = (location) =>
-      <div className="show-location row" style={{ margin: 0, }}>
-        <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image} alt="tropical island"/></div>
-        <div style={styles.locationDataContainer}>
-          <h1>{location.nickname}, {location.country}</h1>
-            <table style={styles.table}>
-              <thead>
-                <tr>
-                  <th><Subheader>Latitude</Subheader></th>
-                  <th><Subheader>Longitude</Subheader></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={styles.tableCell}><h2>{location.lat}</h2></td>
-                  <td style={styles.tableCell}><h2>{location.lon}</h2></td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th><Subheader>Depth</Subheader></th>
-                  <th><Subheader>Bottom</Subheader></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={styles.tableCell}><h2>5.1m</h2></td>
-                  <td style={styles.tableCell}><h2>Sand</h2></td>
-                </tr>
-              </tbody>
-            </table>
-          <Subheader style={styles.subheader}>
-            <div>Reviews</div>
-            <div>
-              <span onClick={this.openReviewForm}>
-                <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
-                Add Review...
-              </span>
-            </div>
-          </Subheader>
-
-          <ReviewCards
-            location={this.props.location}
-          />
-
-        </div>
-
-        <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
-
-      </div>
+    const { loc } = this.props
 
     return (
 
-      <div>
-        {SingleLocation(this.props.location)}
-      </div>
+        <div className="show-location row" style={{ margin: 0, }}>
+          <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image} alt="tropical island"/></div>
+          <div style={styles.locationDataContainer}>
+            <h1>{loc.nickname}, {loc.country}</h1>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    <th><Subheader>Latitude</Subheader></th>
+                    <th><Subheader>Longitude</Subheader></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={styles.tableCell}><h2>{loc.lat}</h2></td>
+                    <td style={styles.tableCell}><h2>{loc.lon}</h2></td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th><Subheader>Depth</Subheader></th>
+                    <th><Subheader>Bottom</Subheader></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={styles.tableCell}><h2>5.1m</h2></td>
+                    <td style={styles.tableCell}><h2>Sand</h2></td>
+                  </tr>
+                </tbody>
+              </table>
+            <Subheader style={styles.subheader}>
+              <div>Reviews</div>
+              <div>
+                <span onClick={this.openReviewForm}>
+                  <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
+                  Add Review...
+                </span>
+              </div>
+            </Subheader>
+
+            <ReviewCards reviews={loc.reviews} />
+
+          </div>
+
+          <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
+
+        </div>
     )
   }
 }
-/* map Redux store state to props */
 
 const mapStateToProps = (state, ownProps) => {
-  const location = state.locations.locations.find(location => location.id === ownProps.match.params.locationId)
-
-  if (location) {
-    return { location }
-  } else {
-    return { location: { reviews: [] } }
-  }
+  let location_id = Number(ownProps.match.params.locationId)
+  return {
+    loc: state.locations.locations.filter(location => { return location.id === location_id })[0]
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {
-
-  return { createReview: (formData) => dispatch(createReview(formData)) }
-
+  return {
+    createReview: (formData) => dispatch(createReview(formData))
+  }
 }
 
 /* connect() creates a higher-order component out of the ShowLocation component, a function that is then called by <Link> in parent */
