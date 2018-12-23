@@ -6,7 +6,7 @@ export default class MapContainer extends Component {
 
   render() {
     return (
-      <div className="map-container">
+      <div className="map-container" style={{ height: window.innerWidth < 700 ? this.props.height*0.5 : this.props.height*0.92 }}>
 
         <Mappy
           width={window.innerWidth < 700 ? this.props.width : this.props.width*0.5}

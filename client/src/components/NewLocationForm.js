@@ -19,7 +19,7 @@ const styles = {
     justifyContent: 'space-around'
   },
   button: {
-    margin: '20px 0'
+    margin: '20px'
   },
   closeButton: {
     color: 'grey',
@@ -30,8 +30,11 @@ const styles = {
   },
   checkbox: {
     marginBottom: 16,
+  },
+  datepicker: {
+    zIndex: 3000
   }
-};
+}
 
 const initialState = {
   nickname: '',
@@ -204,7 +207,7 @@ export default class NewLocationForm extends Component {
                 disabled={!this.props.isOnline}
                 onClick={(event) => this.getPosition(event)}
               >
-              Autofill with current location
+                Autofill with current location
               </Button>
 
               <br />
@@ -369,7 +372,6 @@ export default class NewLocationForm extends Component {
                 style={styles.button}
                 onClick={this.props.handleToggle}
               />
-
 
               <FlatButton
                 style={styles.closeButton}

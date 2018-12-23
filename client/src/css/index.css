@@ -59,13 +59,10 @@ a:hover {
 }
 
 .fab {
-  position: absolute;
-  bottom: 40px;
-  left: 30px;
+  position: relative;
+  bottom: 80px;
+  left: 20px;
   z-index: 2000;
-}
-
-.map-container {
 }
 
 .drawer {
