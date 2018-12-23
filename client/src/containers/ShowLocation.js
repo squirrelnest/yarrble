@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import paradise from '../img/paradise.jpg';
-import { connect } from 'react-redux';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
-import { createReview } from '../actions/reviewActions';
 import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
+import { connect } from 'react-redux';
+import {
+  createReview
+} from '../actions/reviewActions';
 
 const styles = {
   titleStyle: {
@@ -61,6 +63,45 @@ class ShowLocation extends Component {
     }
   }
 
+  componentDidMount() {
+    if (window.navigator.onLine) {
+      this.isOnline();
+    }
+    window.addEventListener('online', () => {
+      this.isOnline();
+    });
+    window.addEventListener('offline', () => {
+      this.isOffline();
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('online', () => {
+      this.isOnline();
+    });
+    window.removeEventListener('offline', () => {
+      this.isOffline();
+    });
+  }
+
+  isOnline = () => {
+    // this.props.postOfflineData();
+    localStorage.removeItem('draft_reviews');
+    localStorage.removeItem('cachedReviews');
+    console.log('online');
+  };
+
+  isOffline = () => {
+    alert(
+      'You are currently offline. Your drafts will be saved and uploaded when back online.'
+    );
+    console.log('offline');
+    localStorage.setItem(
+      'cachedReviews',
+      JSON.stringify(this.props.locations)
+    );
+  };
+
   openReviewForm = () => {
     this.setState({
       open: true,
@@ -72,9 +113,9 @@ class ShowLocation extends Component {
   };
 
   handleSubmit = (reviewData) => {
-    this.props.createReview({...reviewData, location_id: this.props.location.id})
+    this.props.createReview({...reviewData, location_id: this.props.loc.id})
     this.handleClose();
-    let url = `/locations/${this.props.location.id}`;
+    let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url)
   }
 
@@ -82,7 +123,7 @@ class ShowLocation extends Component {
     this.setState({
       open: false
     })
-    let url = `/locations/${this.props.location.id}`;
+    let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url);
   }
 
@@ -146,7 +187,7 @@ class ShowLocation extends Component {
 const mapStateToProps = (state, ownProps) => {
   let location_id = Number(ownProps.match.params.locationId)
   return {
-    loc: state.locations.locations.filter(location => { return location.id === location_id })[0]
+    loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || []
   };
 }
 

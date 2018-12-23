@@ -26,10 +26,6 @@ export default class ReviewCards extends Component {
     })
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   render() {
 
     const ReviewCards = this.props.reviews.sort(latest_updated).map((review) =>

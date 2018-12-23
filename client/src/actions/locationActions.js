@@ -115,7 +115,7 @@ export function fetchLocationsSuccess(payload) {
 }
 
 export function createLocation(locationData) {
-  console.log(locationData)
+
   const bodyData = {
     location: {
       nickname: locationData.nickname,
