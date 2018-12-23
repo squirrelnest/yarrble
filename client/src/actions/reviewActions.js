@@ -23,6 +23,24 @@ export function fetchReviewsSuccess(reviews ) {
   return { type: GET_REVIEWS, reviews };
 }
 
+/* OFFLINE MODE */
+
+export function storeOfflineReviews(data) {
+  let draft_reviews = JSON.parse(localStorage.getItem('draft_reviews'))
+  // check for existing draft_reviews
+  if (!draft_reviews) {
+  // store first draft
+    let newDraft = { draft_1: data }
+    localStorage.setItem('draft_reviews', JSON.stringify([newDraft]))
+  } else {
+  // increment draftID then append draft to draft_reviews object
+    let draftID = `draft_${Object.entries(draft_reviews).length + 1}`
+    let newDraft = { [draftID]: data }
+    draft_reviews.push(newDraft)
+    localStorage.setItem('draft_reviews', JSON.stringify(draft_reviews))
+  }
+}
+
 /* ASYNCS */
 
 export function fetchReviews() {
@@ -59,7 +77,7 @@ export function deleteReview(review_id) {
 }
 
 export function createReview(reviewData) {
-
+  const token = localStorage.getItem('jwt')
   const bodyData = {
     review: {
       location_id: reviewData.location_id,
@@ -67,26 +85,32 @@ export function createReview(reviewData) {
       stability: reviewData.stability,
       aesthetics: reviewData.aesthetics,
       safety: reviewData.safety,
-      date_visited: reviewData.date_visited,
-      user_id: 1
+      date_visited: reviewData.date_visited
     }
   }
 
-  return (dispatch) => {
-    dispatch({ type: 'LOADING_REVIEWS' });
-    return fetch(`//${API_ROOT}/locations/${reviewData.location_id}/reviews`, {
-      method: "POST",
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyData),
-    })
-    .then(response => response.json())
-    .then(response => {
-      dispatch(fetchLocationsSuccess(response));
-    })
+  if (window.navigator.onLine) {
+    return (dispatch) => {
+      dispatch({ type: 'LOADING_REVIEWS' });
+      return fetch(`//${API_ROOT}/locations/${reviewData.location_id}/reviews`, {
+        method: "POST",
+        credentials: 'same-origin',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(bodyData),
+      })
+      .then(response => response.json())
+      .then(response => {
+        dispatch(fetchLocationsSuccess(response));
+      })
+    }
+  } else {
+    return () => {
+      storeOfflineReviews(bodyData)
+    }
   }
 }
 
@@ -98,8 +122,7 @@ export function updateReview(reviewData) {
       content: reviewData.content,
       stability: reviewData.stability,
       aesthetics: reviewData.aesthetics,
-      safety: reviewData.safety,
-      user_id: 1
+      safety: reviewData.safety
     }
   }
 

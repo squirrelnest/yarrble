@@ -25,8 +25,11 @@ class UsersController < ApplicationController
 
   def reviews
     @user = User.find_by(id: current_user.id)
-    @reviews = @user.reviews
-    # @reviews = Review.all
+    if current_user.admin
+      @reviews = Review.all
+    else
+      @reviews = @user.reviews
+    end
     render json: @reviews, status: 200
   end
 

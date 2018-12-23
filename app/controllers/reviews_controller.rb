@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_action :authenticate_user, only: [:create]
+
   def index
     if params[:location_id]
       @reviews = Location.find_by(id: params[:location_id]).reviews
@@ -19,14 +21,12 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @location = Location.find_by(id: params[:location_id]) || Location.find_by(id: review_params["location_id"]) || Location.create(location_params)
     @review.location = @location
-    # @review.user_id = current_user.id
-    # if @review.valid?
+    @review.user_id = current_user.id
+    if @review.valid?
       @review.save
-      # redirect_to locations_path
-    # else
-      # flash[:message] = @location.errors.messages.values.flatten.join(" ") if @location.errors.any?
-      # redirect_to locations_path
-    # end
+    else
+      flash[:message] = @location.errors.messages.values.flatten.join(" ") if @review.errors.any?
+    end
     @locations = Location.all
     render json: @locations, status: 200
   end
