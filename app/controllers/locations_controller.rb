@@ -48,6 +48,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    # @reviews = Review.find(location_id: @location.id)
     render json: @location, status: 200
   end
 

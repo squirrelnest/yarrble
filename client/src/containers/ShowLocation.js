@@ -174,7 +174,7 @@ class ShowLocation extends Component {
               </div>
             </Subheader>
 
-            <ReviewCards reviews={loc.reviews} />
+            { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
 
           </div>
 
@@ -188,6 +188,7 @@ class ShowLocation extends Component {
 const mapStateToProps = (state, ownProps) => {
   let location_id = Number(ownProps.match.params.locationId)
   return {
+    locations: state.locations.locations || [],
     loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || []
   };
 }

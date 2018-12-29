@@ -27,8 +27,8 @@ class ReviewsController < ApplicationController
     else
       flash[:message] = @location.errors.messages.values.flatten.join(" ") if @review.errors.any?
     end
-    # @locations = Location.all
-    render json: @location, status: 200
+    @locations = Location.all
+    render json: @locations, status: 200
   end
 
   def show
