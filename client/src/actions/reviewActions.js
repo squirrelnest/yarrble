@@ -41,6 +41,32 @@ export function storeOfflineReviews(data) {
   }
 }
 
+export function postOfflineReviews() {
+  let token = "Bearer " + localStorage.getItem("jwt")
+  return (dispatch) => {
+    if (localStorage.getItem('draft_reviews')) {
+      const draft_reviews = JSON.parse(localStorage.getItem('draft_reviews'))
+      draft_reviews.forEach( (draft, index) => {
+        let location_id = draft[`draft_${index + 1}`].review.location_id
+        return fetch(`//${API_ROOT}/locations/${location_id}/reviews`, {
+          method: "POST",
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token
+          },
+          body: JSON.stringify(draft[`draft_${index + 1}`].review)
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+          dispatch(fetchLocationsSuccess(responseJSON));
+        })
+      })
+    }
+  }
+}
+
 /* ASYNCS */
 
 export function fetchReviews() {

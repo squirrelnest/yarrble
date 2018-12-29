@@ -6,7 +6,8 @@ import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
 import { connect } from 'react-redux';
 import {
-  createReview
+  createReview,
+  postOfflineReviews
 } from '../actions/reviewActions';
 
 const styles = {
@@ -85,7 +86,7 @@ class ShowLocation extends Component {
   }
 
   isOnline = () => {
-    // this.props.postOfflineData();
+    this.props.postOfflineReviews()
     localStorage.removeItem('draft_reviews');
     localStorage.removeItem('cachedReviews');
     console.log('online');
@@ -193,7 +194,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createReview: (formData) => dispatch(createReview(formData))
+    createReview: (formData) => dispatch(createReview(formData)),
+    postOfflineReviews: () => dispatch(postOfflineReviews())
   }
 }
 

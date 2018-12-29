@@ -36,8 +36,6 @@ class LocationsController < ApplicationController
   end
 
   def create
-    location_params = params.require(:location).permit(:nickname, :lon, :lat, :country,
-      reviews_attributes: [:date_visited, :stability, :aesthetics, :safety, :content, :user_id])
     # location_params["reviews_attributes"][0]["user_id"] = current_user.id
     @location = Location.create(location_params)
 
@@ -91,7 +89,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:nickname, :lon, :lat, :country, reviews_attributes: [:date_visited, :stability, :content])
+    params.require(:location).permit(:nickname, :lon, :lat, :country, reviews_attributes: [:date_visited, :stability, :content, :aesthetics, :safety, :user_id])
   end
 
 end
