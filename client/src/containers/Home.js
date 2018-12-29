@@ -58,7 +58,7 @@ export class Home extends Component {
       isOnline: true
     });
     this.props.postOfflineData();
-    localStorage.removeItem('drafts');
+    localStorage.removeItem('draft_locations');
     localStorage.removeItem('cachedLocations');
     console.log('online');
   };

@@ -21,26 +21,26 @@ export function removeLocation(location_id) {
 /* OFFLINE MODE */
 
 export function storeOfflineData(data) {
-  let drafts = JSON.parse(localStorage.getItem('drafts'))
-  // check for existing drafts
-  if (!drafts) {
+  let draft_locations = JSON.parse(localStorage.getItem('draft_locations'))
+  // check for existing draft_locations
+  if (!draft_locations) {
   // store first draft
     let newDraft = { draft_1: data }
-    localStorage.setItem('drafts', JSON.stringify([newDraft]))
+    localStorage.setItem('draft_locations', JSON.stringify([newDraft]))
   } else {
-  // increment draftID then append draft to drafts object
-    let draftID = `draft_${Object.entries(drafts).length + 1}`
+  // increment draftID then append draft to draft_locations object
+    let draftID = `draft_${Object.entries(draft_locations).length + 1}`
     let newDraft = { [draftID]: data }
-    drafts.push(newDraft)
-    localStorage.setItem('drafts', JSON.stringify(drafts))
+    draft_locations.push(newDraft)
+    localStorage.setItem('draft_locations', JSON.stringify(draft_locations))
   }
 }
 
 export function postOfflineData(dispatch) {
   return (dispatch) => {
-    if (localStorage.getItem('drafts')) {
-      const drafts = JSON.parse(localStorage.getItem('drafts'))
-      drafts.forEach( (draft, index) => {
+    if (localStorage.getItem('draft_locations')) {
+      const draft_locations = JSON.parse(localStorage.getItem('draft_locations'))
+      draft_locations.forEach( (draft, index) => {
 
         return fetch(`//${API_ROOT}/locations`, {
           method: "POST",
