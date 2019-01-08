@@ -2,6 +2,8 @@ class LocationsController < ApplicationController
 
   require 'net/http'
 
+  before_action :authenticate_user, only: [:destroy]
+
   def by_country
     @locations = Location.where(country: params[:country])
     render json: { locations: @locations.map {|location| LocationSerializer.new(location) } }
@@ -62,27 +64,25 @@ class LocationsController < ApplicationController
       @location.update(location_params)
       redirect_to location_path(@location)
     else
-      flash[:message] = "Only admins can do that."
+      # flash[:message] = "Only admins can do that."
       redirect_to location_path(@location)
     end
   end
 
   def destroy
-    @locations = Location.all
-    # if current_user.admin
+    if current_user && current_user.admin
+      @locations = Location.all
       Location.find(params[:id]).destroy
-      # redirect_to locations_url
-    # else
-      # flash[:message] = "Only admins can do that."
-      # redirect_to locations_url
-    # end
-    render json: @locations, status: 200
+      render json: @locations, status: 200
+    else
+      redirect_to locations_path
+    end
   end
 
   def nearby
     @current_lon = params[:lon].to_f
     @current_lat = params[:lat].to_f
-    distance = 10000  # meters
+    distance = 1000000  # meters
     @locations = Location.nearby(@current_lat, @current_lon, distance)
     render json: @locations, status: 200
   end

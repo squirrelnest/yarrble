@@ -66,12 +66,12 @@ export function postOfflineData(dispatch) {
 /* Asynchronous code is single-threaded but multi-tasking - one code can run before another code completes */
 
 export function fetchLocations() {
-  // if (!window.onLine) {
-  //   return (dispatch) => {
-  //     let locationsCache = JSON.parse(localStorage.getItem('cachedLocations'))
-  //     dispatch(fetchLocationsSuccess(locationsCache));
-  //   }
-  // } else {
+  if (!window.navigator.onLine) {
+    return (dispatch) => {
+      let locationsCache = JSON.parse(localStorage.getItem('cachedLocations'));
+      dispatch(fetchLocationsSuccess(locationsCache));
+    }
+  } else {
     return (dispatch) => {
       dispatch({ type: 'LOADING_LOCATIONS' });
       return fetch(`//${API_ROOT}/locations`, {
@@ -87,7 +87,7 @@ export function fetchLocations() {
         dispatch(fetchLocationsSuccess(response));
       })
     }
-  // }
+  }
 }
 
 export function fetchNearbyLocations() {
@@ -159,15 +159,26 @@ export function createLocationSuccess(location) {
 }
 
 export function deleteLocation(location_id) {
+  let token = "Bearer " + localStorage.getItem("jwt")
   return (dispatch) => {
     dispatch({ type: 'LOADING_LOCATIONS' });
     return fetch(`//${API_ROOT}/locations/${location_id}`, {
       method: "DELETE",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
     })
-    .then(response => response.json())
     .then(response => {
-      dispatch(deleteLocationSuccess(response));
-    })
+        if (response.status === '200') {
+          dispatch(deleteLocationSuccess(response))
+        } else {
+          dispatch(fetchLocations())
+        }
+      }
+    )
   }
 }
 
