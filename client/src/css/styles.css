@@ -1,6 +1,15 @@
-p, h3 {
-  color: black;
+* {
+  box-sizing: border-box;
+  top: 0px;
+  left: 0px;
 }
+
+p, h1, h3 {
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
 .dark {
   color: #212121;
 }

@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  top: 0px;
+  left: 0px;
 }
 
 body {
@@ -7,6 +9,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   color: '-212121';
+  width: 100%;
 }
 
 h2 {

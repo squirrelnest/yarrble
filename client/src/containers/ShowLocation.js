@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Subheader from 'material-ui/Subheader';
 import paradise from '../img/paradise.jpg';
+import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
@@ -9,44 +10,6 @@ import {
   createReview,
   postOfflineReviews
 } from '../actions/reviewActions';
-
-const styles = {
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
-  },
-  imageContainer: {
-    width:'50%',
-    margin:0,
-    display:'column',
-  },
-  locationDataContainer: {
-    width:'50%',
-    margin:'0px 20px',
-    display:'column',
-    height: window.innerHeight*0.92,
-    overflow: 'auto',
-  },
-  image: {
-    height:window.innerHeight*0.92,
-    width:window.innerWidth*0.5
-  },
-  subheader: {
-    marginBottom: '20px',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  table: {
-    width:'100%',
-    textAlign:'left',
-    marginBottom:'20px',
-    marginLeft: '-4px',
-  },
-  tableCell: {
-    color: '#00BCD4',
-    paddingLeft: '16px',
-  }
-};
 
 const tilesData = [
   {
@@ -134,11 +97,11 @@ class ShowLocation extends Component {
 
     return (
 
-        <div className="show-location row" style={{ margin: 0, }}>
-          <div style={styles.imageContainer}><img src={tilesData[0].img} style={styles.image} alt="tropical island"/></div>
-          <div style={styles.locationDataContainer}>
+        <div className="row">
+          <div className={styles.imageContainer}><img src={tilesData[0].img} className={styles.image} alt="tropical island"/></div>
+          <div className={styles.locationDataContainer}>
             <h1>{loc.nickname}, {loc.country}</h1>
-              <table style={styles.table}>
+              <table className={styles.table}>
                 <thead>
                   <tr>
                     <th><Subheader>Latitude</Subheader></th>
@@ -147,8 +110,8 @@ class ShowLocation extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td style={styles.tableCell}><h2>{loc.lat}</h2></td>
-                    <td style={styles.tableCell}><h2>{loc.lon}</h2></td>
+                    <td className={styles.tableCell}><h2>{loc.lat}</h2></td>
+                    <td className={styles.tableCell}><h2>{loc.lon}</h2></td>
                   </tr>
                 </tbody>
                 <thead>
@@ -159,18 +122,19 @@ class ShowLocation extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td style={styles.tableCell}><h2>5.1m</h2></td>
-                    <td style={styles.tableCell}><h2>Sand</h2></td>
+                    <td className={styles.tableCell}><h2>5.1m</h2></td>
+                    <td className={styles.tableCell}><h2>Sand</h2></td>
                   </tr>
                 </tbody>
               </table>
-            <Subheader style={styles.subheader}>
+            <Subheader className={styles.subheader}>
               <div>Reviews</div>
-              <div>
-                <span onClick={this.openReviewForm}>
-                  <NoteAdd hoverColor={'f44336'} style={{ margin: '-6px 10px' }}/>
-                  Add Review...
-                </span>
+              <div onClick={this.openReviewForm} className={styles.addReview}>
+                <div className={styles.addReview}>
+                  <NoteAdd hoverColor={'f44336'} />
+                  <div className={styles.hideOnMobile}>Add Review...</div>
+                </div>
+
               </div>
             </Subheader>
 
