@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # resources :locations & :reviews
 
+  get '/' => 'locations#index'
   get '/locations/nearby/:lon/:lat' => 'locations#nearby', :constraints => { :lon => /[^\/]+/, :lat => /[^\/]+/ }
   get '/locations/geojson' => 'locations#geojson'
   get '/locations/by_country/:country' => 'locations#by_country'
