@@ -170,6 +170,16 @@ export default class NewLocationForm extends Component {
               onChange={event => this.handleChange(event)}
             />
 
+            <TextField
+              name="depth"
+              hintText="Depth"
+              floatingLabelText="Depth"
+              value={this.state.depth}
+              multiLine={false}
+              fullWidth={false}
+              onChange={event => this.handleChange(event)}
+            />
+
             <br />
 
             <TextField
