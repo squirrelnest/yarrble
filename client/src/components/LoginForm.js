@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { login } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-
-const styles = {
-  width: '33%',
-  height: '100%',
-  position: 'absolute',
-  top:0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  margin: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  button: {
-    marginLeft: '20px',
-  },
-};
+import classes from '../css/LoginForm.module.css';
 
 export class LoginForm extends Component {
 
@@ -61,7 +44,7 @@ export class LoginForm extends Component {
 
   render() {
     return (
-      <div style={styles}>
+      <div className={classes.formContainer}>
 
         { this.props.newregistration === true ?
         <div>
@@ -76,12 +59,14 @@ export class LoginForm extends Component {
               this.handleSubmit(this.state);
             }
           }
+          className={classes.loginForm}
         >
 
           <TextField
             name="email"
             hintText="email"
-            floatingLabelText="Email"
+            label="Email"
+            style={{ width: '100%' }}
             onChange={(event) => this.handleChange(event)}
           />
 
@@ -91,7 +76,8 @@ export class LoginForm extends Component {
             name="password"
             type="password"
             hintText="Password"
-            floatingLabelText="Password"
+            label="Password"
+            style={{ width: '100%' }}
             onChange={(event) => this.handleChange(event)}
           />
 
@@ -99,11 +85,10 @@ export class LoginForm extends Component {
           <br />
 
           <RaisedButton
-            className="submitBtn"
-            label="Submit"
+            label="LOGIN"
             type="submit"
             secondary={true}
-            style={styles.button}
+            className={classes.loginBtn}
           />
 
           {this.renderRedirect()}

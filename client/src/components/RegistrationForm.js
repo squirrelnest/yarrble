@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { register } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
-const styles = {
-  width: '33%',
-  height: '100%',
-  position: 'absolute',
-  top:0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  margin: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  button: {
-    marginLeft: '20px',
-  },
-};
+import classes from '../css/RegistrationForm.module.css';
 
 export class RegistrationForm extends Component {
 
@@ -63,57 +46,60 @@ export class RegistrationForm extends Component {
   render() {
     return (
 
-      <form
-        style={styles}
-        onSubmit={ (event) => {
-            event.preventDefault();
-            this.handleSubmit(this.state);
+      <div className={classes.formContainer}>
+
+        <form
+          className={classes.registrationForm}
+          onSubmit={ (event) => {
+              event.preventDefault();
+              this.handleSubmit(this.state);
+            }
           }
-        }
-      >
+        >
 
-        <TextField
-          name="username"
-          hintText="username"
-          floatingLabelText="Username"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="username"
+            hintText="username"
+            label="Username"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
+          <br />
 
-        <TextField
-          name="email"
-          hintText="email"
-          floatingLabelText="Email"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="email"
+            hintText="email"
+            label="Email"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
+          <br />
 
-        <TextField
-          name="password"
-          type="password"
-          hintText="Password"
-          floatingLabelText="Password"
-          onChange={(event) => this.handleChange(event)}
-        />
+          <TextField
+            name="password"
+            type="password"
+            hintText="Password"
+            label="Password"
+            onChange={(event) => this.handleChange(event)}
+          />
 
-        <br />
-        <br />
+          <br />
+          <br />
 
-        <RaisedButton
-          className="submitBtn"
-          label="Submit"
-          type="submit"
-          secondary={true}
-          style={styles.button}
-        />
+          <RaisedButton
+            className="submitBtn"
+            label="SIGN UP"
+            type="submit"
+            secondary={true}
+            className={classes.registrationBtn}
+          />
 
-        {this.renderRedirect()}
-        {this.errorMessage()}
+          {this.renderRedirect()}
+          {this.errorMessage()}
 
-      </form>
+        </form>
 
+      </div>
     )
   }
 }

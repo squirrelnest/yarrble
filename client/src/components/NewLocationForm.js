@@ -376,7 +376,6 @@ export default class NewLocationForm extends Component {
                 </div>
                 <div className={classes.buttonsContainer}>
                   <RaisedButton
-                    className="submitBtn"
                     label="Submit"
                     type="submit"
                     secondary={true}

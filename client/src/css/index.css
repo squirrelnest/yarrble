@@ -97,6 +97,11 @@ a:hover {
   margin: 40px;
 }
 
+.link {
+  color: rgba(0,0,0,0.87);
+  text-align: center;
+}
+
 .link:hover {
   color: rgb(0, 188, 212);
 }

@@ -1,0 +1,33 @@
+.formContainer {
+  width: 33%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.loginBtn {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 700px) {
+
+  .formContainer {
+    width: 80%;
+  }
+
+}
