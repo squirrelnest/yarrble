@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+  top: 0px;
+  left: 0px;
+}
+
+.lastLine {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mobileOnly {
+  visibility: hidden;
+}
+
+.closeButton {
+  color: grey;
+  font-size: 14px;
+}
+
+.button {
+  margin: 20px 0;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .desktopOnly {
+    display: none;
+    visibility: hidden;
+  }
+
+  .mobileOnly {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30px;
+    float: right;
+    visibility: visible;
+    border-radius: 200px;
+    width: 40px;
+    height: 40px;
+    margin-top: -30px;
+    margin-right: -30px;
+  }
+
+  .mobileOnly:hover {
+    background: lightgrey;
+  }
+
+  .lastLine {
+    display: block;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    padding-top: 20px;
+    justify-content: space-between;
+  }
+
+  .submitBtn {
+    display: block;
+    width: 100%;
+  }
+
+}

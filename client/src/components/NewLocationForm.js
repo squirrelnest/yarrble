@@ -1,50 +1,56 @@
-import React, { Component } from "react";
-import Drawer from "material-ui/Drawer";
-import TextField from "material-ui/TextField";
-import Slider from "material-ui/Slider";
-import RaisedButton from "material-ui/RaisedButton";
-import FlatButton from "material-ui/FlatButton";
-import Checkbox from "material-ui/Checkbox";
-import Subheader from "material-ui/Subheader";
-import DatePicker from "material-ui/DatePicker";
-import Button from "@material-ui/core/Button";
-import { API_ROOT } from "../api-config";
+import React, { Component } from 'react';
+import Drawer from 'material-ui/Drawer';
+import TextField from '@material-ui/core/TextField';
+import Slider from '@material-ui/lab/Slider';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Checkbox from 'material-ui/Checkbox';
+import Subheader from 'material-ui/Subheader';
+import Button from '@material-ui/core/Button';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import { API_ROOT } from '../api-config';
+import classes from '../css/NewLocationForm.module.css';
+
+export function isMobile() {
+  return window.innerWidth < 700
+}
 
 const styles = {
   root: {
-    display: "flex",
-    height: 120,
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    height: 80,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
-  button: {
-    margin: "20px"
-  },
-  closeButton: {
-    color: "grey",
-    fontSize: "14px"
+  form: {
+    width: '100%',
+    paddingTop: '20px'
   },
   checkboxblock: {
-    marginTop: "40px"
+    margin: '20px 0 0'
   },
   checkbox: {
-    marginBottom: 16
+    marginBottom: 16,
   },
-  datepicker: {
-    zIndex: 3000
+  textField: {
+    marginRight: '20px',
+    marginBottom: '20px'
   }
 };
 
 const initialState = {
-  nickname: "",
-  longitude: "",
-  latitude: "",
-  country: "",
+  nickname: '',
+  depth: '',
+  longitude: '',
+  latitude: '',
+  country: '',
   stability: 5,
   aesthetics: 5,
   safety: 5,
   date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
-  content: "",
+  content: '',
   user_id: 0,
   fuel: false,
   water: false,
@@ -54,81 +60,78 @@ const initialState = {
   snorkeling: false,
   paddleboarding: false,
   surfing: false
-};
+}
 
 export default class NewLocationForm extends Component {
+
   constructor(props) {
     super(props);
-    this.state = initialState;
+    this.state = initialState
   }
 
   handleCheck(event) {
-    let key = event.target.name;
-    this.setState(oldState => {
-      let old = oldState[key];
+    let key = event.target.name
+    this.setState((oldState) => {
+      let old = oldState[key]
       return {
-        [key]: !old
+        [key]: !old,
       };
     });
   }
 
   handleFirstSlider = (event, value) => {
-    this.setState({ stability: value });
+    this.setState({stability: value});
   };
 
   handleSecondSlider = (event, value) => {
-    this.setState({ aesthetics: value });
+    this.setState({aesthetics: value});
   };
 
   handleThirdSlider = (event, value) => {
-    this.setState({ safety: value });
+    this.setState({safety: value});
   };
 
   handleClick(event) {
     this.setState({
-      open: false
+      open: false,
     });
-  }
+  };
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
+  };
 
-  handleDateChange = (event, date) => {
+  handleDateChange(date) {
+    let newDate = new Date(date).toDateString()
     this.setState({
-      date_visited: date
+      date_visited: newDate,
     });
   };
 
   getPosition(event) {
     event.preventDefault();
     this.setState({
-      longitude: localStorage.getItem("lon"),
-      latitude: localStorage.getItem("lat")
-    });
-    fetch(
-      `//${API_ROOT}/locations/get_country/${localStorage.getItem(
-        "lon"
-      )}/${localStorage.getItem("lat")}`,
-      {
-        method: "GET",
-        credentials: "omit" /* other options: include, same-origin */,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+      longitude: localStorage.getItem('lon'),
+      latitude: localStorage.getItem('lat'),
+    })
+    fetch(`//${API_ROOT}/locations/get_country/${localStorage.getItem('lon')}/${localStorage.getItem('lat')}`, {
+      method: "GET",
+      credentials: 'omit',  /* other options: include, same-origin */
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-    )
-      .then(response => response.json())
-      .then(response => {
-        if (response.features[0] == null) {
-          this.setState({ country: "" });
-        } else {
-          this.setState({ country: response.features[0].place_name });
-        }
-      });
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.features[0] == null) {
+        this.setState({ country: '' })
+      } else {
+        this.setState({ country: response.features[0].place_name })
+      }
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -139,159 +142,147 @@ export default class NewLocationForm extends Component {
 
   render() {
     return (
-      <div style={{ zIndex: 2000 }}>
+      <div>
+
         <Drawer
           docked={false}
-          width={
-            window.innerWidth > 700
-              ? window.innerWidth * 0.5
-              : window.innerWidth
-          }
+          width={window.innerWidth > 700 ? window.innerWidth*0.5 : window.innerWidth}
           open={this.props.open}
           openSecondary={true}
-          onRequestChange={event => this.props.handleRequestChange()}
+          onRequestChange={(event) => this.props.handleRequestChange()}
           containerClassName="drawer"
         >
-          <h2>Add New Anchorage</h2>
 
-          <form
-            onSubmit={event => {
-              event.preventDefault();
-              this.props.handleSubmit(this.state);
-            }}
-          >
-            <TextField
-              name="nickname"
-              hintText="Nickname"
-              floatingLabelText="Nickname"
-              value={this.state.nickname}
-              multiLine={false}
-              fullWidth={false}
-              onChange={event => this.handleChange(event)}
-            />
-
-            <TextField
-              name="depth"
-              hintText="Depth"
-              floatingLabelText="Depth"
-              value={this.state.depth}
-              multiLine={false}
-              fullWidth={false}
-              onChange={event => this.handleChange(event)}
-            />
-
-            <br />
-
-            <TextField
-              name="latitude"
-              hintText="Latitude"
-              floatingLabelText="Latitude"
-              value={this.state.latitude}
-              multiLine={false}
-              fullWidth={false}
-              style={{ marginRight: "20px" }}
-              onChange={event => this.handleChange(event)}
-            />
-
-            <TextField
-              name="longitude"
-              hintText="Longitude"
-              floatingLabelText="Longitude"
-              value={this.state.longitude}
-              multiLine={false}
-              fullWidth={false}
-              onChange={event => this.handleChange(event)}
-            />
-
-            <TextField
-              name="country"
-              hintText="Country"
-              floatingLabelText="Country"
-              value={this.state.country}
-              multiLine={false}
-              fullWidth={false}
-              style={{ marginRight: "20px" }}
-              onChange={event => this.handleChange(event)}
-            />
-
-            <Button
-              variant="outlined"
-              color="secondary"
-              style={styles.button}
-              disabled={!this.props.isOnline}
-              onClick={event => this.getPosition(event)}
-            >
-              Autofill with current location
-            </Button>
-
-            <br />
-            <br />
-            <br />
-
-            <div className="sliders row" style={styles.root}>
-              <div className="sliderContainer" name="stability">
-                <div>
-                  {"Comfort: "}
-                  {this.state.stability}
-                </div>
-                <Slider
-                  value={this.state.stability}
-                  onChange={this.handleFirstSlider}
-                  style={{ height: 100 }}
-                  sliderStyle={{ left: "40%" }}
-                  axis="y"
-                  defaultValue={5}
-                  min={0}
-                  max={10}
-                  step={1}
-                />
-              </div>
-
-              <div className="sliderContainer" name="aesthetics">
-                <div>
-                  {"Aesthetics: "}
-                  {this.state.aesthetics}
-                </div>
-                <Slider
-                  name="aesthetics"
-                  value={this.state.aesthetics}
-                  onChange={this.handleSecondSlider}
-                  style={{ height: 100 }}
-                  sliderStyle={{ left: "40%" }}
-                  axis="y"
-                  defaultValue={5}
-                  min={0}
-                  max={10}
-                  step={1}
-                />
-              </div>
-
-              <div className="sliderContainer" name="safety">
-                <div>
-                  {"Safety: "}
-                  {this.state.safety}
-                </div>
-                <Slider
-                  name="safety"
-                  value={this.state.safety}
-                  onChange={this.handleThirdSlider}
-                  style={{ height: 100 }}
-                  sliderStyle={{ left: "40%" }}
-                  axis="y"
-                  defaultValue={5}
-                  min={0}
-                  max={10}
-                  step={1}
-                />
-              </div>
+            <div
+              className={classes.mobileOnly}
+              onClick={this.props.handleClose}>
+              <div>&#10005;</div>
             </div>
 
-            <br />
-            <br />
-            <Subheader className="subheader">Amenities</Subheader>
+            <h2>Add New Anchorage</h2>
 
-            <div className="row" style={styles.checkboxblock}>
-              <div className="column">
+            <form
+              style={styles.form}
+              onSubmit={ (event) => {
+                event.preventDefault();
+                this.props.handleSubmit(this.state);
+              }
+            }>
+
+              <TextField
+                name="nickname"
+                label="Nickname"
+                value={this.state.nickname}
+                multiline={false}
+                fullWidth={isMobile()}
+                style={styles.textField}
+                onChange={(event) => this.handleChange(event)}
+              />
+
+              <TextField
+                name="depth"
+                label="Depth (meters)"
+                value={this.state.depth}
+                multiline={false}
+                fullWidth={isMobile()}
+                style={styles.textField}
+                onChange={(event) => this.handleChange(event)}
+              />
+
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={classes.button}
+                style={{marginBottom: '20px'}}
+                disabled={!this.props.isOnline}
+                onClick={(event) => this.getPosition(event)}
+              >
+              Autofill location
+              </Button>
+
+              <br />
+
+              <TextField
+                name="latitude"
+                label="Latitude"
+                value={this.state.latitude}
+                multiline={false}
+                fullWidth={isMobile()}
+                style={styles.textField}
+                onChange={(event) => this.handleChange(event)}
+              />
+
+              <TextField
+                name="longitude"
+                label="Longitude"
+                value={this.state.longitude}
+                multiline={false}
+                fullWidth={isMobile()}
+                style={styles.textField}
+                onChange={(event) => this.handleChange(event)}
+              />
+
+              <TextField
+                name="country"
+                label="Country"
+                value={this.state.country}
+                multiline={false}
+                fullWidth={isMobile()}
+                style={styles.textField}
+                onChange={(event) => this.handleChange(event)}
+              />
+
+              <br />
+              <br />
+
+              <div className="sliders row" style={styles.root}>
+
+                <div className="sliderContainer" name="stability">
+                  <div>{'Comfort: '}{this.state.stability}</div>
+                  <Slider
+                    value={this.state.stability}
+                    onChange={this.handleFirstSlider}
+                    style={{width: 100, paddingTop: '20px'}}
+                    defaultValue={5}
+                    min={0}
+                    max={10}
+                    step={1}/>
+                </div>
+
+                <div className="sliderContainer" name="aesthetics">
+                  <div>{'Aesthetics: '}{this.state.aesthetics}</div>
+                  <Slider
+                    name="aesthetics"
+                    value={this.state.aesthetics}
+                    onChange={this.handleSecondSlider}
+                    style={{width: 100, paddingTop: '20px'}}
+                    defaultValue={5}
+                    min={0}
+                    max={10}
+                    step={1}/>
+                </div>
+
+                <div className="sliderContainer" name="safety">
+                  <div>{'Safety: '}{this.state.safety}</div>
+                  <Slider
+                    name="safety"
+                    value={this.state.safety}
+                    onChange={this.handleThirdSlider}
+                    style={{width: 100, paddingTop: '20px'}}
+                    defaultValue={5}
+                    min={0}
+                    max={10}
+                    step={1}/>
+                </div>
+
+              </div>
+
+              <br />
+              <br />
+              <Subheader className="subheader">Amenities</Subheader>
+
+              <div className="grid" style={styles.checkboxblock}>
+
                 <Checkbox
                   label="Fuel"
                   style={styles.checkbox}
@@ -313,8 +304,7 @@ export default class NewLocationForm extends Component {
                   checked={this.state.food}
                   onCheck={this.handleCheck.bind(this)}
                 />
-              </div>
-              <div className="column">
+
                 <Checkbox
                   label="Laundry"
                   style={styles.checkbox}
@@ -336,8 +326,7 @@ export default class NewLocationForm extends Component {
                   checked={this.state.diving}
                   onCheck={this.handleCheck.bind(this)}
                 />
-              </div>
-              <div className="column">
+
                 <Checkbox
                   label="Surfing"
                   style={styles.checkbox}
@@ -359,44 +348,55 @@ export default class NewLocationForm extends Component {
                   checked={this.state.paddleboarding}
                   onCheck={this.handleCheck.bind(this)}
                 />
+
               </div>
-            </div>
 
-            <TextField
-              name="content"
-              hintText="Write a Review"
-              floatingLabelText="Write a Review"
-              value={this.state.content}
-              multiLine={true}
-              fullWidth={true}
-              rows={2}
-              onChange={event => this.handleChange(event)}
-            />
+              <TextField
+                name="content"
+                label="Write a Review"
+                value={this.state.content}
+                multiline={true}
+                fullWidth={true}
+                rows={3}
+                style={{marginBottom: '20px'}}
+                onChange={(event) => this.handleChange(event)}
+              />
 
-            <DatePicker
-              dialogContainerStyle={styles.datepicker}
-              hintText="Date Visited"
-              onChange={this.handleDateChange}
-            />
+              <div className={classes.lastLine}>
+                <div>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                      margin="normal"
+                      label="Date Visited"
+                      value={this.state.date_visited}
+                      onChange={(date) => this.handleDateChange(date)}
+                      format='MMM dd yyyy'
+                    />
+                  </MuiPickersUtilsProvider>
+                </div>
+                <div className={classes.buttonsContainer}>
+                  <RaisedButton
+                    className="submitBtn"
+                    label="Submit"
+                    type="submit"
+                    secondary={true}
+                    fullWidth={isMobile()}
+                    className={[classes.button, classes.submitBtn].join(' ')}
+                    onClick={this.props.handleToggle}
+                  />
+                  <FlatButton
+                    className={[classes.closeButton, classes.desktopOnly].join(' ')}
+                    onClick={this.props.handleClose}
+                  >
+                    CANCEL
+                  </FlatButton>
+                </div>
+              </div>
 
-            <RaisedButton
-              className="submitBtn"
-              label="Submit"
-              type="submit"
-              secondary={true}
-              fullWidth={false}
-              style={styles.button}
-              onClick={this.props.handleToggle}
-            />
+            </form>
 
-            <FlatButton
-              style={styles.closeButton}
-              onClick={this.props.handleClose}
-            >
-              CANCEL
-            </FlatButton>
-          </form>
         </Drawer>
+
       </div>
     );
   }
