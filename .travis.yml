@@ -5,17 +5,19 @@ cache:
   - node_modules # NPM packages
 rvm:
 - 2.5.1
+
 install:
 - bundle install
 - nvm install stable && nvm alias default stable
 - npm install npm@latest -g
 - npm --version
-- npm install
+
 script:
 - cd client
 - npm install
 - CI=true npm run test
 - npm run build
+
 deploy:
   provider: s3
   access_key_id: AKIAIVRL56ULYU5DO7MA
