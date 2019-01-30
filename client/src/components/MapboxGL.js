@@ -20,11 +20,11 @@ export default class MapboxGL extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (true) {
+    if (this.props.locations && this.props.locations.length !== nextProps.locations.length) {
 
         // console.log('new' + nextProps.locations.length)
         // console.log('old' + this.props.locations.length)
-      this.props.locations.forEach((loc) => {
+      nextProps.locations.forEach((loc) => {
         // create a HTML element for each feature
         let el = <Link
           to={ `/locations/${loc.id}` }
