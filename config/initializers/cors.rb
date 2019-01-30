@@ -8,7 +8,14 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # origins Rails.application.config.x.cors_allowed_origins
-    origins ['localhost:3000', 'yarrble.com:3000', 'yarrble.com']
+    origins [
+      'localhost:3000',
+      'yarrble.com:3000',
+      'yarrble.com',
+      'www.yarrble.com',
+      'www.yarrble.com:3000',
+      'anchorages.io'
+    ]
     # origins process.env.REACT_APP_FRONTEND_HOST_DEVELOPMENT || 'localhost:3000'
     resource '*',
       headers: :any,
