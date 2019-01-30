@@ -1,3 +1,8 @@
 # npm install
 # npm run build
 # <upload to s3>
+
+language: ruby
+rvm:
+ - 2.5
+ - jruby

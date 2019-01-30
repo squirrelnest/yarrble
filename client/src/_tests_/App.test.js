@@ -5,6 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import { shallow, mount, configure, render } from 'enzyme';
 import configureStore from 'redux-mock-store';
 
+jest.mock("mapbox-gl", () => { return {} });
+
 // initialize enzyme
 
 configure({ adapter: new Adapter() })
