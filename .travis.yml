@@ -2,7 +2,7 @@ language: ruby
 cache:
   bundler: true
   directories:
-  - node_modules # NPM packages
+  - client/node_modules # NPM packages
 rvm:
 - 2.5.1
 
@@ -16,7 +16,7 @@ script:
 - cd client
 - npm install
 - CI=true npm run test
-- cat client/src/api-config.js
+- cat src/api-config.js
 - npm run build
 
 deploy:
