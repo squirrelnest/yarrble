@@ -9,8 +9,8 @@
 /.env
 
 # Ignore build artifacts
-*/build
 /client/build/
+/client/build/*
 
 # Ignore bundler config.
 /.bundle
