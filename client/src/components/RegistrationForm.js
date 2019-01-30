@@ -87,7 +87,6 @@ export class RegistrationForm extends Component {
           <br />
 
           <RaisedButton
-            className="submitBtn"
             label="SIGN UP"
             type="submit"
             secondary={true}

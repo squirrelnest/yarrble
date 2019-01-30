@@ -71,7 +71,7 @@ export default class MapboxGL extends React.Component {
     // </div>
 
   render() {
-    const { lng, lat, zoom } = this.state;
+    // const { lng, lat, zoom } = this.state;
 
     return (
       <div>
