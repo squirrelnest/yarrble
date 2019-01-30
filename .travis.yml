@@ -14,5 +14,6 @@ install:
 - npm install
 
 script:
-- bundle exec rake spec
-- npm run test
+- cd client
+- npm install
+- CI=true npm run test
