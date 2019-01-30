@@ -16,6 +16,7 @@ script:
 - cd client
 - npm install
 - CI=true npm run test
+- cat client/src/api-config.js
 - npm run build
 
 deploy:
