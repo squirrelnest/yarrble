@@ -1,19 +1,27 @@
-# npm install
-# npm run build
-# <upload to s3>
-
 language: ruby
 rvm:
 - 2.5.1
-
 install:
 - bundle install
 - nvm install stable && nvm alias default stable
 - npm install npm@latest -g
 - npm --version
 - npm install
-
 script:
 - cd client
 - npm install
 - CI=true npm run test
+- npm run build
+
+deploy:
+  provider: s3
+  bucket: yarrble-frontend
+  access_key_id: ENCRYPTED_AWS_ACCESS_KEY_ID
+  secret_access_key: ENCRYPTED_AWS_SECRET_ACCESS_KEY
+  region: us-east-1
+  local_dir: build
+
+env:
+  global:
+  - secure: bHJNuwkLXkN6a4C4DTTO+IO/vDUEbqoE7vW0eHVr+nRogfgRnJ9IfiVDTHsre/cBfWWF5gBJnBlfpfQZT5MZz+8neR4aaEr5zXWapSBVt9E9bQHXQagNIKloA080cYb1MkAWZM8n64RBRF/9tyFDxuL43ssQ+q4dx17YhOe2Ma1N1s7CbnB3JIuvSJuicbp5IYMX2KJgGNIDLizTcxqOfe9WoFhxLLJrbnXkXscXNAkzA1kiN04h4G14iDD2v4Inq+A8hmUiFlvjQPypTd5IDaVjVmPTlO5s+jsZZWS1CgJWEU+dqjdGc33eoWXE0qVA4VZriBdH5PJ2TIJ7uBtnk3Jdpq4oUJicut3lgdfsuzKefyBjbCZ4hRMjuT9fI8OKN5voNzVlqj0qqw0bFCMNrhNlcaFPP/uip4jYzN5iq34udJ6hGgdEHxujjFrQKWkP/8vsOSwLPNtLYIE3nDY8d8i4eTS8KjnLqHCG1S5htsoKLNmnu7J1dn3NFUbxEauLs6GhJ8EsGefjweA9nv3WYMvGCqaWnC0OvcRF39lJsBxcuB3y8T87IP087QxfYz0/NOrR7ayjKq9gbis+d4ZrZksAWMEQvIB+JmguwNohTCwFjiJru9FsKbk3/CLyR7gNzxpHulq7yH6a2HIHxvQ92Rlnb4ekoCXtXq5kKRiZnbo=
+  - secure: UXIqdVfbLuyMC86M32YvO24imXgaB1cmPpL5sSG7dQtancs6qNChXZUbaB910+0+wsJvged/TLtPME2cetBnwS4a3EDhFdpvxR0J3GdKKNagIMNv8V6dm7or6vipjlTku3izUUFPtf5VJ9ceXV1FogXXIgfdiS3b/xTJcjeNsBs2zK4IUXkH388OCNRJkAKJfpTv3yKPvnyQij/ZYt/tzGx155gJWecBHPufcZeKI1Nfa28X2nDJy+PY/rodc8Wna5zxKvgwG2Ttik5+Ov+r/trVUwr6ST53Cp0UYn4dVceOCCSWPH0ldPoBszqVPbushmOj4C2vOJNl4WQ8LZ/+yIKdcAuXTWK9DhmJlfEBFeQKFV4RW51v8NngeuvOfYSOyh1gtuLW7l3phnC65fT/QKcwgxsbUnk5KGWdxp629bG70dOCu7+j2rm0ePjhrGJJpHxuLZyO+QzBFEziC9dVJlksY37/8ur3ryN0D8CZK68ERG+EiaPw4cJajl5WCDy+KEJfeDPISjRd+L6vXaG5InRyoD8PkQNyFW3EbaSmh5bumqF8ghkGkIsPH7mbzryfqtR70K1W+6Nxa0myidzzqHm/AsVbXPM3QPR+4DziOE/oVidA0MwygazC5ZHqnJKQaWbxdhgOin7C5ZLQNEoe7Ox3RHArzbl0JTHDTCvtWYY=
