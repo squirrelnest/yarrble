@@ -20,9 +20,9 @@ export class App extends Component {
           <div>
             <Router>
               <div>
-                <NavBar />
+                <NavBar store={this.props.store}/>
                 <Switch>
-                  <Route exact path="/" component={ Home } />
+                  <Route exact path="/" render={() => <Home store={this.props.store} />} />
                   <Route path={`/locations/:locationId`} component={ ShowLocation } />
                   <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} />} />
                   <Route exact path="/login" component={ LoginContainer } />

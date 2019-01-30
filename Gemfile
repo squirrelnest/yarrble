@@ -30,6 +30,8 @@ gem 'rails', '~> 5.1.5'
 gem 'pg'
 # Use PostGIS adapter for Active Record
 gem 'activerecord-postgis-adapter'
+# proj4 converts coordinates from text files or directly from user input
+gem "rgeo-proj4"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

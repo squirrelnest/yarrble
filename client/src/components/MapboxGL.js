@@ -1,15 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import mapboxgl from "mapbox-gl";
 import Place from 'material-ui/svg-icons/maps/place';
 import { Link } from 'react-router-dom';
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg";
+// jest.mock("mapbox-gl", () => { return {} });
+
+const MAPBOX_TOKEN = "pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg";
+
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export default class MapboxGL extends React.Component {
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     this.state = {
       lng: 5,
