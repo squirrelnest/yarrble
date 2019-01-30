@@ -19,27 +19,31 @@ export default class MapboxGL extends React.Component {
     };
   }
 
+  renderMarkers(locations) {
+    locations.forEach((loc) => {
+      // create a HTML element for each feature
+      let el = <Link
+        to={ `/locations/${loc.id}` }
+        key={ loc.id }>
+          <Place
+            hoverColor={'#E91E63'}
+            color='#00BCD4'
+          />
+      </Link>;
+
+      // make a marker for each feature and add to the map
+      new mapboxgl.Marker(el)
+      .setLngLat([loc.lon, loc.lat])
+      .addTo(this.state.map);
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.locations && this.props.locations.length !== nextProps.locations.length) {
-
         // console.log('new' + nextProps.locations.length)
         // console.log('old' + this.props.locations.length)
-      nextProps.locations.forEach((loc) => {
-        // create a HTML element for each feature
-        let el = <Link
-          to={ `/locations/${loc.id}` }
-          key={ loc.id }>
-            <Place
-              hoverColor={'#E91E63'}
-              color='#00BCD4'
-            />
-        </Link>;
-
-        // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-        .setLngLat([loc.lon, loc.lat])
-        .addTo(this.state.map);
-      });
+        renderMarkers(nextProps.locations)
+      
     }
   }
 
@@ -53,7 +57,6 @@ export default class MapboxGL extends React.Component {
       zoom
     });
 
-
     map.on("move", () => {
       const { lng, lat } = map.getCenter();
 
@@ -64,6 +67,9 @@ export default class MapboxGL extends React.Component {
       });
     });
     this.setState({map: map})
+    if (this.props.locations) {
+      renderMarkers(nextProps.locations)
+    }
   }
 
     // <div>
