@@ -102,7 +102,13 @@ export function getUser() {
       }
     })
     .then(response => response.json())
-    .then(responseJSON => dispatch(getUserSuccess(responseJSON)) )
+    .then( responseJSON => { 
+      if (responseJSON != null) { 
+        dispatch(getUserSuccess(responseJSON))
+      } else {
+        dispatch({ type: UNAUTHENTICATED })
+      }
+    })
   }
 }
 

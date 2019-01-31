@@ -34,14 +34,17 @@ class Logged extends Component {
 
   render() {
     return (
-      <IconMenu
-        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      >
-        <MenuItem primaryText="My Reviews" href="/myreviews" />
-        <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
-      </IconMenu>
+      <div style={{display: 'flex'}}>
+        <div style={{color: 'white', margin: 'auto'}}>Hi, {this.props.username}</div>
+        <IconMenu
+          iconButtonElement={<IconButton><MoreVertIcon color='white' /></IconButton>}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        >
+          <MenuItem primaryText="My Reviews" href="/myreviews" />
+          <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
+        </IconMenu>
+      </div>
     )
   }
 }
@@ -69,18 +72,21 @@ class NavBar extends Component {
           title="Yarrble"
           onTitleClick={this.handleClick}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-          iconElementRight={this.props.authenticated ? <Logged /> : <Login />}
+          iconElementRight={this.props.authenticated ? <LoggedConnected /> : <Login />}
         />
 
     )
   }
 }
 
+// CONNECT COMPONENTS TO REDUX STORE
+
 const mapStateToProps = (state) => {
 
   return {
     errorMessage: state.auth.error,
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    username: state.auth.username || []
   }
 }
 
@@ -93,4 +99,6 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
+
+export const LoggedConnected = connect(mapStateToProps, mapDispatchToProps)(Logged)

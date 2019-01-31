@@ -10,8 +10,13 @@ import ShowLocation from './containers/ShowLocation';
 import LoginContainer from './containers/LoginContainer';
 import RegistrationContainer from './containers/RegistrationContainer';
 import { connect } from 'react-redux';
+import { getUser } from './actions/authActions';
 
 export class App extends Component {
+
+  componentDidMount() {
+    this.props.getUser()
+  }
 
   render() {
     return (
@@ -38,19 +43,25 @@ export class App extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => dispatch(getUser())
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     locations: state.locations.locations,
     reviews: state.reviews.reviews,
-    auth: state.auth
-  };
-};
+    auth: state.auth || {}
+  }
+}
 
 /*
 connect() returns a higher order component that listens for redux store changes
 and renders a component with props that are values from the store.
 */
 
-const WrapperApp = connect(mapStateToProps)(App);
+const WrapperApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default WrapperApp

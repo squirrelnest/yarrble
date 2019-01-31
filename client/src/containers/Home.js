@@ -8,7 +8,6 @@ import {
   deleteLocation,
   postOfflineData
 } from '../actions/locationActions';
-import { getUser } from '../actions/authActions';
 
 export class Home extends Component {
   constructor(props) {
@@ -34,7 +33,6 @@ export class Home extends Component {
     window.addEventListener('offline', () => {
       this.isOffline();
     });
-    this.props.getUser()
   }
 
   componentWillUnmount() {
@@ -159,8 +157,7 @@ function mapDispatchToProps(dispatch) {
   return {
     createLocation: locationData => dispatch(createLocation(locationData)),
     deleteLocation: location_id => dispatch(deleteLocation(location_id)),
-    postOfflineData: () => dispatch(postOfflineData()),
-    getUser: () => dispatch(getUser())
+    postOfflineData: () => dispatch(postOfflineData())
   };
 }
 
