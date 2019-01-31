@@ -24,7 +24,7 @@ export default class MapboxGL extends React.Component {
   }
 
   componentDidMount() {
-    const { lng, lat, zoom } = this.state;
+    const { lng, lat } = this.state;
 
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -34,6 +34,8 @@ export default class MapboxGL extends React.Component {
       center: [lng, lat]
     });
 
+    this.setState({map: map})
+    
     map.on("move", () => {
       const { lng, lat } = map.getCenter();
 
@@ -43,7 +45,7 @@ export default class MapboxGL extends React.Component {
         zoom: map.getZoom().toFixed(2)
       });
     });
-    this.setState({map: map})
+
     if (this.state.map && this.props.locations) {
       this.renderMarkers(this.props.locations)
     }

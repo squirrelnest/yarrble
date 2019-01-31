@@ -5,14 +5,6 @@ import Fab from '../components/Fab.js';
 
 export default class MapContainer extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.width !== nextProps.width) {
-      this.setState({
-        width: this.props.width
-      })
-    }
-  }
-
   render() {
     return (
       <div className="map-container" style={{ height: window.innerWidth < 700 ? this.props.height*0.5 : this.props.height*0.92 }}>
