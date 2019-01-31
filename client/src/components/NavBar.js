@@ -5,11 +5,11 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { withRouter } from 'react-router-dom';
 import { logout, refreshAuth } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import anchor from '../img/anchor.svg';
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -71,7 +71,7 @@ class NavBar extends Component {
         <AppBar
           title="Yarrble"
           onTitleClick={this.handleClick}
-          iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+          iconElementLeft={<IconButton onClick={this.handleClick}><img src={anchor} alt="anchor" className="light"></img></IconButton>}
           iconElementRight={this.props.authenticated ? <LoggedConnected /> : <Login />}
         />
 
