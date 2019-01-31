@@ -22,7 +22,6 @@ export default class MapboxGL extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.locations && this.props.locations.length !== nextProps.locations.length) {
         this.renderMarkers(nextProps.locations)
-      
     }
   }
 
@@ -31,9 +30,8 @@ export default class MapboxGL extends React.Component {
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v9",
-      center: [lng, lat],
-      zoom
+      style: "mapbox://styles/mapbox/light-v9",
+      center: [lng, lat]
     });
 
     map.on("move", () => {
@@ -46,7 +44,7 @@ export default class MapboxGL extends React.Component {
       });
     });
     this.setState({map: map})
-    if (this.props.locations) {
+    if (this.state.map && this.props.locations) {
       this.renderMarkers(this.props.locations)
     }
   }
@@ -71,7 +69,6 @@ export default class MapboxGL extends React.Component {
   }
 
   render() {
-    // const { lng, lat, zoom } = this.state;
 
     return (
       <div>
