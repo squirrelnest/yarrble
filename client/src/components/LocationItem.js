@@ -13,7 +13,6 @@ class LocationItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location_id: this.props.location_id,
       visibility: 'hidden',
       popoverOpen: false,
       NewReviewFormOpen: false,
@@ -60,6 +59,8 @@ class LocationItem extends Component {
 
   render() {
 
+    const { auth } = this.props
+
     return (
 
       <div className="list-item">
@@ -97,7 +98,7 @@ class LocationItem extends Component {
               onRequestClose={this.handleClose}
           >
             <MenuItem key="addReview" primaryText="Add Review" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)} />
-            <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} />
+          { auth.admin && <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} /> }
           </Popover>
 
       </div>
@@ -105,8 +106,14 @@ class LocationItem extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    auth: state.auth || {}
+  };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return { deleteLocation: (location_id) => dispatch(deleteLocation(location_id)) }
 };
 
-export default connect(null, mapDispatchToProps)(LocationItem);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationItem);

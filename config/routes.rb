@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/myreviews' => 'users#reviews'
   get '/signup' => 'users#new'
   post '/register' => 'users#create'
-
+  get '/user' => 'users#current'
   get '/logout' => 'sessions#destroy'
 
   # Knock JWT authentication

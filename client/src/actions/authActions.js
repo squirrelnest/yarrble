@@ -7,11 +7,16 @@ export const AUTHENTICATED = 'AUTHENTICATED'
 export const UNAUTHENTICATED = 'UNAUTHENTICATED'
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR'
 export const ADD_USER = 'ADD_USER'
+export const GET_USER = 'GET_USER'
 
 /* ACTION CREATORS */
 
 export function addUser(payload) {
   return { type: ADD_USER, payload }
+}
+
+export function getUserSuccess(payload) {
+  return { type: GET_USER, payload }
 }
 
 /* ASYNCS */
@@ -35,7 +40,9 @@ export function login(loginData) {
     })
     .then(response => response.json())
     .then(response => localStorage.setItem("jwt", response.jwt))
-    .then( () => dispatch({ type: AUTHENTICATED }))
+    .then( () => { 
+      dispatch({ type: AUTHENTICATED })
+    })
     .catch(function(error) {
       console.log('Oops! Invalid credentials: \n', error);
       dispatch({
@@ -79,6 +86,24 @@ export function register(registrationData) {
 export function logout(dispatch) {
   window.localStorage.clear()
   dispatch({ type: 'UNAUTHENTICATED' })
+}
+
+export function getUser() {
+  let token = "Bearer " + localStorage.getItem("jwt")
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_REVIEWS' });
+    return fetch(`//${API_ROOT}/user`, {
+      method: "GET",
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(response => response.json())
+    .then(responseJSON => dispatch(getUserSuccess(responseJSON)) )
+  }
 }
 
 export function updateUser(userData) {

@@ -2,12 +2,8 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user, only: [:reviews]
 
-  # def index
-  #   @users = User.all
-  # end
-
-  def show
-   render json: current_user.as_json(only: %i(id email))
+  def current
+    render json: current_user
   end
 
   def new

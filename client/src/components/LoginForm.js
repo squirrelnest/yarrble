@@ -110,7 +110,7 @@ const mapStateToProps = (state) => {
     errorMessage: state.auth.error,
     authenticated: state.auth.authenticated,
     newregistration: state.auth.newregistration,
-    username: state.auth.user.username
+    username: state.auth.username
   }
 }
 
