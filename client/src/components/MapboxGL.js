@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg";
 
-mapboxgl.accessToken = MAPBOX_TOKEN;
-
 export default class MapboxGL extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +25,8 @@ export default class MapboxGL extends React.Component {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
+
+    mapboxgl.accessToken = MAPBOX_TOKEN;
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -75,6 +75,7 @@ export default class MapboxGL extends React.Component {
         <div
           style={{width: this.props.width, height:this.props.height }}
           ref={el => (this.mapContainer = el)}
+          onClick={(event) => this.props.handleMapClick(event, event.lngLat)}
         />
       </div>
     );
