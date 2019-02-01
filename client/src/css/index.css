@@ -54,6 +54,12 @@ a:hover {
 
 .sliderContainer {
   margin: auto;
+  padding: 20px 0;
+}
+
+.selected {
+  border-bottom: 30px solid rgb(255, 64, 129);
+  padding-bottom: 4px;
 }
 
 .listy {

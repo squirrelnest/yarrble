@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import Subheader from 'material-ui/Subheader';
 import Button from '@material-ui/core/Button';
+import WindSelector from './WindSelector';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
@@ -18,12 +19,6 @@ export function isMobile() {
 }
 
 const styles = {
-  root: {
-    display: 'flex',
-    height: 80,
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
   form: {
     width: '100%',
     paddingTop: '20px'
@@ -59,7 +54,8 @@ const initialState = {
   diving: false,
   snorkeling: false,
   paddleboarding: false,
-  surfing: false
+  surfing: false,
+  windProtection: []
 }
 
 export default class NewLocationForm extends Component {
@@ -95,6 +91,17 @@ export default class NewLocationForm extends Component {
     this.setState({
       open: false,
     });
+  };
+
+  handleWindClick = (event) => {
+    event.preventDefault()
+    this.setState({
+      windProtection: ( event.target.id !== "" && this.state.windProtection.includes(event.target.id) ) ? 
+        this.state.windProtection.filter(dir => dir !== event.target.id) 
+        : 
+        this.state.windProtection.concat(event.target.id)
+    });
+    console.log(this.state.windProtection)
   };
 
   handleChange(event) {
@@ -232,53 +239,57 @@ export default class NewLocationForm extends Component {
                 onChange={(event) => this.handleChange(event)}
               />
 
-              <br />
-              <br />
+              <div className="row">
 
-              <div className="sliders row" style={styles.root}>
-
-                <div className="sliderContainer" name="stability">
-                  <div>{'Comfort: '}{this.state.stability}</div>
-                  <Slider
-                    value={this.state.stability}
-                    onChange={this.handleFirstSlider}
-                    style={{width: 100, paddingTop: '20px'}}
-                    defaultValue={5}
-                    min={0}
-                    max={10}
-                    step={1}/>
+                <div className={classes.formRow}>
+                  <Subheader className="subheader">Wind Protection</Subheader>
+                  <WindSelector clickHandler={this.handleWindClick} />
                 </div>
+                <div className={classes.formRow}>
+                  <Subheader className="subheader">Ratings</Subheader>
+                  <div className="sliders">
 
-                <div className="sliderContainer" name="aesthetics">
-                  <div>{'Aesthetics: '}{this.state.aesthetics}</div>
-                  <Slider
-                    name="aesthetics"
-                    value={this.state.aesthetics}
-                    onChange={this.handleSecondSlider}
-                    style={{width: 100, paddingTop: '20px'}}
-                    defaultValue={5}
-                    min={0}
-                    max={10}
-                    step={1}/>
+                    <div className="sliderContainer" name="stability">
+                      <div>{'Comfort: '}{this.state.stability}</div>
+                      <Slider
+                        value={this.state.stability}
+                        onChange={this.handleFirstSlider}
+                        style={{width: 100, paddingTop: '20px'}}
+                        defaultValue={5}
+                        min={0}
+                        max={10}
+                        step={1}/>
+                    </div>
+
+                    <div className="sliderContainer" name="aesthetics">
+                      <div>{'Aesthetics: '}{this.state.aesthetics}</div>
+                      <Slider
+                        name="aesthetics"
+                        value={this.state.aesthetics}
+                        onChange={this.handleSecondSlider}
+                        style={{width: 100, paddingTop: '20px'}}
+                        defaultValue={5}
+                        min={0}
+                        max={10}
+                        step={1}/>
+                    </div>
+
+                    <div className="sliderContainer" name="safety">
+                      <div>{'Safety: '}{this.state.safety}</div>
+                      <Slider
+                        name="safety"
+                        value={this.state.safety}
+                        onChange={this.handleThirdSlider}
+                        style={{width: 100, paddingTop: '20px'}}
+                        defaultValue={5}
+                        min={0}
+                        max={10}
+                        step={1}/>
+                    </div>
+                  </div>
                 </div>
-
-                <div className="sliderContainer" name="safety">
-                  <div>{'Safety: '}{this.state.safety}</div>
-                  <Slider
-                    name="safety"
-                    value={this.state.safety}
-                    onChange={this.handleThirdSlider}
-                    style={{width: 100, paddingTop: '20px'}}
-                    defaultValue={5}
-                    min={0}
-                    max={10}
-                    step={1}/>
-                </div>
-
               </div>
-
-              <br />
-              <br />
+            
               <Subheader className="subheader">Amenities</Subheader>
 
               <div className="grid" style={styles.checkboxblock}>
