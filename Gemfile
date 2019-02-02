@@ -7,7 +7,6 @@ end
 
 # Enable JWT authentication
 gem 'knock'
-
 # Create seed file from previous databases
 gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 # Foreman utility for managing multiple servers (Webpack dev server, Rails API server, etc.)
@@ -55,6 +54,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Prettify rails console output
+  gem 'awesome_print', :require => 'ap'
 end
 
 group :development do
