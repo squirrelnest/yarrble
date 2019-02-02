@@ -2,6 +2,7 @@ class Location < ApplicationRecord
 
   attr_writer :lon, :lat
 
+  has_many :amenities, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :users, through: :reviews
 

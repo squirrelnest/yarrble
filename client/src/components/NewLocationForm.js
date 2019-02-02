@@ -101,7 +101,6 @@ export default class NewLocationForm extends Component {
         : 
         this.state.windProtection.concat(event.target.id)
     });
-    console.log(this.state.windProtection)
   };
 
   handleChange(event) {

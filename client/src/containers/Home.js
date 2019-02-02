@@ -103,7 +103,8 @@ export class Home extends Component {
   };
 
   handleSubmit = locationData => {
-    this.props.createLocation(locationData);
+    console.log(locationData)
+    this.props.createLocation(locationData, this.props.user);
     this.setState({
       open: false
     });
@@ -149,7 +150,8 @@ export class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    locations: state.locations.locations || []
+    locations: state.locations.locations || [],
+    user: state.auth.user_id || null
   };
 }
 

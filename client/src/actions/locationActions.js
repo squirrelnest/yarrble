@@ -122,17 +122,19 @@ export function createLocation(locationData) {
       lon: Number(locationData.longitude),
       lat: Number(locationData.latitude),
       country: locationData.country,
+      depth: locationData.depth,
+      windProtection: locationData.windProtection,
       reviews_attributes: [{
         stability: Number(locationData.stability),
         aesthetics: Number(locationData.aesthetics),
         safety: Number(locationData.safety),
         date_visited: locationData.date_visited,
         content: locationData.content,
-        user_id: 1,
+        user_id: locationData.user_id || 1,
       }]
     }
   }
-
+// post user input if online, store user input if offline
   if (window.navigator.onLine) {
     return (dispatch) => {
       return fetch(`//${API_ROOT}/locations`, {
