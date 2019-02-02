@@ -96,10 +96,10 @@ export class Home extends Component {
   handleMapClick = (event, lngLat) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({
-      lon: lngLat[0],
-      lat: lngLat[1]
-    });
+    // this.setState({
+    //   lon: lngLat[0],
+    //   lat: lngLat[1]
+    // });
   };
 
   handleSubmit = locationData => {
