@@ -28,11 +28,10 @@
 }
 
 .subheader {
-  margin-bottom: 20px;
+  margin-left: -20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 0 !important;
 }
 
 .addReview {
@@ -44,11 +43,14 @@
   width: 100%;
   text-align: left;
   margin-bottom: 20px;
+  padding: 16px;
 }
 
 .tableCell {
   color: #00BCD4;
-  padding-left: 16px;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 50%;
 }
 
 @media only screen and (max-width: 500px) {

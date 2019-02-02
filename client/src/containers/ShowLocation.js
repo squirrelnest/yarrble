@@ -5,6 +5,7 @@ import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
+import Amenities from '../components/Amenities';
 import { connect } from 'react-redux';
 import {
   createReview,
@@ -94,6 +95,15 @@ class ShowLocation extends Component {
   render() {
 
     const { loc } = this.props
+                    
+    const wins = loc.winds && Object.entries(loc.winds[0]).map((keyval, index) => {
+      let key = keyval[0]
+      let val = keyval[1]
+      console.log(`${key}: ${val}`) 
+      if (val == true) {
+        return (<p key={key}>{key}</p>)}
+      }                      
+    )
 
     return (
 
@@ -104,8 +114,8 @@ class ShowLocation extends Component {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <th><Subheader>Latitude</Subheader></th>
-                    <th><Subheader>Longitude</Subheader></th>
+                    <th><Subheader className={styles.subheader}>Latitude</Subheader></th>
+                    <th><Subheader className={styles.subheader}>Longitude</Subheader></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -116,14 +126,28 @@ class ShowLocation extends Component {
                 </tbody>
                 <thead>
                   <tr>
-                    <th><Subheader>Depth</Subheader></th>
-                    <th><Subheader>Bottom</Subheader></th>
+                    <th><Subheader className={styles.subheader}>Depth</Subheader></th>
+                    <th><Subheader className={styles.subheader}>Bottom</Subheader></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className={styles.tableCell}><h2>5.1m</h2></td>
+                    <td className={styles.tableCell}><h2>{loc.depth}</h2></td>
                     <td className={styles.tableCell}><h2>Sand</h2></td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th><Subheader className={styles.subheader}>Wind Protection</Subheader></th>
+                    <th><Subheader className={styles.subheader}>Amenities</Subheader></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <td className={styles.tableCell}>
+                    {wins}
+                  </td>
+                    <td className={styles.tableCell}><p>{loc.amenities ? loc.amenities.map(am => <p>{am.name}</p>) : JSON.stringify(loc.amenities)}</p></td>
                   </tr>
                 </tbody>
               </table>
@@ -163,7 +187,5 @@ const mapDispatchToProps = (dispatch) => {
     postOfflineReviews: () => dispatch(postOfflineReviews())
   }
 }
-
-/* connect() creates a higher-order component out of the ShowLocation component, a function that is then called by <Link> in parent */
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowLocation);
