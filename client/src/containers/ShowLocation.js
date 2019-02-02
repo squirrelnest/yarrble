@@ -5,7 +5,6 @@ import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
-import Amenities from '../components/Amenities';
 import { connect } from 'react-redux';
 import {
   createReview,
@@ -96,10 +95,9 @@ class ShowLocation extends Component {
 
     const { loc } = this.props
                     
-    const wins = loc.winds && Object.entries(loc.winds[0]).map((keyval, index) => {
+    const winds = loc.winds && Object.entries(loc.winds[0]).map((keyval, index) => {
       let key = keyval[0]
       let val = keyval[1]
-      console.log(`${key}: ${val}`) 
       if (val == true) {
         return (<p key={key}>{key}</p>)}
       }                      
@@ -145,13 +143,13 @@ class ShowLocation extends Component {
                 <tbody>
                   <tr>
                   <td className={styles.tableCell}>
-                    {wins}
+                    {winds}
                   </td>
                     <td className={styles.tableCell}><p>{loc.amenities ? loc.amenities.map(am => <p>{am.name}</p>) : JSON.stringify(loc.amenities)}</p></td>
                   </tr>
                 </tbody>
               </table>
-            <Subheader className={styles.subheader}>
+            <Subheader className={styles.subheader} style={{ padding: '20px' }}>
               <div>Reviews</div>
               <div onClick={this.openReviewForm} className={styles.addReview}>
                 <div className={styles.addReview}>
