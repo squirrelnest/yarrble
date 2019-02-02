@@ -38,9 +38,19 @@ class LocationsController < ApplicationController
   end
 
   def create
-    # location_params["reviews_attributes"][0]["user_id"] = current_user.id
     @location = Location.create(location_params)
-
+    # add wind protection if exists
+    @wind = Wind.create()
+    params[:windProtection].each do |wind|
+      @wind.update(wind => true)
+    end
+    @location.winds << @wind
+    # add amenities if exists
+    params[:amenities].each do |amenity|
+      @amenity = Amenity.find_by(name: amenity)
+      @location.amenities << @amenity
+    end
+    # throw errors if any
     if @location.errors.any?
       render json: { errors: @location.errors.full_messages }
     else
@@ -90,7 +100,14 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:nickname, :lon, :lat, :country, reviews_attributes: [:date_visited, :stability, :content, :aesthetics, :safety, :user_id])
+    params.require(:location).permit(
+      :nickname,
+      :lon,
+      :lat,
+      :country,
+      :depth,
+      reviews_attributes: [:date_visited, :stability, :content, :aesthetics, :safety, :user_id]
+    )
   end
 
 end

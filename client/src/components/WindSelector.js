@@ -14,14 +14,6 @@ export default class WindSelector extends Component {
     }
   }
 
-  // handleClick =(event) => {
-  //   this.props.clickHandler(event)
-  //   this.setState({
-  //     [event.target.id]: true
-  //   })
-  //   console.log(this.state.NW)
-  // }
-
   render() {
     return (
       <div className={classes.dial}>

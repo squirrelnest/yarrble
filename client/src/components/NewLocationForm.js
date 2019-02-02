@@ -46,15 +46,15 @@ const initialState = {
   safety: 5,
   date_visited: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
   content: '',
-  user_id: 0,
   fuel: false,
   water: false,
-  food: false,
+  grocery: false,
   laundry: false,
   diving: false,
   snorkeling: false,
   paddleboarding: false,
   surfing: false,
+  amenities: [],
   windProtection: []
 }
 
@@ -93,11 +93,22 @@ export default class NewLocationForm extends Component {
     });
   };
 
+  handleAmenitiesClick = (event) => {
+    event.preventDefault()
+    this.handleCheck(event)
+    this.setState({
+      amenities: ( event.target.id !== "" && this.state.amenities.includes(event.target.id) ) ? 
+        this.state.amenities.filter(amenity => amenity !== event.target.id) 
+        : 
+        this.state.amenities.concat(event.target.id)
+    });
+  };
+
   handleWindClick = (event) => {
     event.preventDefault()
     this.setState({
       windProtection: ( event.target.id !== "" && this.state.windProtection.includes(event.target.id) ) ? 
-        this.state.windProtection.filter(dir => dir !== event.target.id) 
+        this.state.windProtection.filter(direction => direction !== event.target.id) 
         : 
         this.state.windProtection.concat(event.target.id)
     });
@@ -297,66 +308,75 @@ export default class NewLocationForm extends Component {
                   label="Fuel"
                   style={styles.checkbox}
                   name="fuel"
+                  id="fuel"
                   checked={this.state.fuel}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
                   label="Fresh Water"
                   style={styles.checkbox}
                   name="water"
+                  id="water"
                   checked={this.state.water}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
-                  label="Food"
+                  label="Grocery"
                   style={styles.checkbox}
-                  name="food"
-                  checked={this.state.food}
-                  onCheck={this.handleCheck.bind(this)}
+                  name="grocery"
+                  id="grocery"
+                  checked={this.state.grocery}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
 
                 <Checkbox
                   label="Laundry"
                   style={styles.checkbox}
                   name="laundry"
+                  id="laundry"
                   checked={this.state.laundry}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
                   label="Snorkeling"
                   style={styles.checkbox}
                   name="snorkeling"
+                  id="snorkeling"
                   checked={this.state.snorkeling}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
                   label="Diving"
                   style={styles.checkbox}
                   name="diving"
+                  id="diving"
                   checked={this.state.diving}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
 
                 <Checkbox
                   label="Surfing"
                   style={styles.checkbox}
                   name="surfing"
+                  id="surfing"
                   checked={this.state.surfing}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
                   label="Windsurfing"
                   style={styles.checkbox}
                   name="windsurfing"
+                  id="windsurfing"
                   checked={this.state.windsurfing}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
                 <Checkbox
                   label="Paddleboarding"
                   style={styles.checkbox}
                   name="paddleboarding"
+                  id="paddleboarding"
                   checked={this.state.paddleboarding}
-                  onCheck={this.handleCheck.bind(this)}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
                 />
 
               </div>

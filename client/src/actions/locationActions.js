@@ -114,7 +114,7 @@ export function fetchLocationsSuccess(payload) {
   return {type: GET_LOCATIONS, payload};
 }
 
-export function createLocation(locationData) {
+export function createLocation(locationData, user_id) {
 
   const bodyData = {
     location: {
@@ -123,16 +123,17 @@ export function createLocation(locationData) {
       lat: Number(locationData.latitude),
       country: locationData.country,
       depth: locationData.depth,
-      windProtection: locationData.windProtection,
       reviews_attributes: [{
         stability: Number(locationData.stability),
         aesthetics: Number(locationData.aesthetics),
         safety: Number(locationData.safety),
         date_visited: locationData.date_visited,
         content: locationData.content,
-        user_id: locationData.user_id || 1,
+        user_id: user_id || 1,
       }]
-    }
+    },
+    windProtection: locationData.windProtection,
+    amenities: locationData.amenities,
   }
 // post user input if online, store user input if offline
   if (window.navigator.onLine) {
