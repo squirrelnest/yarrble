@@ -42,7 +42,7 @@ class LocationsController < ApplicationController
     # add wind protection if exists
     @wind = Wind.create()
     params[:windProtection].each do |wind|
-      @wind.update(wind => true)
+      @wind.update(wind => true) unless wind == "" 
     end
     @location.winds << @wind
     # add amenities if exists
