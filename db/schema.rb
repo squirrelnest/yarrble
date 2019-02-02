@@ -10,14 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202011528) do
+ActiveRecord::Schema.define(version: 20190202043056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "chats", force: :cascade do |t|
-    t.string "content"
+  create_table "amenities", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+  end
+
+  create_table "location_amenities", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "amenity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "location_winds", force: :cascade do |t|
@@ -32,12 +41,6 @@ ActiveRecord::Schema.define(version: 20190202011528) do
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.text "country"
     t.float "depth"
-  end
-
-  create_table "notes", force: :cascade do |t|
-    t.text "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|

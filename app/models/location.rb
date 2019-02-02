@@ -4,7 +4,10 @@ class Location < ApplicationRecord
 
   has_many :location_winds
   has_many :winds, through: :location_winds
-  has_many :amenities, dependent: :destroy
+
+  has_many :location_amenities
+  has_many :amenities, through: :location_amenities
+
   has_many :reviews, dependent: :destroy
   has_many :users, through: :reviews
 
