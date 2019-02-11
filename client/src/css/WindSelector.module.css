@@ -23,7 +23,7 @@
     transform-origin: top center;
 }
 
-.arrow:hover, .selected {
+.interactive:hover, .selected {
     border-bottom: 30px solid rgb(255, 64, 129);
 }
 

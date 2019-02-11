@@ -5,6 +5,7 @@ import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import ReviewCards from '../components/ReviewCards';
+import WindCompass from '../components/WindCompass';
 import { connect } from 'react-redux';
 import {
   createReview,
@@ -92,19 +93,6 @@ class ShowLocation extends Component {
   render() {
 
     const { loc } = this.props
-                    
-    const winds = loc.winds && Object.entries(loc.winds[0]).map(
-      (keyval) => { 
-        let key = keyval[0]
-        let val = keyval[1]
-        if (val === true) {
-          return (<p key={key}>{key}</p>)
-        } else {
-          return null;
-        }      
-      }          
-    )
-    
 
     return (
 
@@ -146,9 +134,9 @@ class ShowLocation extends Component {
                 <tbody>
                   <tr>
                   <td className={styles.tableCell}>
-                    {winds}
+                    {loc.winds && <WindCompass winds={loc.winds}/>}
                   </td>
-                    <td className={styles.tableCell}><p>{loc.amenities ? loc.amenities.map(am => <p>{am.name}</p>) : JSON.stringify(loc.amenities)}</p></td>
+                    <td className={styles.tableCell}><ul>{loc.amenities && loc.amenities.map(am => <li key={am.name}>{am.name}</li>)}</ul></td>
                   </tr>
                 </tbody>
               </table>
@@ -178,7 +166,7 @@ const mapStateToProps = (state, ownProps) => {
   let location_id = Number(ownProps.match.params.locationId)
   return {
     locations: state.locations.locations || [],
-    loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || []
+    loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || []    
   };
 }
 

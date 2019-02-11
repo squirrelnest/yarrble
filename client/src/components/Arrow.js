@@ -12,16 +12,18 @@ export default class Arrow extends Component {
 
   handleClick = (event) => {
     event.preventDefault()
-    this.props.clickHandler(event)
-    this.setState({
-      selected: !this.state.selected
-    })
+    if (this.props.interactive) {
+      this.props.clickHandler(event)
+      this.setState({
+        selected: !this.state.selected
+      })
+    }
   }
 
   render() {
-    const { id, children, css } = this.props
+    const { id, children, css, interactive } = this.props
     return (
-      <div id={id} onClick={(event) => this.handleClick(event)} className={[css, this.state.selected ? classes.selected : '' ].join(' ')}>{children}</div>
+      <div id={id} onClick={(event) => this.handleClick(event)} className={[css, interactive && classes.interactive, this.state.selected && classes.selected].join(' ')}>{children}</div>
     )
   }
 }
