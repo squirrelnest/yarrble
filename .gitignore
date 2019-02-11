@@ -8,6 +8,9 @@
 .env
 /.env
 
+# Ignore vscode
+.vscode/
+
 # Ignore build artifacts
 /client/build/
 /client/build/*
