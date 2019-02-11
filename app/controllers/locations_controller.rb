@@ -28,7 +28,7 @@ class LocationsController < ApplicationController
 
   def index
     @location = Location.new
-    @locations = Location.all
+    @locations = Location.all.includes(:reviews, :amenities, :winds)
     render json: @locations, status: 200
   end
 
