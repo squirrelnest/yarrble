@@ -24,7 +24,8 @@ const initialState = {
   ],
   locations: [
     {location_id: 0}
-  ]
+  ],
+  auth: {}
 };
 const store = mockStore(initialState);
 
