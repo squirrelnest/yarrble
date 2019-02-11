@@ -60,7 +60,6 @@ export class Home extends Component {
     this.props.postOfflineData();
     localStorage.removeItem('draft_locations');
     localStorage.removeItem('cachedLocations');
-    console.log('online');
   };
 
   isOffline = () => {

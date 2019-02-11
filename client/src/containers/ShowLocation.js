@@ -52,14 +52,12 @@ class ShowLocation extends Component {
     this.props.postOfflineReviews()
     localStorage.removeItem('draft_reviews');
     localStorage.removeItem('cachedReviews');
-    console.log('online');
   };
 
   isOffline = () => {
     alert(
       'You are currently offline. Your drafts will be saved and uploaded when back online.'
     );
-    console.log('offline');
     localStorage.setItem(
       'cachedReviews',
       JSON.stringify(this.props.locations)
@@ -95,13 +93,18 @@ class ShowLocation extends Component {
 
     const { loc } = this.props
                     
-    const winds = loc.winds && Object.entries(loc.winds[0]).map((keyval, index) => {
-      let key = keyval[0]
-      let val = keyval[1]
-      if (val == true) {
-        return (<p key={key}>{key}</p>)}
-      }                      
+    const winds = loc.winds && Object.entries(loc.winds[0]).map(
+      (keyval) => { 
+        let key = keyval[0]
+        let val = keyval[1]
+        if (val === true) {
+          return (<p key={key}>{key}</p>)
+        } else {
+          return null;
+        }      
+      }          
     )
+    
 
     return (
 
