@@ -77,6 +77,10 @@
   font-weight: 100;
 }
 
+.wind {
+  width: 150px;
+}
+
 /* REVIEWS */
 
 .reviewsContainer {

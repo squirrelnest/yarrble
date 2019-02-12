@@ -156,15 +156,18 @@ export default class NewLocationForm extends Component {
                     name='bottom'
                     defaultValue={loc.bottom}
                     onChange={(event) => this.handleChange(event)}/>
-              </div>
             </div>
-            <div className={styles.data}>
-              <span className={styles.label}>Wind Protection</span>
-              <div className={styles.field}>
-                <WindSelector clickHandler={this.handleWindClick}/>
-              </div>
-            </div>         
+             
           </div>
+            
+          </div> 
+
+          <div className={styles.data}>
+            <span className={styles.label}>Wind Protection</span>
+            <div className={styles.wind}>
+              <WindSelector clickHandler={this.handleWindClick}/>
+            </div>
+          </div> 
         
           <span className={styles.label}>Amenities</span>
 
@@ -256,12 +259,6 @@ export default class NewLocationForm extends Component {
               className={[classes.button, classes.submitBtn].join(' ')}
               onClick={this.props.handleToggle}
             />
-            <FlatButton
-              className={[classes.closeButton, classes.desktopOnly].join(' ')}
-              onClick={this.props.handleClose}
-            >
-              CANCEL
-            </FlatButton>
           </div>
 
         </form>
