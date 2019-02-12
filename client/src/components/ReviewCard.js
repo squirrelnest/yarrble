@@ -5,6 +5,9 @@ import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 
 const styles = {
+  card: {
+    marginBottom: '20px',
+  },
   titleStyle: {
     color: 'rgb(0, 188, 212)',
   },
