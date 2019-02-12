@@ -4,6 +4,7 @@ import paradise from '../img/paradise.jpg';
 import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
+import EditLocationForm from '../components/EditLocationForm';
 import ReviewCards from '../components/ReviewCards';
 import WindCompass from '../components/WindCompass';
 import { connect } from 'react-redux';
@@ -59,6 +60,10 @@ class ShowLocation extends Component {
     );
   };
 
+  toggleLocationForm = () => {
+    this.setState({ openLocation: false });
+  };
+
   openReviewForm = () => {
     this.setState({
       openReview: true,
@@ -72,16 +77,31 @@ class ShowLocation extends Component {
     })
   }
 
-  handleSubmit = (reviewData) => {
+  handleSubmitReview = (reviewData) => {
     this.props.createReview({...reviewData, location_id: this.props.loc.id})
-    this.handleClose();
+    this.handleCloseReview();
     let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url)
   }
 
-  handleClose = () => {
+  handleCloseReview = () => {
     this.setState({
       openReview: false
+    })
+    let url = `/locations/${this.props.loc.id}`;
+    this.props.history.push(url);
+  }
+
+  handleSubmitLocation = (reviewData) => {
+    // this.props.editLocation({...locationData, location_id: this.props.loc.id})
+    this.handleCloseLocation();
+    let url = `/locations/${this.props.loc.id}`;
+    this.props.history.push(url)
+  }
+
+  handleCloseLocation = () => {
+    this.setState({
+      openLocation: false
     })
     let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url);
@@ -156,7 +176,15 @@ class ShowLocation extends Component {
             </div>
           </div>
           { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
-          <NewReviewForm open={this.state.openReview} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
+          <NewReviewForm
+            open={this.state.openReview}
+            handleSubmit={this.handleSubmitReview}
+            handleClose={this.handleCloseReview}/>
+          <EditLocationForm
+            open={this.state.openLocation}
+            handleSubmit={this.handleSubmitLocation}
+            handleClose={this.handleCloseLocation}
+            handleRequestChange={this.toggleLocationForm}/>
         </section>
 
       </div>
