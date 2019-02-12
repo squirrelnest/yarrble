@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react';
-// import subheader from 'material-ui/subheader';
 import paradise from '../img/paradise.jpg';
 import styles from '../css/ShowLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import UpdateLocationForm from '../components/UpdateLocationForm';
-// import EditLocationForm from '../components/EditLocationForm';
 import ReviewCards from '../components/ReviewCards';
 import WindCompass from '../components/WindCompass';
 import { connect } from 'react-redux';

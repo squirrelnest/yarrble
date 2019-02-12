@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import styles from '../css/UpdateLocationForm.module.css';
 import classes from '../css/NewLocationForm.module.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import WindSelector from './WindSelector';
-import { API_ROOT } from '../api-config';
 
 export function isMobile() {
   return window.innerWidth < 700
