@@ -4,27 +4,42 @@
   left: 0px;
 }
 
+:root {
+  --header-color: #00BCD4;
+  --text-color: #212121;
+  --medium-grey: #999999;
+  --light-grey: #e6e6e6;
+  --light: #FFFFFF;
+
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: '-212121';
+  color: var(--text-color);
   width: 100%;
 }
 
-h2 {
+h1, h2, h3 {
+  padding-bottom: 20px;
   margin: 0;
-  color: '#00BCD4';
+  color: var(--header-color);
+  font-weight: 700;
 }
 
 a {
-  color: '#00BCD4' !important;
+  color: var(--header-color) !important;
   text-decoration: none;
 }
 
 a:hover {
-  color: '#212121' !important;
+  color: coral !important;
   text-decoration: none;
+}
+
+li {
+  margin: 0;
 }
 
 .header {
@@ -46,6 +61,8 @@ a:hover {
 .row {
   display:flex;
   flex-direction:row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .drawer: {
@@ -90,12 +107,12 @@ a:hover {
 }
 
 .tab-active {
-  color: '#00BCD4';
+  color: var(--header-color);
   background-color: 'none';
 }
 
 .tab-inactive {
-  color: '#212121';
+  color: var(--text-color);
   background-color: 'none';
 }
 
@@ -109,7 +126,7 @@ a:hover {
 }
 
 .link:hover {
-  color: rgb(0, 188, 212);
+  color: var(--header-color);
 }
 
 @media only screen and (max-width: 1000px) {
@@ -120,7 +137,7 @@ a:hover {
 
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
 
   .row {
     display: block;

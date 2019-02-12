@@ -4,7 +4,16 @@
 }
 
 .dial {
-    margin-top: 60px;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;   
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.row {
+    display:flex;
+    flex-direction:row;
 }
 
 .arrowText {
@@ -17,14 +26,14 @@
 .arrow {
     width: 0; 
     height: 0; 
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent; 
-    border-bottom: 30px solid lightgrey;
+    border-left: 2em solid transparent;
+    border-right: 2em solid transparent; 
+    border-bottom: 2em solid lightgrey;
     transform-origin: top center;
 }
 
 .interactive:hover, .selected {
-    border-bottom: 30px solid rgb(255, 64, 129);
+    border-bottom: 30px solid var(--header-color);
 }
 
 .arrowWest {
@@ -65,4 +74,62 @@
 .arrowNortheast {
     composes: arrow;
     transform: rotate(225deg) translate(0, -20px);
+}
+
+@media only screen and (max-width: 500px) {
+
+    .dial {
+        justify-content: space-between;
+        align-items: center;
+        margin-left: -50px;
+        margin-top: -30px;
+        margin-bottom: 0;
+    }
+
+    .arrow {
+        border-left: 1em solid transparent;
+        border-right: 1em solid transparent; 
+        border-bottom: 1em solid lightgrey;
+    }
+        
+    .arrowWest {
+        composes: arrow;
+        transform: rotate(90deg) translate(0, -.8em);
+    }
+
+    .arrowSouthwest {
+        composes: arrow;
+        transform: rotate(45deg) translate(0, -2em);
+    }
+
+    .arrowSouth {
+        composes: arrow;
+        transform: rotate(0deg) translate(0, -.8em);
+    }
+
+    .arrowSoutheast {
+        composes: arrow;
+        transform: rotate(-45deg) translate(0, -2em);
+    }
+
+    .arrowEast {
+        composes: arrow;
+        transform: rotate(-90deg) translate(0, -.8em);
+    }
+
+    .arrowNorthwest {
+        composes: arrow;
+        transform: rotate(135deg) translate(0, -2em);
+    }
+
+    .arrowNorth {
+        composes: arrow;
+        transform: rotate(180deg) translate(0, -.8em);
+    }
+
+    .arrowNortheast {
+        composes: arrow;
+        transform: rotate(225deg) translate(0, -2em);
+    }
+
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Subheader from 'material-ui/Subheader';
+// import subheader from 'material-ui/subheader';
 import paradise from '../img/paradise.jpg';
 import styles from '../css/showLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
@@ -11,6 +11,7 @@ import {
   createReview,
   postOfflineReviews
 } from '../actions/reviewActions';
+import { createLocationSuccess } from '../actions/locationActions';
 
 const tilesData = [
   {
@@ -95,69 +96,65 @@ class ShowLocation extends Component {
     const { loc } = this.props
 
     return (
+      <div className='row'>
 
-        <div className="row">
-          <div className={styles.imageContainer}><img src={tilesData[0].img} className={styles.image} alt="tropical island"/></div>
-          <div className={styles.locationDataContainer}>
+        <section className={styles.imageContainer}>
+          <img src={tilesData[0].img} className={styles.image} alt="tropical island"/>
+        </section>
+
+        <section className={styles.dataContainer}>
+
+          <section className={styles.locationDataContainer}>
             <h1>{loc.nickname}, {loc.country}</h1>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th><Subheader className={styles.subheader}>Latitude</Subheader></th>
-                    <th><Subheader className={styles.subheader}>Longitude</Subheader></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className={styles.tableCell}><h2>{loc.lat}</h2></td>
-                    <td className={styles.tableCell}><h2>{loc.lon}</h2></td>
-                  </tr>
-                </tbody>
-                <thead>
-                  <tr>
-                    <th><Subheader className={styles.subheader}>Depth</Subheader></th>
-                    <th><Subheader className={styles.subheader}>Bottom</Subheader></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className={styles.tableCell}><h2>{loc.depth}</h2></td>
-                    <td className={styles.tableCell}><h2>Sand</h2></td>
-                  </tr>
-                </tbody>
-                <thead>
-                  <tr>
-                    <th><Subheader className={styles.subheader}>Wind Protection</Subheader></th>
-                    <th><Subheader className={styles.subheader}>Amenities</Subheader></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                  <td className={styles.tableCell}>
-                    {loc.winds && <WindCompass winds={loc.winds}/>}
-                  </td>
-                    <td className={styles.tableCell}><ul>{loc.amenities && loc.amenities.map(am => <li key={am.name}>{am.name}</li>)}</ul></td>
-                  </tr>
-                </tbody>
-              </table>
-            <Subheader className={styles.subheader} style={{ padding: '20px' }}>
+            <div className={styles.coordinates}>
+                <div className={styles.data}>
+                  <span className={styles.label}>Latitude</span>
+                  <div className={styles.field}><h2>{loc.lat}</h2></div>
+                </div>
+                <div className={styles.data}>
+                  <span className={styles.label}>Longitude</span>
+                  <div className={styles.field}><h2>{loc.lon}</h2></div>
+                </div>
+              </div>
+            <div className={styles.table}>           
+              <div className={styles.data}>
+                <span className={styles.label}>Depth</span>
+                <div className={styles.field}><h2>{loc.depth}m</h2></div>
+              </div>
+              <div className={styles.data}>
+                <span className={styles.label}>Bottom</span>
+                <div className={styles.field}><h2>sand</h2></div>
+              </div>
+              <div className={styles.data}>
+                <span className={styles.label}>Wind Protection</span>
+                <div className={styles.field}>{loc.winds && <WindCompass winds={loc.winds}/>}</div>
+              </div>
+              <div className={styles.data}>
+                <span className={styles.label}>Amenities</span>
+                <div className={styles.field}>
+                  {loc.amenities && loc.amenities.map(am => <p key={am.name} className={styles.field}>{am.name}</p>)}
+                </div>
+              </div>
+            </div>
+          </section>
+        
+          <section className={styles.reviewsContainer}>
+            <span className={styles.reviewsHeader} style={{ padding: '20px' }}>
               <div>Reviews</div>
               <div onClick={this.openReviewForm} className={styles.addReview}>
                 <div className={styles.addReview}>
                   <NoteAdd hoverColor={'f44336'} />
                   <div className={styles.hideOnMobile}>Add Review...</div>
                 </div>
-
               </div>
-            </Subheader>
-
+            </span>
             { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
+            <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
+          </section>
 
-          </div>
+        </section>
 
-          <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
-
-        </div>
+      </div>
     )
   }
 }

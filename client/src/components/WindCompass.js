@@ -13,7 +13,7 @@ export default class WindCompass extends Component {
   render() {
     return (
       <div className={classes.dial}>
-        <div className="row">
+        <div className={classes.row}>
           <div className={classes.arrowContainer}>
             <Arrow id="NW" css={[classes.arrowNorthwest, this.props.winds[0] && this.props.winds[0].NW && classes.selected].join(' ')} />
           </div>
@@ -26,7 +26,7 @@ export default class WindCompass extends Component {
             <Arrow id="NE" css={[classes.arrowNortheast, this.props.winds[0] && this.props.winds[0].NE && classes.selected].join(' ')} />
           </div>
         </div>
-        <div className="row">
+        <div className={classes.row}>
           <div className={classes.arrowContainer}>
             <Arrow id="W" css={[classes.arrowWest, this.props.winds[0] && this.props.winds[0].W && classes.selected].join(' ')} />
           </div>
@@ -37,7 +37,7 @@ export default class WindCompass extends Component {
             <Arrow id="E" css={[classes.arrowEast, this.props.winds[0] && this.props.winds[0].E && classes.selected].join(' ')} />
           </div>
         </div>
-        <div className="row">
+        <div className={classes.row}>
           <div className={classes.arrowContainer}>
             <Arrow id="SW" css={[classes.arrowSouthwest, this.props.winds[0] && this.props.winds[0].SW && classes.selected].join(' ')} />
           </div>

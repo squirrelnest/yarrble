@@ -1,37 +1,72 @@
-* {
-  box-sizing: border-box;
-  top: 0px;
-  left: 0px;
-}
-
-.titleStyle {
-  color: rgb(0, 188, 212);
+.table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .imageContainer {
   margin: 0;
   display: flex;
+  flex: 1;
   flex-direction: column;
   width: 100%;
 }
 
-.locationDataContainer {
-  margin: 0 20px;
+.dataContainer {
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: auto;
   width: 100%;
+}
+
+.locationDataContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: auto;
+  width: 100%;
+  padding: 40px;
+}
+
+.reviewsContainer {
+  background-color: var(--light-grey);
 }
 
 .image {
   width: 100%;
 }
 
-.subheader {
-  margin-left: -20px;
+.coordinates {
+  display: flex;
+  flex-direction: row;
+}
+
+.data {
+  flex: 1;
+  min-height: 60px;
+}
+
+.label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  color: var(--medium-grey);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.field {
+  color: var(--header-color);
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.field h2 {
+  font-weight: 100;
 }
 
 .addReview {
@@ -39,24 +74,22 @@
   align-items: center;
 }
 
-.table {
-  width: 100%;
-  text-align: left;
-  margin-bottom: 20px;
-  padding: 16px;
+.reviewsHeader {
+  color: var(--light)
 }
 
-.tableCell {
-  color: #00BCD4;
-  word-wrap: break-word;
-  word-break: break-all;
-  width: 50%;
+@media only screen and (max-width: 1200px) {
+
+  .coordinates {
+    display: block;
+  }
+
 }
 
 @media only screen and (max-width: 500px) {
 
-  .subheader {
-    justify-content: flex-start;
+  .locationDataContainer {
+    padding: 20px;
   }
 
   .addReview {

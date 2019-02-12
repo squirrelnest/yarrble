@@ -45,61 +45,59 @@ export default class ReviewCard extends Component {
 
       return (
 
-            <div>
-              <Card>
-                <CardHeader
-                 title="Username"
-                 subtitle="Subtitle"
-                 avatar={tilesData[0].img}
-                 actAsExpander={true}
-                 style={{ margin: '-20px 0px' }}
-                />
-                <CardText >
-                  <p>"{this.props.review.content}"</p>
-                  <div className="row">
-                    <Chip
-                      backgroundColor={'#B2EBF2'}
-                      style={styles.chip}
-                    >
-                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                        {this.props.review.stability}
-                      </Avatar>
-                      Comfort
-                    </Chip>
-                    <Chip
-                      backgroundColor={'#B2EBF2'}
-                      style={styles.chip}
-                    >
-                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                        {this.props.review.aesthetics}
-                      </Avatar>
-                      Aesthetics
-                    </Chip>
-                    <Chip
-                      backgroundColor={'#B2EBF2'}
-                      style={styles.chip}
-                    >
-                      <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                        {this.props.review.safety}
-                      </Avatar>
-                      Safety
-                    </Chip>
+            <Card>
+              <CardHeader
+                title="Username"
+                subtitle="Subtitle"
+                avatar={tilesData[0].img}
+                actAsExpander={true}
+              />
+              <CardText >
+                <p>"{this.props.review.content}"</p>
+                <div className="row">
+                  <Chip
+                    backgroundColor={'#B2EBF2'}
+                    style={styles.chip}
+                  >
+                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                      {this.props.review.stability}
+                    </Avatar>
+                    Comfort
+                  </Chip>
+                  <Chip
+                    backgroundColor={'#B2EBF2'}
+                    style={styles.chip}
+                  >
+                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                      {this.props.review.aesthetics}
+                    </Avatar>
+                    Aesthetics
+                  </Chip>
+                  <Chip
+                    backgroundColor={'#B2EBF2'}
+                    style={styles.chip}
+                  >
+                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                      {this.props.review.safety}
+                    </Avatar>
+                    Safety
+                  </Chip>
 
-                    <Chip
-                      backgroundColor={'#F8BBD0'}
-                      style={styles.chip}
-                      onClick={this.handleClick.bind(this)}
-                    >
-                      <Avatar size={32} color={'#F8BBD0'} backgroundColor={'#EC407A'}>
-                        {this.state.like}
-                      </Avatar>
-                      Likes
-                    </Chip>
+                  <Chip
+                    backgroundColor={'#F8BBD0'}
+                    style={styles.chip}
+                    onClick={this.handleClick.bind(this)}
+                  >
+                    <Avatar size={32} color={'#F8BBD0'} backgroundColor={'#EC407A'}>
+                      {this.state.like}
+                    </Avatar>
+                    Likes
+                  </Chip>
 
-                  </div>
-                </CardText>
-              </Card>
-            </div>
+                </div>
+              </CardText>
+            </Card>
+            
       );
 
   }
