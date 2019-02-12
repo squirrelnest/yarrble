@@ -114,7 +114,7 @@ export default class NewLocationForm extends Component {
             </div>
           </div>
 
-          <div className={styles.coordinates}>
+          <div className={styles.table}>       
             <div className={styles.data}>
               <span className={styles.label}>Latitude</span>
               <div className={styles.field}>
@@ -134,10 +134,7 @@ export default class NewLocationForm extends Component {
                   defaultValue={loc.lon}
                   onChange={(event) => this.handleChange(event)}/>
               </div>
-            </div>
-          </div>
-
-          <div className={styles.table}>           
+            </div>    
             <div className={styles.data}>
               <span className={styles.label}>Depth</span>
               <div className={styles.field}>
