@@ -11,14 +11,6 @@ import {
   createReview,
   postOfflineReviews
 } from '../actions/reviewActions';
-import { createLocationSuccess } from '../actions/locationActions';
-
-const tilesData = [
-  {
-    img: paradise,
-    title: 'Ao Yon Beach',
-  },
-]
 
 class ShowLocation extends Component {
 
@@ -100,7 +92,7 @@ class ShowLocation extends Component {
 
         <section className='row'>
           <section className={styles.imageContainer}>
-            <img src={tilesData[0].img} className={styles.image} alt="tropical island"/>
+            <div className={styles.image} style={{ backgroundImage: `url(${paradise})` }} alt="tropical island"/>
           </section>
           <section className={styles.locationDataContainer}>
             <h1>{loc.nickname}, {loc.country}</h1>
@@ -139,7 +131,7 @@ class ShowLocation extends Component {
 
         <section className={styles.reviewsContainer}>
           <div className={styles.reviewsHeader}>
-            <div>Reviews</div>
+            <div className={styles.label}>Reviews</div>
             <div onClick={this.openReviewForm} className={styles.addReview}>
               <div className={styles.addReview}>
                 <NoteAdd hoverColor={'coral'} />
