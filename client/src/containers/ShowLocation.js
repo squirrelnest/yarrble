@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 // import subheader from 'material-ui/subheader';
 import paradise from '../img/paradise.jpg';
-import styles from '../css/showLocation.module.css';
+import styles from '../css/ShowLocation.module.css';
 import NoteAdd from 'material-ui/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
-import EditLocationForm from '../components/EditLocationForm';
+import UpdateLocationForm from '../components/UpdateLocationForm';
+// import EditLocationForm from '../components/EditLocationForm';
 import ReviewCards from '../components/ReviewCards';
 import WindCompass from '../components/WindCompass';
 import { connect } from 'react-redux';
@@ -110,6 +111,7 @@ class ShowLocation extends Component {
   render() {
 
     const { loc, admin } = this.props
+    const { openLocation } = this.state
 
     return (
       <div className='column'>
@@ -119,20 +121,22 @@ class ShowLocation extends Component {
             <div className={styles.image} style={{ backgroundImage: `url(${paradise})` }} alt="tropical island"/>
           </section>
           <section className={styles.locationDataContainer}>
-                  
-            <div className={styles.locationHeader}>
-              <div><h1>{loc.nickname}, {loc.country}</h1></div>
-              { admin && 
-                <div onClick={this.openLocationForm} className={styles.addReview}>        
-                  <div className={styles.addReview}>
-                    <NoteAdd hoverColor={'coral'} />
-                    <div className={styles.hideOnMobile}>Edit Location</div>
-                  </div>
-                </div>
-              } 
-            </div>
 
-            <div className={styles.coordinates}>
+          { openLocation ? <UpdateLocationForm loc={loc} toggleForm={this.toggleLocationForm}/> :
+            <Fragment>
+              <div className={styles.locationHeader}>
+                <div><h1>{loc.nickname}, {loc.country}</h1></div>
+                { admin && 
+                  <div onClick={this.openLocationForm} className={styles.addReview}>        
+                    <div className={styles.addReview}>
+                      <NoteAdd hoverColor={'coral'} />
+                      <div className={styles.hideOnMobile}>Edit Location</div>
+                    </div>
+                  </div>
+                } 
+              </div>
+          
+              <div className={styles.coordinates}>
                 <div className={styles.data}>
                   <span className={styles.label}>Latitude</span>
                   <div className={styles.field}><h2>{loc.lat}</h2></div>
@@ -142,28 +146,31 @@ class ShowLocation extends Component {
                   <div className={styles.field}><h2>{loc.lon}</h2></div>
                 </div>
               </div>
-            <div className={styles.table}>           
-              <div className={styles.data}>
-                <span className={styles.label}>Depth</span>
-                <div className={styles.field}><h2>{loc.depth && `${loc.depth}m`}</h2></div>
-              </div>
-              <div className={styles.data}>
-                <span className={styles.label}>Bottom</span>
-                <div className={styles.field}><h2>sand</h2></div>
-              </div>
-              <div className={styles.data}>
-                <span className={styles.label}>Wind Protection</span>
-                <div className={styles.field}>{loc.winds && <WindCompass winds={loc.winds}/>}</div>
-              </div>
-              <div className={styles.data}>
-                <span className={styles.label}>Amenities</span>
-                <div className={styles.field}>
-                  {loc.amenities && loc.amenities.map(am => <p key={am.name} className={styles.field}>{am.name}</p>)}
+              <div className={styles.table}>           
+                <div className={styles.data}>
+                  <span className={styles.label}>Depth</span>
+                  <div className={styles.field}><h2>{loc.depth && `${loc.depth}m`}</h2></div>
+                </div>
+                <div className={styles.data}>
+                  <span className={styles.label}>Bottom</span>
+                  <div className={styles.field}><h2>sand</h2></div>
+                </div>
+                <div className={styles.data}>
+                  <span className={styles.label}>Wind Protection</span>
+                  <div className={styles.field}>{loc.winds && <WindCompass winds={loc.winds}/>}</div>
+                </div>
+                <div className={styles.data}>
+                  <span className={styles.label}>Amenities</span>
+                  <div className={styles.field}>
+                    {loc.amenities && loc.amenities.map(am => <p key={am.name} className={styles.field}>{am.name}</p>)}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>       
-        </section>
+            </Fragment>
+          }
+
+            </section>     
+          </section>
 
         <section className={styles.reviewsContainer}>
           <div className={styles.reviewsHeader}>
@@ -180,11 +187,11 @@ class ShowLocation extends Component {
             open={this.state.openReview}
             handleSubmit={this.handleSubmitReview}
             handleClose={this.handleCloseReview}/>
-          <EditLocationForm
+          {/* <EditLocationForm
             open={this.state.openLocation}
             handleSubmit={this.handleSubmitLocation}
             handleClose={this.handleCloseLocation}
-            handleRequestChange={this.toggleLocationForm}/>
+            handleRequestChange={this.toggleLocationForm}/> */}
         </section>
 
       </div>

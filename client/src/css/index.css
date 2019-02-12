@@ -10,12 +10,13 @@
   --medium-grey: #999999;
   --light-grey: #e6e6e6;
   --light: #FFFFFF;
+  --font: 'Roboto', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font);
   color: var(--dark);
   width: 100%;
 }
@@ -38,6 +39,13 @@ a:hover {
 
 li {
   margin: 0;
+}
+
+input {
+  font-family: var(--font);
+  font-size: 16px;
+  padding: 6px;
+  width: 80%;
 }
 
 .header {
@@ -144,6 +152,10 @@ li {
 
   .column {
     display: block;
+    width: 100%;
+  }
+
+  input {
     width: 100%;
   }
 
