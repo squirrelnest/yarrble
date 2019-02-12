@@ -16,9 +16,7 @@ script:
 - cd client
 - npm install
 - CI=true npm run test
-- cat src/api-config.js
 - npm run build
-- cat /home/travis/.npm/_logs/*.log
 
 deploy:
   provider: s3
