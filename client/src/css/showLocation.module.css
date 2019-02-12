@@ -31,6 +31,16 @@
   padding: 40px;
 }
 
+.locationHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: var(--dark);
+  padding-bottom: 20px;
+}
+
 .image {
   background-size: cover;
   background-repeat: no-repeat;
@@ -77,7 +87,9 @@
 
 .addReview {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .addReview:hover {

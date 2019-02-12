@@ -17,7 +17,8 @@ class ShowLocation extends Component {
   constructor(props){
     super(props);
     this.state = {
-      open: false,
+      openReview: false,
+      openLocation: false
     }
   }
 
@@ -60,13 +61,16 @@ class ShowLocation extends Component {
 
   openReviewForm = () => {
     this.setState({
-      open: true,
+      openReview: true,
     })
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  openLocationForm = () => {
+    console.log('open sesame')
+    this.setState({
+      openLocation: true,
+    })
+  }
 
   handleSubmit = (reviewData) => {
     this.props.createReview({...reviewData, location_id: this.props.loc.id})
@@ -77,7 +81,7 @@ class ShowLocation extends Component {
 
   handleClose = () => {
     this.setState({
-      open: false
+      openReview: false
     })
     let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url);
@@ -85,7 +89,7 @@ class ShowLocation extends Component {
 
   render() {
 
-    const { loc } = this.props
+    const { loc, admin } = this.props
 
     return (
       <div className='column'>
@@ -95,7 +99,19 @@ class ShowLocation extends Component {
             <div className={styles.image} style={{ backgroundImage: `url(${paradise})` }} alt="tropical island"/>
           </section>
           <section className={styles.locationDataContainer}>
-            <h1>{loc.nickname}, {loc.country}</h1>
+                  
+            <div className={styles.locationHeader}>
+              <div><h1>{loc.nickname}, {loc.country}</h1></div>
+              { admin && 
+                <div onClick={this.openLocationForm} className={styles.addReview}>        
+                  <div className={styles.addReview}>
+                    <NoteAdd hoverColor={'coral'} />
+                    <div className={styles.hideOnMobile}>Edit Location</div>
+                  </div>
+                </div>
+              } 
+            </div>
+
             <div className={styles.coordinates}>
                 <div className={styles.data}>
                   <span className={styles.label}>Latitude</span>
@@ -109,7 +125,7 @@ class ShowLocation extends Component {
             <div className={styles.table}>           
               <div className={styles.data}>
                 <span className={styles.label}>Depth</span>
-                <div className={styles.field}><h2>{loc.depth}m</h2></div>
+                <div className={styles.field}><h2>{loc.depth && `${loc.depth}m`}</h2></div>
               </div>
               <div className={styles.data}>
                 <span className={styles.label}>Bottom</span>
@@ -140,7 +156,7 @@ class ShowLocation extends Component {
             </div>
           </div>
           { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
-          <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
+          <NewReviewForm open={this.state.openReview} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
         </section>
 
       </div>
@@ -152,7 +168,8 @@ const mapStateToProps = (state, ownProps) => {
   let location_id = Number(ownProps.match.params.locationId)
   return {
     locations: state.locations.locations || [],
-    loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || []    
+    loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || [],
+    admin: state.auth.admin || false  
   };
 }
 
