@@ -58,7 +58,7 @@ const initialState = {
   windProtection: []
 }
 
-export default class NewLocationForm extends Component {
+export default class EditLocationForm extends Component {
 
   constructor(props) {
     super(props);
