@@ -45,7 +45,7 @@ export default class ReviewCard extends Component {
 
       return (
 
-            <Card>
+            <Card style={styles.card}>
               <CardHeader
                 title="Username"
                 subtitle="Subtitle"

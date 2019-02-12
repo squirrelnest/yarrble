@@ -1,3 +1,5 @@
+/* PAGE LAYOUT */
+
 .table {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -7,21 +9,19 @@
   margin-bottom: 20px;
 }
 
+/* IMAGES */
+
 .imageContainer {
   margin: 0;
   display: flex;
   flex: 1;
   flex-direction: column;
   width: 100%;
+  background-color: var(--dark);
 }
 
-.dataContainer {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow: auto;
-  width: 100%;
-}
+
+/* LOCATION DATA */
 
 .locationDataContainer {
   display: flex;
@@ -30,10 +30,6 @@
   overflow: auto;
   width: 100%;
   padding: 40px;
-}
-
-.reviewsContainer {
-  background-color: var(--light-grey);
 }
 
 .image {
@@ -69,13 +65,30 @@
   font-weight: 100;
 }
 
+/* REVIEWS */
+
+.reviewsContainer {
+  padding: 20px;
+  background-color: var(--light-grey);
+}
+
 .addReview {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.addReview:hover {
+  color: coral;
 }
 
 .reviewsHeader {
-  color: var(--light)
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: var(--dark);
+  padding: 10px 0;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -97,7 +110,8 @@
   }
 
   .hideOnMobile {
-    visibility: hidden;
+    /* visibility: hidden; */
+    flex-direction: row-reverse;
   }
 
 }

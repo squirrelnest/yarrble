@@ -96,14 +96,12 @@ class ShowLocation extends Component {
     const { loc } = this.props
 
     return (
-      <div className='row'>
+      <div className='column'>
 
-        <section className={styles.imageContainer}>
-          <img src={tilesData[0].img} className={styles.image} alt="tropical island"/>
-        </section>
-
-        <section className={styles.dataContainer}>
-
+        <section className='row'>
+          <section className={styles.imageContainer}>
+            <img src={tilesData[0].img} className={styles.image} alt="tropical island"/>
+          </section>
           <section className={styles.locationDataContainer}>
             <h1>{loc.nickname}, {loc.country}</h1>
             <div className={styles.coordinates}>
@@ -136,22 +134,21 @@ class ShowLocation extends Component {
                 </div>
               </div>
             </div>
-          </section>
-        
-          <section className={styles.reviewsContainer}>
-            <span className={styles.reviewsHeader} style={{ padding: '20px' }}>
-              <div>Reviews</div>
-              <div onClick={this.openReviewForm} className={styles.addReview}>
-                <div className={styles.addReview}>
-                  <NoteAdd hoverColor={'f44336'} />
-                  <div className={styles.hideOnMobile}>Add Review...</div>
-                </div>
-              </div>
-            </span>
-            { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
-            <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
-          </section>
+          </section>       
+        </section>
 
+        <section className={styles.reviewsContainer}>
+          <div className={styles.reviewsHeader}>
+            <div>Reviews</div>
+            <div onClick={this.openReviewForm} className={styles.addReview}>
+              <div className={styles.addReview}>
+                <NoteAdd hoverColor={'coral'} />
+                <div className={styles.hideOnMobile}>Add Review</div>
+              </div>
+            </div>
+          </div>
+          { loc.reviews && <ReviewCards reviews={loc.reviews} /> }
+          <NewReviewForm open={this.state.open} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/>
         </section>
 
       </div>

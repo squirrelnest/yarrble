@@ -33,7 +33,7 @@
 }
 
 .interactive:hover, .selected {
-    border-bottom: 30px solid var(--header-color);
+    border-bottom: 2em solid var(--header-color);
 }
 
 .arrowWest {
@@ -84,6 +84,12 @@
         margin-left: -50px;
         margin-top: -30px;
         margin-bottom: 0;
+    }
+
+    .arrowText {
+        font-size: 10px;
+        margin-left: -4px;
+        padding-top: 3px;
     }
 
     .arrow {
