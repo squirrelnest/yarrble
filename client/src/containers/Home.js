@@ -24,7 +24,6 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.getUser();
     if (window.navigator.onLine) {
       this.isOnline();
     }

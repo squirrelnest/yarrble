@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { withRouter } from 'react-router-dom';
-import { logout, refreshAuth } from '../actions/authActions';
+import { logout, refreshAuth, getUser } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import anchor from '../img/anchor.svg';
@@ -26,6 +26,10 @@ class Login extends Component {
 }
 
 class Logged extends Component {
+
+  componentDidMount() {
+    this.props.getUser();
+  }
 
   handleClick = () => {
     window.localStorage.clear()
@@ -94,7 +98,8 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     logout: () => dispatch(logout()),
-    refreshAuth: () => dispatch(refreshAuth())
+    refreshAuth: () => dispatch(refreshAuth()),
+    getUser: () => dispatch(getUser())
   }
 
 }

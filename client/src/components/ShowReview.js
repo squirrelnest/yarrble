@@ -12,7 +12,6 @@ export class ShowReview extends Component {
         <TableRow
           hoverable={true}
           key={this.props.key}
-          hover={true}
           onMouseOver={this.props.handleMouseOver}
           onMouseOut={this.props.handleMouseOut}
         >
