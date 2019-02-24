@@ -14,10 +14,6 @@ import { getUser } from './actions/authActions';
 
 export class App extends Component {
 
-  componentDidMount() {
-    this.props.getUser()
-  }
-
   render() {
     return (
       <div className="App">

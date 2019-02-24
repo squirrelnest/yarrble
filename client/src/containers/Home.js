@@ -3,6 +3,7 @@ import MapContainer from './MapContainer';
 import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
+import { getUser } from '../actions/authActions';
 import {
   createLocation,
   deleteLocation,
@@ -23,6 +24,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
+    this.props.getUser();
     if (window.navigator.onLine) {
       this.isOnline();
     }
@@ -158,7 +160,8 @@ function mapDispatchToProps(dispatch) {
   return {
     createLocation: locationData => dispatch(createLocation(locationData)),
     deleteLocation: location_id => dispatch(deleteLocation(location_id)),
-    postOfflineData: () => dispatch(postOfflineData())
+    postOfflineData: () => dispatch(postOfflineData()),
+    getUser: () => dispatch(getUser())
   };
 }
 
