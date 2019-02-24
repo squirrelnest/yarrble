@@ -64,7 +64,6 @@ export class LoginForm extends Component {
 
           <TextField
             name="email"
-            hintText="email"
             label="Email"
             style={{ width: '100%' }}
             onChange={(event) => this.handleChange(event)}
@@ -75,7 +74,6 @@ export class LoginForm extends Component {
           <TextField
             name="password"
             type="password"
-            hintText="Password"
             label="Password"
             style={{ width: '100%' }}
             onChange={(event) => this.handleChange(event)}
