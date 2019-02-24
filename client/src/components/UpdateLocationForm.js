@@ -9,31 +9,29 @@ export function isMobile() {
   return window.innerWidth < 700
 }
 
-const initialState = {
-  nickname: '',
-  depth: '',
-  longitude: '',
-  latitude: '',
-  country: '',
-  stability: '',
-  date_modified: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
-  fuel: false,
-  water: false,
-  grocery: false,
-  laundry: false,
-  diving: false,
-  snorkeling: false,
-  paddleboarding: false,
-  surfing: false,
-  amenities: [],
-  windProtection: []
-}
-
 export default class UpdateLocationForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = initialState
+    this.state = {
+      nickname: this.props.loc.nickname,
+      depth: this.props.loc.depth,
+      longitude: this.props.loc.lon,
+      latitude: this.props.loc.lat,
+      country: this.props.loc.country,
+      stability: '',
+      date_modified: Date(Date.UTC(96, 1, 2, 3, 4, 5)),
+      fuel: this.props.loc.amenities.fuel,
+      water: this.props.loc.amenities.water,
+      grocery: this.props.loc.amenities.grocery,
+      laundry: this.props.loc.amenities.laundry,
+      diving: this.props.loc.amenities.diving,
+      snorkeling: this.props.loc.amenities.snorkeling,
+      paddleboarding: this.props.loc.amenities.paddleboarding,
+      surfing: this.props.loc.amenities.surfing,
+      amenities: [],
+      windProtection: []
+    }
   }
 
   handleCheck(event) {
@@ -77,18 +75,15 @@ export default class UpdateLocationForm extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(this.state.longitude)
   };
 
   componentWillReceiveProps(nextProps) {
     if (this.props.open === false) {
-      this.setState(initialState);
+      // this.setState(initialState);
     }
   }
 
   render() {
-
-    const { loc } = this.props
 
     return (
       <div>
@@ -102,7 +97,27 @@ export default class UpdateLocationForm extends Component {
         }>
 
           <div className={styles.locationHeader}>
-            <div><h1>{loc.nickname}, {loc.country}</h1></div>
+            <div className={styles.data}>
+              <span className={styles.label}>Nickname</span>
+              <div className={styles.field}>
+                <input
+                  type='text'
+                  name='nickname'
+                  value={this.state.nickname}
+                  onChange={(event) => this.handleChange(event)}/>
+              </div>
+            </div>
+            <div className={styles.data}>
+              <span className={styles.label}>Country</span>
+              <div className={styles.field}>
+                <input
+                  type='text'
+                  name='country'
+                  value={this.state.country}
+                  onChange={(event) => this.handleChange(event)}/>
+              </div>
+            </div>
+
             <div onClick={this.props.toggleForm} className={styles.addReview}>                     
               <div
                 className={styles.closeBtn}
@@ -119,7 +134,7 @@ export default class UpdateLocationForm extends Component {
                 <input
                   type='text'
                   name='latitude'
-                  defaultValue={loc.lat}
+                  value={this.state.lat}
                   onChange={(event) => this.handleChange(event)}/>
               </div>
             </div>
@@ -129,7 +144,7 @@ export default class UpdateLocationForm extends Component {
                 <input
                   type='text'
                   name='longitude'
-                  defaultValue={loc.lon}
+                  value={this.state.lon}
                   onChange={(event) => this.handleChange(event)}/>
               </div>
             </div>    
@@ -139,7 +154,7 @@ export default class UpdateLocationForm extends Component {
               <input
                     type='text'
                     name='depth'
-                    defaultValue={loc.depth}
+                    value={this.state.depth}
                     onChange={(event) => this.handleChange(event)}/>
               </div>
             </div>
@@ -149,7 +164,7 @@ export default class UpdateLocationForm extends Component {
               <input
                     type='text'
                     name='bottom'
-                    defaultValue={loc.bottom}
+                    value={this.state.bottom}
                     onChange={(event) => this.handleChange(event)}/>
             </div>
              
@@ -160,7 +175,7 @@ export default class UpdateLocationForm extends Component {
           <div className={styles.data}>
             <span className={styles.label}>Wind Protection</span>
             <div className={styles.wind}>
-              <WindSelector clickHandler={this.handleWindClick}/>
+              <WindSelector clickHandler={this.handleWindClick} winds={this.state.windProtection} />
             </div>
           </div> 
         

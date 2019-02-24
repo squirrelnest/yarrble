@@ -7,6 +7,7 @@ import UpdateLocationForm from '../components/UpdateLocationForm';
 import ReviewCards from '../components/ReviewCards';
 import WindCompass from '../components/WindCompass';
 import { connect } from 'react-redux';
+import { editLocation } from '../actions/locationActions';
 import {
   createReview,
   postOfflineReviews
@@ -70,7 +71,6 @@ class ShowLocation extends Component {
   }
 
   openLocationForm = () => {
-    console.log('open sesame')
     this.setState({
       openLocation: true,
     })
@@ -91,8 +91,9 @@ class ShowLocation extends Component {
     this.props.history.push(url);
   }
 
-  handleSubmitLocation = (reviewData) => {
-    // this.props.editLocation({...locationData, location_id: this.props.loc.id})
+  handleSubmitLocation = (locationData) => {
+    console.log(this.props.loc.id)
+    this.props.editLocation({...locationData, location_id: this.props.loc.id})
     this.handleCloseLocation();
     let url = `/locations/${this.props.loc.id}`;
     this.props.history.push(url)
@@ -120,7 +121,7 @@ class ShowLocation extends Component {
           </section>
           <section className={styles.locationDataContainer}>
 
-          { openLocation ? <UpdateLocationForm loc={loc} toggleForm={this.toggleLocationForm}/> :
+          { openLocation ? <UpdateLocationForm loc={loc} toggleForm={this.toggleLocationForm} handleSubmit={this.handleSubmitLocation}/> :
             <Fragment>
               <div className={styles.locationHeader}>
                 <div><h1>{loc.nickname}, {loc.country}</h1></div>
@@ -185,11 +186,6 @@ class ShowLocation extends Component {
             open={this.state.openReview}
             handleSubmit={this.handleSubmitReview}
             handleClose={this.handleCloseReview}/>
-          {/* <EditLocationForm
-            open={this.state.openLocation}
-            handleSubmit={this.handleSubmitLocation}
-            handleClose={this.handleCloseLocation}
-            handleRequestChange={this.toggleLocationForm}/> */}
         </section>
 
       </div>
@@ -209,7 +205,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createReview: (formData) => dispatch(createReview(formData)),
-    postOfflineReviews: () => dispatch(postOfflineReviews())
+    postOfflineReviews: () => dispatch(postOfflineReviews()),
+    editLocation: (locationData) => dispatch(editLocation(locationData))
   }
 }
 

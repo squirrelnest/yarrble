@@ -2,6 +2,7 @@ import {
   GET_LOCATIONS,
   LOADING_LOCATIONS,
   ADD_LOCATION,
+  EDIT_LOCATION,
   REMOVE_LOCATION
 } from '../actions/locationActions';
 
@@ -25,6 +26,9 @@ export default function locationReducer(state = initialState, action) {
       return { locations: action.payload }
 
     case ADD_LOCATION:
+      return { locations: state.locations.concat(action.location) }
+
+    case EDIT_LOCATION:
       return { locations: state.locations.concat(action.location) }
 
     case REMOVE_LOCATION:

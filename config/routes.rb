@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/locations/new/:lon/:lat' => 'locations#new', :constraints => { :lon => /[^\/]+/, :lat => /[^\/]+/ }
   get '/locations/get_country/:lon/:lat' => 'locations#get_country', :constraints => { :lon => /[^\/]+/, :lat => /[^\/]+/ }
   get '/locations/mapbox_token' => 'locations#mapbox_token', :constraints => { :lon => /[^\/]+/, :lat => /[^\/]+/ }
+  patch '/locations/:id' => 'locations#update'
 
   resources :locations do
     resources :reviews

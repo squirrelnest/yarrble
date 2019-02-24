@@ -6,6 +6,7 @@ import { API_ROOT } from '../api-config';
 export const GET_LOCATIONS = 'GET_LOCATIONS'
 export const LOADING_LOCATIONS = 'LOADING_LOCATIONS'
 export const ADD_LOCATION = 'ADD_LOCATION'
+export const EDIT_LOCATION = 'EDIT_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 
 /* ACTION CREATORS */
@@ -159,6 +160,49 @@ export function createLocation(locationData, user_id) {
 
 export function createLocationSuccess(location) {
   return {type: ADD_LOCATION, location};
+}
+
+export function editLocation(locationData) {
+
+  let token = "Bearer " + localStorage.getItem("jwt")
+
+  const bodyData = {
+    location: {
+      id: locationData.location_id,
+      nickname: locationData.nickname,
+      lon: Number(locationData.longitude),
+      lat: Number(locationData.latitude),
+      country: locationData.country,
+      depth: locationData.depth,
+    },
+    windProtection: locationData.windProtection,
+    amenities: locationData.amenities,
+  }
+// post user input if online, store user input if offline
+  if (window.navigator.onLine) {
+    return (dispatch) => {
+      return fetch(`//${API_ROOT}/locations/${locationData.location_id}`, {
+        method: "PATCH",
+        credentials: 'same-origin',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify(bodyData)
+      })
+      .then(response => response.json())
+      .then(response => dispatch(editLocationSuccess(response)))
+    }
+  } else {
+    return () => {
+      storeOfflineData(bodyData)
+    }
+  }
+}
+
+export function editLocationSuccess(location) {
+  return {type: EDIT_LOCATION, location};
 }
 
 export function deleteLocation(location_id) {

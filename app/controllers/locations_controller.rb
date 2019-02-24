@@ -60,7 +60,6 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
-    # @reviews = Review.find(location_id: @location.id)
     render json: @location, status: 200
   end
 
@@ -72,10 +71,17 @@ class LocationsController < ApplicationController
     if current_user.admin
       @location = Location.find(params[:id])
       @location.update(location_params)
-      redirect_to location_path(@location)
+      params[:windProtection].each do |wind|
+        @location.winds.update(wind => true) unless wind == "" 
+      end
+      params[:amenities].each do |amenity|
+        @amenity = Amenity.find_by(name: amenity)
+        @location.amenities << @amenity
+      end
+      render json: @location, status: 200
     else
-      # flash[:message] = "Only admins can do that."
-      redirect_to location_path(@location)
+      # flash message "only admins can edit locations"
+      render json: @location, status: 200
     end
   end
 
@@ -101,12 +107,14 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(
+      :id,
       :nickname,
       :lon,
       :lat,
       :country,
       :depth,
-      reviews_attributes: [:date_visited, :stability, :content, :aesthetics, :safety, :user_id]
+      :windProtection,
+      :amenities
     )
   end
 
