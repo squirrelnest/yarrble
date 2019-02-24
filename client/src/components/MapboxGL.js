@@ -49,7 +49,6 @@ export default class MapboxGL extends Component {
   }
 
   renderMarkers = (locations, map) => {
-    console.log('rendering markers');
     locations.forEach((loc) => {
       // create a HTML element for each feature
       let el = <Link
