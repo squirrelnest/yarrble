@@ -3,7 +3,6 @@ import MapContainer from './MapContainer';
 import LocationList from '../containers/LocationList';
 import NewLocationForm from '../components/NewLocationForm';
 import { connect } from 'react-redux';
-import { getUser } from '../actions/authActions';
 import {
   createLocation,
   deleteLocation,
@@ -159,8 +158,7 @@ function mapDispatchToProps(dispatch) {
   return {
     createLocation: locationData => dispatch(createLocation(locationData)),
     deleteLocation: location_id => dispatch(deleteLocation(location_id)),
-    postOfflineData: () => dispatch(postOfflineData()),
-    getUser: () => dispatch(getUser())
+    postOfflineData: () => dispatch(postOfflineData())
   };
 }
 

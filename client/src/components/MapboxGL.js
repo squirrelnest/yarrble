@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import Place from 'material-ui/svg-icons/maps/place';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiemVya29uaXVtIiwiYSI6ImNqZDE3MGFncDJtNjUyeG5zZGMwczMxcmEifQ.e0Pxb8cdU5NiEobS_o6zSg";
 
-export default class MapboxGL extends React.Component {
+export default class MapboxGL extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,9 +17,9 @@ export default class MapboxGL extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.locations && this.props.locations.length !== nextProps.locations.length) {
-        this.renderMarkers(nextProps.locations)
+  componentDidUpdate(prevProps) {
+    if (this.state.map && (this.props.locations && this.props.locations !== prevProps.locations)) {
+      this.renderMarkers(this.props.locations, this.state.map)
     }
   }
 
@@ -35,6 +35,7 @@ export default class MapboxGL extends React.Component {
     });
 
     this.setState({map: map})
+    this.renderMarkers((this.props.locations || []), map)
     
     map.on("move", () => {
       const { lng, lat } = map.getCenter();
@@ -45,13 +46,10 @@ export default class MapboxGL extends React.Component {
         zoom: map.getZoom().toFixed(2)
       });
     });
-
-    if (this.state.map && this.props.locations) {
-      this.renderMarkers(this.props.locations)
-    }
   }
 
-  renderMarkers = (locations) => {
+  renderMarkers = (locations, map) => {
+    console.log('rendering markers');
     locations.forEach((loc) => {
       // create a HTML element for each feature
       let el = <Link
@@ -66,12 +64,11 @@ export default class MapboxGL extends React.Component {
       // make a marker for each feature and add to the map
       new mapboxgl.Marker(el)
       .setLngLat([loc.lon, loc.lat])
-      .addTo(this.state.map);
+      .addTo(map);
     });
   }
 
   render() {
-
     return (
       <div>
         <div
