@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Slider from 'material-ui/Slider';
-import DatePicker from 'material-ui/DatePicker';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import classes from '../css/NewReviewForm.module.css';
 
 const styles = {
   root: {
@@ -20,9 +22,6 @@ const styles = {
   },
   checkbox: {
     marginBottom: 16,
-  },
-  datepicker: {
-    zIndex: '4000',
   }
 };
 
@@ -60,9 +59,10 @@ export default class NewReviewForm extends Component {
     });
   };
 
-  handleDateChange = (event, date) => {
+  handleDateChange = (date) => {
+    let newDate = new Date(date).toDateString()
     this.setState({
-      date_visited: date,
+      date_visited: newDate,
     });
   };
 
@@ -149,23 +149,29 @@ export default class NewReviewForm extends Component {
 
             </div>
 
-            <TextField
-              name="content"
-              value={this.state.content}
-              hintText="Write a Review"
-              floatingLabelText="Write a Review"
-              multiLine={true}
-              fullWidth={true}
-              rows={2}
-              style={{ marginTop: '-50px' }}
-              onChange={(event) => this.handleChange(event)}
-            />
+              <div className={styles.data}>
+              <span className={styles.label}>Write a review</span>
+              <div className={styles.field}>
+                <textarea
+                  style={{ width: '100%' }}
+                  rows='10'
+                  name='content'
+                  value={this.state.content}
+                  onChange={(event) => this.handleChange(event)}/>
+              </div>
+            </div>
 
-            <DatePicker
-              dialogContainerStyle={styles.datepicker}
-              hintText="Date Visited"
-              onChange={this.handleDateChange}
-            />
+            <div>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                  margin="normal"
+                  label="Date Visited"
+                  value={this.state.date_visited}
+                  onChange={(event, date) => this.handleDateChange(event, date)}
+                  format='MMM dd yyyy'
+                />
+              </MuiPickersUtilsProvider>
+            </div>
 
           </form>
 
