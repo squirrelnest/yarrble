@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import paradise from '../img/paradise.jpg';
-import {Card, CardHeader, CardText} from '@mui/material/Card';
+import { Card, CardHeader, CardContent } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 
@@ -55,7 +55,7 @@ export default class ReviewCard extends Component {
                 avatar={tilesData[0].img}
                 actAsExpander={true}
               />
-              <CardText >
+              <CardContent  >
                 <p>"{this.props.review.content}"</p>
                 <div className="row">
                   <Chip
@@ -98,7 +98,7 @@ export default class ReviewCard extends Component {
                   </Chip>
 
                 </div>
-              </CardText>
+              </CardContent >
             </Card>
             
       );

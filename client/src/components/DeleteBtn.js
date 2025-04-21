@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Delete from '@mui/material/svg-icons/action/delete';
+import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 export default class DeleteBtn extends Component {
@@ -11,7 +11,7 @@ export default class DeleteBtn extends Component {
         style={{ visibility: this.props.visibility }}
         onClick={this.props.handleClick}
         size="large">
-        <Delete
+        <DeleteIcon
           hoverColor={'f44336'}
         />
       </IconButton>

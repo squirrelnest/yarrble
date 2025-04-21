@@ -3,8 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import classes from '../css/NewReviewForm.module.css';
 
 const styles = {
@@ -162,15 +161,13 @@ export default class NewReviewForm extends Component {
             </div>
 
             <div>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <DatePicker
-                  margin="normal"
-                  label="Date Visited"
-                  value={this.state.date_visited}
-                  onChange={(event, date) => this.handleDateChange(event, date)}
-                  format='MMM dd yyyy'
-                />
-              </MuiPickersUtilsProvider>
+              <DatePicker
+                margin="normal"
+                label="Date Visited"
+                value={this.state.date_visited}
+                onChange={(event, date) => this.handleDateChange(event, date)}
+                format='MMM dd yyyy'
+              />
             </div>
 
           </form>

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import FloatingActionButton from '@mui/material/FloatingActionButton';
-import ContentAdd from '@mui/material/svg-icons/content/add';
+import { Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 const style = {
   marginRight: 20,
   zIndex: 1000
 };
 
-export default class Fab extends Component {
+export default class FabButton extends Component {
 
   render() {
     return (
-      <FloatingActionButton
+      <Fab
         style={style}
         className="fab"
         onClick={this.props.handleToggle}
       >
-        <ContentAdd />
-      </FloatingActionButton>
+        <AddIcon />
+      </Fab>
     );
   }
 }

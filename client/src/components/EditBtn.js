@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import IconButton from '@mui/material/IconButton';
-import ModeEdit from '@mui/material/svg-icons/editor/mode-edit';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default class EditBtn extends Component {
 
@@ -11,7 +11,7 @@ export default class EditBtn extends Component {
         style={{ visibility: this.props.visibility }}
         onClick={this.props.handleClick}
         size="large">
-        <ModeEdit hoverColor={'f44336'} />
+        <EditIcon hoverColor={'f44336'} />
       </IconButton>
     );
   }

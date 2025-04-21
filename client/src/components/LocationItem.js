@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ListItem } from '@mui/material/List';
-import MoreVertIcon from '@mui/material/svg-icons/navigation/more-vert';
+import { ListItem } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { deleteLocation } from '../actions/locationActions';
 import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';

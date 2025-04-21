@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import WindSelector from './WindSelector';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import { DatePicker } from 'material-ui-pickers';
 import { API_ROOT } from '../api-config';
 import classes from '../css/NewLocationForm.module.css';
 
@@ -393,15 +393,13 @@ export default class EditLocationForm extends Component {
 
               <div className={classes.lastLine}>
                 <div>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DatePicker
-                      margin="normal"
-                      label="Date Visited"
-                      value={this.state.date_visited}
-                      onChange={(date) => this.handleDateChange(date)}
-                      format='MMM dd yyyy'
-                    />
-                  </MuiPickersUtilsProvider>
+                  <DatePicker
+                    margin="normal"
+                    label="Date Visited"
+                    value={this.state.date_visited}
+                    onChange={(date) => this.handleDateChange(date)}
+                    format='MMM dd yyyy'
+                  />
                 </div>
                 <div className={classes.buttonsContainer}>
                   <Button variant="contained"

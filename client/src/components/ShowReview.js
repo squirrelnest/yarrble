@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TableRow, TableRowColumn } from '@mui/material/Table';
+import { TableRow, TableCell } from '@mui/material';
 import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 
@@ -16,14 +16,14 @@ export class ShowReview extends Component {
           onMouseOut={this.props.handleMouseOut}
         >
 
-          <TableRowColumn>{this.props.review_id}</TableRowColumn>
-          <TableRowColumn>{this.props.nickname}</TableRowColumn>
-          <TableRowColumn>{this.props.content}</TableRowColumn>
-          <TableRowColumn>{this.props.stability}</TableRowColumn>
-          <TableRowColumn>{this.props.aesthetics}</TableRowColumn>
-          <TableRowColumn>{this.props.safety}</TableRowColumn>
+          <TableCell>{this.props.review_id}</TableCell>
+          <TableCell>{this.props.nickname}</TableCell>
+          <TableCell>{this.props.content}</TableCell>
+          <TableCell>{this.props.stability}</TableCell>
+          <TableCell>{this.props.aesthetics}</TableCell>
+          <TableCell>{this.props.safety}</TableCell>
 
-          <TableRowColumn>
+          <TableCell>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <DeleteBtn
                 review_id={this.props.review_id}
@@ -36,7 +36,7 @@ export class ShowReview extends Component {
                 visibility={this.props.visibility}
               />
             </div>
-          </TableRowColumn>
+          </TableCell>
 
         </TableRow>
 

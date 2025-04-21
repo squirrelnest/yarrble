@@ -2,16 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202043056) do
-
+ActiveRecord::Schema[7.1].define(version: 2019_02_02_043056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -19,26 +18,26 @@ ActiveRecord::Schema.define(version: 20190202043056) do
   create_table "amenities", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id"
-    t.datetime "created_at", null: false
+    t.timestamptz "created_at", null: false
   end
 
   create_table "location_amenities", force: :cascade do |t|
     t.integer "location_id"
     t.integer "amenity_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "location_winds", force: :cascade do |t|
     t.integer "location_id"
     t.integer "wind_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "nickname"
-    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.geography "lonlat", limit: {srid: 4326, type: "st_point", geographic: true}, null: false
     t.text "country"
     t.float "depth"
   end
@@ -46,9 +45,9 @@ ActiveRecord::Schema.define(version: 20190202043056) do
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "stability"
-    t.datetime "date_visited", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.timestamptz "date_visited", null: false
+    t.timestamptz "created_at", null: false
+    t.timestamptz "updated_at", null: false
     t.integer "location_id", null: false
     t.integer "user_id", null: false
     t.float "safety"
@@ -59,7 +58,7 @@ ActiveRecord::Schema.define(version: 20190202043056) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.datetime "created_at", null: false
+    t.timestamptz "created_at", null: false
     t.boolean "admin", default: false
     t.string "email"
   end

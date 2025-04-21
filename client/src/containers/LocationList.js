@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { List } from '@mui/material/List';
 import LocationItem from '../components/LocationItem';
 import { fetchNearbyLocations, fetchLocations } from '../actions/locationActions';
-import { Tabs, Tab } from '@mui/material/Tabs';
+import { Tabs, Tab, List } from '@mui/material';
 import NewReviewForm from '../components/NewReviewForm';
 import { createReview } from '../actions/reviewActions';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../functions/withRouter';
 import { connect } from 'react-redux';
 
 function alphabetize(current, next) {
@@ -34,12 +33,12 @@ export class LocationList extends Component {
     });
   };
 
-  handleActive = (tab) => {
-    if (tab.props['name'] === 'nearby') {
-      this.props.fetchNearbyLocations();
-    } else {
-      this.props.fetchLocations();
-    }
+  handleAll = (tab) => {
+    this.props.fetchLocations();
+  }
+
+  handleNearby = (tab) => {
+    this.props.fetchNearbyLocations();
   }
 
   handleAdd = (location_id) => {
@@ -74,7 +73,7 @@ export class LocationList extends Component {
 
   render() {
 
-    const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
+    const locations = this.props?.locations?.sort(alphabetize).map( (loc, index) =>
 
       <LocationItem
         location_id={loc.id}
@@ -107,9 +106,9 @@ export class LocationList extends Component {
           handleSubmit={this.handleSubmit}
         />
 
-        <Tabs inkBarStyle={{background: '#00BCD4'}}>
-          <Tab href="" label="All Anchorages" onActive={this.handleActive} name="all" className="tab-active one" style={{ color: '#212121', backgroundColor: 'none' }}/>
-          <Tab href="" label="Nearby Anchorages" onActive={this.handleActive} name="nearby" className="tab-inactive one" style={{ color: '#212121', backgroundColor: 'none' }}/>
+        <Tabs indicatorColor="primary">
+          <Tab href="" label="All Anchorages" onClick={this.handleAll} name="all" className="tab-active one" style={{ color: '#212121', backgroundColor: 'none' }}/>
+          <Tab href="" label="Nearby Anchorages" onClick={this.handleNearby} name="nearby" className="tab-inactive one" style={{ color: '#212121', backgroundColor: 'none' }}/>
         </Tabs>
 
         <List style={{ height: '90%', overflow: 'auto'}}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@mui/material/TextField';
 import { login } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import classes from '../css/LoginForm.module.css';
 
 export class LoginForm extends Component {
@@ -37,7 +37,7 @@ export class LoginForm extends Component {
 
   renderRedirect = () => {
     if (this.props.authenticated) {
-      return <Redirect to='/' />
+      return <Navigate to='/' />
     }
   }
 

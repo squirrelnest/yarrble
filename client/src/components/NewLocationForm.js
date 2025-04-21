@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Drawer from '@mui/material/Drawer';
 import TextField from '@mui/material/TextField';
-import Slider from '@mui/lab/Slider';
+import { Slider } from '@mui/material';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import Subheader from '@mui/material/Subheader';
+import { ListSubheader } from '@mui/material';
 import WindSelector from './WindSelector';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { API_ROOT } from '../api-config';
 import classes from '../css/NewLocationForm.module.css';
 
@@ -250,11 +250,11 @@ export default class NewLocationForm extends Component {
               <div className="row">
 
                 <div className={classes.formRow}>
-                  <Subheader className="subheader">Wind Protection</Subheader>
+                  <ListSubheader className="subheader">Wind Protection</ListSubheader>
                   <WindSelector clickHandler={this.handleWindClick} />
                 </div>
                 <div className={classes.formRow}>
-                  <Subheader className="subheader">Ratings</Subheader>
+                  <ListSubheader className="subheader">Ratings</ListSubheader>
                   <div className="sliders">
 
                     <div className="sliderContainer" name="stability">
@@ -298,7 +298,7 @@ export default class NewLocationForm extends Component {
                 </div>
               </div>
             
-              <Subheader className="subheader">Amenities</Subheader>
+              <ListSubheader className="subheader">Amenities</ListSubheader>
 
               <div className="grid" style={styles.checkboxblock}>
 
@@ -392,15 +392,13 @@ export default class NewLocationForm extends Component {
 
               <div className={classes.lastLine}>
                 <div>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DatePicker
-                      margin="normal"
-                      label="Date Visited"
-                      value={this.state.date_visited}
-                      onChange={(date) => this.handleDateChange(date)}
-                      format='MMM dd yyyy'
-                    />
-                  </MuiPickersUtilsProvider>
+                  <DatePicker
+                    margin="normal"
+                    label="Date Visited"
+                    value={this.state.date_visited}
+                    onChange={(date) => this.handleDateChange(date)}
+                    format='MMM dd yyyy'
+                  />
                 </div>
                 <div className={classes.buttonsContainer}>
                   <Button variant="contained"

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import paradise from '../img/paradise.jpg';
 import styles from '../css/ShowLocation.module.css';
-import NoteAdd from '@mui/material/svg-icons/action/note-add';
+import AddIcon from '@mui/icons-material/Add';
 import NewReviewForm from '../components/NewReviewForm';
 import UpdateLocationForm from '../components/UpdateLocationForm';
 import ReviewCards from '../components/ReviewCards';
@@ -128,7 +128,7 @@ class ShowLocation extends Component {
                 { admin && 
                   <div onClick={this.openLocationForm} className={styles.addReview}>        
                     <div className={styles.addReview}>
-                      <NoteAdd hoverColor={'coral'} />
+                      <AddIcon hoverColor={'coral'} />
                       <div className={styles.hideOnMobile}>Edit Location</div>
                     </div>
                   </div>
@@ -176,7 +176,7 @@ class ShowLocation extends Component {
             <div className={styles.label}>Reviews</div>
             <div onClick={this.openReviewForm} className={styles.addReview}>
               <div className={styles.addReview}>
-                <NoteAdd hoverColor={'coral'} />
+                <AddIcon hoverColor={'coral'} />
                 <div className={styles.hideOnMobile}>Add Review</div>
               </div>
             </div>

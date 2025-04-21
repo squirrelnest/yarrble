@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Mappy from '../components/Mappy.js';
 import MapboxGL from '../components/MapboxGL.js';
-import Fab from '../components/Fab.js';
+import FabButton from '../components/Fab.js';
 
 export default class MapContainer extends Component {
 
@@ -18,7 +18,7 @@ export default class MapContainer extends Component {
           handleMapClick={this.props.handleMapClick}
         />
 
-        <Fab handleToggle={this.props.handleToggle} />
+        <FabButton handleToggle={this.props.handleToggle} />
 
       </div>
     );

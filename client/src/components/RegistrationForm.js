@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { register } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import classes from '../css/RegistrationForm.module.css';
 
 export class RegistrationForm extends Component {
@@ -39,7 +39,7 @@ export class RegistrationForm extends Component {
 
   renderRedirect = () => {
     if (this.props.newregistration) {
-      return <Redirect to='/login' />
+      return <Navigate to='/login' />
     }
   }
 

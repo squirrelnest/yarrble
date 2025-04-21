@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TableRow, TableRowColumn } from '@mui/material/Table';
+import { TableRow, TableCell } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -36,13 +36,13 @@ export class EditReviewForm extends Component {
           onMouseOver={this.props.handleMouseOver}
           onMouseOut={this.props.handleMouseOut}
         >
-          <TableRowColumn>{this.props.review_id}</TableRowColumn>
-          <TableRowColumn><p style={{ width: '80px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{this.props.nickname}</p></TableRowColumn>
-          <TableRowColumn><TextField name="content" onChange={(event) => this.handleChange(event)} value={this.state.content} floatingLabelText='content' multiLine={true} textareaStyle={{ marginBottom: '0px' }} /></TableRowColumn>
-          <TableRowColumn><TextField name="stability" onChange={(event) => this.handleChange(event)} value={this.state.stability} floatingLabelText='stability' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
-          <TableRowColumn><TextField name="aesthetics" onChange={(event) => this.handleChange(event)} value={this.state.aesthetics} floatingLabelText='aesthetics' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
-          <TableRowColumn><TextField name="safety" onChange={(event) => this.handleChange(event)} value={this.state.safety} floatingLabelText='safety' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
-          <TableRowColumn>
+          <TableCell>{this.props.review_id}</TableCell>
+          <TableCell><p style={{ width: '80px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{this.props.nickname}</p></TableCell>
+          <TableCell><TextField name="content" onChange={(event) => this.handleChange(event)} value={this.state.content} floatingLabelText='content' multiLine={true} textareaStyle={{ marginBottom: '0px' }} /></TableCell>
+          <TableCell><TextField name="stability" onChange={(event) => this.handleChange(event)} value={this.state.stability} floatingLabelText='stability' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableCell>
+          <TableCell><TextField name="aesthetics" onChange={(event) => this.handleChange(event)} value={this.state.aesthetics} floatingLabelText='aesthetics' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableCell>
+          <TableCell><TextField name="safety" onChange={(event) => this.handleChange(event)} value={this.state.safety} floatingLabelText='safety' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableCell>
+          <TableCell>
             <Button variant="contained"
               className="submitBtn"
               label="Submit"
@@ -61,7 +61,7 @@ export class EditReviewForm extends Component {
               style={styles.button}
               onClick={(event) => this.props.handleCancel(event)}
             />
-          </TableRowColumn>
+          </TableCell>
         </TableRow>
 
     );

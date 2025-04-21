@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './css/index.css';
-import MuiThemeProvider from '@mui/material/styles/MuiThemeProvider';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Switch } from 'react-router';
+import { Routes } from 'react-router';
 import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Home from './containers/Home';
@@ -11,33 +11,65 @@ import LoginContainer from './containers/LoginContainer';
 import RegistrationContainer from './containers/RegistrationContainer';
 import { connect } from 'react-redux';
 import { getUser } from './actions/authActions';
+import { createRoot } from 'react-dom/client';
+
+import 'babel-polyfill';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import yomama from './reducers/index';
+import { fetchLocations } from './actions/locationActions';
+import './functions/currentPosition';
+
+const container = document.getElementById('root');
+const root = createRoot(container); 
+
+let store = configureStore({
+  reducer: yomama
+});
+
+store.dispatch(fetchLocations())
+
+/* Provider exposes store so you can pass it through as a prop on context.
+   This allows components to subscribe to store updates and dispatch actions */
 
 export class App extends Component {
-
   render() {
-    return (
-      <div className="App">
-        <MuiThemeProvider>
-          <div>
-            <Router>
-              <div>
-                <NavBar store={this.props.store}/>
-                <Switch>
-                  <Route exact path="/" render={() => <Home store={this.props.store} />} />
-                  <Route path={`/locations/:locationId`} component={ ShowLocation } />
-                  <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} />} />
-                  <Route exact path="/login" component={ LoginContainer } />
-                  <Route exact path="/signup" component={ RegistrationContainer } />
 
-                </Switch>
-              </div>
-            </Router>
-          </div>
-        </MuiThemeProvider>
-      </div>
+    const theme = createTheme({
+      palette: {
+        primary: {
+          main: "#40e0d0",
+        },
+      },
+    });
+    
+    return (
+      <Provider store={store}>
+        <div className="App" store={store}>
+          <ThemeProvider theme={theme}>
+            <div>
+              <Router>
+                <div>
+                  <NavBar store={this.props.store}/>
+                  <Routes>
+                    <Route exact path="/" render={() => <Home store={this.props.store} />} />
+                    <Route path={`/locations/:locationId`} component={ ShowLocation } />
+                    <Route exact path="/myreviews" render={() => <MyReviews store={this.props.store} />} />
+                    <Route exact path="/login" component={ LoginContainer } />
+                    <Route exact path="/signup" component={ RegistrationContainer } />
+
+                  </Routes>
+                </div>
+              </Router>
+            </div>
+          </ThemeProvider>
+        </div>
+      </Provider>
     );
   }
 }
+
+root.render(<App />)
 
 const mapDispatchToProps = (dispatch) => {
   return {

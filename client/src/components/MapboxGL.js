@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
-import Place from '@mui/material/svg-icons/maps/place';
+import PlaceIcon from '@mui/icons-material/Place';
 import { Link } from 'react-router-dom';
 
 // jest.mock("mapbox-gl", () => { return {} });
@@ -54,7 +54,7 @@ export default class MapboxGL extends Component {
       let el = <Link
         to={ `/locations/${loc.id}` }
         key={ loc.id }>
-          <Place
+          <PlaceIcon
             hoverColor={'#E91E63'}
             color='#00BCD4'
           />

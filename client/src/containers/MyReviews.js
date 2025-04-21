@@ -3,10 +3,10 @@ import { fetchReviews } from '../actions/reviewActions';
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
+  TableHead,
+  TableCell,
   TableRow
-} from '@mui/material/Table';
+} from '@mui/material';
 import { ReviewItem } from '../components/ReviewItem';
 import { connect } from 'react-redux';
 
@@ -89,26 +89,26 @@ export class MyReviews extends Component {
           selectable={this.state.selectable}
           multiSelectable={this.state.multiSelectable}
         >
-          <TableHeader
+          <TableHead
             displaySelectAll={this.state.showCheckboxes}
             adjustForCheckbox={this.state.showCheckboxes}
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="7" tooltip="My Reviews" style={{textAlign: 'center'}}>
+              <TableCell colSpan="7" tooltip="My Reviews" style={{textAlign: 'center'}}>
                 My Reviews
-              </TableHeaderColumn>
+              </TableCell>
             </TableRow>
             <TableRow>
-              <TableHeaderColumn tooltip="id">review_id</TableHeaderColumn>
-              <TableHeaderColumn tooltip="nickname of anchorage">location</TableHeaderColumn>
-              <TableHeaderColumn tooltip="user feedback">content</TableHeaderColumn>
-              <TableHeaderColumn tooltip="water surface stability - a function of exposure to wind and swell">comfort</TableHeaderColumn>
-              <TableHeaderColumn tooltip="subjective beauty">aesthetics</TableHeaderColumn>
-              <TableHeaderColumn tooltip="safety from crime">safety</TableHeaderColumn>
-              <TableHeaderColumn tooltip="delete or edit a review"></TableHeaderColumn>
+              <TableCell tooltip="id">review_id</TableCell>
+              <TableCell tooltip="nickname of anchorage">location</TableCell>
+              <TableCell tooltip="user feedback">content</TableCell>
+              <TableCell tooltip="water surface stability - a function of exposure to wind and swell">comfort</TableCell>
+              <TableCell tooltip="subjective beauty">aesthetics</TableCell>
+              <TableCell tooltip="safety from crime">safety</TableCell>
+              <TableCell tooltip="delete or edit a review"></TableCell>
             </TableRow>
-          </TableHeader>
+          </TableHead>
           <TableBody
             displayRowCheckbox={this.state.showCheckboxes}
             deselectOnClickaway={this.state.deselectOnClickaway}
