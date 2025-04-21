@@ -72,8 +72,8 @@ export class LocationList extends Component {
   }
 
   render() {
-
-    const locations = this.props?.locations?.sort(alphabetize).map( (loc, index) =>
+    console.log(this.props.locations)
+    const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
 
       <LocationItem
         location_id={loc.id}

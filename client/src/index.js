@@ -24,13 +24,12 @@
 import React, { Component } from 'react';
 import './css/index.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 import NavBar from './components/NavBar';
 import MyReviews from './containers/MyReviews';
 import Home from './containers/Home';
 import ShowLocation from './containers/ShowLocation';
-import LoginContainer from './containers/LoginContainer';
+import { LoginContainer } from './containers/LoginContainer';
 import RegistrationContainer from './containers/RegistrationContainer';
 import { connect } from 'react-redux';
 import { getUser } from './actions/authActions';
@@ -43,11 +42,19 @@ import yomama from './reducers/index';
 import { fetchLocations } from './actions/locationActions';
 import './functions/currentPosition';
 
+import locationReducer from './reducers/locationReducer';
+import reviewReducer from './reducers/reviewReducer';
+import authReducer from './reducers/authReducer';
+
 const container = document.getElementById('root');
 const root = createRoot(container); 
 
 let store = configureStore({
-  reducer: yomama
+  reducer: {
+    locations: locationReducer,
+    reviews: reviewReducer,
+    auth: authReducer
+  }
 });
 
 store.dispatch(fetchLocations())
@@ -55,42 +62,46 @@ store.dispatch(fetchLocations())
 /* Provider exposes store so you can pass it through as a prop on context.
    This allows components to subscribe to store updates and dispatch actions */
 
-export class App extends Component {
-  render() {
+export const App = () => {
 
-    const theme = createTheme({
-      palette: {
-        primary: {
-          main: "#40e0d0",
-        },
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#00BCD4',
+        contrastText: '#FFFFFF',
       },
-    });
+      secondary: {
+        main: '#cc83d4',
+        contrastText: '#FFFFFF',
+      },
+      tertiary: {
+        main: '#FFFFFF',
+      }
+    },
+  });
     
-    return (
-      <Provider store={store}>
-        <div className="App" store={store}>
-          <ThemeProvider theme={theme}>
-            <div>
-              <Router>
-                <div>
-                  <NavBar store={store}/>
-                  <Routes>
-                    <Route exact path="/" render={() => <Home store={store} />} />
-                    <Route path={`/locations/:locationId`} component={ ShowLocation } />
-                    <Route exact path="/myreviews" render={() => <MyReviews store={store} />} />
-                    <Route exact path="/login" component={ LoginContainer } />
-                    <Route exact path="/signup" component={ RegistrationContainer } />
-
-                  </Routes>
-                </div>
-              </Router>
-            </div>
-          </ThemeProvider>
-        </div>
-      </Provider>
-    );
-  }
+  return (
+    <Provider store={store}>
+      <div className="app" store={store}>
+        <ThemeProvider theme={theme}>
+          
+            <BrowserRouter>
+              <NavBar store={store}/>
+              <Routes>
+                <Route exact path="/" element={ <Home store={store} /> } />
+                <Route path={`/locations/:locationId`} element={ <ShowLocation /> } />
+                <Route exact path="/myreviews" element={ <MyReviews store={store} /> } />
+                <Route exact path="/login" element={ <LoginContainer /> } />
+                <Route exact path="/signup" element={ <RegistrationContainer/> } />
+              </Routes>
+            </BrowserRouter>
+          
+        </ThemeProvider>
+      </div>
+    </Provider>
+  );
 }
+
 
 root.render(<App />)
 

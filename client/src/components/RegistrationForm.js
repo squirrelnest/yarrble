@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { register } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import classes from '../css/RegistrationForm.module.css';
 
 export class RegistrationForm extends Component {
@@ -59,7 +59,7 @@ export class RegistrationForm extends Component {
 
           <TextField
             name="username"
-            hintText="username"
+            helperText="username"
             label="Username"
             onChange={(event) => this.handleChange(event)}
           />
@@ -68,7 +68,7 @@ export class RegistrationForm extends Component {
 
           <TextField
             name="email"
-            hintText="email"
+            helperText="email"
             label="Email"
             onChange={(event) => this.handleChange(event)}
           />
@@ -78,7 +78,7 @@ export class RegistrationForm extends Component {
           <TextField
             name="password"
             type="password"
-            hintText="Password"
+            helperText="Password"
             label="Password"
             onChange={(event) => this.handleChange(event)}
           />
@@ -87,11 +87,14 @@ export class RegistrationForm extends Component {
           <br />
 
           <Button variant="contained"
-            label="SIGN UP"
             type="submit"
-            secondary={true}
-            className={classes.registrationBtn}
-          />
+            color="primary"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+            }}
+          >SIGN UP</Button>
 
           {this.renderRedirect()}
           {this.errorMessage()}

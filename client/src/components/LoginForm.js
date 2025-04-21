@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TextField from '@mui/material/TextField';
+import { Button, TextField } from '@mui/material';
 import { login } from '../actions/authActions';
 import { connect } from 'react-redux';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router';
 import classes from '../css/LoginForm.module.css';
 
 export class LoginForm extends Component {
@@ -81,12 +81,18 @@ export class LoginForm extends Component {
           <br />
           <br />
 
-          <Button variant="contained"
-            label="LOGIN"
+          <Button
+            variant="contained"
             type="submit"
-            secondary={true}
-            className={classes.loginBtn}
-          />
+            color="primary"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+            }}
+          >
+            LOGIN
+          </Button>
 
           {this.renderRedirect()}
           {this.errorMessage()}
