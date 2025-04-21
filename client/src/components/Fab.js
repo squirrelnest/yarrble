@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from '@mui/material/FloatingActionButton';
+import ContentAdd from '@mui/material/svg-icons/content/add';
 
 const style = {
   marginRight: 20,

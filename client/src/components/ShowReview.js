@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
+import { TableRow, TableRowColumn } from '@mui/material/Table';
 import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 

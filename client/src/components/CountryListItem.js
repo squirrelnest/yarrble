@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+import { ListItem } from '@mui/material/List';
+import Subheader from '@mui/material/Subheader';
 
 export default class CountryListItem extends Component {
 

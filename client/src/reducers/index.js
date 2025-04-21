@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import locationReducer from './locationReducer';
 import reviewReducer from './reviewReducer';
 import authReducer from './authReducer';

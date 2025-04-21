@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import Slider from 'material-ui/Slider';
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import Slider from '@mui/material/Slider';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
@@ -74,12 +74,12 @@ export default class NewReviewForm extends Component {
 
   render() {
     const actions = [
-      <FlatButton
+      <Button variant="text"
         label="Cancel"
         primary={true}
         onClick={this.props.handleClose}
       />,
-      <FlatButton
+      <Button variant="text"
         label="Submit"
         primary={true}
         type="submit"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { register } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -86,7 +86,7 @@ export class RegistrationForm extends Component {
           <br />
           <br />
 
-          <RaisedButton
+          <Button variant="contained"
             label="SIGN UP"
             type="submit"
             secondary={true}

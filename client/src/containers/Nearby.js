@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+import { List, ListItem } from '@mui/material/List';
+import Subheader from '@mui/material/Subheader';
 import { fetchNearbyLocations } from '../actions/locationActions';
 import { connect } from 'react-redux';
 

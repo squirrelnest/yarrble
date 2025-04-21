@@ -10,7 +10,7 @@ gem 'knock'
 # Create seed file from previous databases
 gem 'seed_dump', '~> 3.2', '>= 3.2.4'
 # Foreman utility for managing multiple servers (Webpack dev server, Rails API server, etc.)
-gem 'foreman', '~> 0.82.0'
+gem 'foreman', '~> 0.88.1'
 # Load environment variables from .env
 gem 'dotenv', '~> 2.2', '>= 2.2.1'
 # dotenv-Rails
@@ -24,7 +24,7 @@ gem 'active_model_serializers'
 # Pry for debugging
 gem 'pry'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 7.1.1'
 # Use Postgres as the database for Active Record
 gem 'pg'
 # Use PostGIS adapter for Active Record
@@ -32,9 +32,10 @@ gem 'activerecord-postgis-adapter'
 # proj4 converts coordinates from text files or directly from user input
 gem "rgeo-proj4"
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem "puma", "~> 3.12"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
@@ -67,3 +68,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# add gems deprecated from default library since Ruby 3.4
+gem "base64", "~> 0.2.0"
+gem "bigdecimal", "~> 3.1"
+gem "mutex_m"

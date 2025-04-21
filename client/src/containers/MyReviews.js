@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow
-} from 'material-ui/Table';
+} from '@mui/material/Table';
 import { ReviewItem } from '../components/ReviewItem';
 import { connect } from 'react-redux';
 

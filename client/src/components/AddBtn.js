@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ListItemIcon from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import ListItemIcon from '@mui/material/List';
+import IconButton from '@mui/material/IconButton';
+import FontIcon from '@mui/material/FontIcon';
+import AddCircleOutline from '@mui/material/svg-icons/content/add-circle-outline';
 
 export default class AddBtn extends Component {
 

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import { TableRow, TableRowColumn } from '@mui/material/Table';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const styles={
   width: '100%',
@@ -44,7 +43,7 @@ export class EditReviewForm extends Component {
           <TableRowColumn><TextField name="aesthetics" onChange={(event) => this.handleChange(event)} value={this.state.aesthetics} floatingLabelText='aesthetics' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
           <TableRowColumn><TextField name="safety" onChange={(event) => this.handleChange(event)} value={this.state.safety} floatingLabelText='safety' multiLine={true} textareaStyle={{ marginBottom: '0px' }}/></TableRowColumn>
           <TableRowColumn>
-            <RaisedButton
+            <Button variant="contained"
               className="submitBtn"
               label="Submit"
               type="submit"
@@ -53,7 +52,7 @@ export class EditReviewForm extends Component {
               style={styles.button}
               onClick={(event) => this.props.handleSubmit(event, this.state)}
             />
-            <FlatButton
+            <Button variant="text"
               className="cancelBtn"
               label="Cancel"
               type="cancel"

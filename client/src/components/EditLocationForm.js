@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Drawer from 'material-ui/Drawer';
-import TextField from '@material-ui/core/TextField';
-import Slider from '@material-ui/lab/Slider';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import Checkbox from 'material-ui/Checkbox';
-import Subheader from 'material-ui/Subheader';
-import Button from '@material-ui/core/Button';
+import Drawer from '@mui/material/Drawer';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/lab/Slider';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Subheader from '@mui/material/Subheader';
+import Button from '@mui/material/Button';
 import WindSelector from './WindSelector';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -405,7 +404,7 @@ export default class EditLocationForm extends Component {
                   </MuiPickersUtilsProvider>
                 </div>
                 <div className={classes.buttonsContainer}>
-                  <RaisedButton
+                  <Button variant="contained"
                     label="Submit"
                     type="submit"
                     secondary={true}
@@ -413,12 +412,12 @@ export default class EditLocationForm extends Component {
                     className={[classes.button, classes.submitBtn].join(' ')}
                     onClick={this.props.handleToggle}
                   />
-                  <FlatButton
+                  <Button variant="text"
                     className={[classes.closeButton, classes.desktopOnly].join(' ')}
                     onClick={this.props.handleClose}
                   >
                     CANCEL
-                  </FlatButton>
+                  </Button>
                 </div>
               </div>
 

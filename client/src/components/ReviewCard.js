@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import paradise from '../img/paradise.jpg';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
+import {Card, CardHeader, CardText} from '@mui/material/Card';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
 
 const styles = {
   card: {

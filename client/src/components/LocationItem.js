@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ListItem } from 'material-ui/List';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import { ListItem } from '@mui/material/List';
+import MoreVertIcon from '@mui/material/svg-icons/navigation/more-vert';
 import { deleteLocation } from '../actions/locationActions';
-import MenuItem from 'material-ui/MenuItem';
-import Popover from 'material-ui/Popover';
+import MenuItem from '@mui/material/MenuItem';
+import Popover from '@mui/material/Popover';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 

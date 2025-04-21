@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from '../css/UpdateLocationForm.module.css';
 import classes from '../css/NewLocationForm.module.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import Checkbox from 'material-ui/Checkbox';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
 import WindSelector from './WindSelector';
 
 export function isMobile() {
@@ -261,7 +261,7 @@ export default class UpdateLocationForm extends Component {
           </div>
       
           <div className={classes.buttonsContainer}>
-            <RaisedButton
+            <Button variant="contained"
               label="Submit"
               type="submit"
               secondary={true}

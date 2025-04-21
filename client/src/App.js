@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/index.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from '@mui/material/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import NavBar from './components/NavBar';

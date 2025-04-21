@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
-import Place from 'material-ui/svg-icons/maps/place';
+import Place from '@mui/material/svg-icons/maps/place';
 import { Link } from 'react-router-dom';
 
 // jest.mock("mapbox-gl", () => { return {} });

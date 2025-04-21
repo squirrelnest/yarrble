@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import paradise from '../img/paradise.jpg';
 import styles from '../css/ShowLocation.module.css';
-import NoteAdd from 'material-ui/svg-icons/action/note-add';
+import NoteAdd from '@mui/material/svg-icons/action/note-add';
 import NewReviewForm from '../components/NewReviewForm';
 import UpdateLocationForm from '../components/UpdateLocationForm';
 import ReviewCards from '../components/ReviewCards';

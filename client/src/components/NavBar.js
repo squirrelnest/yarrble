@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+import IconMenu from '@mui/material/IconMenu';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import MoreVertIcon from '@mui/material/svg-icons/navigation/more-vert';
 import { withRouter } from 'react-router-dom';
 import { logout, refreshAuth, getUser } from '../actions/authActions';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import anchor from '../img/anchor.svg';
 
 class Login extends Component {
-  static muiName = 'FlatButton';
+  static muiName = 'Button';
 
   handleClick = () => {
     this.props.logout()
@@ -20,7 +20,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Link to="/login"><FlatButton {...this.props} label="Login"/></Link>
+      <Link to="/login"><Button variant="text" {...this.props} label="Login"/></Link>
     )
   }
 }
@@ -41,7 +41,7 @@ class Logged extends Component {
       <div style={{display: 'flex'}}>
         <div style={{color: 'white', margin: 'auto'}}>Hi, {this.props.username}</div>
         <IconMenu
-          iconButtonElement={<IconButton><MoreVertIcon color='white' /></IconButton>}
+          iconButtonElement={<IconButton size="large"><MoreVertIcon color='white' /></IconButton>}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
         >
@@ -49,7 +49,7 @@ class Logged extends Component {
           <MenuItem primaryText="Sign out" href="/login" onClick={this.handleClick}/>
         </IconMenu>
       </div>
-    )
+    );
   }
 }
 
@@ -71,15 +71,13 @@ class NavBar extends Component {
 
   render() {
     return (
-
-        <AppBar
-          title="Yarrble"
-          onTitleClick={this.handleClick}
-          iconElementLeft={<IconButton onClick={this.handleClick}><img src={anchor} alt="anchor" className="light"></img></IconButton>}
-          iconElementRight={this.props.authenticated ? <LoggedConnected /> : <Login />}
-        />
-
-    )
+      <AppBar
+        title="Yarrble"
+        onTitleClick={this.handleClick}
+        iconElementLeft={<IconButton onClick={this.handleClick} size="large"><img src={anchor} alt="anchor" className="light"></img></IconButton>}
+        iconElementRight={this.props.authenticated ? <LoggedConnected /> : <Login />}
+      />
+    );
   }
 }
 
