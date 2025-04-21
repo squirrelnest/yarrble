@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ListItem } from '@mui/material';
+import { ListItem, ListItemButton, ListItemText, ListItemIcon, Typography, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { deleteLocation } from '../actions/locationActions';
-import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -71,12 +70,12 @@ class LocationItem extends Component {
             onClick={(event) => this.props.moveMap(event, this.props.lon, this.props.lat)}
             key={this.props.location_id}
             name={this.props.name}
-            primaryText={
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '30px', width: '100%' }}>
-                <span><Link to={`/locations/${this.props.location_id}`} style={{ color: "#00BCD4" }}>{this.props.primaryText}</Link>, {this.props.country}</span>
-                <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
-              </div>
-            }
+            // primaryText={
+            //   <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '30px', width: '100%' }}>
+            //     <span><Link to={`/locations/${this.props.location_id}`} style={{ color: "#00BCD4" }}>{this.props.primaryText}</Link>, {this.props.country}</span>
+            //     <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
+            //   </div>
+            // }
             initiallyOpen={this.props.initiallyOpen}
             primaryTogglesNestedList={true}
             nestedItems={this.props.nestedItems.map( (review) =>
@@ -88,7 +87,14 @@ class LocationItem extends Component {
                />
              )
             }
-          />
+          >
+            <ListItemButton component="a" href={`/locations/${this.props.location_id}`}>
+              <ListItemText primary={`${this.props.primaryText}, ${this.props.country}`} />
+              <ListItemIcon>
+                <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
           <Popover
               key="menu"
               open={this.state.popoverOpen}
@@ -97,7 +103,10 @@ class LocationItem extends Component {
               targetOrigin={{horizontal: 'right', vertical: 'top'}}
               onRequestClose={this.handleClose}
           >
-            <MenuItem key="addReview" primaryText="Add Review" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)} />
+            <MenuItem key="addReview" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)}>  
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>Add Review</Typography>
+            </MenuItem>
+
           { auth.admin && <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} /> }
           </Popover>
 

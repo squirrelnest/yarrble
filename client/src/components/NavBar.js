@@ -47,7 +47,7 @@ export const NavBar = (props) => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       onClick={handleClick}
     >
       <Toolbar>

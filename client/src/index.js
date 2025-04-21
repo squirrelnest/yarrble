@@ -38,7 +38,6 @@ import { createRoot } from 'react-dom/client';
 import 'babel-polyfill';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import yomama from './reducers/index';
 import { fetchLocations } from './actions/locationActions';
 import './functions/currentPosition';
 
