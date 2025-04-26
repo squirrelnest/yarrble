@@ -63,53 +63,45 @@ class LocationItem extends Component {
     return (
 
       <div className="list-item">
+          <ListItem
+              onMouseOver={this.handleMouseOver}
+              onMouseOut={this.handleMouseOut}
+              onClick={(event) => this.props.moveMap(event, this.props.lon, this.props.lat)}
+              key={this.props.location_id}
+              name={this.props.name}
+              initiallyOpen={this.props.initiallyOpen}
+              primaryTogglesNestedList={true}
+              nestedItems={this.props.nestedItems.map( (review) =>
+                <ListItem
+                  insetChildren={true}
+                  key={review.id}
+                  review_id={review.id}
+                  primaryText= { '"' + review.content + '"' }
+                />
+              )
+              }
+            >
+              <ListItemButton onClick={() => window.location.href = `/locations/${this.props.location_id}`}>
+                <ListItemText primary={`${this.props.primaryText}, ${this.props.country}`} sx={{ color: "#00BCD4" }}/>
+                <ListItemIcon>
+                  <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+            <Popover
+                key="menu"
+                open={this.state.popoverOpen}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                onRequestClose={this.handleClose}
+            >
+              <MenuItem key="addReview" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)}>  
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>Add Review</Typography>
+              </MenuItem>
 
-        <ListItem
-            onMouseOver={this.handleMouseOver}
-            onMouseOut={this.handleMouseOut}
-            onClick={(event) => this.props.moveMap(event, this.props.lon, this.props.lat)}
-            key={this.props.location_id}
-            name={this.props.name}
-            // primaryText={
-            //   <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '30px', width: '100%' }}>
-            //     <span><Link to={`/locations/${this.props.location_id}`} style={{ color: "#00BCD4" }}>{this.props.primaryText}</Link>, {this.props.country}</span>
-            //     <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
-            //   </div>
-            // }
-            initiallyOpen={this.props.initiallyOpen}
-            primaryTogglesNestedList={true}
-            nestedItems={this.props.nestedItems.map( (review) =>
-              <ListItem
-                insetChildren={true}
-                key={review.id}
-                review_id={review.id}
-                primaryText= { '"' + review.content + '"' }
-               />
-             )
-            }
-          >
-            <ListItemButton component="a" href={`/locations/${this.props.location_id}`}>
-              <ListItemText primary={`${this.props.primaryText}, ${this.props.country}`} />
-              <ListItemIcon>
-                <MoreVertIcon onClick={this.openPopover} hoverColor={'f44336'} visibility={this.state.visibility}/>
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-          <Popover
-              key="menu"
-              open={this.state.popoverOpen}
-              anchorEl={this.state.anchorEl}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              onRequestClose={this.handleClose}
-          >
-            <MenuItem key="addReview" href="" onClick={(event) => this.handleAddReview(event, this.props.location_id)}>  
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>Add Review</Typography>
-            </MenuItem>
-
-          { auth.admin && <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} /> }
+            { auth.admin && <MenuItem key="deleteLocation" primaryText="Delete Location" href="" onClick={this.handleDelete} /> }
           </Popover>
-
       </div>
     );
   }

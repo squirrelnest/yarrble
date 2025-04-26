@@ -12,6 +12,8 @@ import {
   createReview,
   postOfflineReviews
 } from '../actions/reviewActions';
+import { compose } from '@reduxjs/toolkit';
+import { withRouter } from '../functions/withRouter';
 
 class ShowLocation extends Component {
 
@@ -80,7 +82,7 @@ class ShowLocation extends Component {
     this.props.createReview({...reviewData, location_id: this.props.loc.id})
     this.handleCloseReview();
     let url = `/locations/${this.props.loc.id}`;
-    this.props.history.push(url)
+    window.history.href = (url);
   }
 
   handleCloseReview = () => {
@@ -88,7 +90,7 @@ class ShowLocation extends Component {
       openReview: false
     })
     let url = `/locations/${this.props.loc.id}`;
-    this.props.history.push(url);
+    window.history.href = (url);
   }
 
   handleSubmitLocation = (locationData) => {
@@ -104,7 +106,7 @@ class ShowLocation extends Component {
       openLocation: false
     })
     let url = `/locations/${this.props.loc.id}`;
-    this.props.history.push(url);
+    window.history.href = (url);
   }
 
   render() {
@@ -194,7 +196,7 @@ class ShowLocation extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let location_id = Number(ownProps.match.params.locationId)
+  let location_id = Number(location.pathname.split("/")[2])
   return {
     locations: state.locations.locations || [],
     loc: state.locations.locations.filter(location => { return location.id === location_id })[0] || [],
