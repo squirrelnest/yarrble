@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DialogContent, Slider, Button, FormControlLabel, Checkbox, ListSubheader, TextField, Drawer } from '@mui/material';
+import { Grid, Container, DialogContent, Slider, Button, FormControlLabel, Checkbox, ListSubheader, TextField, Drawer } from '@mui/material';
 import WindSelector from './WindSelector';
 import 'date-fns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -153,205 +153,209 @@ export default class NewLocationForm extends Component {
 
   render() {
     return (
-      <div>
-
-        <Drawer
-          docked={false}
-          width={window.innerWidth > 700 ? window.innerWidth*0.5 : window.innerWidth}
-          open={this.props.open}
-          openSecondary={true}
-          onRequestChange={(event) => this.props.handleRequestChange()}
-          containerClassName="drawer"
+      <Drawer
+        width={window.innerWidth*0.5}
+        open={this.props.open}
+        onRequestChange={(event) => this.props.handleRequestChange()}
+        containerClassName="drawer"
+      >
+        <Container
+          maxWidth="sm"
+          sx={{
+            margin: "20px 0"
+          }}
         >
-          <DialogContent>
-            <div
-              className={classes.mobileOnly}
-              onClick={this.props.handleClose}>
-              <div>&#10005;</div>
-            </div>
-
+          <Grid 
+            container 
+            spacing={2}
+            sx={{
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+            }}
+          >
             <h2>Add New Anchorage</h2>
-
-            <form
-              style={styles.form}
-              onSubmit={ (event) => {
-                event.preventDefault();
-                this.props.handleSubmit(this.state);
-              }
-            }>
-
-              <TextField
-                name="nickname"
-                label="Nickname"
-                value={this.state.nickname}
-                multiline={false}
-                fullWidth={isMobile()}
-                style={styles.textField}
-                onChange={(event) => this.handleChange(event)}
-              />
-
-              <TextField
-                name="depth"
-                label="Depth (meters)"
-                value={this.state.depth}
-                multiline={false}
-                fullWidth={isMobile()}
-                style={styles.textField}
-                onChange={(event) => this.handleChange(event)}
-              />
-
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.button}
-                style={{marginBottom: '20px'}}
-                disabled={!this.props.isOnline}
-                onClick={(event) => this.getPosition(event)}
-              >
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={!this.props.isOnline}
+              onClick={(event) => this.getPosition(event)}
+            >
               Autofill location
-              </Button>
+            </Button>
+          </Grid>
+          <form
+            style={styles.form}
+            onSubmit={ (event) => {
+              event.preventDefault();
+              this.props.handleSubmit(this.state);
+            }
+          }>
+            <Grid 
+              container
+              spacing={2}
+              sx={{
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
+            >
+              <Grid size={6}>
+                <TextField
+                  name="nickname"
+                  label="Nickname"
+                  value={this.state.nickname}
+                  multiline={false}
+                  fullWidth
+                  onChange={(event) => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid size={6}>
+                <TextField
+                  name="depth"
+                  label="Depth (meters)"
+                  value={this.state.depth}
+                  multiline={false}
+                  fullWidth
+                  onChange={(event) => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid size={6}>
+                <TextField
+                  name="latitude"
+                  label="Latitude"
+                  value={this.state.latitude}
+                  multiline={false}
+                  fullWidth
+                  onChange={(event) => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid size={6}>
+                <TextField
+                  name="longitude"
+                  label="Longitude"
+                  value={this.state.longitude}
+                  multiline={false}
+                  fullWidth
+                  onChange={(event) => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid size={6}>
+                <TextField
+                  name="country"
+                  label="Country"
+                  value={this.state.country}
+                  multiline={false}
+                  fullWidth
+                  onChange={(event) => this.handleChange(event)}
+                />
+              </Grid>
+              <Grid size={6}>
+                <DatePicker
+                  label="Date Visited"
+                  value={this.state.date_visited}
+                  onChange={(date) => this.handleDateChange(date)}
+                  format='MMM dd yyyy'
+                  sx={{
+                    width: "100%"
+                  }}
+                />
+              </Grid>
+            </Grid>
 
-              <br />
+            <div className="row">
 
-              <TextField
-                name="latitude"
-                label="Latitude"
-                value={this.state.latitude}
-                multiline={false}
-                fullWidth={isMobile()}
-                style={styles.textField}
-                onChange={(event) => this.handleChange(event)}
-              />
+              <div className={classes.formRow}>
+                <ListSubheader className="subheader">Wind Protection</ListSubheader>
+                <WindSelector clickHandler={this.handleWindClick} />
+              </div>
+              <div className={classes.formRow}>
+                <ListSubheader className="subheader">Ratings</ListSubheader>
+                <div className="sliders">
 
-              <TextField
-                name="longitude"
-                label="Longitude"
-                value={this.state.longitude}
-                multiline={false}
-                fullWidth={isMobile()}
-                style={styles.textField}
-                onChange={(event) => this.handleChange(event)}
-              />
+                  <div className="sliderContainer" name="stability">
+                    <div>{'Comfort: '}{this.state.stability}</div>
+                    <Slider
+                      value={this.state.stability}
+                      onChange={this.handleFirstSlider}
+                      style={{width: 100, paddingTop: '20px'}}
+                      defaultValue={5}
+                      min={0}
+                      max={10}
+                      step={1}/>
+                  </div>
 
-              <TextField
-                name="country"
-                label="Country"
-                value={this.state.country}
-                multiline={false}
-                fullWidth={isMobile()}
-                style={styles.textField}
-                onChange={(event) => this.handleChange(event)}
-              />
+                  <div className="sliderContainer" name="aesthetics">
+                    <div>{'Aesthetics: '}{this.state.aesthetics}</div>
+                    <Slider
+                      name="aesthetics"
+                      value={this.state.aesthetics}
+                      onChange={this.handleSecondSlider}
+                      style={{width: 100, paddingTop: '20px'}}
+                      defaultValue={5}
+                      min={0}
+                      max={10}
+                      step={1}/>
+                  </div>
 
-              <div className="row">
-
-                <div className={classes.formRow}>
-                  <ListSubheader className="subheader">Wind Protection</ListSubheader>
-                  <WindSelector clickHandler={this.handleWindClick} />
-                </div>
-                <div className={classes.formRow}>
-                  <ListSubheader className="subheader">Ratings</ListSubheader>
-                  <div className="sliders">
-
-                    <div className="sliderContainer" name="stability">
-                      <div>{'Comfort: '}{this.state.stability}</div>
-                      <Slider
-                        value={this.state.stability}
-                        onChange={this.handleFirstSlider}
-                        style={{width: 100, paddingTop: '20px'}}
-                        defaultValue={5}
-                        min={0}
-                        max={10}
-                        step={1}/>
-                    </div>
-
-                    <div className="sliderContainer" name="aesthetics">
-                      <div>{'Aesthetics: '}{this.state.aesthetics}</div>
-                      <Slider
-                        name="aesthetics"
-                        value={this.state.aesthetics}
-                        onChange={this.handleSecondSlider}
-                        style={{width: 100, paddingTop: '20px'}}
-                        defaultValue={5}
-                        min={0}
-                        max={10}
-                        step={1}/>
-                    </div>
-
-                    <div className="sliderContainer" name="safety">
-                      <div>{'Safety: '}{this.state.safety}</div>
-                      <Slider
-                        name="safety"
-                        value={this.state.safety}
-                        onChange={this.handleThirdSlider}
-                        style={{width: 100, paddingTop: '20px'}}
-                        defaultValue={5}
-                        min={0}
-                        max={10}
-                        step={1}/>
-                    </div>
+                  <div className="sliderContainer" name="safety">
+                    <div>{'Safety: '}{this.state.safety}</div>
+                    <Slider
+                      name="safety"
+                      value={this.state.safety}
+                      onChange={this.handleThirdSlider}
+                      style={{width: 100, paddingTop: '20px'}}
+                      defaultValue={5}
+                      min={0}
+                      max={10}
+                      step={1}/>
                   </div>
                 </div>
               </div>
+            </div>
+          
+            <ListSubheader className="subheader">Amenities</ListSubheader>
+
+            <div className="grid" style={styles.checkboxblock}>
+              { amenities.map((item) => 
+                <FormControlLabel
+                  label={item}
+                  name={item}
+                  id={item}
+                  onCheck={(event) => this.handleAmenitiesClick(event)}
+                  control={<Checkbox/>}
+                />
+              )}
+            </div>
             
-              <ListSubheader className="subheader">Amenities</ListSubheader>
-
-              <div className="grid" style={styles.checkboxblock}>
-                { amenities.map((item) => 
-                  <FormControlLabel
-                    label={item}
-                    name={item}
-                    id={item}
-                    onCheck={(event) => this.handleAmenitiesClick(event)}
-                    control={<Checkbox/>}
-                  />
-                )}
-              </div>
-
-              <TextField
-                name="content"
-                label="Write a Review"
-                value={this.state.content}
-                multiline={true}
-                fullWidth={true}
-                rows={3}
-                style={{marginBottom: '20px'}}
-                onChange={(event) => this.handleChange(event)}
-              />
-
-              <div className={classes.lastLine}>
-                <div>
-                  <DatePicker
-                    margin="normal"
-                    label="Date Visited"
-                    value={this.state.date_visited}
-                    onChange={(date) => this.handleDateChange(date)}
-                    format='MMM dd yyyy'
-                  />
-                </div>
-                <div className={classes.buttonsContainer}>
-                  <Button variant="contained"
-                    type="submit"
-                    secondary={true}
-                    fullWidth={isMobile()}
-                    className={[classes.button, classes.submitBtn].join(' ')}
-                    onClick={this.props.handleToggle}
-                  >
-                    SUBMIT
-                  </Button>
-                  <Button variant="text"
-                    className={[classes.closeButton, classes.desktopOnly].join(' ')}
-                    onClick={this.props.handleClose}
-                  >
-                    CANCEL
-                  </Button>
-                </div>
-              </div>
-
-            </form>
-          </DialogContent>
-        </Drawer>
-      </div>
+            <TextField
+              name="content"
+              label="Write a review"
+              value={this.state.content}
+              multiline={true}
+              fullWidth={true}
+              rows={3}
+              style={{ marginBottom: '20px' }}
+              onChange={(event) => this.handleChange(event)}
+            />
+            <div className={classes.buttonsContainer}>
+              <Button variant="contained"
+                type="submit"
+                secondary={true}
+                fullWidth={isMobile()}
+                className={[classes.button, classes.submitBtn].join(' ')}
+                onClick={this.props.handleToggle}
+              >
+                SUBMIT
+              </Button>
+              <Button variant="text"
+                className={[classes.closeButton, classes.desktopOnly].join(' ')}
+                onClick={this.props.handleClose}
+              >
+                CANCEL
+              </Button>
+            </div>
+          </form>
+        </Container>
+      </Drawer>
     );
   }
 }
