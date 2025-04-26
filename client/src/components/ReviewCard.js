@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import paradise from '../img/paradise.jpg';
-import { Card, CardHeader, CardContent } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
+import { Card, CardHeader, CardContent, Avatar, Chip } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 
 const styles = {
   card: {
@@ -45,63 +44,62 @@ export default class ReviewCard extends Component {
   }
 
   render() {
+    return (
+      <Card style={styles.card}>
+        <CardHeader
+          title={this.props.review.author || "sailormoon"}
+          subtitle="Subtitle"
+          avatar={<PersonIcon />}
+          actAsExpander={true}
+        />
+        <CardContent  >
+          <p>{this.props.review.content}</p>
+          <div className="row">
+            <Chip
+              backgroundColor={'#B2EBF2'}
+              style={styles.chip}
+              label="comfort"
+              avatar={
+                <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                  {this.props.review.stability}
+                </Avatar>
+              }
+            />
+            <Chip
+              backgroundColor={'#B2EBF2'}
+              style={styles.chip}
+              label="aesthetics"
+              avatar={
+                <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                  {this.props.review.aesthetics}
+                </Avatar>
+              }
+            />
+            <Chip
+              backgroundColor={'#B2EBF2'}
+              style={styles.chip}
+              label="safety"
+              avatar={
+                <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
+                  {this.props.review.safety}
+                </Avatar>
+              }
+            />
 
-      return (
-
-            <Card style={styles.card}>
-              <CardHeader
-                title="Username"
-                subtitle="Subtitle"
-                avatar={tilesData[0].img}
-                actAsExpander={true}
-              />
-              <CardContent  >
-                <p>"{this.props.review.content}"</p>
-                <div className="row">
-                  <Chip
-                    backgroundColor={'#B2EBF2'}
-                    style={styles.chip}
-                  >
-                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                      {this.props.review.stability}
-                    </Avatar>
-                    Comfort
-                  </Chip>
-                  <Chip
-                    backgroundColor={'#B2EBF2'}
-                    style={styles.chip}
-                  >
-                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                      {this.props.review.aesthetics}
-                    </Avatar>
-                    Aesthetics
-                  </Chip>
-                  <Chip
-                    backgroundColor={'#B2EBF2'}
-                    style={styles.chip}
-                  >
-                    <Avatar size={32} color={'#E0F7FA'} backgroundColor={'#00BCD4'}>
-                      {this.props.review.safety}
-                    </Avatar>
-                    Safety
-                  </Chip>
-
-                  <Chip
-                    backgroundColor={'#F8BBD0'}
-                    style={styles.chip}
-                    onClick={this.handleClick.bind(this)}
-                  >
-                    <Avatar size={32} color={'#F8BBD0'} backgroundColor={'#EC407A'}>
-                      {this.state.like}
-                    </Avatar>
-                    Likes
-                  </Chip>
-
-                </div>
-              </CardContent >
-            </Card>
-            
-      );
-
+            <Chip
+              backgroundColor={'#F8BBD0'}
+              style={styles.chip}
+              onClick={this.handleClick.bind(this)}
+              label="likes"
+              avatar={
+                <Avatar size={32} color={'#F8BBD0'} backgroundColor={'#EC407A'}>
+                  {this.state.like}
+                </Avatar>
+              }
+            />
+          </div>
+        </CardContent >
+      </Card>
+    );
   }
 }
