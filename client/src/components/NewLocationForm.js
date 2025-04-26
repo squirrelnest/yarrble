@@ -18,7 +18,7 @@ const styles = {
     paddingTop: '20px'
   },
   checkboxblock: {
-    margin: '20px 0 0'
+    margin: '20px 0'
   },
   checkbox: {
     marginBottom: 16,
@@ -196,6 +196,7 @@ export default class NewLocationForm extends Component {
               sx={{
                 justifyContent: "space-between",
                 alignItems: "flex-end",
+                padding: "20px 0"
               }}
             >
               <Grid size={6}>
@@ -270,43 +271,43 @@ export default class NewLocationForm extends Component {
               <div className={classes.formRow}>
                 <ListSubheader className="subheader">Ratings</ListSubheader>
                 <div className="sliders">
-
                   <div className="sliderContainer" name="stability">
                     <div>{'Comfort: '}{this.state.stability}</div>
                     <Slider
                       value={this.state.stability}
                       onChange={this.handleFirstSlider}
-                      style={{width: 100, paddingTop: '20px'}}
                       defaultValue={5}
                       min={0}
                       max={10}
-                      step={1}/>
+                      step={1}
+                      size="medium"
+                    />
                   </div>
-
                   <div className="sliderContainer" name="aesthetics">
                     <div>{'Aesthetics: '}{this.state.aesthetics}</div>
                     <Slider
                       name="aesthetics"
                       value={this.state.aesthetics}
                       onChange={this.handleSecondSlider}
-                      style={{width: 100, paddingTop: '20px'}}
                       defaultValue={5}
                       min={0}
                       max={10}
-                      step={1}/>
+                      step={1}
+                      size="medium"
+                    />
                   </div>
-
                   <div className="sliderContainer" name="safety">
                     <div>{'Safety: '}{this.state.safety}</div>
                     <Slider
                       name="safety"
                       value={this.state.safety}
                       onChange={this.handleThirdSlider}
-                      style={{width: 100, paddingTop: '20px'}}
                       defaultValue={5}
                       min={0}
                       max={10}
-                      step={1}/>
+                      step={1}
+                      size="medium"
+                    />
                   </div>
                 </div>
               </div>
@@ -325,7 +326,16 @@ export default class NewLocationForm extends Component {
                 />
               )}
             </div>
-            
+
+            <ListSubheader
+              className="subheader"
+              sx={{ 
+                marginBottom: "10px",
+              }}
+            >
+              Description
+            </ListSubheader>
+
             <TextField
               name="content"
               label="Write a review"
@@ -333,7 +343,6 @@ export default class NewLocationForm extends Component {
               multiline={true}
               fullWidth={true}
               rows={3}
-              style={{ marginBottom: '20px' }}
               onChange={(event) => this.handleChange(event)}
             />
             <div className={classes.buttonsContainer}>
