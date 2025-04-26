@@ -15,7 +15,8 @@ export default function MapboxGL(props) {
     >
       <PlaceIcon
         hoverColor={'#E91E63'}
-        color='#00BCD4'
+        color="primary"
+        fontSize="large"
       />
     </Marker>
   )
@@ -34,12 +35,6 @@ export default function MapboxGL(props) {
         height: window.innerHeight,
       }}
     >
-      <Marker longitude={100} latitude={40} anchor="bottom" >
-        <PlaceIcon
-          hoverColor={'#E91E63'}
-          color='#00BCD4'
-        />
-      </Marker>
       { markers }
     </Map>
   )
