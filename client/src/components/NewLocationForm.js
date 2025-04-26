@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Container, DialogContent, Slider, Button, FormControlLabel, Checkbox, ListSubheader, TextField, Drawer } from '@mui/material';
+import { Grid, Container, Slider, Button, FormControlLabel, Checkbox, ListSubheader, TextField, Drawer } from '@mui/material';
 import WindSelector from './WindSelector';
 import 'date-fns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';

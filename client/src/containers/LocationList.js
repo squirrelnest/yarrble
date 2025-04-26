@@ -72,7 +72,6 @@ export class LocationList extends Component {
   }
 
   render() {
-    console.log("BOOYAKA: ", this.props.locations)
     const locations = this.props.locations.sort(alphabetize).map( (loc, index) =>
 
       <LocationItem
