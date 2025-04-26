@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import Drawer from '@mui/material/Drawer';
-import TextField from '@mui/material/TextField';
-import { Slider } from '@mui/material';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import { ListSubheader } from '@mui/material';
+import { DialogContent, Slider, Button, FormControlLabel, Checkbox, ListSubheader, TextField, Drawer } from '@mui/material';
 import WindSelector from './WindSelector';
 import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { API_ROOT } from '../api-config';
 import classes from '../css/NewLocationForm.module.css';
@@ -15,6 +9,8 @@ import classes from '../css/NewLocationForm.module.css';
 export function isMobile() {
   return window.innerWidth < 700
 }
+
+const amenities = ["fuel", "water", "grocery", "laundry", "snorkeling", "fishing", "surfing", "wind/kitesurfing", "paddleboarding"];
 
 const styles = {
   form: {
@@ -167,7 +163,7 @@ export default class NewLocationForm extends Component {
           onRequestChange={(event) => this.props.handleRequestChange()}
           containerClassName="drawer"
         >
-
+          <DialogContent>
             <div
               className={classes.mobileOnly}
               onClick={this.props.handleClose}>
@@ -301,82 +297,15 @@ export default class NewLocationForm extends Component {
               <ListSubheader className="subheader">Amenities</ListSubheader>
 
               <div className="grid" style={styles.checkboxblock}>
-
-                <Checkbox
-                  label="Fuel"
-                  style={styles.checkbox}
-                  name="fuel"
-                  id="fuel"
-                  checked={this.state.fuel}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Fresh Water"
-                  style={styles.checkbox}
-                  name="water"
-                  id="water"
-                  checked={this.state.water}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Grocery"
-                  style={styles.checkbox}
-                  name="grocery"
-                  id="grocery"
-                  checked={this.state.grocery}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-
-                <Checkbox
-                  label="Laundry"
-                  style={styles.checkbox}
-                  name="laundry"
-                  id="laundry"
-                  checked={this.state.laundry}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Snorkeling"
-                  style={styles.checkbox}
-                  name="snorkeling"
-                  id="snorkeling"
-                  checked={this.state.snorkeling}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Diving"
-                  style={styles.checkbox}
-                  name="diving"
-                  id="diving"
-                  checked={this.state.diving}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-
-                <Checkbox
-                  label="Surfing"
-                  style={styles.checkbox}
-                  name="surfing"
-                  id="surfing"
-                  checked={this.state.surfing}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Windsurfing"
-                  style={styles.checkbox}
-                  name="windsurfing"
-                  id="windsurfing"
-                  checked={this.state.windsurfing}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-                <Checkbox
-                  label="Paddleboarding"
-                  style={styles.checkbox}
-                  name="paddleboarding"
-                  id="paddleboarding"
-                  checked={this.state.paddleboarding}
-                  onCheck={(event) => this.handleAmenitiesClick(event)}
-                />
-
+                { amenities.map((item) => 
+                  <FormControlLabel
+                    label={item}
+                    name={item}
+                    id={item}
+                    onCheck={(event) => this.handleAmenitiesClick(event)}
+                    control={<Checkbox/>}
+                  />
+                )}
               </div>
 
               <TextField
@@ -402,13 +331,14 @@ export default class NewLocationForm extends Component {
                 </div>
                 <div className={classes.buttonsContainer}>
                   <Button variant="contained"
-                    label="Submit"
                     type="submit"
                     secondary={true}
                     fullWidth={isMobile()}
                     className={[classes.button, classes.submitBtn].join(' ')}
                     onClick={this.props.handleToggle}
-                  />
+                  >
+                    SUBMIT
+                  </Button>
                   <Button variant="text"
                     className={[classes.closeButton, classes.desktopOnly].join(' ')}
                     onClick={this.props.handleClose}
@@ -419,9 +349,8 @@ export default class NewLocationForm extends Component {
               </div>
 
             </form>
-
+          </DialogContent>
         </Drawer>
-
       </div>
     );
   }
