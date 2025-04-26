@@ -85,7 +85,6 @@ export default class ReviewCard extends Component {
                 </Avatar>
               }
             />
-
             <Chip
               backgroundColor={'#F8BBD0'}
               style={styles.chip}
