@@ -41,6 +41,9 @@ import { Provider } from 'react-redux';
 import { fetchLocations } from './actions/locationActions';
 import './functions/currentPosition';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV2';
+
 import locationReducer from './reducers/locationReducer';
 import reviewReducer from './reducers/reviewReducer';
 import authReducer from './reducers/authReducer';
@@ -83,7 +86,7 @@ export const App = () => {
     <Provider store={store}>
       <div className="app" store={store}>
         <ThemeProvider theme={theme}>
-          
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
             <BrowserRouter>
               <NavBar store={store}/>
               <Routes>
@@ -94,7 +97,7 @@ export const App = () => {
                 <Route exact path="/signup" element={ <RegistrationContainer/> } />
               </Routes>
             </BrowserRouter>
-          
+          </LocalizationProvider>
         </ThemeProvider>
       </div>
     </Provider>
