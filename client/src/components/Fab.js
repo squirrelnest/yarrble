@@ -15,6 +15,8 @@ export default class FabButton extends Component {
         style={style}
         className="fab"
         onClick={this.props.handleToggle}
+        color="secondary"
+        aria-label="add location"
       >
         <AddIcon />
       </Fab>

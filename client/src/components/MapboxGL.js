@@ -32,7 +32,7 @@ export default function MapboxGL(props) {
       mapStyle="mapbox://styles/mapbox/light-v9"
       style={{
         width: window.innerWidth < 700 ? window.innerWidth : window.innerWidth/2,
-        height: window.innerHeight,
+        height: window.innerWidth < 700 ? window.innerHeight/2 : window.innerHeight - 60,
       }}
     >
       { markers }

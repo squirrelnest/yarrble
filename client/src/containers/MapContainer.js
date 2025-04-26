@@ -18,7 +18,12 @@ export default class MapContainer extends Component {
           handleMapClick={this.props.handleMapClick}
         />
 
-        <FabButton handleToggle={this.props.handleToggle} />
+        <FabButton 
+          handleToggle={this.props.handleToggle}
+          sx={{
+            marginBottom: "20px"
+          }}
+        />
 
       </div>
     );
