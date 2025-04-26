@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-import Slider from '@mui/material/Slider';
+import { Dialog, DialogContent, DialogContentText, Button, Slider, Typography } from '@mui/material';
 import 'date-fns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import classes from '../css/NewReviewForm.module.css';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV2';
 
 const styles = {
   root: {
@@ -72,111 +72,109 @@ export default class NewReviewForm extends Component {
   }
 
   render() {
-    const actions = [
-      <Button variant="text"
-        label="Cancel"
-        primary={true}
-        onClick={this.props.handleClose}
-      />,
-      <Button variant="text"
-        label="Submit"
-        primary={true}
-        type="submit"
-        name="submit"
-        onClick={this.submitAndReset}
-      />,
-    ];
-
     return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Dialog
+          style={{ classes }}
+          modal={true}
+          autoScrollBodyContent={true}
+          open={this.props.open}
+        >
+          <DialogContent>
+            <DialogContentText>Add a review</DialogContentText>
 
-      <Dialog
-        title="Add Review to this Location"
-        actions={actions}
-        style={{ zIndex: 3000 }}
-        modal={true}
-        autoScrollBodyContent={true}
-        open={this.props.open}
-      >
+            <form onSubmit={(event) => this.submitAndReset(event)}>
 
-        <div>
+              <div style={styles.root}>
 
-          <form onSubmit={(event) => this.submitAndReset(event)}>
+                <div className="sliderContainer" name="stability">
+                <h5>{'Stability: '}{this.state.stability}</h5>
+                <Slider
+                  name="stability"
+                  value={this.state.stability}
+                  onChange={this.handleFirstSlider}
+                  sliderStyle={{left:'0%', width: '150px'}}
+                  axis="x"
+                  defaultValue={5}
+                  min={0}
+                  max={10}
+                  step={1}/>
+                </div>
 
-            <div style={styles.root}>
+                <div className="sliderContainer" name="aesthetics">
+                <h5>{'Aesthetics: '}{this.state.aesthetics}</h5>
+                <Slider
+                  name="aesthetics"
+                  value={this.state.aesthetics}
+                  onChange={this.handleSecondSlider}
+                  sliderStyle={{left:'0%', width: '150px'}}
+                  axis="x"
+                  defaultValue={5}
+                  min={0}
+                  max={10}
+                  step={1}/>
+                </div>
 
-              <div className="sliderContainer" name="stability">
-              <h5>{'Stability: '}{this.state.stability}</h5>
-              <Slider
-                name="stability"
-                value={this.state.stability}
-                onChange={this.handleFirstSlider}
-                sliderStyle={{left:'0%', width: '150px'}}
-                axis="x"
-                defaultValue={5}
-                min={0}
-                max={10}
-                step={1}/>
+                <div className="sliderContainer" name="safety">
+                <h5>{'Safety: '}{this.state.safety}</h5>
+                <Slider
+                  name="safety"
+                  value={this.state.safety}
+                  onChange={this.handleThirdSlider}
+                  sliderStyle={{left:'0%', width: '150px'}}
+                  axis="x"
+                  defaultValue={5}
+                  min={0}
+                  max={10}
+                  step={1}/>
+                </div>
+
               </div>
 
-              <div className="sliderContainer" name="aesthetics">
-              <h5>{'Aesthetics: '}{this.state.aesthetics}</h5>
-              <Slider
-                name="aesthetics"
-                value={this.state.aesthetics}
-                onChange={this.handleSecondSlider}
-                sliderStyle={{left:'0%', width: '150px'}}
-                axis="x"
-                defaultValue={5}
-                min={0}
-                max={10}
-                step={1}/>
+                <div className={styles.data}>
+                <span className={styles.label}>Write a review</span>
+                <div className={styles.field}>
+                  <textarea
+                    style={{ width: '100%' }}
+                    rows='10'
+                    name='content'
+                    value={this.state.content}
+                    onChange={(event) => this.handleChange(event)}/>
+                </div>
               </div>
 
-              <div className="sliderContainer" name="safety">
-              <h5>{'Safety: '}{this.state.safety}</h5>
-              <Slider
-                name="safety"
-                value={this.state.safety}
-                onChange={this.handleThirdSlider}
-                sliderStyle={{left:'0%', width: '150px'}}
-                axis="x"
-                defaultValue={5}
-                min={0}
-                max={10}
-                step={1}/>
+              <div>
+                <DatePicker
+                  margin="normal"
+                  label="Date Visited"
+                  value={this.state.date_visited}
+                  onChange={(event, date) => this.handleDateChange(event, date)}
+                  slotProps={{ textField: { 
+                      helperText: 'MM/DD/YYYY'
+                    } 
+                  }}
+                />
               </div>
-
-            </div>
-
-              <div className={styles.data}>
-              <span className={styles.label}>Write a review</span>
-              <div className={styles.field}>
-                <textarea
-                  style={{ width: '100%' }}
-                  rows='10'
-                  name='content'
-                  value={this.state.content}
-                  onChange={(event) => this.handleChange(event)}/>
-              </div>
-            </div>
-
-            <div>
-              <DatePicker
-                margin="normal"
-                label="Date Visited"
-                value={this.state.date_visited}
-                onChange={(event, date) => this.handleDateChange(event, date)}
-                format='MMM dd yyyy'
-              />
-            </div>
-
-          </form>
-
-        </div>
-
-      </Dialog>
-
-
+              <Button 
+                variant="text"
+                primary={true}
+                onClick={this.props.handleClose}
+              >
+                <Typography>Cancel</Typography>
+              </Button>
+              <Button 
+                variant="text"
+                primary={true}
+                type="submit"
+                name="submit"
+                onClick={this.submitAndReset}
+              >
+                <Typography>Submit</Typography>
+              </Button>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </LocalizationProvider>
     );
   }
 }

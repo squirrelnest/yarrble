@@ -68,7 +68,7 @@ export class LocationList extends Component {
     this.props.createReview({...reviewData, location_id: this.state.review_location})
     this.handleClose();
     let url = `/locations/${this.state.review_location}`;
-    this.props.history.push(url)
+    window.history.href = url;
   }
 
   render() {
